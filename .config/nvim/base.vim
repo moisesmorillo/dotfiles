@@ -16,10 +16,10 @@ syntax on
 " Add numbers to each line on the left-hand side.
 set number
 
-" Set shift width to 4 spaces.
+" Set shift width to 2 spaces.
 set shiftwidth=2
 
-" Set tab width to 4 columns.
+" Set tab width to 2 columns.
 set tabstop=2
 
 " Use space characters instead of tabs.
@@ -66,7 +66,7 @@ set history=1000
 set wildmenu
 
 " Make wildmenu behave like similar to Bash completion.
-set wildmode=list:longest
+set wildmode=longest:full,list:full
 
 " There are certain files that we would never want to edit with Vim.
 " Wildmenu will ignore files with these extensions.
