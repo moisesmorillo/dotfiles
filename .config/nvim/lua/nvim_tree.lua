@@ -1,5 +1,4 @@
 --  not migrated options must be set before running the setup function
-vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_highlight_opened_files = 1
@@ -12,6 +11,7 @@ vim.g.nvim_tree_show_icons = {
 }
 
 require'nvim-tree'.setup {
+  open_on_setup = true,
   git = {
     enable = true,
     ignore = true,
@@ -19,8 +19,9 @@ require'nvim-tree'.setup {
   },
   view = {
     hide_root_folder = false,
-    width = 25,
-    side = "left",
+    width = 30,
+    side = 'left',
+    auto_resize = true,
   }
 }
 
