@@ -101,6 +101,8 @@ set termguicolors
 
 " Mapping for open/close NvimTree
 nnoremap <C-w> :NvimTreeToggle<CR>
+" Mapping for setting NvimTree Focus
+nnoremap <s-TAB> :NvimTreeFocus<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
