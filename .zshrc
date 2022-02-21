@@ -121,7 +121,7 @@ alias nv="nvim"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export GOPATH="$HOME/projects/go"
 export PATH="$PATH:$(go env GOPATH)/bin"
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
