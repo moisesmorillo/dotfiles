@@ -1,6 +1,9 @@
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
+" Set terminal messages size
+set cmdheight=2
+
 " Enable type file detection. Vim will be able to try to detect the type of file in use.
 filetype on
 
@@ -99,13 +102,12 @@ set noerrorbells
 " Enables 24-bit RGB color in the TUI
 set termguicolors
 
-" Mapping for open/close NvimTree
-nnoremap <C-w> :NvimTreeToggle<CR>
-" Mapping for setting NvimTree Focus
-nnoremap <s-TAB> :NvimTreeFocus<CR>
+" Enable colorized maxlength line size
+set colorcolumn=80
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" Enable spell check
+set spell spelllang=en_us
+
+" Set background to dark
+set background=dark
+
