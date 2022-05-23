@@ -1,7 +1,7 @@
 " Load initial configuration
 source ~/.config/nvim/base.vim
 
-" Load plungins
+" Load plugins
 source ~/.config/nvim/plugins.vim
 
 " Load lua files
