@@ -1,5 +1,3 @@
-" Mapping for open/close NvimTree
-nnoremap <silent> <C-w> :NvimTreeToggle<CR>
 " Mapping for setting NvimTree Focus
 nnoremap <silent> <s-TAB> :NvimTreeFocus<CR>
 
