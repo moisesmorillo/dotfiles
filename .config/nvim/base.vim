@@ -111,3 +111,5 @@ set spell spelllang=en_us
 " Set background to dark
 set background=dark
 
+" Set encoding UTF-8
+set encoding=UTF-8
