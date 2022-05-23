@@ -1,6 +1,3 @@
-" Github theme settings
-lua require('github_theme')
-
 " NvimTree settings
 lua require('nvim_tree')
 
