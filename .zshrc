@@ -114,9 +114,14 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias for neovim
 alias nv="nvim"
-alias vim="nvim"
+# alias for fulling updating homembrew alongside oh my zsh
 alias fu="brew update && brew upgrade && omz update"
+# alias to replace cat for bat
+alias cat="bat"
+# alias to find files using fzf
+alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

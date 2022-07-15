@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'nvim-lua/plenary.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
