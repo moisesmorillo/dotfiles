@@ -31,7 +31,7 @@ set expandtab
 " Do not save backup files.
 set nobackup
 
-" Do not save swaf files.
+" Do not save swap files.
 set noswapfile
 
 " The number of screen lines to keep above and below the cursor
@@ -104,9 +104,6 @@ set termguicolors
 
 " Enable colorized maxlength line size
 set colorcolumn=80
-
-" Enable spell check
-set spell spelllang=en_us
 
 " Set background to dark
 set background=dark
