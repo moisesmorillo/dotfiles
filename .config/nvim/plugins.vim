@@ -14,6 +14,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
