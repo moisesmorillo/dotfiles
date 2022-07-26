@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR="nvim"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -128,6 +128,7 @@ alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 export GOPATH="$HOME/projects/go"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export GPG_TTY="$(tty)"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
