@@ -116,8 +116,6 @@ export EDITOR="nvim"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias for neovim
 alias nv="nvim"
-# alias for fulling updating homembrew alongside oh my zsh
-alias fu="brew update && brew upgrade && omz update"
 # alias to replace cat for bat
 alias cat="bat"
 # alias to find files using fzf
@@ -136,3 +134,14 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(rbenv init - zsh)"
+
+# Load Fedora OS customization
+if [[ $(uname) == "Linux" ]]; then
+  alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y"
+fi
+
+# Load Mac OS customization
+if [[ $(uname) == "Darwin" ]]; then
+  alias fu="brew update && brew upgrade && omz update"
+fi
+
