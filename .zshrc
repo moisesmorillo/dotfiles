@@ -138,6 +138,7 @@ eval "$(rbenv init - zsh)"
 # Load Fedora OS customization
 if [[ $(uname) == "Linux" ]]; then
   alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y"
+  export PATH="$PATH:~/.rbenv/bin"
 fi
 
 # Load Mac OS customization
