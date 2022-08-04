@@ -133,7 +133,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(rbenv init - zsh)"
 
 # Load Fedora OS customization
 if [[ $(uname) == "Linux" ]]; then
@@ -146,3 +145,4 @@ if [[ $(uname) == "Darwin" ]]; then
   alias fu="brew update && brew upgrade && omz update"
 fi
 
+eval "$(rbenv init -zsh)"
