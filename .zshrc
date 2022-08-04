@@ -145,4 +145,4 @@ if [[ $(uname) == "Darwin" ]]; then
   alias fu="brew update && brew upgrade && omz update"
 fi
 
-eval "$(rbenv init -zsh)"
+eval "$(rbenv init - -zsh)"
