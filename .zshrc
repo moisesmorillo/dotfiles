@@ -120,6 +120,10 @@ alias nv="nvim"
 alias cat="bat"
 # alias to find files using fzf
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+# alias to replace ls for exa
+alias ls="exa --icons"
+# alias to replace tree for exa
+alias tree="exa --icons --tree"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
