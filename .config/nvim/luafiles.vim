@@ -1,3 +1,6 @@
+" NvimTreesitter settings
+lua require('nvim_treesitter')
+
 " NvimTree settings
 lua require('nvim_tree')
 
