@@ -147,6 +147,8 @@ fi
 # Load Mac OS customization
 if [[ $(uname) == "Darwin" ]]; then
   alias fu="brew update && brew upgrade && omz update"
+  bindkey "^[[1;3C" forward-word
+  bindkey "^[[1;3D" backward-word
 fi
 
 eval "$(rbenv init - -zsh)"
