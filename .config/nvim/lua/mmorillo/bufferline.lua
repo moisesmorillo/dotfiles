@@ -1,6 +1,5 @@
 require("bufferline").setup({
   options = {
-    -- mode = "tabs",
     max_name_length = 25,
     tab_size = 25,
     diagnostics = "coc",
