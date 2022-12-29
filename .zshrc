@@ -131,6 +131,7 @@ export GOPATH="$HOME/projects/go"
 export PATH="$PATH:$(go env GOPATH)/bin:$HOME/.local/bin"
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export TERM=xterm
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
