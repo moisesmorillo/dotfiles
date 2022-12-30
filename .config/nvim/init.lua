@@ -1,4 +1,4 @@
-local baseFolder = "mmorillo"
+local baseFolder = "core"
 -- Neovim options settings
 require(baseFolder..".options")
 -- Neovim global settins
