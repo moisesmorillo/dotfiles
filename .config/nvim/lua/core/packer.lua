@@ -11,7 +11,6 @@ require("packer").startup(function(use)
 
   -- Devtools
   use 'wakatime/vim-wakatime'
-  
   -- Personalization
   use "EdenEast/nightfox.nvim"
   use {
@@ -19,7 +18,7 @@ require("packer").startup(function(use)
     requires = {
       "nvim-tree/nvim-web-devicons",
     },
-    tag = "nightly" 
+    tag = "nightly"
   }
   use {
     "nvim-telescope/telescope.nvim", tag = "0.1.0",
@@ -30,11 +29,12 @@ require("packer").startup(function(use)
     requires = { "kyazdani42/nvim-web-devicons", opt = true }
   }
   use {
-    "akinsho/bufferline.nvim", 
-    tag = "v3.*", 
+    "akinsho/bufferline.nvim",
+    tag = "v3.*",
     requires = "kyazdani42/nvim-web-devicons",
   }
   use "tpope/vim-fugitive"
+  use "airblade/vim-gitgutter"
   -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
