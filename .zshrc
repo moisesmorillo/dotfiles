@@ -124,6 +124,8 @@ alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 alias ls="exa --icons"
 # alias to replace tree for exa
 alias tree="exa --icons --tree"
+# alias to git client
+alias lg="lazygit"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
