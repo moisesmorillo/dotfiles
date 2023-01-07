@@ -23,3 +23,6 @@ nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
 nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
 nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
 
+-- Clear search highlight
+nnoremap("<esc>", ":noh<CR>")
+
