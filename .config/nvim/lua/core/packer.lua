@@ -33,12 +33,13 @@ require("packer").startup(function(use)
     tag = "v3.*",
     requires = "kyazdani42/nvim-web-devicons",
   }
-  use "windwp/nvim-autopairs"
+  use "j-hui/fidget.nvim"
   -- Git
   use "tpope/vim-fugitive"
   use "lewis6991/gitsigns.nvim"
   -- Tools
   use "b3nj5m1n/kommentary"
+  use "windwp/nvim-autopairs"
   -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
