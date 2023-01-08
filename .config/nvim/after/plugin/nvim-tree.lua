@@ -1,15 +1,25 @@
 require("nvim-tree").setup({
-  open_on_setup = true,
   diagnostics = {
     enable = true,
   },
   view = {
     adaptive_size = true,
     width = "25%",
-  },
+    side = "right",
+ },
+ modified = {
+   enable = true,
+ },
   renderer = {
     highlight_git = true,
+    highlight_modified = "all",
+    indent_markers = {
+      enable = true,
+    },
     icons = {
+      show = {
+        modified = true,
+      },
       glyphs = {
         folder = {
           arrow_closed = "+",
@@ -18,4 +28,9 @@ require("nvim-tree").setup({
       }
     },
   },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    }
+  }
 })
