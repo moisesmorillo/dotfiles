@@ -15,7 +15,7 @@ nnoremap("<leader>q", ":q<cr>")
 nnoremap("<c-l>", ":noh<cr>")
 
 -- Open/Quit NvimTree
-nnoremap("<s-tab>", ":NvimTreeFocus<cr>")
+nnoremap("<s-tab>", ":NvimTreeToggle<cr>")
 
 -- Telescope
 nnoremap("<leader>ff", "<cmd>Telescope find_files hidden=true<cr>")
