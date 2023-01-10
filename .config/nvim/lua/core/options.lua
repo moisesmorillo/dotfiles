@@ -1,5 +1,6 @@
 -- Before setting up new options, review defaults :h nvim-defaults
 local options = {
+  autowrite = true,
   backup = false,
   clipboard = "unnamed",
   cmdheight = 2,

@@ -13,6 +13,8 @@ local options = {
   go_textobj_include_function_doc = 0,
   go_highlight_function_calls = 1,
   go_highlight_generate_tag = 1,
+  go_def_mode = "gopls",
+  go_info_mode = "gopls",
 }
 
 

@@ -7,7 +7,10 @@ require("packer").startup(function(use)
   }
 
   -- Programing lang specific
-  use "fatih/vim-go"
+  use {
+    "fatih/vim-go",
+    run = ":GoInstallBinaries"
+  }
 
   -- Devtools
   use 'wakatime/vim-wakatime'

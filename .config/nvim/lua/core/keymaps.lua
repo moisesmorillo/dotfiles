@@ -1,28 +1,38 @@
 vim.g.mapleader = " "
 
-local nnoremap = function(shorcut, command) 
-  vim.api.nvim_set_keymap("n", shorcut, command, { noremap = true, silent = true })
-end
+local utils = require("core.utils")
 local builtin = require("telescope.builtin")
 
 -- Save file
-nnoremap("<leader>w", ":w<cr>")
+utils.nnoremap("<leader>w", ":w<cr>")
 
--- Quit from current mode
-nnoremap("<leader>q", ":q<cr>")
+-- Quit
+utils.nnoremap("<leader>q", ":q<cr>")
 
 -- Turn off highlighting until next search using ctr+l
-nnoremap("<c-l>", ":noh<cr>")
+utils.nnoremap("<c-l>", ":noh<cr>")
 
 -- Open/Quit NvimTree
-nnoremap("<s-tab>", ":NvimTreeToggle<cr>")
+utils.nnoremap("<s-tab>", ":NvimTreeToggle<cr>")
 
 -- Telescope
-nnoremap("<leader>ff", "<cmd>Telescope find_files hidden=true<cr>")
-nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
-nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
-nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
+utils.nnoremap("<leader>ff", "<cmd>Telescope find_files hidden=true<cr>")
+utils.nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
+utils.nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
+utils.nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
 
 -- Clear search highlight
-nnoremap("<esc>", ":noh<CR>")
+utils.nnoremap("<esc>", ":noh<CR>")
+
+-- Golang specific mappings
+vim.cmd [[
+  autocmd FileType go nnoremap <leader>b <plug>(go-build)
+  autocmd FileType go nnoremap <leader>r <plug>(go-run)
+  autocmd FileType go nnoremap <leader>t :GoTest ./...<cr>
+  autocmd FileType go nnoremap <leader>tf <plug>(go-test-func)
+  autocmd FileType go nnoremap <leader>c <plug>(go-coverage-toggle)
+  autocmd FileType go nnoremap <c-n> :cnext<cr>
+  autocmd FileType go nnoremap <c-p> :cprevious<cr> 
+  autocmd FileType go nnoremap <c-a> :cclose<cr> 
+]]
 
