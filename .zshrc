@@ -129,8 +129,6 @@ alias lg="lazygit"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export GOPATH="$HOME/projects/go"
-export PATH="$PATH:$(go env GOPATH)/bin:$HOME/.local/bin"
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export TERM=xterm
@@ -141,10 +139,18 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Load Fedora OS customization
+# Load Linux OS customization
 if [[ $(uname) == "Linux" ]]; then
-  alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y"
-  export PATH="$PATH:$HOME/.rbenv/bin"
+  OS_NAME="$(grep '^ID=' /etc/os-release | cut -d '=' -f2)"
+  
+  case $OS_NAME in
+    fedora)
+        alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y"
+    ;;
+    debian)
+        alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
+    ;;
+  esac
 fi
 
 # Load Mac OS customization
@@ -154,4 +160,14 @@ if [[ $(uname) == "Darwin" ]]; then
   bindkey "^[[1;3D" backward-word
 fi
 
-eval "$(rbenv init - -zsh)"
+# Golang customization
+if command -v go &> /dev/null; then
+  export GOPATH="$HOME/projects/go"
+  export PATH="$PATH:$(go env GOPATH)/bin:$HOME/.local/bin"
+fi
+
+# Ruby customization
+if command -v rbenv &> /dev/null; then
+  export PATH="$PATH:$HOME/.rbenv/bin"
+  eval "$(rbenv init - -zsh)"
+fi
