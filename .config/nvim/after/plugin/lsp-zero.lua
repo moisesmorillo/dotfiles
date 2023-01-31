@@ -11,6 +11,7 @@ lsp.ensure_installed({
   "rust_analyzer",
   "yamlls",
   "clangd",
+  "bashls"
 })
 
 lsp.nvim_workspace()
