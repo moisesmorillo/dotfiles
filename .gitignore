@@ -139,4 +139,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,vim,lua
+.config/nvim/plugin/packer_compiled.lua
 
