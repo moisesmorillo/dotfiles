@@ -132,6 +132,7 @@ alias lg="lazygit"
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export TERM=xterm
+export PATH="$PATH:/usr/local/go/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -141,14 +142,16 @@ export NVM_DIR="$HOME/.nvm"
 
 # Load Linux OS customization
 if [[ $(uname) == "Linux" ]]; then
+  export PATH="/usr/local/sbin:/snap/bin:/boot/dietpi:/sbin:/usr/sbin:$PATH"
   OS_NAME="$(grep '^ID=' /etc/os-release | cut -d '=' -f2)"
-  
+
   case $OS_NAME in
     fedora)
         alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y"
     ;;
     debian)
         alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
+	/boot/dietpi/dietpi-login
     ;;
   esac
 fi
