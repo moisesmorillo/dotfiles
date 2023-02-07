@@ -147,12 +147,12 @@ if [[ $(uname) == "Linux" ]]; then
 
   case $OS_NAME in
     fedora)
-        alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y"
-    ;;
+      alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y && omz update"
+      ;;
     debian)
-        alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
-	/boot/dietpi/dietpi-login
-    ;;
+      alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && omz update"
+      /boot/dietpi/dietpi-login
+      ;;
   esac
 fi
 
