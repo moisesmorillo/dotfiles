@@ -126,6 +126,9 @@ alias ls="exa --icons"
 alias tree="exa --icons --tree"
 # alias to git client
 alias lg="lazygit"
+# alias to kill docker in mac
+alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill"
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
