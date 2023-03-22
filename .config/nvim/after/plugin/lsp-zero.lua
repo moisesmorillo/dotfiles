@@ -14,5 +14,32 @@ lsp.ensure_installed({
   "bashls"
 })
 
+-- Fix Undefined global 'vim'
+lsp.configure('lua-language-server', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
+
+
+lsp.on_attach = function (client, bufnr)
+  
+end
+
 lsp.nvim_workspace()
 lsp.setup()
+
+-- TODO review this config
+vim.diagnostic.config({
+  virtual_text = true,
+  severity_sort = false,
+  underline = true,
+  update_in_insert = false,
+  float = {
+    source = "always", -- Or "if_many"
+  },
+})
