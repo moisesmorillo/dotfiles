@@ -15,7 +15,7 @@ require("packer").startup(function(use)
   -- Devtools
   use 'wakatime/vim-wakatime'
   -- Personalization
-  use "EdenEast/nightfox.nvim"
+  use { "catppuccin/nvim", as = "catppuccin" }
   use {
     "nvim-tree/nvim-tree.lua",
     requires = {
