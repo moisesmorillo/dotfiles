@@ -8,6 +8,7 @@ require("nvim-treesitter.configs").setup({
     "go",
     "json",
     "jsonc",
+    "jsdoc",
     "help",
   },
   sync_install = false,
