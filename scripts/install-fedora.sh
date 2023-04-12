@@ -48,6 +48,7 @@ sudo dnf install -y neovim python3-neovim
 ### Install Neovim Plugins ###
 sudo dnf install -y fzf
 sudo dnf install -y lua-language-server
+sudo dnf install ripgrep
 
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh

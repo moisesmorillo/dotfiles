@@ -44,6 +44,7 @@ sudo apt-get install -y neovim python3-neovim
 ### Install Neovim Plugins ###
 sudo apt-get install -y fzf
 # TODO install lua-language-server
+sudo apt-get install ripgrep
 
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh

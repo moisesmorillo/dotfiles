@@ -29,6 +29,7 @@ brew install neovim
 brew install fzf
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 brew install lua-language-server
+brew install ripgrep
 
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
