@@ -1,36 +1,42 @@
-require("nvim-tree").setup({
-  diagnostics = {
-    enable = true,
-  },
-  view = {
-    adaptive_size = true,
-    width = "25%",
-    side = "right",
- },
- modified = {
-   enable = true,
- },
-  renderer = {
-    highlight_git = true,
-    highlight_modified = "all",
-    indent_markers = {
+local ok, tree = pcall(require, "nvim-tree")
+
+if ok then
+  tree.setup({
+    diagnostics = {
       enable = true,
     },
-    icons = {
-      show = {
-        modified = true,
+    view = {
+      adaptive_size = true,
+      width = "25%",
+      side = "right",
+   },
+   modified = {
+     enable = true,
+   },
+    renderer = {
+      highlight_git = true,
+      highlight_modified = "all",
+      indent_markers = {
+        enable = true,
       },
-      glyphs = {
-        folder = {
-          arrow_closed = "+",
-          arrow_open = "-"
+      icons = {
+        show = {
+          modified = true,
+        },
+        glyphs = {
+          folder = {
+            arrow_closed = "+",
+            arrow_open = "-"
+          }
         }
-      }
+      },
     },
-  },
-  actions = {
-    open_file = {
-      quit_on_open = true,
+    actions = {
+      open_file = {
+        quit_on_open = true,
+      }
     }
-  }
-})
+  })
+else
+  print("Module nvim-tree not found")
+end

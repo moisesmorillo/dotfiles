@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 
 local utils = require("core.utils")
-local builtin = require("telescope.builtin")
 
 -- Save file
 utils.nnoremap("<leader>w", ":w<cr>")
@@ -16,10 +15,14 @@ utils.nnoremap("<c-l>", ":noh<cr>")
 utils.nnoremap("<s-tab>", ":NvimTreeToggle<cr>")
 
 -- Telescope
-utils.nnoremap("<leader>ff", "<cmd>Telescope find_files hidden=true<cr>")
-utils.nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
-utils.nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
-utils.nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
+local ok, telescope = pcall(require, "telescope.builtin")
+
+if ok then
+  utils.nnoremap("<leader>ff", "<cmd>Telescope find_files hidden=true<cr>")
+  utils.nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
+  utils.nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
+  utils.nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
+end
 
 -- Clear search highlight
 utils.nnoremap("<esc>", ":noh<CR>")
