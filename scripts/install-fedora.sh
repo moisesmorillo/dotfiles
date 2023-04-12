@@ -2,7 +2,7 @@
 
 ### Enable Extra Repositories ###
 sudo dnf -y copr enable agriffis/neovim-nightly
-sudo dnf copr enable yorickpeterse/lua-language-server
+sudo dnf -y copr enable yorickpeterse/lua-language-server
 sudo dnf -y install fedora-workstation-repositories
 sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf -y install dnf-utils
