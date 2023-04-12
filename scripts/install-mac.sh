@@ -22,10 +22,14 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ### Install Kitty ###
 brew install --cask kitty
 
+### Install Neovim ###
+brew install neovim
+
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
+ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
 
 ### Install Fuzzy Finder ###
 brew install fzf
