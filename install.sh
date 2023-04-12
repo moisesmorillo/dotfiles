@@ -1,31 +1,26 @@
-#!/bin/bash
+source ./scripts/utils.sh
 
-# Clean packer
-rm -rf ~/.local/share/nvim/site/pack/packer
-rm ~/.config/nvim/plugin/packer_compiled.lua
+os_name=$(get_os_name)
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-# Dectect OS
-if [[ "$(uname)" == "Darwin" ]]; then
-  echo "MacOS"
-elif [[ "$(uname)" == "Linux" ]]; then
-  # Detect supported Linux version
-  if [ -r /etc/os-release ]; then
-    . /etc/os-release
-    if [[ "$ID" == "ubuntu" || "$ID" == "debian" ]]; then
-      echo "Debian or Ubuntu: $ID"
-    elif [[ "$ID" == "fedora" ]]; then
-      echo "Fedora"
-    else
-      echo "Unsupported Linux Version, exiting now..."
-      exit 1
-    fi
- fi
-else
-  echo "Unsupported OS"
-  exit 1
+if [[ "$os_name" == "debian" || "$os_name" == "ubuntu" ]]; then
+    # Install Debian/Ubuntu Packages
+    source ./scripts/install-debian.sh
+elif [[ "$os_name" == "fedora" ]]; then
+    # Install Fedora Packages
+    source ./scripts/install-fedora.sh
+elif [[ "$os_name" == "macos" ]]; then
+    # Install Mac Packages
+    source ./scripts/install-mac.sh
 fi
+
+
+# # Clean packer
+# rm -rf ~/.local/share/nvim/site/pack/packer
+# rm ~/.config/nvim/plugin/packer_compiled.lua
+
+# git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+# nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+
 
