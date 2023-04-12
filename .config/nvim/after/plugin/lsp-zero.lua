@@ -8,7 +8,7 @@ if ok then
     "tsserver",
     "eslint",
     "gopls",
-    "sumneko_lua",
+    "lua_ls",
     "rust_analyzer",
     "yamlls",
     "clangd",
