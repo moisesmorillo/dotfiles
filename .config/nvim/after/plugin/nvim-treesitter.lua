@@ -12,7 +12,6 @@ if ok then
       "json",
       "jsonc",
       "jsdoc",
-      "help",
     },
     sync_install = false,
     auto_install = true,
