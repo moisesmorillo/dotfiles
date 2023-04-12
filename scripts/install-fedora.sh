@@ -2,6 +2,7 @@
 
 ### Enable Extra Repositories ###
 sudo dnf -y copr enable agriffis/neovim-nightly
+sudo dnf copr enable yorickpeterse/lua-language-server
 sudo dnf -y install fedora-workstation-repositories
 sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf -y install dnf-utils
@@ -44,14 +45,15 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 ### Install Neovim ###
 sudo dnf install -y neovim python3-neovim
 
+### Install Neovim Plugins ###
+sudo dnf install -y fzf
+sudo dnf install -y lua-language-server
+
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
-
-### Install Fuzzy Finder ###
-sudo dnf install -y fzf
 
 ### Install Btop ###
 sudo dnf install -y btop

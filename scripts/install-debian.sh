@@ -41,14 +41,15 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 ### Install Neovim ###
 sudo apt-get install -y neovim python3-neovim
 
+### Install Neovim Plugins ###
+sudo apt-get install -y fzf
+# TODO install lua-language-server
+
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
-
-### Install Fuzzy Finder ###
-sudo apt-get install -y fzf
 
 ### Install Btop ###
 sudo snap install btop
