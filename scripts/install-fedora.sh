@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ### Enable Extra Repositories ###
-sudo dnf -y copr enable agriffis/neovim-nightly
+sudo dnf -y copr enable agriffis/neovim-night
+sudo dnf -y copr enable lyatim/lazygit 
 sudo dnf -y copr enable yorickpeterse/lua-language-server
 sudo dnf -y install fedora-workstation-repositories
 sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -69,7 +70,6 @@ sudo dnf install -y bat
 sudo snap install yq
 
 ### Install Lazygit ###
-sudo dnf copr enable atim/lazygit -y
 sudo dnf install lazygit
 
 ### Install tmux ###
@@ -77,6 +77,6 @@ sudo dnf install -y tmux
 
 ### Install NVM ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-nvm install --lts
-nvm use --lts --default
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+nvm install --lts && nvm alias default node
 

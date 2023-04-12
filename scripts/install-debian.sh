@@ -75,5 +75,5 @@ sudo apt-get install -y tmux
 
 ### Install NVM ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-nvm install --lts
-nvm use --lts --default
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+nvm install --lts && nvm alias default node
