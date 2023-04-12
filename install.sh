@@ -11,10 +11,11 @@ elif [[ "$(uname)" == "Linux" ]]; then
       echo "Debian or Ubuntu: $ID"
     elif [[ "$ID" == "fedora" ]]; then
       echo "Fedora"
+    else
+      echo "Unsupported Linux Version, exiting now..."
+      exit 1
     fi
-  fi
-  echo "Unsupported Linux Version, exiting now..."
-  exit 1
+ fi
 else
   echo "Unsupported OS"
   exit 1
