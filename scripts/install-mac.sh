@@ -47,3 +47,11 @@ brew install bat
 
 ### Install Yq ###
 brew install yq
+
+### Install Lazygit ###
+brew install jesseduffield/lazygit/lazygit
+brew install lazygit
+
+### Install tmux ###
+brew install tmux
+

@@ -66,3 +66,11 @@ sudo dnf install -y bat
 
 ### Install Yq ###
 sudo snap install yq
+
+### Install Lazygit ###
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
+
+### Install tmux ###
+sudo dnf install -y tmux
+
