@@ -47,6 +47,7 @@ sudo apt-get install -y fzf
 sudo apt-get install ripgrep
 
 ### Clone and set dotfiles ###
+rm -rf ~/.config/nvim ~/.config/kitty
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
