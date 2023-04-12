@@ -49,3 +49,15 @@ ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
 
 ### Install Fuzzy Finder ###
 sudo apt-get install -y fzf
+
+### Install Btop ###
+sudo snap install btop
+
+### Install Exa ###
+sudo apt-get install -y exa
+
+### Install Bat ###
+sudo apt-get install -y bat
+
+### Install Yq ###
+sudo snap install yq

@@ -34,3 +34,15 @@ ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
 ### Install Fuzzy Finder ###
 brew install fzf
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
+
+### Install Btop ###
+brew install btop
+
+### Install Exa ###
+brew install exa
+
+### Install Bat ###
+brew install bat
+
+### Install Yq ###
+brew install yq
