@@ -1,12 +1,12 @@
 #!/bin/bash
 
-### Brew ###
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+### Install Brew ###
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ### Update Brew
 brew update && brew upgrade
 
-### Git ###
+### Install Git ###
 brew install git
 
 ### Install Zsh ###
@@ -23,7 +23,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 brew install --cask kitty
 
 ### Clone and set dotfiles ###
-git clone https://github.com/moisesmorillo/dotfiles.git ~/projects/dotfiles
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
