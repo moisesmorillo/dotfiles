@@ -25,15 +25,16 @@ brew install --cask kitty
 ### Install Neovim ###
 brew install neovim
 
+### Install Neovim Plugins ###
+brew install fzf
+$(brew --prefix)/opt/fzf/install --all --key-bindings --completion
+brew install lua-language-server
+
 ### Clone and set dotfiles ###
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
-
-### Install Fuzzy Finder ###
-brew install fzf
-$(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 
 ### Install Btop ###
 brew install btop
