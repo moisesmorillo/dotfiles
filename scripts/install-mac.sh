@@ -29,4 +29,4 @@ ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
 
 ### Install Fuzzy Finder ###
 brew install fzf
-$(brew --prefix)/opt/fzf/install
+$(brew --prefix)/opt/fzf/install --all --key-bindings --completion
