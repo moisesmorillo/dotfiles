@@ -19,7 +19,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 ### Install Jetbrains Font ###
-curl -Lo- https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh | bash
 curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
 unzip JetBrainsMono.zip -d ~/.fonts
 rm JetBrainsMono.zip
