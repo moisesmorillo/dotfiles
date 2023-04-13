@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export DEBIAN_FRONTEND=noninteractive
 ### Enable Extra Repositories ###
 sudo add-apt-repository restricted
 sudo add-apt-repository universe
@@ -10,7 +11,7 @@ sudo apt-get update
 sudo apt update -y && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 ### Install Basic Packages
-sudo apt-get install -y unrar p7zip snapd libdvdnav4 lsdvd libdvd-pkg flatpak build-essential libcurl4-openssl-dev libssl-dev htop wget curl
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip snapd libdvdnav4 lsdvd flatpak libdvd-pkg build-essential libcurl4-openssl-dev libssl-dev htop wget curl
 
 ### Install Git ###
 sudo apt-get install -y git
@@ -59,6 +60,7 @@ sudo apt-get install -y openjdk-17-jdk openjdk-17-jre
 ### Install Rust ###
 sudo apt-get purge -y rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+. $HOME/.cargo/env
 
 ### Install Neovim ###
 sudo apt-get install -y neovim python3-neovim
@@ -71,10 +73,10 @@ go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty
-ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
-ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
-ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
+ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.p10k.zsh ~/.p10k.zsh
+ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.zshrc ~/.zshrc
+ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/kitty ~/.config/kitty
+ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 
 ### Install Btop ###
 sudo snap install btop
