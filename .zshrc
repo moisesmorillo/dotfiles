@@ -116,8 +116,6 @@ export EDITOR="nvim"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias for neovim
 alias nv="nvim"
-# alias to replace cat for bat
-alias cat="bat"
 # alias to find files using fzf
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 # alias to replace ls for exa
@@ -145,6 +143,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Load Linux OS customization
 if [[ $(uname) == "Linux" ]]; then
+  # alias to replace cat for bat
+  alias cat="batcat"
   export PATH="/usr/local/sbin:/snap/bin:/boot/dietpi:/sbin:/usr/sbin:$PATH"
   OS_NAME="$(grep '^ID=' /etc/os-release | cut -d '=' -f2)"
 
@@ -161,6 +161,8 @@ fi
 
 # Load Mac OS customization
 if [[ $(uname) == "Darwin" ]]; then
+  # alias to replace cat for bat
+  alias cat="bat"
   alias fu="brew update && brew upgrade && omz update"
   bindkey "^[[1;3C" forward-word
   bindkey "^[[1;3D" backward-word

@@ -6,70 +6,30 @@ sudo add-apt-repository restricted
 sudo add-apt-repository universe
 sudo apt-get update
 
-
-### Update OS ###
-sudo apt update -y && sudo apt upgrade -y && sudo apt full-upgrade -y
-
 ### Install Basic Packages
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip snapd libdvdnav4 lsdvd flatpak libdvd-pkg build-essential libcurl4-openssl-dev libssl-dev htop wget curl
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip build-essential libcurl4-openssl-dev libssl-dev curl bat tmux git zsh ripgrep fzf neovim python3-neovim rvenv
 
-### Install Git ###
-sudo apt-get install -y git
-
-### Install Zsh ###
-sudo apt-get install -y zsh
+### Configure Zsh ###
 sudo chsh -s $(which zsh) $USER
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+curl -Lo- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
 
 ### Install Zsh Plugins ###
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-### Install Kitty Term ###
-sudo apt-get install -y kitty
-# Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
-# your system-wide PATH)
-ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
-# Place the kitty.desktop file somewhere it can be found by the OS
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-# If you want to open text files and images in kitty via your file manager also add the kitty-open.desktop file
-cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-# Update the paths to the kitty and its icon in the kitty.desktop file(s)
-sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-
 ### Install Jetbrains Font ###
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+curl -Lo- https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh | bash
 
 ### Install Nvm ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 nvm install --lts && nvm alias default node
 
-### Install Rbenv ###
-sudo apt-get install -y rbenv
-
-### Install Go ###
-curl -O https://dl.google.com/go/go1.20.3.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.3.linux-amd64.tar.gz
-
-### Install Java ###
-sudo apt-get install -y openjdk-17-jdk openjdk-17-jre
-
-### Install Rust ###
-sudo apt-get purge -y rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-. $HOME/.cargo/env
-
-### Install Neovim ###
-sudo apt-get install -y neovim python3-neovim
-
 ### Install Neovim Plugins ###
-sudo apt-get install -y fzf
-# TODO install lua-language-server
-sudo apt-get install ripgrep
-go install golang.org/x/tools/gopls@latest
+if command -v go &> /dev/null; then
+    go install golang.org/x/tools/gopls@latest
+fi
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty
@@ -79,25 +39,25 @@ ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/kitty ~/.config/
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 
 ### Install Btop ###
-sudo snap install btop
+curl -LO https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz
+tar -xvf btop-x86_64-linux-musl.tbz
+sudo mv ./btop/bin/btop /usr/local/bin/btop
+sudo chmod +x /usr/local/bin/btop
+rm -rf btop-x86_64-linux-musl.tbz btop
 
 ### Install Exa ###
-sudo apt-get install -y exa
-
-### Install Bat ###
-sudo apt-get install -y bat
+curl -LO https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
+unzip exa-linux-x86_64-v0.10.0.zip -d exa
+sudo mv ./exa/bin/exa /usr/local/bin/exa
+sudo chmod +x /usr/local/bin/exa
+rm -rf exa-linux-x86_64-v0.10.0.zip exa
 
 ### Install Yq ###
-sudo snap install yq
+sudo curl -L "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64" -o /usr/local/bin/yq
+sudo chmod +x /usr/local/bin/yq
 
 ### Install Lazygit ###
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
-
-### Install Tmux ###
-sudo apt-get install -y tmux
-
-### Clean System ###
-sudo apt-get autoclean -y && sudo apt-get autoremove -y && sudo apt-get clean -y
