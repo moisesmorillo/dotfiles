@@ -10,14 +10,14 @@ sudo apt-get update
 sudo apt update -y && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 ### Install Basic Packages
-sudo apt-get install unrar p7zip p7zip-plugins snapd libdvdread6 libdvdnav4 lsdvd libdvd-pkg flatpak build-essential libcurl4-openssl-dev libssl-dev htop wget curl
+sudo apt-get install -y unrar p7zip snapd libdvdnav4 lsdvd libdvd-pkg flatpak build-essential libcurl4-openssl-dev libssl-dev htop wget curl
 
 ### Install Git ###
 sudo apt-get install -y git
 
 ### Install Zsh ###
 sudo apt-get install -y zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $USER
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ### Install Zsh Plugins ###
@@ -50,13 +50,14 @@ nvm install --lts && nvm alias default node
 sudo apt-get install -y rbenv
 
 ### Install Go ###
-sudo apt-get install -y golang
+curl -O https://dl.google.com/go/go1.20.3.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.3.linux-amd64.tar.gz
 
 ### Install Java ###
-sudo apt install openjdk-17-jdk openjdk-17-jre
+sudo apt-get install -y openjdk-17-jdk openjdk-17-jre
 
 ### Install Rust ###
-sudo apt-get uninstall -y rust
+sudo apt-get purge -y rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 ### Install Neovim ###
@@ -96,3 +97,5 @@ sudo install lazygit /usr/local/bin
 ### Install Tmux ###
 sudo apt-get install -y tmux
 
+### Clean System ###
+sudo apt-get autoclean -y && sudo apt-get autoremove -y && sudo apt-get clean -y

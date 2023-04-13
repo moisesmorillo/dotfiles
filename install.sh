@@ -1,3 +1,5 @@
+cat /etc/os-release
+
 source ./scripts/utils.sh
 
 os_name=$(get_os_name)

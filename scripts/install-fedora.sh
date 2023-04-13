@@ -22,7 +22,7 @@ sudo dnf install -y git
 
 ### Install Zsh ###
 sudo dnf install -y zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $USER
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ### Install Zsh Plugins ###
@@ -72,6 +72,10 @@ sudo dnf install -y fzf
 sudo dnf install -y lua-language-server
 sudo dnf install ripgrep
 go install golang.org/x/tools/gopls@latest
+rm -rf ~/.local/share/nvim/site/pack/packer ~/.config/nvim/plugin/packer_compiled.lua
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty
@@ -98,3 +102,5 @@ sudo dnf install lazygit
 ### Install Tmux ###
 sudo dnf install -y tmux
 
+### Clean System ###
+sudo dnf clean packages -y && sudo dnf autoremove -y && sudo dnf clean all -y
