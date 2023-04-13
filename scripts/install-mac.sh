@@ -1,7 +1,9 @@
 #!/bin/bash
 
+export NONINTERACTIVE=1
+
 ### Install Brew ###
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ### Update Brew
 brew update && brew upgrade
@@ -80,3 +82,6 @@ brew install lazygit
 
 ### Install Tmux ###
 brew install tmux
+
+unset NONINTERACTIVE
+
