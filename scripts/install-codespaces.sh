@@ -7,7 +7,7 @@ sudo add-apt-repository universe
 sudo apt-get update
 
 ### Install Basic Packages
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip build-essential libcurl4-openssl-dev libssl-dev curl bat tmux git zsh ripgrep fzf neovim python3-neovim rvenv
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip build-essential libcurl4-openssl-dev libssl-dev curl bat tmux git zsh ripgrep fzf neovim python3-neovim rvenv batcat
 
 ### Configure Zsh ###
 sudo chsh -s $(which zsh) $USER
@@ -20,16 +20,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 ### Install Jetbrains Font ###
 curl -Lo- https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh | bash
-
-### Install Nvm ###
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-nvm install --lts && nvm alias default node
-
-### Install Neovim Plugins ###
-if command -v go &> /dev/null; then
-    go install golang.org/x/tools/gopls@latest
-fi
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty
@@ -61,3 +51,14 @@ LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/re
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
+
+### Install Nvm ###
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm install --lts && nvm alias default node
+
+### Install Neovim Plugins ###
+if command -v go &> /dev/null; then
+    go install golang.org/x/tools/gopls@latest
+fi
