@@ -20,6 +20,10 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 ### Install Jetbrains Font ###
 curl -Lo- https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh | bash
+curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d ~/.fonts
+rm JetBrainsMono.zip
+fc-cache -fv
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty

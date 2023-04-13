@@ -25,6 +25,7 @@ brew install --cask kitty
 ### Install Jetbrains Font ###
 brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono
+brew install --cask font-jetbrains-mono-nerd-font
 
 ### Install Nvm ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
