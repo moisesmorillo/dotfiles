@@ -57,6 +57,13 @@ sudo dnf install -y rbenv
 ### Install Go ###
 sudo dnf install -y golang
 
+### Install Java ###
+sudo dnf install -y java-17-openjdk-headless.x86_64
+
+### Install Rust ###
+sudo dnf remove -y rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
 ### Install Neovim ###
 sudo dnf install -y neovim python3-neovim
 
@@ -64,6 +71,7 @@ sudo dnf install -y neovim python3-neovim
 sudo dnf install -y fzf
 sudo dnf install -y lua-language-server
 sudo dnf install ripgrep
+go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty

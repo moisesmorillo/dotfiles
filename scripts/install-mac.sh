@@ -37,6 +37,14 @@ brew install rbenv ruby-build
 ### Install Go ###
 brew install go
 
+### Install Java ###
+brew install openjdk@17
+sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+
+### Install Rust ###
+brew uninstall rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
 ### Install Neovim ###
 brew install neovim
 
@@ -45,6 +53,7 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 brew install lua-language-server
 brew install ripgrep
+go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty

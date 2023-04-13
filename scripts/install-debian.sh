@@ -52,6 +52,13 @@ sudo apt-get install -y rbenv
 ### Install Go ###
 sudo apt-get install -y golang
 
+### Install Java ###
+sudo apt install openjdk-17-jdk openjdk-17-jre
+
+### Install Rust ###
+sudo apt-get uninstall -y rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
 ### Install Neovim ###
 sudo apt-get install -y neovim python3-neovim
 
@@ -59,6 +66,7 @@ sudo apt-get install -y neovim python3-neovim
 sudo apt-get install -y fzf
 # TODO install lua-language-server
 sudo apt-get install ripgrep
+go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/kitty
