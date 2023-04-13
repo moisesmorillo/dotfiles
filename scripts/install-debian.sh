@@ -41,6 +41,17 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 ### Install Jetbrains Font ###
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 
+### Install Nvm ###
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+nvm install --lts && nvm alias default node
+
+### Install Rbenv ###
+sudo apt-get install -y rbenv
+
+### Install Go ###
+sudo apt-get install -y golang
+
 ### Install Neovim ###
 sudo apt-get install -y neovim python3-neovim
 
@@ -77,10 +88,3 @@ sudo install lazygit /usr/local/bin
 ### Install Tmux ###
 sudo apt-get install -y tmux
 
-### Install Nvm ###
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-nvm install --lts && nvm alias default node
-
-### Install Rbenv ###
-sudo apt-get install -y rbenv

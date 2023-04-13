@@ -26,6 +26,17 @@ brew install --cask kitty
 brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono
 
+### Install Nvm ###
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+nvm install --lts && nvm alias default node
+
+### Install Rbenv ###
+brew install rbenv ruby-build
+
+### Install Go ###
+brew install go
+
 ### Install Neovim ###
 brew install neovim
 
@@ -61,10 +72,3 @@ brew install lazygit
 ### Install Tmux ###
 brew install tmux
 
-### Install Nvm ###
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-nvm install --lts && nvm alias default node
-
-### Install Rbenv ###
-brew install rbenv ruby-build
