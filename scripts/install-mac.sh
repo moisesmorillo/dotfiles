@@ -22,6 +22,10 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ### Install Kitty ###
 brew install --cask kitty
 
+### Install Jetbrains Font ###
+brew tap homebrew/cask-fonts
+brew install --cask font-jetbrains-mono
+
 ### Install Neovim ###
 brew install neovim
 
@@ -54,11 +58,13 @@ brew install yq
 brew install jesseduffield/lazygit/lazygit
 brew install lazygit
 
-### Install tmux ###
+### Install Tmux ###
 brew install tmux
 
-### Install NVM ###
+### Install Nvm ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 nvm install --lts && nvm alias default node
 
+### Install Rbenv ###
+brew install rbenv ruby-build

@@ -43,6 +43,9 @@ cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/appli
 sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
 sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 
+### Install Jetbrains Font ###
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
 ### Install Neovim ###
 sudo dnf install -y neovim python3-neovim
 
@@ -73,11 +76,13 @@ sudo snap install yq
 ### Install Lazygit ###
 sudo dnf install lazygit
 
-### Install tmux ###
+### Install Tmux ###
 sudo dnf install -y tmux
 
-### Install NVM ###
+### Install Nvm ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 nvm install --lts && nvm alias default node
 
+### Install Rbenv ###
+sudo dnf install -y rbenv
