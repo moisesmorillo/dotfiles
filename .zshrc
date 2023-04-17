@@ -133,7 +133,6 @@ alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{pr
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export TERM=xterm
-export PATH="$PATH:/usr/local/go/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -178,6 +177,10 @@ fi
 if command -v rbenv &> /dev/null; then
   export PATH="$PATH:$HOME/.rbenv/bin"
   eval "$(rbenv init - -zsh)"
+fi
+
+if command -v yarn &> /dev/null; then
+  export PATH="$PATH:$(yarn global bin)"
 fi
 
 #macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
