@@ -14,6 +14,9 @@ sudo dnf update -y && sudo dnf upgrade -y
 ### Install Basic Packages ###
 sudo dnf -y install htop wget curl unrar p7zip p7zip-plugins snapd libdvdread libdvdnav lsdvd flatpak --setopt=strict=0
 
+### Add Flathub To Flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 ### Config snapd ###
 sudo ln -sf /var/lib/snapd/snap /snap
 
