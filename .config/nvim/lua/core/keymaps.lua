@@ -15,7 +15,7 @@ utils.nnoremap("<c-l>", ":noh<cr>")
 utils.nnoremap("<s-tab>", ":NvimTreeToggle<cr>")
 
 -- Telescope
-local ok, telescope = pcall(require, "telescope.builtin")
+local ok, _ = pcall(require, "telescope.builtin")
 
 if ok then
   utils.nnoremap("<leader>ff", "<cmd>Telescope find_files hidden=true<cr>")
@@ -29,13 +29,12 @@ utils.nnoremap("<esc>", ":noh<CR>")
 
 -- Golang specific mappings
 vim.cmd [[
-  autocmd FileType go nnoremap <leader>b <plug>(go-build)
-  autocmd FileType go nnoremap <leader>r <plug>(go-run)
-  autocmd FileType go nnoremap <leader>t :GoTest ./...<cr>
-  autocmd FileType go nnoremap <leader>tf <plug>(go-test-func)
-  autocmd FileType go nnoremap <leader>c <plug>(go-coverage-toggle)
+  autocmd FileType go nnoremap <leader>gb <plug>(go-build)
+  autocmd FileType go nnoremap <leader>gr <plug>(go-run)
+  autocmd FileType go nnoremap <leader>gt :GoTest ./...<cr>
+  autocmd FileType go nnoremap <leader>gtf <plug>(go-test-func)
+  autocmd FileType go nnoremap <leader>gc <plug>(go-coverage-toggle)
   autocmd FileType go nnoremap <c-n> :cnext<cr>
   autocmd FileType go nnoremap <c-p> :cprevious<cr> 
   autocmd FileType go nnoremap <c-a> :cclose<cr> 
 ]]
-

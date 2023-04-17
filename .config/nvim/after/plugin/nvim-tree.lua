@@ -9,10 +9,10 @@ if ok then
       adaptive_size = true,
       width = "25%",
       side = "right",
-   },
-   modified = {
-     enable = true,
-   },
+    },
+    modified = {
+      enable = true,
+    },
     renderer = {
       highlight_git = true,
       highlight_modified = "all",

@@ -2,7 +2,7 @@
 local options = {
   autowrite = true,
   backup = false,
-  clipboard = "unnamed",
+  clipboard = "unnamedplus",
   cmdheight = 2,
   colorcolumn = "80",
   expandtab = true,
@@ -29,5 +29,5 @@ local options = {
 }
 
 for k, v in pairs(options) do
-	vim.opt[k] = v
+  vim.opt[k] = v
 end
