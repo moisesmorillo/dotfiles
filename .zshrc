@@ -143,15 +143,16 @@ export NVM_DIR="$HOME/.nvm"
 # Load Linux OS customization
 if [[ $(uname) == "Linux" ]]; then
   # alias to replace cat for bat
-  alias cat="batcat"
   export PATH="/usr/local/sbin:/snap/bin:/boot/dietpi:/sbin:/usr/sbin:$PATH"
   OS_NAME="$(grep '^ID=' /etc/os-release | cut -d '=' -f2)"
 
   case $OS_NAME in
     fedora)
+      alias cat="bat"
       alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y && omz update"
       ;;
     debian)
+      alias cat="batcat"
       alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && omz update"
       /boot/dietpi/dietpi-login
       ;;
