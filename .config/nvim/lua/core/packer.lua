@@ -46,13 +46,14 @@ require("packer").startup(function(use)
   -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
       {
         'williamboman/mason.nvim',
         run = function()
-          pcall(vim.cmd, 'MasonUpdate')
+          _, _ = pcall(vim.cmd, 'MasonUpdate')
         end,
       },
       { 'williamboman/mason-lspconfig.nvim' },
