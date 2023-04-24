@@ -83,5 +83,8 @@ brew install lazygit
 ### Install Tmux ###
 brew install tmux
 
+### Install 1Password CLI
+brew install --cask 1password/tap/1password-cli
+
 unset NONINTERACTIVE
 
