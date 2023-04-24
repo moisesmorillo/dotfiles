@@ -1,4 +1,5 @@
 local ok, lsp = pcall(require, "lsp-zero")
+local utils = require("core.utils")
 
 if ok then
   lsp.preset({
@@ -6,15 +7,15 @@ if ok then
   })
 
   lsp.ensure_installed({
-    "sqlls",
-    "tsserver",
+    "bashls",
+    "clangd",
     "eslint",
     "gopls",
     "lua_ls",
     "rust_analyzer",
+    "sqlls",
+    "tsserver",
     "yamlls",
-    "clangd",
-    "bashls"
   })
 
   lsp.set_sign_icons({
@@ -24,8 +25,11 @@ if ok then
     info = ""
   })
 
-  lsp.on_attach = function(client, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
+  lsp.on_attach = function(_, bufnr)
+    local opts = { buffer = bufnr }
+    utils.nnoremap("<leader>lh", function() vim.lsp.buf.hover() end, opts)
+    utils.nnoremap("<leader>ld", function() vim.lsp.buf.definition() end, opts)
+    --   utils.nnoremap("", command, options)
   end
 
   lsp.format_on_save({
