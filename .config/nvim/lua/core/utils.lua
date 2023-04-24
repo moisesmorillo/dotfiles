@@ -1,7 +1,12 @@
 local M = {}
 
-function M.nnoremap(shorcut, command)
-  vim.api.nvim_set_keymap("n", shorcut, command, { noremap = true, silent = true })
+function M.nnoremap(shorcut, command, options)
+  local opts = vim.tbl_extend("keep", {
+    noremap = true,
+    silent = true,
+  }, options or {})
+
+  vim.keymap.set("n", shorcut, command, opts)
 end
 
 return M
