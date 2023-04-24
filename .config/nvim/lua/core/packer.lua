@@ -13,7 +13,7 @@ require("packer").startup(function(use)
   }
 
   -- Devtools
-  use 'wakatime/vim-wakatime'
+  use "wakatime/vim-wakatime"
   -- Personalization
   use { "catppuccin/nvim", as = "catppuccin" }
   use {
@@ -45,30 +45,30 @@ require("packer").startup(function(use)
   use "windwp/nvim-autopairs"
   -- LSP
   use {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v2.x",
     requires = {
       -- LSP Support
-      { 'neovim/nvim-lspconfig' },
+      { "neovim/nvim-lspconfig" },
       {
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim",
         run = function()
-          _, _ = pcall(vim.cmd, 'MasonUpdate')
+          _, _ = pcall(vim.cmd, "MasonUpdate")
         end,
       },
-      { 'williamboman/mason-lspconfig.nvim' },
+      { "williamboman/mason-lspconfig.nvim" },
 
       -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
+      { "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "saadparwaiz1/cmp_luasnip" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
 
       -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
+      { "L3MON4D3/LuaSnip" },
+      { "rafamadriz/friendly-snippets" },
     }
   }
 end)
