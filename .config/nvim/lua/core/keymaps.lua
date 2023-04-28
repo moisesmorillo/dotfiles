@@ -19,7 +19,7 @@ utils.nnoremap("<leader>bb", ":bp<cr>")
 utils.nnoremap("<c-l>", ":noh<cr>")
 
 -- Open/Quit NvimTree
-utils.nnoremap("<s-tab>", ":NvimTreeToggle<cr>")
+utils.nnoremap("<leader>e", ":NvimTreeToggle<cr>")
 
 -- Open new buffer
 utils.nnoremap("<leader>n", ":enew<cr>")
