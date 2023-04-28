@@ -53,7 +53,6 @@ brew install neovim
 ### Install Neovim Plugins ###
 brew install fzf
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
-brew install lua-language-server
 brew install ripgrep
 go install golang.org/x/tools/gopls@latest
 

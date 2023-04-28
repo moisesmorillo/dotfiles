@@ -3,7 +3,6 @@
 ### Enable Extra Repositories ###
 sudo dnf -y copr enable agriffis/neovim-night
 sudo dnf -y copr enable lyatim/lazygit 
-sudo dnf -y copr enable yorickpeterse/lua-language-server
 sudo dnf -y install fedora-workstation-repositories
 sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf -y install dnf-utils
@@ -75,7 +74,6 @@ sudo dnf install -y neovim python3-neovim
 
 ### Install Neovim Plugins ###
 sudo dnf install -y fzf
-sudo dnf install -y lua-language-server
 sudo dnf install ripgrep
 go install golang.org/x/tools/gopls@latest
 rm -rf ~/.local/share/nvim/site/pack/packer ~/.config/nvim/plugin/packer_compiled.lua
