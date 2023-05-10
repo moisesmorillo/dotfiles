@@ -1,3 +1,4 @@
+local utils = require("core.utils")
 local ok, tree = pcall(require, "nvim-tree")
 
 if ok then
@@ -60,3 +61,7 @@ if ok then
 else
   print("Module nvim-tree not found")
 end
+
+
+-- Open/Quit NvimTree
+utils.nnoremap("<leader>e", ":NvimTreeToggle<cr>")

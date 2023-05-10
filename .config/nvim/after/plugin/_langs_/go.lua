@@ -21,3 +21,15 @@ local options = {
 for k, v in pairs(options) do
   vim.g[k] = v
 end
+
+
+vim.cmd [[
+  autocmd FileType go nnoremap <leader>gb <plug>(go-build)
+  autocmd FileType go nnoremap <leader>gr <plug>(go-run)
+  autocmd FileType go nnoremap <leader>gt :GoTest ./...<cr>
+  autocmd FileType go nnoremap <leader>gtf <plug>(go-test-func)
+  autocmd FileType go nnoremap <leader>gc <plug>(go-coverage-toggle)
+  autocmd FileType go nnoremap <c-n> :cnext<cr>
+  autocmd FileType go nnoremap <c-p> :cprevious<cr>
+  autocmd FileType go nnoremap <c-a> :cclose<cr>
+]]
