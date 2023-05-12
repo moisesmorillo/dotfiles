@@ -64,6 +64,7 @@ ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
 
 ### Install Btop ###
 brew install btop
@@ -83,6 +84,7 @@ brew install lazygit
 
 ### Install Tmux ###
 brew install tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### Install 1Password CLI
 brew install --cask 1password/tap/1password-cli

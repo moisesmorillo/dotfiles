@@ -132,7 +132,7 @@ alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{pr
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export TERM=xterm
+export TERM=xterm-256color
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

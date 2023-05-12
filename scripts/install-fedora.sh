@@ -89,6 +89,7 @@ ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
 
 ### Install Btop ###
 sudo dnf install -y btop
@@ -107,6 +108,7 @@ sudo dnf install lazygit
 
 ### Install Tmux ###
 sudo dnf install -y tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### Clean System ###
 sudo dnf clean packages -y && sudo dnf autoremove -y && sudo dnf clean all -y
