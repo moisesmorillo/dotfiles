@@ -43,6 +43,7 @@ require("packer").startup(function(use)
   -- Tools
   use "b3nj5m1n/kommentary"
   use "windwp/nvim-autopairs"
+  use "ojroques/vim-oscyank" -- System clipboard for blink shell
   -- LSP
   use {
     "VonHeikemen/lsp-zero.nvim",
