@@ -1,11 +1,8 @@
 local ok, catppuccin = pcall(require, "catppuccin")
+if not ok then return false end
 
-if ok then
-  catppuccin.setup({
-    flavour = "mocha",
-  })
-  
-  vim.cmd.colorscheme("catppuccin")
-else
-  print("Module catppuccin not found")
-end
+catppuccin.setup({
+  flavour = "mocha",
+})
+
+vim.cmd.colorscheme("catppuccin")

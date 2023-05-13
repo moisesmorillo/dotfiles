@@ -3,6 +3,6 @@ local globals = {
   loaded_netrwPlugin = 1,
 }
 
-for k,v in pairs(globals) do
+for k, v in pairs(globals) do
   vim.g[k] = v
 end

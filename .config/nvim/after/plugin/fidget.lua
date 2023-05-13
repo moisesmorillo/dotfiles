@@ -1,7 +1,4 @@
 local ok, fidget = pcall(require, "fidget")
+if not ok then return false end
 
-if ok then
-    fidget.setup()
-else
-    print("Module fidget not found")
-end
+fidget.setup()
