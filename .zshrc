@@ -102,6 +102,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 export EDITOR="nvim"
+export GPG_TTY="$(tty)"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# export TERM=xterm-256color
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -112,8 +115,6 @@ export EDITOR="nvim"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias for neovim
 alias nv="nvim"
 # alias to find files using fzf
@@ -127,12 +128,8 @@ alias lg="lazygit"
 # alias to kill docker in mac
 alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill"
 
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export GPG_TTY="$(tty)"
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export TERM=xterm-256color
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

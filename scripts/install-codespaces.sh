@@ -26,10 +26,8 @@ rm JetBrainsMono.zip
 fc-cache -fv
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/nvim ~/.config/kitty
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.zshrc ~/.zshrc
-ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/kitty ~/.config/kitty
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
 

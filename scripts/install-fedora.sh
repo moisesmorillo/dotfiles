@@ -32,19 +32,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-### Kitty ###
-sudo dnf install -y kitty
-# Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
-# your system-wide PATH)
-ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
-# Place the kitty.desktop file somewhere it can be found by the OS
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-# If you want to open text files and images in kitty via your file manager also add the kitty-open.desktop file
-cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-# Update the paths to the kitty and its icon in the kitty.desktop file(s)
-sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-
+### Install Alacritty ###
+sudo dnf install -y alacritty
+curl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info -o alacritty.info
+sudo tic -xe alacritty,alacritty-direct alacritty.info
+rm alacritty.info
 ### Install Jetbrains Font ###
 curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
 unzip JetBrainsMono.zip -d ~/.fonts
@@ -84,10 +76,9 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/nvim ~/.config/kitty
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
+ln -sf ~/projects/dotfiles/.config/alacritty ~/.config/alacritty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
 

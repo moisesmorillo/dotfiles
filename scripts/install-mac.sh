@@ -21,9 +21,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-### Install Kitty ###
-brew install --cask kitty
-
+### Install Alacritty ###
+brew install --cask alacritty
+curl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info -o alacritty.info
+sudo tic -xe alacritty,alacritty-direct alacritty.info
+rm alacritty.info
 ### Install Jetbrains Font ###
 brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono-nerd-font
@@ -59,10 +61,9 @@ brew install ripgrep
 go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/nvim ~/.config/kitty
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/projects/dotfiles/.config/kitty ~/.config/kitty
+ln -sf ~/projects/dotfiles/.config/alacritty ~/.config/alacritty
 ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
 
