@@ -1,8 +1,4 @@
-local utils = require("core.utils")
-local ok, tree = pcall(require, "nvim-tree")
-if not ok then return false end
-
-tree.setup({
+local opts = {
   actions = {
     open_file = {
       quit_on_open = true,
@@ -61,7 +57,18 @@ tree.setup({
     side = "right",
     width = "25%",
   },
-})
+}
 
--- Open/Quit NvimTree
-utils.nnoremap("<leader>e", ":NvimTreeToggle<cr>")
+local keys = {
+  {"<leader>e", ":NvimTreeToggle<cr>", desc = "NvimTree: Toggle", silent = true, noremap = true},
+}
+
+return {
+  "nvim-tree/nvim-tree.lua",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  opts = opts,
+  keys = keys,
+  version = "nightly"
+}

@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 local utils = require("core.utils")
 -- Save file
 utils.nnoremap("<leader>w", ":w<cr>")
@@ -15,6 +13,3 @@ utils.nnoremap("<leader>bb", ":bp<cr>")
 utils.nnoremap("<c-l>", ":noh<cr>")
 -- Open new buffer
 utils.nnoremap("<leader>n", ":enew<cr>")
-
--- Clear search highlight
-utils.nnoremap("<esc>", ":noh<CR>")

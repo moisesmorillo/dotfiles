@@ -1,3 +1,8 @@
+-- Disable tmux status bar when starting neovim
+vim.cmd [[
+    autocmd VimEnter,VimLeave * silent !tmux set status
+]]
+
 local baseFolder = "core"
 -- Neovim diagnostic settings
 require(baseFolder .. ".diagnostic")
@@ -7,5 +12,5 @@ require(baseFolder .. ".options")
 require(baseFolder .. ".globals")
 -- Keymaps
 require(baseFolder .. ".keymaps")
--- Plugin package manager settings
-require(baseFolder .. ".packer")
+-- Lazy Plugin Manager
+require(baseFolder .. ".lazy")
