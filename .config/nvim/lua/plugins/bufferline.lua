@@ -11,7 +11,6 @@ local opts = {
   tab_size = 20,
   diagnostics = "nvim_lsp",
   show_buffer_icons = true,
-  separator_style = {"any", ""},
   always_show_bufferline = true,
   offsets = {
     {
@@ -30,7 +29,7 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  event = "VimEnter",
+  event = "VeryLazy",
   config = function()
     require("bufferline").setup({
       options = opts,

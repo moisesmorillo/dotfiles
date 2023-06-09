@@ -11,9 +11,10 @@ local opts = {
 return {
   "catppuccin/nvim",
   name = "catppuccin",
-  event = "VimEnter",
   opts = opts,
   init = function ()
     vim.cmd([[colorscheme catppuccin]])
   end,
+  priority = 1000,
+  lazy = false,
 }

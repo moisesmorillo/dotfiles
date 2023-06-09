@@ -21,7 +21,7 @@ return {
         "catppuccin",
     },
     opts = opts,
-    event = "VimEnter",
+    event = "VeryLazy",
     config = function(_, opts)
         require("lualine").setup(opts)
     end,
