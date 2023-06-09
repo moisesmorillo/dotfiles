@@ -4,6 +4,11 @@ local opts = {
       hidden = true,
     },
   },
+  defaults = {
+    file_ignore_patterns = {
+      "%.git/",
+    },
+  },
 }
 
 local keys = {
