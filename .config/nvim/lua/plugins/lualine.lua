@@ -8,7 +8,14 @@ local opts = {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff'},
         lualine_c = {'diagnostics'},
-        lualine_x = {'encoding', 'filetype'},
+        --lualine_x = {'encoding', 'filetype'}, // TODO update this to show lazy status
+        lualine_x = {
+          {
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            color = { fg = "#ff0000" },
+          },
+        },
         lualine_y = {'progress',},
         lualine_z = {'location'}
     },
