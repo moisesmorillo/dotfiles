@@ -1,4 +1,5 @@
-return {
+return {"neovim/nvim-lspconfig"}
+--[[ return {
   event = { "BufReadPre", "BufNewFile" },
   "neovim/nvim-lspconfig",
   init = function()
@@ -20,13 +21,9 @@ return {
       go_def_mode = "gopls",
       go_info_mode = "gopls",
     }
-
-
     for k, v in pairs(options) do
       vim.g[k] = v
     end
-
-
     vim.cmd [[
     autocmd FileType go nnoremap <leader>gb <plug>(go-build)
     autocmd FileType go nnoremap <leader>gr <plug>(go-run)
@@ -37,5 +34,6 @@ return {
     autocmd FileType go nnoremap <c-p> :cprevious<cr>
     autocmd FileType go nnoremap <c-a> :cclose<cr>
     ]]
-  end,
-}
+  --end,
+  --opts = {},
+--}

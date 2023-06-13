@@ -17,4 +17,7 @@ local options = {
   },
 }
 
-require("lazy").setup("plugins", options)
+require("lazy").setup({
+  { import = "plugins" },
+  { import = "plugins.extras.langs" },
+}, options)
