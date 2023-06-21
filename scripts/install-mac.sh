@@ -10,6 +10,9 @@ brew update && brew upgrade
 ### Install Git ###
 brew install git
 
+### Gpg for commit signing
+brew install gpg2 gnupg pinentry-mac
+
 ### Install Zsh ###
 rm -rf ~/.oh-my-zsh
 brew install zsh
