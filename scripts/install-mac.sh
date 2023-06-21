@@ -97,5 +97,3 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### Install 1Password CLI
 brew install --cask 1password/tap/1password-cli
 
-unset NONINTERACTIVE
-
