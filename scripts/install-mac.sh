@@ -1,9 +1,8 @@
 #!/bin/bash
 
-export NONINTERACTIVE=1
-
 ### Install Brew ###
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ### Update Brew
 brew update && brew upgrade
@@ -12,9 +11,13 @@ brew update && brew upgrade
 brew install git
 
 ### Install Zsh ###
+rm -rf ~/.oh-my-zsh
 brew install zsh
-sudo chsh -s $(which zsh) $USER
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o install_ohmyzsh.sh
+# disable zsh reloading after installing
+awk '!/exec zsh -l/ { print } /exec zsh -l/ { print "# " $0 }' install_ohmyzsh.sh > temp_install.sh && mv temp_install.sh install_ohmyzsh.sh
+sh install_ohmyzsh.sh
+rm install_ohmyzsh.sh 
 
 ### Install Zsh Plugins ###
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -35,7 +38,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 nvm install --lts && nvm alias default node
 npm install -g yarn
-yarn globall add @githubnext/github-copilot-cli
+yarn global add @githubnext/github-copilot-cli
 
 ### Install Rbenv ###
 brew install rbenv ruby-build
@@ -61,6 +64,7 @@ brew install ripgrep
 go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
+rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/alacritty ~/.config/alacritty
