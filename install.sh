@@ -5,11 +5,9 @@ if [ -n "$CODESPACES" ]; then
 else
     . ./scripts/utils.sh
     os_name=$(get_os_name)
-    if [[ "$os_name" == "fedora" ]]; then
-        # Install Fedora Packages
-        . ./scripts/install-fedora.sh
-    elif [[ "$os_name" == "macos" ]]; then
-        # Install Mac Packages
-        . ./scripts/install-mac.sh
+    if [[ "$os_name" == "macos" ]]; then
+      echo "***Loading MasOS Dotfiles***"
+      chmod +x ./scripts/install-mac.sh
+      . ./scripts/install-mac.sh
     fi
 fi
