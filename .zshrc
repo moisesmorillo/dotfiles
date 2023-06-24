@@ -120,6 +120,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # Example aliases
 # alias for neovim
 alias nv="nvim"
+alias vim="nvim"
 # alias to find files using fzf
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 # alias to replace ls for exa

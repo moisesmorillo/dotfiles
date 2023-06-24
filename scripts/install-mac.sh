@@ -67,11 +67,12 @@ brew install ripgrep
 go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux
+rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/projects/dotfiles/.config/alacritty ~/.config/alacritty
-ln -sf ~/projects/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/projects/dotfiles/.config/nvim/lua/custom ~/.config/nvim/lua/custom
 ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
 
 ### Install Btop ###
