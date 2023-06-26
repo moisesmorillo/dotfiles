@@ -64,7 +64,6 @@ brew install neovim
 brew install fzf
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 brew install ripgrep
-go install golang.org/x/tools/gopls@latest
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim
