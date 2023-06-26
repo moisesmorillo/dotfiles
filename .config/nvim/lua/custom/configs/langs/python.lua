@@ -8,5 +8,4 @@ lspconfig.pyright.setup({
 	capabilities = capabilities,
 	filetypes = { "python" },
 	root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
-	settings = {},
 })
