@@ -16,6 +16,20 @@ local sources = {
 
 	-- cpp/c stuff
 	b.formatting.clang_format,
+
+	-- go stuff
+	b.formatting.gofumpt,
+	b.formatting.goimports_reviser.with({
+		extra_args = { "-set-alias", "-rm-unused" },
+	}),
+	b.formatting.golines.with({
+		extra_args = { "-m", "120" },
+	}),
+
+	-- python stuff
+	b.diagnostics.mypy,
+	b.diagnostics.ruff,
+	b.formatting.black,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

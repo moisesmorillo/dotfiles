@@ -15,19 +15,43 @@ local plugins = {
 			-- DAP support
 			{
 				"mfussenegger/nvim-dap",
+				init = function()
+					vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
+					require("core.utils").load_mappings("dap")
+				end,
+			},
+			{
+				"rcarriga/nvim-dap-ui",
+				dependencies = "mfussenegger/nvim-dap",
+				config = function()
+					local dap = require("dap")
+					local dapui = require("dapui")
+					dapui.setup()
+					dap.listeners.after.event_initialized["dapui_config"] = function()
+						dapui.open()
+					end
+					dap.listeners.before.event_terminated["dapui_config"] = function()
+						dapui.close()
+					end
+					dap.listeners.before.event_exited["dapui_config"] = function()
+						dapui.close()
+					end
+				end,
 			},
 		},
 		config = function()
 			require("plugins.configs.lspconfig")
 			require("custom.configs.lspconfig")
-			require("custom.configs.lua-lang")
+			require("custom.configs.langs.lua")
+			require("custom.configs.langs.go")
+			require("custom.configs.langs.python")
 		end, -- Override to setup mason-lspconfig
 	},
 
 	{
 		"hrsh7th/nvim-cmp",
 		opts = function()
-			local M = require("plugins.config.cmp")
+			local M = require("plugins.configs.cmp")
 			table.insert(M.sources, { name = "crates" })
 			return M
 		end,
@@ -47,6 +71,9 @@ local plugins = {
 	{
 		"nvim-tree/nvim-tree.lua",
 		opts = overrides.nvimtree,
+		init = function()
+			require("core.utils").load_mappings("nvimtree")
+		end,
 	},
 
 	{
@@ -103,7 +130,7 @@ local plugins = {
 		ft = "rust",
 		dependencies = "neovim/nvim-lspconfig",
 		opts = function()
-			require("custom.configs.rust-lang")
+			require("custom.configs.langs.rust")
 		end,
 		config = function(_, opts)
 			require("rust-tools").setup(opts)
@@ -117,6 +144,33 @@ local plugins = {
 			local crates = require("crates")
 			crates.setup(opts)
 			crates.show()
+			require("core.utils").load_mappings("rust")
+		end,
+	},
+
+	{
+		"leoluz/nvim-dap-go", -- "dreamsofcode-io/nvim-dap-go"
+		ft = "go",
+		dependencies = "mfussenegger/nvim-dap",
+		init = function()
+			require("core.utils").load_mappings("dap_go")
+		end,
+		config = function(_, opts)
+			require("dap-go").setup(opts)
+		end,
+	},
+
+	{
+		"mfussenegger/nvim-dap-python",
+		ft = "python",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+		config = function(_, _)
+			local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+			require("dap-python").setup(path)
+			require("core.utils").load_mappings("dap_python")
 		end,
 	},
 }

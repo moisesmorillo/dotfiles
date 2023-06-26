@@ -20,26 +20,53 @@ M.general = {
 }
 
 M.nvimtree = {
+	plugin = true,
 	n = {
 		["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
 	},
 }
 
 M.dap = {
+	plugin = true,
 	n = {
 		["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>", "Toggle breakpoint" },
-		["<leader>dus"] = {
+		["<leader>ds"] = {
 			function()
 				local widgets = require("dap.ui.widgets")
 				local sidebar = widgets.sidebar(widgets.scopes)
-				sidebar.open()
+				sidebar.toggle() -- TODO fix this, is only opening new sidebars
 			end,
-			"Open debugging sidebar",
+			"Toggle debugging sidebar",
+		},
+	},
+}
+
+M.dap_go = {
+	plugin = true,
+	n = {
+		["<leader>dgt"] = {
+			function()
+				require("dap-go").debug_test()
+			end,
+			"Debug go test",
+		},
+	},
+}
+
+M.dap_python = {
+	plugin = true,
+	n = {
+		["<leader>dpt"] = {
+			function()
+				require("dap-python").test_method()
+			end,
+			"Debung python test",
 		},
 	},
 }
 
 M.rust = {
+	plugin = true,
 	n = {
 		["<leader>rcu"] = {
 			function()
