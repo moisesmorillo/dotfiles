@@ -41,10 +41,10 @@ local plugins = {
 		},
 		config = function()
 			require("plugins.configs.lspconfig")
-			require("custom.configs.lspconfig")
 			require("custom.configs.langs.lua")
 			require("custom.configs.langs.go")
 			require("custom.configs.langs.python")
+			require("custom.configs.langs.typescript")
 		end, -- Override to setup mason-lspconfig
 	},
 
