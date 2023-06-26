@@ -8,6 +8,7 @@ local options = {
 	scrolloff = 8,
 	showmatch = true,
 	swapfile = false,
+	fillchars = { eob = "~" },
 }
 
 for k, v in pairs(options) do
