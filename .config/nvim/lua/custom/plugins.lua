@@ -173,6 +173,19 @@ local plugins = {
 			require("core.utils").load_mappings("dap_python")
 		end,
 	},
+
+	{
+		"kdheepak/lazygit.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function(_, _)
+			vim.g.lazygit_use_custom_config_file_path = 1
+			vim.g.lazygit_config_file_path = "~/.config/lazygit/config.yml"
+			require("core.utils").load_mappings("lazygit")
+		end,
+	},
 }
 
 return plugins

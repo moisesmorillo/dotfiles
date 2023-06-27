@@ -77,4 +77,11 @@ M.rust = {
 	},
 }
 
+M.lazygit = {
+	plugin = true,
+	n = {
+		["<leader>lg"] = { "<cmd> LazyGit<CR>", "Open LazyGit" },
+	},
+}
+
 return M
