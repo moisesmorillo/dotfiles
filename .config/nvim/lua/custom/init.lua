@@ -1,5 +1,5 @@
 local options = {
-	colorcolumn = "80",
+	colorcolumn = "120",
 	modelines = 0,
 	number = true,
 	rnu = true,
