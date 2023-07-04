@@ -15,6 +15,7 @@ M.treesitter = {
 		"lua",
 		"luadoc",
 		"luap",
+		"make",
 		"markdown",
 		"markdown_inline",
 		"mermaid",

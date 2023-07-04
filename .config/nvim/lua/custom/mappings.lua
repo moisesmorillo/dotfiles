@@ -16,6 +16,7 @@ M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = opts },
 		["<leader>q"] = { ":q<cr>", "Quit", opts = opts },
+		["<leader>pm"] = { "<cmd> Lazy <CR>", "Open Lazy Plugin Manager", opts = opts },
 	},
 }
 
