@@ -181,6 +181,11 @@ if command -v rbenv &> /dev/null; then
   eval "$(rbenv init - -zsh)"
 fi
 
+# Pyenv customization
+if command -v pyenv &> /dev/null; then
+  eval "$(pyenv init -)"
+fi
+
 if command -v yarn &> /dev/null; then
   export PATH="$PATH:$(yarn global bin)"
 fi
