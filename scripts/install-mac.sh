@@ -36,6 +36,9 @@ rm alacritty.info
 brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono-nerd-font
 
+### Install PyEnv ###
+brew install pyenv
+
 ### Install Nvm ###
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
