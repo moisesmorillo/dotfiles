@@ -5,7 +5,11 @@ local util = require("lspconfig.util")
 
 local get_poetry_venv_path = function()
 	local fn = vim.fn
-	return fn.trim(fn.system("poetry config virtualenvs.path"))
+	if fn.executable("poetry") == 1 then
+		return fn.trim(fn.system("poetry config virtualenvs.path"))
+	end
+
+	return ""
 end
 
 lspconfig.pyright.setup({
