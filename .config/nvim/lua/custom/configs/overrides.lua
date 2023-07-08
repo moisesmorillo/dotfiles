@@ -66,6 +66,10 @@ M.mason = {
 		"sqlls",
 		-- yaml stuff
 		"yaml-language-server",
+		-- others
+		"write-good",
+		-- shell
+		"shfmt",
 	},
 }
 

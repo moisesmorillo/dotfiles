@@ -11,6 +11,9 @@ local sources = {
 	b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
 	b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
 
+	-- shell
+	b.formatting.shfmt,
+
 	-- lua stuff
 	b.formatting.stylua,
 
@@ -28,6 +31,11 @@ local sources = {
 
 	-- python stuff
 	b.formatting.black,
+
+	-- others
+	b.diagnostics.write_good.with({
+		filetypes = { "python", "go", "markdown", "typescript", "javascript", "rust" },
+	}),
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
