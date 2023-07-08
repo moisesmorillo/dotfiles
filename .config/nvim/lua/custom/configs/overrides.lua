@@ -53,8 +53,8 @@ M.mason = {
 		"delve",
 		-- python stuff
 		"pyright",
-		"mypy",
 		"ruff",
+		"ruff-lsp",
 		"black",
 		"debugpy",
 		-- typescript/javascript stuff
@@ -91,7 +91,7 @@ M.nvimtree = {
 		ignore = false,
 	},
 	filters = {
-		custom = { "^\\.git", "^node_modules$", "^\\.DS_Store$" },
+		custom = { "^\\.git$", "^node_modules$", "^\\.DS_Store$" },
 	},
 	hijack_cursor = true,
 	hijack_directories = {
