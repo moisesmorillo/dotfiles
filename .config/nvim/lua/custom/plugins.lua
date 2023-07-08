@@ -79,6 +79,9 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		opts = overrides.telescope,
+		init = function()
+			require("core.utils").load_mappings("dotfiles")
+		end,
 	},
 
 	{

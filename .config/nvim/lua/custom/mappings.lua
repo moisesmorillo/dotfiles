@@ -20,6 +20,22 @@ M.general = {
 	},
 }
 
+M.dotfiles = {
+	plugin = true,
+	n = {
+		["<leader>fd"] = {
+			function()
+				require("telescope.builtin").git_files({
+					prompt_title = "<Dotfiles>",
+					cwd = "~/projects/dotfiles/",
+				})
+			end,
+			"Open dotfiles",
+			opts = opts,
+		},
+	},
+}
+
 M.nvimtree = {
 	plugin = true,
 	n = {
