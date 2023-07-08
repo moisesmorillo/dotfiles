@@ -12,6 +12,14 @@ local plugins = {
 					require("custom.configs.null-ls")
 				end,
 			},
+			-- lsp progress visualizer
+			{
+				"j-hui/fidget.nvim",
+				tag = "legacy",
+				config = function(_, _)
+					require("fidget").setup({})
+				end,
+			},
 			-- DAP support
 			{
 				"mfussenegger/nvim-dap",
@@ -79,7 +87,7 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		opts = overrides.telescope,
-		init = function()
+		config = function()
 			require("core.utils").load_mappings("dotfiles")
 		end,
 	},

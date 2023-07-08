@@ -8,8 +8,15 @@ M.ui = {
 	theme = "catppuccin",
 	theme_toggle = { "catppuccin", "one_light" },
 	statusline = {
-		theme = "minimal",
+		theme = "vscode_colored",
 		separator_style = "round",
+		overriden_modules = function()
+			return {
+				LSP_progress = function()
+					return ""
+				end,
+			}
+		end,
 	},
 
 	hl_override = highlights.override,
