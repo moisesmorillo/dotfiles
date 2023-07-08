@@ -53,7 +53,7 @@ local plugins = {
 			require("custom.configs.langs.go")
 			require("custom.configs.langs.python")
 			require("custom.configs.langs.typescript")
-		end, -- Override to setup mason-lspconfig
+		end,
 	},
 
 	{
@@ -87,9 +87,6 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		opts = overrides.telescope,
-		config = function()
-			require("core.utils").load_mappings("dotfiles")
-		end,
 	},
 
 	{

@@ -20,7 +20,7 @@ M.general = {
 	},
 }
 
-M.dotfiles = {
+M.telescope = vim.tbl_deep_extend("force", require("core.mappings").telescope, {
 	plugin = true,
 	n = {
 		["<leader>fd"] = {
@@ -34,7 +34,7 @@ M.dotfiles = {
 			opts = opts,
 		},
 	},
-}
+})
 
 M.nvimtree = {
 	plugin = true,
