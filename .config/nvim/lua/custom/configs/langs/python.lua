@@ -24,3 +24,14 @@ lspconfig.pyright.setup({
 		},
 	},
 })
+
+lspconfig.ruff_lsp.setup({
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+		-- Disable hover in favor of Pyright
+		client.server_capabilities.hoverProvider = false
+	end,
+	capabilities = capabilities,
+	filetypes = { "python" },
+	root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+})

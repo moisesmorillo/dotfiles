@@ -27,8 +27,6 @@ local sources = {
 	}),
 
 	-- python stuff
-	-- b.diagnostics.mypy,
-	b.diagnostics.ruff,
 	b.formatting.black,
 }
 
