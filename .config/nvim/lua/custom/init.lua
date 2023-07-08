@@ -1,3 +1,4 @@
+local opt = vim.opt
 local options = {
 	colorcolumn = "120",
 	modelines = 0,
@@ -11,8 +12,15 @@ local options = {
 	fillchars = { eob = "~" },
 }
 
+-- better search
+opt.path:remove("/usr/include")
+opt.path:append("**")
+opt.wildignorecase = true
+opt.wildignore:append("**/node_modules/*")
+opt.wildignore:append("**/.git/*")
+
 for k, v in pairs(options) do
-	vim.opt[k] = v
+	opt[k] = v
 end
 
 local globals = {
