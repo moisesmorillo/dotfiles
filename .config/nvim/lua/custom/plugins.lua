@@ -194,6 +194,19 @@ local plugins = {
 			require("core.utils").load_mappings("lazygit")
 		end,
 	},
+	{
+		"aznhe21/actions-preview.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		opts = {
+			backend = { "telescope" },
+		},
+		config = function(_, opts)
+			require("actions-preview").setup(opts)
+		end,
+	},
 }
 
 return plugins

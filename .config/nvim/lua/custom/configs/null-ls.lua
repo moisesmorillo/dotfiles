@@ -30,7 +30,9 @@ local sources = {
 	}),
 
 	-- python stuff
-	b.formatting.black,
+	b.formatting.black.with({
+		extra_args = { "-l", "79" },
+	}),
 
 	-- others
 	b.diagnostics.write_good.with({
