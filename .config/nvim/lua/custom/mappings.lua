@@ -48,32 +48,51 @@ M.dap = {
 	plugin = true,
 	n = {
 		["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>", "Toggle breakpoint" },
+		["<leader>du"] = {
+			function()
+				require("dapui").toggle()
+			end,
+			"Toggle UI",
+		},
+		["<leader>dsb"] = {
+			function()
+				require("dap").step_back()
+			end,
+			"Step Back",
+		},
 		["<leader>ds"] = {
 			function()
-				local widgets = require("dap.ui.widgets")
-				local sidebar = widgets.sidebar(widgets.scopes)
-				sidebar.toggle() -- TODO fix this, is only opening new sidebars
+				require("dap").continue()
 			end,
-			"Toggle debugging sidebar",
+			"Start/Continue",
 		},
-	},
-}
+		["<leader>dsi"] = {
+			function()
+				require("dap").step_into()
+			end,
+			"Step Into",
+		},
+		["<leader>dso"] = {
+			function()
+				require("dap").step_over()
+			end,
+			"Step Over",
+		},
+		["<leader>dsx"] = {
+			function()
+				require("dap").step_out()
+			end,
+			"Step Out",
+		},
 
-M.dap_go = {
-	plugin = true,
-	n = {
+		-- TODO add more debug methods for go
 		["<leader>dgt"] = {
 			function()
 				require("dap-go").debug_test()
 			end,
 			"Debug go test",
 		},
-	},
-}
-
-M.dap_python = {
-	plugin = true,
-	n = {
+		-- TODO add more debug methods for python
 		["<leader>dpt"] = {
 			function()
 				require("dap-python").test_method()
