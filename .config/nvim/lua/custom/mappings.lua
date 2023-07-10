@@ -9,6 +9,7 @@ local opts = {
 M.disabled = {
 	n = {
 		["<C-n>"] = "",
+		["<leader>ca"] = "",
 	},
 }
 
@@ -98,6 +99,18 @@ M.lazygit = {
 	plugin = true,
 	n = {
 		["<leader>lg"] = { "<cmd> LazyGit<CR>", "Open LazyGit" },
+	},
+}
+
+M.actions_preview = {
+	plugin = true,
+	n = {
+		["<leader>ca"] = {
+			function()
+				require("actions-preview").code_actions()
+			end,
+			"Open Code Actions",
+		},
 	},
 }
 

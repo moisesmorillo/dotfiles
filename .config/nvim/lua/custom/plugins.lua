@@ -12,12 +12,35 @@ local plugins = {
 					require("custom.configs.null-ls")
 				end,
 			},
+			-- lsp code actions with telescope
+			{
+				"aznhe21/actions-preview.nvim",
+				dependencies = {
+					"nvim-telescope/telescope.nvim",
+				},
+				opts = {
+					backend = { "telescope" },
+				},
+				config = function(_, opts)
+					require("actions-preview").setup(opts)
+					require("core.utils").load_mappings("actions_preview")
+				end,
+			},
 			-- lsp progress visualizer
 			{
 				"j-hui/fidget.nvim",
 				tag = "legacy",
 				config = function(_, _)
 					require("fidget").setup({})
+				end,
+			},
+			-- cmp (auto complete)
+			{
+				"hrsh7th/nvim-cmp",
+				opts = function()
+					local M = require("plugins.configs.cmp")
+					table.insert(M.sources, { name = "crates" })
+					return M
 				end,
 			},
 			-- DAP support
@@ -55,16 +78,6 @@ local plugins = {
 			require("custom.configs.langs.typescript")
 		end,
 	},
-
-	{
-		"hrsh7th/nvim-cmp",
-		opts = function()
-			local M = require("plugins.configs.cmp")
-			table.insert(M.sources, { name = "crates" })
-			return M
-		end,
-	},
-
 	-- override plugin configs
 	{
 		"williamboman/mason.nvim",
@@ -192,19 +205,6 @@ local plugins = {
 			vim.g.lazygit_use_custom_config_file_path = 1
 			vim.g.lazygit_config_file_path = "~/.config/lazygit/config.yml"
 			require("core.utils").load_mappings("lazygit")
-		end,
-	},
-	{
-		"aznhe21/actions-preview.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-		},
-		opts = {
-			backend = { "telescope" },
-		},
-		config = function(_, opts)
-			require("actions-preview").setup(opts)
 		end,
 	},
 }
