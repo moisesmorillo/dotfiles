@@ -175,6 +175,26 @@ local plugins = {
 			require("core.utils").load_mappings("lazygit")
 		end,
 	},
+
+	{
+		"andythigpen/nvim-coverage",
+		cmd = { "Coverage", "CoverageShow", "CoverageHide", "CoverageToggle", "CoverageSummary" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			commands = true,
+			load_coverage_cb = function(ftype)
+				vim.notify("Loaded " .. ftype .. " coverage") -- TODO change this by nvim notify
+			end,
+			lang = {
+				python = {
+					coverage_file = "project/.coverage",
+				},
+			},
+		},
+		config = function(_, opts)
+			require("coverage").setup(opts)
+		end,
+	},
 }
 
 return plugins
