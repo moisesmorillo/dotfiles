@@ -67,6 +67,7 @@ local plugins = {
 		config = function()
 			require("plugins.configs.lspconfig")
 			require("custom.configs.langs.lua")
+			require("custom.configs.langs.cpp")
 			require("custom.configs.langs.go")
 			require("custom.configs.langs.python")
 			require("custom.configs.langs.typescript")
@@ -196,6 +197,18 @@ local plugins = {
 		config = function(_, opts)
 			require("coverage").setup(opts)
 		end,
+	},
+
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap",
+		},
+		opts = {
+			handlers = {},
+		},
 	},
 }
 

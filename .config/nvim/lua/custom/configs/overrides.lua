@@ -39,9 +39,10 @@ M.mason = {
 	ensure_installed = {
 		-- bash stuff
 		"bash-language-server",
-		-- c stuff
+		-- c, cpp stuff
 		"clangd",
 		"clang-format",
+		"codelldb",
 		-- lua stuff
 		"lua-language-server",
 		"stylua",
