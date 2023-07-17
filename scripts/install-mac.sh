@@ -18,9 +18,9 @@ rm -rf ~/.oh-my-zsh
 brew install zsh
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o install_ohmyzsh.sh
 # disable zsh reloading after installing
-awk '!/exec zsh -l/ { print } /exec zsh -l/ { print "# " $0 }' install_ohmyzsh.sh > temp_install.sh && mv temp_install.sh install_ohmyzsh.sh
+awk '!/exec zsh -l/ { print } /exec zsh -l/ { print "# " $0 }' install_ohmyzsh.sh >temp_install.sh && mv temp_install.sh install_ohmyzsh.sh
 sh install_ohmyzsh.sh
-rm install_ohmyzsh.sh 
+rm install_ohmyzsh.sh
 
 ### Install Zsh Plugins ###
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -101,3 +101,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### Install 1Password CLI
 brew install --cask 1password/tap/1password-cli
 
+### Set defaults mac os
+chmod +x ./install-mac.sh
+. ./install-mac.sh
