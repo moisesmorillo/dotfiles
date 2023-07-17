@@ -38,7 +38,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # System Preferences > Desktop & Dock
 ################################################################################
 defaults write com.apple.dock autohide -bool true
-defaults write com.apple.dock autohide-time-modifier -float 0.5
+defaults write com.apple.dock autohide-time-modifier -float 0.2
 defaults write com.apple.dock largesize -float 85
 defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock tilesize -float 50
@@ -54,7 +54,7 @@ defaults write "com.apple.controlcenter" "NSStatusItem Visible Sound" -bool true
 defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
 
 ################################################################################
-# System Preferences > Desktop & Dock
+# System Preferences > Accessibility
 ################################################################################
 defaults write com.apple.Accessibility ReduceMotionEnabled -int 1
 
