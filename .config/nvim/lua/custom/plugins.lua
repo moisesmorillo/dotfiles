@@ -180,7 +180,6 @@ local plugins = {
 	{
 		"andythigpen/nvim-coverage",
 		branch = "main",
-		commit = "8fcc71e",
 		cmd = { "Coverage", "CoverageShow", "CoverageHide", "CoverageToggle", "CoverageSummary" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
