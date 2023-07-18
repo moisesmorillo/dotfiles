@@ -34,6 +34,13 @@ M.telescope = vim.tbl_deep_extend("force", require("core.mappings").telescope, {
 			"Open dotfiles",
 			opts = opts,
 		},
+		["<leader>fs"] = {
+			function()
+				require("telescope.builtin").symbols({
+					sources = { "emoji", "kaomoji", "gitmoji" },
+				})
+			end,
+		},
 	},
 })
 

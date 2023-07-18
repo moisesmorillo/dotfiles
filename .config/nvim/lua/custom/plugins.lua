@@ -95,6 +95,9 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		opts = overrides.telescope,
+		dependencies = {
+			"nvim-telescope/telescope-symbols.nvim",
+		},
 	},
 
 	{
