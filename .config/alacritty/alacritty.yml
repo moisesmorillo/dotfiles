@@ -43,3 +43,14 @@ font:
 draw_bold_text_with_bright_colors: true
 shell:
  program: /bin/zsh
+cursor:
+  style:
+    shape: Beam
+    blinking: Off
+  vi_mode_style:
+    shape: Block
+    blinking: off
+  blink_interval: 250
+  blink_timeout: 5
+  unfocused_hollow: true
+  thickness: 0.15
