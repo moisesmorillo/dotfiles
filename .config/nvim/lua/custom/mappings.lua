@@ -9,7 +9,6 @@ local opts = {
 M.disabled = {
 	n = {
 		["<C-n>"] = "",
-		["<leader>ca"] = "",
 	},
 }
 
@@ -21,7 +20,7 @@ M.general = {
 	},
 }
 
-M.telescope = vim.tbl_deep_extend("force", require("core.mappings").telescope, {
+M.telescope = {
 	plugin = true,
 	n = {
 		["<leader>fd"] = {
@@ -40,12 +39,12 @@ M.telescope = vim.tbl_deep_extend("force", require("core.mappings").telescope, {
 					sources = { "emoji", "kaomoji", "gitmoji" },
 				})
 			end,
+			"Open emojis",
 		},
 	},
-})
+}
 
 M.nvimtree = {
-	plugin = true,
 	n = {
 		["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
 	},
@@ -125,18 +124,6 @@ M.lazygit = {
 	plugin = true,
 	n = {
 		["<leader>lg"] = { "<cmd> LazyGit<CR>", "Open LazyGit" },
-	},
-}
-
-M.actions_preview = {
-	plugin = true,
-	n = {
-		["<leader>ca"] = {
-			function()
-				require("actions-preview").code_actions()
-			end,
-			"Open Code Actions",
-		},
 	},
 }
 

@@ -12,22 +12,12 @@ local plugins = {
 					require("custom.configs.null-ls")
 				end,
 			},
-			-- lsp code actions with telescope
+			-- UI dialogs improvement
 			{
-				"aznhe21/actions-preview.nvim",
-				dependencies = {
-					"nvim-telescope/telescope.nvim",
-				},
-				opts = {
-					backend = { "telescope" },
-					telescope = require("telescope.themes").get_dropdown({ winblend = 10 }),
-				},
-				config = function(_, opts)
-					require("actions-preview").setup(opts)
-					require("core.utils").load_mappings("actions_preview")
-				end,
+				"stevearc/dressing.nvim",
+				event = "VeryLazy",
+				opts = {},
 			},
-			-- lsp progress visualizer
 			{
 				"j-hui/fidget.nvim",
 				tag = "legacy",
@@ -87,9 +77,6 @@ local plugins = {
 	{
 		"nvim-tree/nvim-tree.lua",
 		opts = overrides.nvimtree,
-		init = function()
-			require("core.utils").load_mappings("nvimtree")
-		end,
 	},
 
 	{
@@ -210,6 +197,20 @@ local plugins = {
 		},
 		opts = {
 			handlers = {},
+		},
+	},
+
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		event = "VeryLazy",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		opts = {
+			theme = "catppuccin",
 		},
 	},
 }
