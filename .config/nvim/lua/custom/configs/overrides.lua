@@ -31,7 +31,7 @@ M.mason = {
     -- others
     "write-good",
     -- shell
-    -- "shfmt",
+    "shfmt",
   },
 }
 

@@ -27,9 +27,4 @@ M.setup = function(sources)
   }
 end
 
--- local sources = {
---   -- shell
---   b.formatting.shfmt,-
--- }
-
 return M

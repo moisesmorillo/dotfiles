@@ -110,6 +110,7 @@ local plugins = {
         b.diagnostics.write_good.with {
           filetypes = { "python", "go", "markdown", "typescript", "javascript", "rust" },
         },
+        b.formatting.shfmt,
       })
       return opts
     end,
