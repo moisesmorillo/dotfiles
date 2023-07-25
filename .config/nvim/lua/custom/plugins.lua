@@ -1,203 +1,122 @@
+---@diagnostic disable: missing-fields
 local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      -- format & linting
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
-        end,
-      },
-      -- UI improvement
-      {
-        "stevearc/dressing.nvim",
-        event = "VeryLazy",
-        opts = {},
-      },
-      {
-        "j-hui/fidget.nvim",
-        tag = "legacy",
-        config = function(_, _)
-          require("fidget").setup {}
-        end,
-      },
-      -- cmp (auto complete)
-      {
-        "hrsh7th/nvim-cmp",
-        opts = function()
-          local M = require "plugins.configs.cmp"
-          table.insert(M.sources, { name = "crates" })
-          return M
-        end,
-      },
-      -- DAP support
-      {
-        "mfussenegger/nvim-dap",
-        dependencies = {
-          "rcarriga/nvim-dap-ui",
-          {
-            "leoluz/nvim-dap-go", -- "dreamsofcode-io/nvim-dap-go"
-            ft = "go",
-          },
-          {
-            "mfussenegger/nvim-dap-python",
-            ft = "python",
-          },
-        },
-        init = function()
-          require("custom.configs.dap").setup()
-          require("core.utils").load_mappings "dap"
-        end,
-      },
-    },
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.langs.lua"
-      require "custom.configs.langs.cpp"
-      require "custom.configs.langs.go"
-      require "custom.configs.langs.python"
-      require "custom.configs.langs.typescript"
-    end,
+    import = "custom.configs.langs",
   },
-  -- override plugin configs
+
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason,
+    event = "VeryLazy",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, overrides.mason.ensure_installed)
+    end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
+    event = "VeryLazy",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, overrides.treesitter.ensure_installed)
+      opts.auto_install = true
+
+      return opts
+    end,
   },
 
+  -- highlight for lsp servers not compatible with semantic tokens
   {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
-  },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = overrides.telescope,
-    dependencies = {
-      "nvim-telescope/telescope-symbols.nvim",
+    "m-demare/hlargs.nvim",
+    event = "VeryLazy",
+    opts = {
+      color = "#fab387",
+      use_colorpalette = false,
+      disable = function(_, bufnr)
+        if vim.b.semantic_tokens then
+          return true
+        end
+        local clients = vim.lsp.get_active_clients { bufnr = bufnr }
+        for _, c in pairs(clients) do
+          local caps = c.server_capabilities
+          if c.name ~= "null-ls" and caps.semanticTokensProvider and caps.semanticTokensProvider.full then
+            vim.b.semantic_tokens = true
+            return vim.b.semantic_tokens
+          end
+        end
+      end,
     },
   },
 
   {
-    "lewis6991/gitsigns.nvim",
-    opts = overrides.gitsigns,
-  },
-
-  -- my plugins
-  {
-    "wakatime/vim-wakatime",
+    "andymass/vim-matchup",
     event = "VeryLazy",
-  },
-
-  {
-    "jackMort/ChatGPT.nvim",
-    enabled = false,
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup {
-        api_key_cmd = "op read op://Work/OpenAI_API_Key/api_key_cmd --no-newline",
-        openai_params = {
-          model = "gpt-4",
-        },
-      }
+    init = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
+      "rcarriga/nvim-notify",
     },
-  },
-
-  {
-    "github/copilot.vim",
-    enabled = false,
-    event = "VeryLazy",
-  },
-
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
-  },
-
-  {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    opts = function()
-      require "custom.configs.langs.rust"
-    end,
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
-    end,
-  },
-
-  {
-    "saecki/crates.nvim",
-    ft = { "rust", "toml" },
-    config = function(_, opts)
-      local crates = require "crates"
-      crates.setup(opts)
-      crates.show()
-      require("core.utils").load_mappings "rust"
-    end,
-  },
-
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = { "LazyGit" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    init = function()
-      vim.g.lazygit_use_custom_config_file_path = 1
-      vim.g.lazygit_config_file_path = "~/.config/lazygit/config.yml"
-      require("core.utils").load_mappings "lazygit"
-    end,
-  },
-
-  {
-    "andythigpen/nvim-coverage",
-    branch = "main",
-    cmd = { "Coverage", "CoverageShow", "CoverageHide", "CoverageToggle", "CoverageSummary" },
-    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
-      commands = true,
-      load_coverage_cb = function(ftype)
-        vim.notify("Loaded " .. ftype .. " coverage") -- TODO change this by nvim notify
-      end,
-      lang = {
-        python = {
-          coverage_file = "project/.coverage",
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
         },
       },
+      presets = {
+        bottom_search = false, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = true, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
+    },
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    dependencies = {
+      { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
+      { "folke/neodev.nvim", opts = {} },
+      { "smjonas/inc-rename.nvim", opts = {} },
     },
     config = function(_, opts)
-      require("coverage").setup(opts)
+      local lspconfig = require "lspconfig"
+
+      for server, v in pairs(opts) do
+        lspconfig[server].setup(v)
+      end
     end,
   },
 
   {
-    "jay-babu/mason-nvim-dap.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap",
-    },
-    opts = {
-      handlers = {},
-    },
+    opts = function(_, opts)
+      local b = require("null-ls").builtins
+
+      -- default
+      vim.list_extend(opts, {
+        b.diagnostics.write_good.with {
+          filetypes = { "python", "go", "markdown", "typescript", "javascript", "rust" },
+        },
+        b.formatting.shfmt,
+      })
+      return opts
+    end,
+    config = function(_, opts)
+      require("custom.configs.null-ls").setup(opts)
+    end,
   },
 
   {
@@ -214,29 +133,134 @@ local plugins = {
       theme = "catppuccin",
     },
   },
+
   {
-    "rcarriga/nvim-notify",
+    "mfussenegger/nvim-dap",
     event = "VeryLazy",
-    config = function(_, _)
-      require("notify").setup {}
-    end,
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      flavour = "mocha",
-      integrations = {
-        notify = true,
-        fidget = true,
-      },
+
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
     },
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
+    config = function(_, _)
+      local dap = require "custom.configs.dap"
+      dap.setup()
+
+      require("core.utils").load_mappings "dap"
     end,
   },
+
+  {
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = overrides.nvimtree,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = overrides.telescope,
+    dependencies = {
+      "nvim-telescope/telescope-symbols.nvim",
+      "nvim-telescope/telescope-project.nvim",
+    },
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = overrides.gitsigns,
+  },
+
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = { "LazyGit" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    init = function()
+      vim.g.lazygit_use_custom_config_file_path = 1
+      vim.g.lazygit_config_file_path = "~/.config/lazygit/config.yml"
+      require("core.utils").load_mappings "lazygit"
+    end,
+  },
+
+  {
+    "wakatime/vim-wakatime",
+    event = "VeryLazy",
+  },
+
+  -- {
+  --   "andythigpen/nvim-coverage",
+  --   branch = "main",
+  --   cmd = { "Coverage", "CoverageShow", "CoverageHide", "CoverageToggle", "CoverageSummary" },
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   opts = {
+  --     commands = true,
+  --     load_coverage_cb = function(ftype)
+  --       vim.notify("Loaded " .. ftype .. " coverage") -- TODO change this by nvim notify
+  --     end,
+  --     lang = {
+  --       python = {
+  --         coverage_file = "project/.coverage",
+  --       },
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("coverage").setup(opts)
+  --   end,
+  -- },
+
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   event = "VeryLazy",
+  --   config = function(_, _)
+  --     require("notify").setup {}
+  --   end,
+  -- },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     flavour = "mocha",
+  --     integrations = {
+  --       notify = true,
+  --       fidget = true,
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("catppuccin").setup(opts)
+  --   end,
+  -- },
+  --
+  -- {
+  --   "jackMort/ChatGPT.nvim",
+  --   enabled = false,
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("chatgpt").setup {
+  --       api_key_cmd = "op read op://Work/OpenAI_API_Key/api_key_cmd --no-newline",
+  --       openai_params = {
+  --         model = "gpt-4",
+  --       },
+  --     }
+  --   end,
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  -- },
+
+  -- {
+  --   "github/copilot.vim",
+  --   enabled = false,
+  --   event = "VeryLazy",
+  -- },
 }
 
 return plugins

@@ -1,8 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-local lspconfig = require "lspconfig"
-local util = require "lspconfig.util"
-
 local get_poetry_venv_path = function()
   local fn = vim.fn
   if fn.executable "poetry" == 1 then
@@ -12,26 +7,91 @@ local get_poetry_venv_path = function()
   return ""
 end
 
-lspconfig.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "python" },
-  root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+---@type NvPluginSpec[]
+return {
+  {
+    "williamboman/mason.nvim",
+    ft = "python",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, { "pyright", "ruff", "ruff-lsp", "black", "debugpy" })
 
-  settings = {
-    pyright = {
-      venvPath = get_poetry_venv_path(),
-    },
+      return opts
+    end,
   },
-}
 
-lspconfig.ruff_lsp.setup {
-  on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-    -- Disable hover in favor of Pyright
-    client.server_capabilities.hoverProvider = false
-  end,
-  capabilities = capabilities,
-  filetypes = { "python" },
-  root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+  {
+    "nvim-treesitter/nvim-treesitter",
+    ft = "python",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, { "python" })
+
+      return opts
+    end,
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    ft = "python",
+    opts = function(_, opts)
+      local on_attach = require("plugins.configs.lspconfig").on_attach
+      local capabilities = require("plugins.configs.lspconfig").capabilities
+      local util = require "lspconfig.util"
+      local server_opts = {
+        pyright = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+          filetypes = { "python" },
+          root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+
+          settings = {
+            pyright = {
+              venvPath = get_poetry_venv_path(),
+            },
+            analysis = {
+              typeCheckingMode = "off",
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "workspace",
+            },
+          },
+        },
+        ruff_lsp = {
+          on_attach = function(client, bufnr)
+            on_attach(client, bufnr)
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end,
+          capabilities = capabilities,
+          filetypes = { "python" },
+          root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+        },
+      }
+
+      return vim.tbl_extend("force", opts, server_opts)
+    end,
+  },
+
+  {
+    ft = "python",
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      local b = require("null-ls").builtins
+      vim.list_extend(opts, { b.formatting.black.with { extra_args = { "-l", "79", "-double-quote" } } })
+
+      return opts
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+    },
+    config = function(_, _)
+      require("custom.configs.dap").set_python_debugger()
+      require("core.utils").load_mappings "python"
+    end,
+  },
 }

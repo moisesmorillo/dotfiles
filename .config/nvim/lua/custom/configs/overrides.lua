@@ -3,70 +3,31 @@ local M = {}
 M.treesitter = {
   ensure_installed = {
     "bash",
-    "c",
-    "cpp",
     "dockerfile",
-    "go",
-    "javascript",
     "jsdoc",
     "json",
     "jsonc",
     "json5",
-    "lua",
-    "luadoc",
-    "luap",
     "make",
     "markdown",
     "markdown_inline",
     "mermaid",
-    "python",
     "regex",
-    "rust",
     "sql",
     "terraform",
     "toml",
-    "typescript",
-    "vim",
-    "vimdoc",
     "yaml",
   },
-  highlight = { enable = true },
-  indent = { enable = true },
-  auto_install = true,
 }
 
 M.mason = {
   ensure_installed = {
     -- bash stuff
-    "bash-language-server",
-    -- c, cpp stuff
-    "clangd",
-    "clang-format",
-    "codelldb",
-    -- lua stuff
-    "lua-language-server",
-    "stylua",
-    -- go stuff
-    "gopls",
-    "golines",
-    "gofumpt",
-    "goimports-reviser",
-    "delve",
-    -- python stuff
-    "pyright",
-    "ruff",
-    "ruff-lsp",
-    "black",
-    "debugpy",
-    -- typescript/javascript stuff
-    "typescript-language-server",
-    "prettier",
-    -- rust stuff
-    "rust-analyzer",
+    -- "bash-language-server",
     -- sql stuff
-    "sqlls",
+    -- "sqlls",
     -- yaml stuff
-    "yaml-language-server",
+    -- "yaml-language-server",
     -- others
     "write-good",
     -- shell
@@ -182,6 +143,14 @@ M.telescope = {
   defaults = {
     file_ignore_patterns = {
       "%.git/",
+    },
+  },
+  extensions = {
+    project = {
+      base_dirs = { "~/projects" },
+      hidden_files = true,
+      order_by = "desc",
+      sync_with_nvim_tree = true,
     },
   },
 }
