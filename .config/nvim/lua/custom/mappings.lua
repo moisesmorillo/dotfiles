@@ -18,7 +18,6 @@ M.general = {
     [";"] = { ":", "enter command mode", opts = opts },
     ["<leader>q"] = { ":q<cr>", "Quit", opts = opts },
     ["<leader>pm"] = { "<cmd> Lazy <CR>", "Open Lazy Plugin Manager", opts = opts },
-    ["<leader>li"] = { "<cmd> LspInfo <CR>", "Open LSP Info", opts = opts },
     -- Overwrite default Esc behavior to add silent execution to avoid noice
     -- plugin drawing this command
     ["<Esc>"] = {
@@ -126,6 +125,31 @@ M.lazygit = {
 M.lspconfig = {
   n = {
     ["<leader>ra"] = { ":IncRename ", "LSP Rename", opts = opts },
+    ["<leader>lspi"] = { "<cmd> LspInfo <CR>", "Open LSP Info", opts = opts },
+    ["<leader>lspd"] = {
+      function()
+        local clients = vim.lsp.get_active_clients { bufnr = vim.api.nvim_get_current_buf() }
+        if next(clients) == nil then
+          return ""
+        end
+
+        local client_list = {}
+        for _, client in pairs(clients) do
+          table.insert(client_list, client.name)
+        end
+
+        vim.ui.select(client_list, {
+          prompt_title = "Select LSP Server",
+        }, function(input)
+          local new_buffer = vim.api.nvim_create_buf(false, true)
+          local content = vim.inspect(vim.lsp.get_active_clients { name = input })
+          vim.api.nvim_buf_set_lines(new_buffer, 0, -1, true, vim.split(content, "\n"))
+          vim.api.nvim_set_current_buf(new_buffer)
+        end)
+      end,
+      "Debug Attached LSP Client",
+      opts = opts,
+    },
   },
 }
 
