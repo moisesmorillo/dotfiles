@@ -42,17 +42,19 @@ local set_dap_ui = function()
   end
 end
 
-local set_debuggers = function()
-  require("dap-go").setup()
+M.set_python_debugger = function()
   local debugpy_path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
   require("dap-python").setup(debugpy_path)
+end
+
+M.set_go_debugger = function()
+  require("dap-go").setup()
 end
 
 M.setup = function()
   set_dap_breakpoint_signs()
   set_dap_ui()
   require("core.utils").load_mappings "dap"
-  set_debuggers()
 end
 
 return M
