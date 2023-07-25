@@ -87,14 +87,25 @@ local plugins = {
     event = "VeryLazy",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
-      { "folke/neodev.nvim", opts = {} },
+      {
+        "folke/neodev.nvim",
+        opts = {
+          override = function(root_dir, library)
+            -- disable from dofiles project to avoid overriding nvchad types
+            if root_dir:find("projects/dotfiles", 1, true) then
+              library.enabled = false
+            end
+          end,
+          pathStrict = true,
+        },
+      },
       { "smjonas/inc-rename.nvim", opts = {} },
     },
     config = function(_, opts)
       local lspconfig = require "lspconfig"
 
-      for server, v in pairs(opts) do
-        lspconfig[server].setup(v)
+      for server, setup in pairs(opts) do
+        lspconfig[server].setup(setup)
       end
     end,
   },
@@ -166,6 +177,12 @@ local plugins = {
     dependencies = {
       "nvim-telescope/telescope-symbols.nvim",
       "nvim-telescope/telescope-project.nvim",
+      {
+        "nvim-telescope/telescope-ui-select.nvim",
+        config = function(_, _)
+          require("telescope").load_extension "ui-select"
+        end,
+      },
     },
   },
 
