@@ -76,6 +76,19 @@ local plugins = {
       require("core.utils").load_mappings "go"
     end,
   },
+
+  {
+    "nvim-neotest/neotest",
+    ft = "go",
+    dependencies = {
+      { "nvim-neotest/neotest-go" },
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, { require "neotest-go" })
+
+      return opts
+    end,
+  },
 }
 
 return plugins

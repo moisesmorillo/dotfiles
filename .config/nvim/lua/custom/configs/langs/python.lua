@@ -113,6 +113,19 @@ local plugins = {
       },
     },
   },
+
+  {
+    "nvim-neotest/neotest",
+    ft = "python",
+    dependencies = {
+      "nvim-neotest/neotest-python",
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, { require "neotest-python" { dap = { justMyCode = false }, runner = "pytest" } })
+
+      return opts
+    end,
+  },
 }
 
 return plugins

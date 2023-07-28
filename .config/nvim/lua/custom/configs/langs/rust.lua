@@ -144,6 +144,19 @@ local plugins = {
       require("core.utils").load_mappings "rust"
     end,
   },
+
+  {
+    "nvim-neotest/neotest",
+    ft = "rust",
+    dependencies = {
+      "rouge8/neotest-rust",
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, { require "neotest-rust" })
+
+      return opts
+    end,
+  },
 }
 
 return plugins

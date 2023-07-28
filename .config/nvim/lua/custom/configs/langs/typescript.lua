@@ -54,6 +54,25 @@ local plugins = {
       return opts
     end,
   },
+
+  {
+    "nvim-neotest/neotest",
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    dependencies = {
+      "nvim-neotest/neotest-jest",
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, {
+        require "neotest-jest" {
+          jestCommand = "npx jest --bail --verbose --ci --outputFile=lcov.info --",
+          env = { NODE_OPTIONS = "--experimental-vm-modules" },
+          jestConfigFile = "jest.config.js",
+        },
+      })
+
+      return opts
+    end,
+  },
 }
 
 return plugins
