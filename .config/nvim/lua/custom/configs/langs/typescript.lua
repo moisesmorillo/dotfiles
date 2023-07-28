@@ -1,5 +1,9 @@
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
+local util = require "lspconfig.util"
+
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
@@ -23,22 +27,16 @@ return {
   {
     "neovim/nvim-lspconfig",
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-    opts = function(_, opts)
-      local on_attach = require("plugins.configs.lspconfig").on_attach
-      local capabilities = require("plugins.configs.lspconfig").capabilities
-      local util = require "lspconfig.util"
-
-      local server_opts = {
+    opts = {
+      servers = {
         tsserver = {
           on_attach = on_attach,
           capabilities = capabilities,
           filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
           root_dir = util.root_pattern("package.json", "yarn.lock", "package-lock.json", ".git"),
         },
-      }
-
-      return vim.tbl_extend("force", opts, server_opts)
-    end,
+      },
+    },
   },
 
   {
@@ -46,7 +44,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
-      vim.list_extend(opts, {
+      vim.list_extend(opts.servers, {
         b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
         b.formatting.deno_fmt.with {
           extra_args = { "--single-quote" },
@@ -57,3 +55,5 @@ return {
     end,
   },
 }
+
+return plugins

@@ -1,40 +1,5 @@
 local M = {}
 
-M.treesitter = {
-  ensure_installed = {
-    "bash",
-    "dockerfile",
-    "jsdoc",
-    "json",
-    "jsonc",
-    "json5",
-    "make",
-    "markdown",
-    "markdown_inline",
-    "mermaid",
-    "regex",
-    "sql",
-    "terraform",
-    "toml",
-    "yaml",
-  },
-}
-
-M.mason = {
-  ensure_installed = {
-    -- bash stuff
-    -- "bash-language-server",
-    -- sql stuff
-    -- "sqlls",
-    -- yaml stuff
-    -- "yaml-language-server",
-    -- others
-    "write-good",
-    -- shell
-    "shfmt",
-  },
-}
-
 -- git support in nvimtree
 M.nvimtree = {
   respect_buf_cwd = true,
@@ -143,6 +108,7 @@ M.telescope = {
   defaults = {
     vimgrep_arguments = {
       "rg",
+      "-L",
       "--color=never",
       "--no-heading",
       "--with-filename",
@@ -154,6 +120,13 @@ M.telescope = {
     file_ignore_patterns = {
       "%.git/",
     },
+  },
+  extensions_list = {
+    -- default nvchad
+    "themes",
+    "terms",
+    -- customs
+    "ui-select",
   },
   extensions = {
     project = {

@@ -7,6 +7,7 @@ local highlights = require "custom.highlights"
 M.ui = {
   theme = "catppuccin",
   theme_toggle = { "catppuccin", "one_light" },
+
   statusline = {
     theme = "vscode_colored",
     separator_style = "round",
@@ -19,11 +20,19 @@ M.ui = {
     end,
   },
 
+  tabufline = {
+    lazyload = false,
+  },
+
   hl_override = highlights.override,
   hl_add = highlights.add,
 
   nvdash = {
     load_on_startup = true,
+  },
+
+  cmp = {
+    style = "atom",
   },
 }
 
