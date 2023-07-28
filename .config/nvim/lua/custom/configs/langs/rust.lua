@@ -1,3 +1,11 @@
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
+local util = require "lspconfig.util"
+local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
 ---@type NvPluginSpec[]
 return {
   {
@@ -36,7 +44,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
-      vim.list_extend(opts, {
+      vim.list_extend(opts.servers, {
         b.formatting.clang_format,
       })
 
@@ -45,34 +53,85 @@ return {
   },
 
   {
-    "rust-lang/rust.vim",
+    "simrat39/rust-tools.nvim",
     ft = "rust",
+    dependencies = {
+      "rust-lang/rust.vim",
+      "neovim/nvim-lspconfig",
+    },
     init = function()
       vim.g.rustfmt_autosave = 1
     end,
-  },
-
-  {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    opts = function(_, _)
-      local on_attach = require("plugins.configs.lspconfig").on_attach
-      local capabilities = require("plugins.configs.lspconfig").capabilities
-      local util = require "lspconfig.util"
-
-      return {
-        server = {
+    opts = {
+      servers = {
+        rust_analyzer = {
           on_attach = on_attach,
           capabilities = capabilities,
           filetypes = { "rust" },
           root_dir = util.root_pattern("Cargo.toml", "Cargo.lock", ".git"),
+
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = { allFeatures = true },
+              checkOnSave = {
+                command = "cargo clippy",
+                extraArgs = { "--no-deps" },
+              },
+            },
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      require("rust-tools").setup {
+        tools = {
+          hover_actions = { border = "solid" },
+          on_initialized = function()
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+              pattern = { "*.rs" },
+              callback = function()
+                vim.lsp.codelens.refresh()
+              end,
+            })
+          end,
+        },
+        server = opts,
+        dap = {
+          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
         },
       }
     end,
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
-    end,
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    opts = {
+      setup = {
+        codelldb = function()
+          local dap = require "dap"
+          dap.adapters.codelldb = {
+            type = "server",
+            port = "${port}",
+            executable = {
+              command = codelldb_path,
+              args = { "--port", "${port}" },
+            },
+          }
+          dap.configurations.rust = {
+            {
+              name = "Launch file",
+              type = "codelldb",
+              request = "launch",
+              program = function()
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+              end,
+              cwd = "${workspaceFolder}",
+              stopOnEntry = false,
+            },
+          }
+        end,
+      },
+    },
   },
 
   {
@@ -85,17 +144,4 @@ return {
       require("core.utils").load_mappings "rust"
     end,
   },
-
-  -- TODO add support for DAP
-  -- {
-  --   "jay-babu/mason-nvim-dap.nvim",
-  --   ft = "rust",
-  --   dependencies = {
-  --     "williamboman/mason.nvim",
-  --     "mfussenegger/nvim-dap",
-  --   },
-  --   opts = {
-  --     handlers = {},
-  --   },
-  -- },
 }

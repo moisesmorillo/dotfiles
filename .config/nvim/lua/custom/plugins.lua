@@ -8,56 +8,6 @@ local plugins = {
   },
 
   {
-    "williamboman/mason.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, overrides.mason.ensure_installed)
-    end,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, overrides.treesitter.ensure_installed)
-      opts.auto_install = true
-
-      return opts
-    end,
-  },
-
-  -- highlight for lsp servers not compatible with semantic tokens
-  {
-    "m-demare/hlargs.nvim",
-    event = "VeryLazy",
-    opts = {
-      color = "#fab387",
-      use_colorpalette = false,
-      disable = function(_, bufnr)
-        if vim.b.semantic_tokens then
-          return true
-        end
-        local clients = vim.lsp.get_active_clients { bufnr = bufnr }
-        for _, c in pairs(clients) do
-          local caps = c.server_capabilities
-          if c.name ~= "null-ls" and caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-            vim.b.semantic_tokens = true
-            return vim.b.semantic_tokens
-          end
-        end
-      end,
-    },
-  },
-
-  {
-    "andymass/vim-matchup",
-    event = "VeryLazy",
-    init = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
-
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -83,54 +33,6 @@ local plugins = {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-    dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
-      {
-        "folke/neodev.nvim",
-        opts = {
-          override = function(root_dir, library)
-            -- disable from dofiles project to avoid overriding nvchad types
-            if root_dir:find("projects/dotfiles", 1, true) then
-              library.enabled = false
-            end
-          end,
-          pathStrict = true,
-        },
-      },
-      { "smjonas/inc-rename.nvim", opts = {} },
-    },
-    config = function(_, opts)
-      local lspconfig = require "lspconfig"
-
-      for server, setup in pairs(opts) do
-        lspconfig[server].setup(setup)
-      end
-    end,
-  },
-
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      local b = require("null-ls").builtins
-
-      -- default
-      vim.list_extend(opts, {
-        b.diagnostics.write_good.with {
-          filetypes = { "python", "go", "markdown", "typescript", "javascript", "rust" },
-        },
-        b.formatting.shfmt,
-      })
-      return opts
-    end,
-    config = function(_, opts)
-      require("custom.configs.null-ls").setup(opts)
-    end,
-  },
-
-  {
     "utilyre/barbecue.nvim",
     name = "barbecue",
     event = "VeryLazy",
@@ -145,26 +47,11 @@ local plugins = {
     },
   },
 
-  {
-    "mfussenegger/nvim-dap",
-    event = "VeryLazy",
-
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-    },
-    config = function(_, _)
-      local dap = require "custom.configs.dap"
-      dap.setup()
-
-      require("core.utils").load_mappings "dap"
-    end,
-  },
-
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  -- },
 
   {
     "nvim-tree/nvim-tree.lua",
@@ -177,12 +64,8 @@ local plugins = {
     dependencies = {
       "nvim-telescope/telescope-symbols.nvim",
       "nvim-telescope/telescope-project.nvim",
-      {
-        "nvim-telescope/telescope-ui-select.nvim",
-        config = function(_, _)
-          require("telescope").load_extension "ui-select"
-        end,
-      },
+      "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-telescope/telescope-dap.nvim",
     },
   },
 

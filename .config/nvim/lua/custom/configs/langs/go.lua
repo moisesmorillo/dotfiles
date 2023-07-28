@@ -1,3 +1,6 @@
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
+local util = require "lspconfig.util"
 ---@type NvPluginSpec[]
 return {
   {
@@ -23,12 +26,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     ft = "go",
-    opts = function(_, opts)
-      local on_attach = require("plugins.configs.lspconfig").on_attach
-      local capabilities = require("plugins.configs.lspconfig").capabilities
-      local util = require "lspconfig.util"
-
-      local server_opts = {
+    opts = {
+      servers = {
         gopls = {
           on_attach = on_attach,
           capabilities = capabilities,
@@ -46,10 +45,8 @@ return {
             },
           },
         },
-      }
-
-      return vim.tbl_extend("force", opts, server_opts)
-    end,
+      },
+    },
   },
 
   {
@@ -57,7 +54,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
-      vim.list_extend(opts, {
+      vim.list_extend(opts.servers, {
         b.formatting.gofumpt,
         b.formatting.goimports_reviser.with { extra_args = { "-set-alias", "-rm-unused" } },
         b.formatting.golines.with { extra_args = { "-m", "120" } },
@@ -72,9 +69,8 @@ return {
     ft = "go",
     dependencies = {
       "mfussenegger/nvim-dap",
-      "rcarriga/nvim-dap-ui",
     },
-    config = function(_, _)
+    config = function()
       require("custom.configs.dap").set_go_debugger()
       require("core.utils").load_mappings "go"
     end,
