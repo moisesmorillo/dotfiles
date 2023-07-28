@@ -77,7 +77,6 @@ local plugins = {
     end,
   },
 
-  -- TODO fix this is not working
   {
     "nvim-neotest/neotest",
     ft = "go",
