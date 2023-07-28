@@ -1,7 +1,8 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
+
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     ft = "lua",
@@ -119,3 +120,5 @@ return {
     },
   },
 }
+
+return plugins

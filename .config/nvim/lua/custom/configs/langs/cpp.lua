@@ -6,7 +6,7 @@ local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
 
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     ft = { "c", "cpp" },
@@ -91,3 +91,5 @@ return {
     },
   },
 }
+
+return plugins

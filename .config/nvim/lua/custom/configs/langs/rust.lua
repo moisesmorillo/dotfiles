@@ -7,7 +7,7 @@ local codelldb_path = extension_path .. "adapter/codelldb"
 local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     ft = "rust",
@@ -145,3 +145,5 @@ return {
     end,
   },
 }
+
+return plugins

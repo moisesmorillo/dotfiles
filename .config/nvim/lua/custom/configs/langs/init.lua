@@ -1,6 +1,7 @@
 ---@diagnostic disable: missing-fields
+
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     event = "VeryLazy",
@@ -164,3 +165,5 @@ return {
     end,
   },
 }
+
+return plugins

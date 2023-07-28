@@ -12,7 +12,7 @@ local get_poetry_venv_path = function()
 end
 
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     ft = "python",
@@ -114,3 +114,5 @@ return {
     },
   },
 }
+
+return plugins

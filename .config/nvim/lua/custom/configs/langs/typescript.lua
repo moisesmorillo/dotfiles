@@ -3,7 +3,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local util = require "lspconfig.util"
 
 ---@type NvPluginSpec[]
-return {
+local plugins = {
   {
     "williamboman/mason.nvim",
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
@@ -55,3 +55,5 @@ return {
     end,
   },
 }
+
+return plugins
