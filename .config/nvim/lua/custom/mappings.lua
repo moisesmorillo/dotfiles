@@ -267,6 +267,13 @@ M.neotest = {
       "Neotest Output",
       opts = opts,
     },
+    ["<leader>tNz"] = {
+      function()
+        require("neotest").run.run { vim.fn.getcwd() }
+      end,
+      "Neotest Suite",
+      opts = opts,
+    },
   },
 }
 
