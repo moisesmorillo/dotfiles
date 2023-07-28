@@ -1,5 +1,3 @@
----@diagnostic disable: missing-fields
-
 ---@type NvPluginSpec[]
 local plugins = {
   {
@@ -162,6 +160,40 @@ local plugins = {
       for k, _ in pairs(opts.servers) do
         opts.servers[k](plugin, opts)
       end
+    end,
+  },
+
+  {
+    "nvim-neotest/neotest",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-plenary",
+      { "stevearc/overseer.nvim", opts = {} },
+    },
+    opts = {
+      adapters = {
+        library = { plugins = { "neotest" }, types = true },
+      },
+    },
+    config = function(_, opts)
+      vim.list_extend(opts.adapters, {
+        require "neotest-plenary",
+      })
+
+      opts.consumers = {
+        overseer = require "neotest.consumers.overseer",
+      }
+      opts.overseer = {
+        enabled = true,
+        force_default = true,
+      }
+
+      require("core.utils").load_mappings "neotest"
+      require("core.utils").load_mappings "overseer"
+
+      require("neotest").setup(opts)
     end,
   },
 }

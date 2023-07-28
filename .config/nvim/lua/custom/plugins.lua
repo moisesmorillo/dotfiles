@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]

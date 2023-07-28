@@ -76,6 +76,33 @@ local plugins = {
       require("core.utils").load_mappings "go"
     end,
   },
+
+  -- TODO fix this is not working
+  {
+    "nvim-neotest/neotest",
+    ft = "go",
+    dependencies = {
+      {
+        "nvim-neotest/neotest-go",
+        config = function()
+          local neotest_ns = vim.api.nvim_create_namespace "neotest"
+          vim.diagnostic.config({
+            virtual_text = {
+              format = function(diagnostic)
+                local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+                return message
+              end,
+            },
+          }, neotest_ns)
+        end,
+      },
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, { require "neotest-go" { experimental = { test_table = true } } })
+
+      return opts
+    end,
+  },
 }
 
 return plugins

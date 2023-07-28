@@ -194,4 +194,97 @@ M.python = {
   },
 }
 
+M.neotest = {
+  plugin = true,
+  n = {
+    ["<leader>tNF"] = {
+      function()
+        require("neotest").run.run { vim.fn.expand "%", strategy = "dap" }
+      end,
+      "Neotest Debug Test File",
+      opts = opts,
+    },
+    ["<leader>tNL"] = {
+      function()
+        require("neotest").run.run_last { strategy = "dap" }
+      end,
+      "Neotest Debug Last Test",
+      opts = opts,
+    },
+    ["<leader>tNN"] = {
+      function()
+        require("neotest").run.run { strategy = "dap" }
+      end,
+      "Neotest Debug Nearest Test",
+      opts = opts,
+    },
+    ["<leader>tNs"] = {
+      function()
+        require("neotest").run.stop()
+      end,
+      "Neotest Stop",
+      opts = opts,
+    },
+    ["<leader>tNS"] = {
+      function()
+        require("neotest").summary.toggle()
+      end,
+      "Neotest Summary",
+      opts = opts,
+    },
+    ["<leader>tNa"] = {
+      function()
+        require("neotest").summary.attach()
+      end,
+      "Neotest Attach",
+      opts = opts,
+    },
+    ["<leader>tNf"] = {
+      function()
+        require("neotest").run.run(vim.fn.expand "%")
+      end,
+      "Neotest Test File",
+      opts = opts,
+    },
+    ["<leader>tNl"] = {
+      function()
+        require("neotest").run.run_last()
+      end,
+      "Neotest Test Last",
+      opts = opts,
+    },
+    ["<leader>tNn"] = {
+      function()
+        require("neotest").run.run()
+      end,
+      "Neotest Test Nearest",
+      opts = opts,
+    },
+    ["<leader>tNo"] = {
+      function()
+        require("neotest").output.open { enter = true }
+      end,
+      "Neotest Output",
+      opts = opts,
+    },
+  },
+}
+
+M.overseer = {
+  plugin = true,
+  n = {
+    ["<leader>toR"] = { "<cmd>OverseerRunCmd<CR>", "Overseer Run Command", opts = opts },
+    ["<leader>to"] = { "<cmd>OverseerTaskAction<CR>", "Overseer Task Action", opts = opts },
+    ["<leader>tob"] = { "<cmd>OverseerBuild<CR>", "Overseer Build", opts = opts },
+    ["<leader>toc"] = { "<cmd>OverseerClose<CR>", "Overseer Close", opts = opts },
+    ["<leader>tod"] = { "<cmd>OverseerDeleteBundle<CR>", "Overseer Delete Bundle", opts = opts },
+    ["<leader>tol"] = { "<cmd>OverseerLoadBundle<cr>", "Overseer Load Bundle", opts = opts },
+    ["<leader>too"] = { "<cmd>OverseerOpen<cr>", "Overseer Open", opts = opts },
+    ["<leader>toq"] = { "<cmd>OverseerQuickAction<cr>", "Overseer Quick Action", opts = opts },
+    ["<leader>tor"] = { "<cmd>OverseerRun<cr>", "Overseer Run", opts = opts },
+    ["<leader>tos"] = { "<cmd>OverseerSaveBundle<cr>", "Overseer Save Bundle", opts = opts },
+    ["<leader>tot"] = { "<cmd>OverseerToggle<cr>", "Overseer Toggle", opts = opts },
+  },
+}
+
 return M
