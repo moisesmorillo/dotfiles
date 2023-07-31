@@ -127,27 +127,8 @@ M.lspconfig = {
     ["<leader>ra"] = { ":IncRename ", "LSP Rename", opts = opts },
     ["<leader>lspi"] = { "<cmd> LspInfo <CR>", "Open LSP Info", opts = opts },
     ["<leader>lspd"] = {
-      function()
-        local clients = vim.lsp.get_active_clients { bufnr = vim.api.nvim_get_current_buf() }
-        if next(clients) == nil then
-          return ""
-        end
-
-        local client_list = {}
-        for _, client in pairs(clients) do
-          table.insert(client_list, client.name)
-        end
-
-        vim.ui.select(client_list, {
-          prompt_title = "Select LSP Server",
-        }, function(input)
-          local new_buffer = vim.api.nvim_create_buf(false, true)
-          local content = vim.inspect(vim.lsp.get_active_clients { name = input })
-          vim.api.nvim_buf_set_lines(new_buffer, 0, -1, true, vim.split(content, "\n"))
-          vim.api.nvim_set_current_buf(new_buffer)
-        end)
-      end,
-      "Debug Attached LSP Client",
+      "<cmd> Neoconf lsp <CR>",
+      "Debug LSP Client",
       opts = opts,
     },
   },
@@ -281,7 +262,7 @@ M.overseer = {
   plugin = true,
   n = {
     ["<leader>toR"] = { "<cmd>OverseerRunCmd<CR>", "Overseer Run Command", opts = opts },
-    ["<leader>to"] = { "<cmd>OverseerTaskAction<CR>", "Overseer Task Action", opts = opts },
+    ["<leader>toa"] = { "<cmd>OverseerTaskAction<CR>", "Overseer Task Action", opts = opts },
     ["<leader>tob"] = { "<cmd>OverseerBuild<CR>", "Overseer Build", opts = opts },
     ["<leader>toc"] = { "<cmd>OverseerClose<CR>", "Overseer Close", opts = opts },
     ["<leader>tod"] = { "<cmd>OverseerDeleteBundle<CR>", "Overseer Delete Bundle", opts = opts },
