@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 ---@type MappingsTable
 local M = {}
 local opts = {

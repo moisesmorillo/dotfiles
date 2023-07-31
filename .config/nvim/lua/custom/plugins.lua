@@ -46,6 +46,7 @@ local plugins = {
     },
   },
 
+  -- TODO: review if this is still required after integrating noice.nvim
   -- {
   --   "stevearc/dressing.nvim",
   --   event = "VeryLazy",
@@ -91,6 +92,7 @@ local plugins = {
     event = "VeryLazy",
   },
 
+  -- TODO: complete this integration
   -- {
   --   "andythigpen/nvim-coverage",
   --   branch = "main",
@@ -112,6 +114,7 @@ local plugins = {
   --   end,
   -- },
 
+  -- FIX: full integration of catppuccin in installed plugins
   -- {
   --   "catppuccin/nvim",
   --   name = "catppuccin",
@@ -129,6 +132,7 @@ local plugins = {
   --   end,
   -- },
   --
+  -- TODO: complete AI Integration
   -- {
   --   "jackMort/ChatGPT.nvim",
   --   enabled = false,
@@ -191,13 +195,6 @@ local plugins = {
       require("core.utils").load_mappings "todo"
       require("todo-comments").setup(opts)
     end,
-    -- stylua: ignore
-    -- keys = {
-    --   { "]t", function() require("todo-comments").jump_next() end, desc = "Next ToDo" },
-    --   { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous ToDo" },
-    --   { "<leader>ct", "<cmd>TodoTrouble<cr>", desc = "ToDo (Trouble)" },
-    --   { "<leader>cT", "<cmd>TodoTelescope<cr>", desc = "ToDo" },
-    -- },
   },
 
   {

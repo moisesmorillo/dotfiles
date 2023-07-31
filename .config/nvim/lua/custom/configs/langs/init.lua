@@ -5,6 +5,7 @@ local plugins = {
     event = "VeryLazy",
     opts = function(_, opts)
       -- Overwrite defaults ensure_installed from nvchad
+      -- FIX: split into file-specifc settings or enable bellow
       local ensure_installed = {
         -- bash stuff
         -- "bash-language-server",
@@ -93,7 +94,7 @@ local plugins = {
   {
     "folke/neodev.nvim",
     opts = {
-      debug = true,
+      setup_jsonls = false,
     },
   },
 
