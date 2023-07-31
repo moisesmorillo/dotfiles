@@ -58,6 +58,7 @@ local plugins = {
 
   {
     "mfussenegger/nvim-dap",
+    ft = { "c", "cpp" },
     opts = {
       setup = {
         codelldb = function()
@@ -85,6 +86,25 @@ local plugins = {
 
           dap.configurations.c = dap.configurations.cpp
         end,
+      },
+    },
+  },
+
+  {
+    "danymat/neogen",
+    ft = { "c", "cpp" },
+    opts = {
+      languages = {
+        c = {
+          template = {
+            annotation_convention = "doxygen",
+          },
+        },
+        cpp = {
+          template = {
+            annotation_convention = "doxygen",
+          },
+        },
       },
     },
   },

@@ -114,6 +114,20 @@ local plugins = {
       },
     },
   },
+
+  {
+    "danymat/neogen",
+    ft = "lua",
+    opts = {
+      languages = {
+        lua = {
+          template = {
+            annotation_convention = "ldoc",
+          },
+        },
+      },
+    },
+  },
 }
 
 return plugins

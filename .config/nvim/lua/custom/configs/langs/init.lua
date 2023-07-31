@@ -213,6 +213,20 @@ local plugins = {
       require("neotest").setup(opts)
     end,
   },
+
+  {
+    "danymat/neogen",
+    event = "VeryLazy",
+    opts = {
+      enabled = true,
+      snippet_engine = "luasnip",
+      languages = {},
+    },
+    config = function(_, opts)
+      require("core.utils").load_mappings "neogen"
+      require("neogen").setup(opts)
+    end,
+  },
 }
 
 return plugins

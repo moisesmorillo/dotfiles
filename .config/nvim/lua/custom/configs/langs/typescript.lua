@@ -67,6 +67,26 @@ local plugins = {
       return opts
     end,
   },
+
+  {
+    "danymat/neogen",
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    opts = {
+      languages = {
+        javscript = {
+          template = {
+            annotation_convention = "jsdoc",
+          },
+        },
+
+        typescript = {
+          template = {
+            annotation_convention = "tsdoc",
+          },
+        },
+      },
+    },
+  },
 }
 
 return plugins

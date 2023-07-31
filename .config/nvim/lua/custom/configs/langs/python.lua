@@ -121,6 +121,20 @@ local plugins = {
       return opts
     end,
   },
+
+  {
+    "danymat/neogen",
+    ft = "python",
+    opts = {
+      languages = {
+        python = {
+          template = {
+            annotation_convention = "numpydoc",
+          },
+        },
+      },
+    },
+  },
 }
 
 return plugins

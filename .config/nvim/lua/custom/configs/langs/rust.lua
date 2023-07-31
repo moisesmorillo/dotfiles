@@ -151,6 +151,20 @@ local plugins = {
       return opts
     end,
   },
+
+  {
+    "danymat/neogen",
+    ft = "rust",
+    opts = {
+      languages = {
+        rust = {
+          template = {
+            annotation_convention = "rustdoc",
+          },
+        },
+      },
+    },
+  },
 }
 
 return plugins

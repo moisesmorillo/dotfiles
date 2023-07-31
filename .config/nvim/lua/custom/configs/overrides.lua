@@ -127,6 +127,7 @@ M.telescope = {
     "terms",
     -- customs
     "ui-select",
+    "refactoring",
   },
   extensions = {
     project = {

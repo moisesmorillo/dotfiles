@@ -99,7 +99,7 @@ local plugins = {
   --   opts = {
   --     commands = true,
   --     load_coverage_cb = function(ftype)
-  --       vim.notify("Loaded " .. ftype .. " coverage") -- TODO change this by nvim notify
+  --       vim.notify("Loaded " .. ftype .. " coverage") -- TODO: change this by nvim notify
   --     end,
   --     lang = {
   --       python = {
@@ -112,13 +112,6 @@ local plugins = {
   --   end,
   -- },
 
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   event = "VeryLazy",
-  --   config = function(_, _)
-  --     require("notify").setup {}
-  --   end,
-  -- },
   -- {
   --   "catppuccin/nvim",
   --   name = "catppuccin",
@@ -160,6 +153,59 @@ local plugins = {
   --   enabled = false,
   --   event = "VeryLazy",
   -- },
+  --
+  {
+    "ThePrimeagen/refactoring.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+    },
+    opts = {},
+    config = function(_, opts)
+      require("core.utils").load_mappings "refactoring"
+      require("refactoring").setup(opts)
+    end,
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = "BufReadPost",
+    opts = {
+      search = {
+        args = {
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("core.utils").load_mappings "todo"
+      require("todo-comments").setup(opts)
+    end,
+    -- stylua: ignore
+    -- keys = {
+    --   { "]t", function() require("todo-comments").jump_next() end, desc = "Next ToDo" },
+    --   { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous ToDo" },
+    --   { "<leader>ct", "<cmd>TodoTrouble<cr>", desc = "ToDo (Trouble)" },
+    --   { "<leader>cT", "<cmd>TodoTelescope<cr>", desc = "ToDo" },
+    -- },
+  },
+
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "BufReadPost",
+    opts = {},
+  },
 }
 
 return plugins

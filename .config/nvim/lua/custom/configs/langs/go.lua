@@ -83,6 +83,20 @@ local plugins = {
       return opts
     end,
   },
+
+  {
+    "danymat/neogen",
+    ft = "go",
+    opts = {
+      languages = {
+        go = {
+          template = {
+            annotation_convention = "godoc",
+          },
+        },
+      },
+    },
+  },
 }
 
 return plugins

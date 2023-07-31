@@ -150,7 +150,7 @@ M.rust = {
 M.go = {
   plugin = true,
   n = {
-    -- TODO add more debug methods for go
+    --TODO: add more debug methods for go
     ["<leader>dgt"] = {
       function()
         require("dap-go").debug_test()
@@ -164,7 +164,7 @@ M.go = {
 M.python = {
   plugin = true,
   n = {
-    -- TODO add more debug methods for python
+    --TODO: add more debug methods for python
     ["<leader>dpt"] = {
       function()
         require("dap-python").test_method()
@@ -272,6 +272,75 @@ M.overseer = {
     ["<leader>tor"] = { "<cmd>OverseerRun<cr>", "Overseer Run", opts = opts },
     ["<leader>tos"] = { "<cmd>OverseerSaveBundle<cr>", "Overseer Save Bundle", opts = opts },
     ["<leader>tot"] = { "<cmd>OverseerToggle<cr>", "Overseer Toggle", opts = opts },
+  },
+}
+
+M.neogen = {
+  plugin = true,
+  n = {
+    ["<leader>cgd"] = {
+      function()
+        require("neogen").generate()
+      end,
+      "Neogen Annotation",
+      opts = opts,
+    },
+    ["<leader>cgc"] = {
+      function()
+        require("neogen").generate { type = "class" }
+      end,
+      "Neogen Class Annotation",
+      opts = opts,
+    },
+    ["<leader>cgf"] = {
+      function()
+        require("neogen").generate { type = "func" }
+      end,
+      "Neogen Function Annotation",
+      opts = opts,
+    },
+    ["<leader>cgt"] = {
+      function()
+        require("neogen").generate { type = "type" }
+      end,
+      "Neogen Type Annotation",
+      opts = opts,
+    },
+  },
+}
+
+M.refactoring = {
+  plugin = true,
+  v = {
+    ["<leader>rr"] = {
+      function()
+        require("telescope").extensions.refactoring.refactors()
+      end,
+      "Open Refactoring",
+      opts = opts,
+    },
+  },
+}
+
+M.todo = {
+  plugin = true,
+  n = {
+    ["<leader>[t"] = {
+      function()
+        require("todo-comments").jump_prev()
+      end,
+      "Previous TODO",
+      opts = opts,
+    },
+    ["<leader>]t"] = {
+      function()
+        require("todo-comments").jump_next()
+      end,
+      "Next TODO",
+      opts = opts,
+    },
+    ["<leader>ct"] = { "<cmd>TodoTelescope<CR>", "Open TODO in Telescope", opts = opts },
+    ["<leader>cT"] = { "<cmd>TodoTrouble<CR>", "Open TODO in Trouble", opts = opts },
   },
 }
 
