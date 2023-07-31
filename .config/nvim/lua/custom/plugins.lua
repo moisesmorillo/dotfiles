@@ -203,6 +203,19 @@ local plugins = {
     event = "BufReadPost",
     opts = {},
   },
+
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    opts = {
+      plugins = {
+        alacritty = {
+          enabled = true,
+          font = "24",
+        },
+      },
+    },
+  },
 }
 
 return plugins
