@@ -86,30 +86,47 @@ local plugins = {
   },
 
   {
+    "folke/neoconf.nvim",
+    opts = {},
+  },
+
+  {
+    "folke/neodev.nvim",
+    opts = {
+      debug = true,
+    },
+  },
+
+  {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      -- TODO fix this
-      -- {
-      --   "folke/neoconf.nvim",
-      --   cmd = "Neoconf",
-      --   opts = {},
-      -- },
-      {
-        "folke/neodev.nvim",
-        opts = {
-          debug = true,
-        },
-      },
       { "smjonas/inc-rename.nvim", opts = {} },
     },
     opts = {
       servers = {},
     },
     config = function(_, opts)
+      require("neoconf").setup()
+      require("neodev").setup()
       local lspconfig = require "lspconfig"
+      local on_attach = require("plugins.configs.lspconfig").on_attach
+      local capabilities = require("plugins.configs.lspconfig").capabilities
+      local util = require "lspconfig.util"
 
       for server, setup in pairs(opts.servers) do
+        if setup.on_attach == nil then
+          setup.on_attach = on_attach
+        end
+
+        if setup.capabilities == nil then
+          setup.capabilities = capabilities
+        end
+
+        if setup.root_dir and type(setup.root_dir) == "table" then
+          setup.root_dir = util.root_pattern(setup.root_dir)
+        end
+
         lspconfig[server].setup(setup)
       end
     end,

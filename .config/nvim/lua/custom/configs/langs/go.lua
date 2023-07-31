@@ -1,7 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-local util = require "lspconfig.util"
-
 ---@type NvPluginSpec[]
 local plugins = {
   {
@@ -30,10 +26,8 @@ local plugins = {
     opts = {
       servers = {
         gopls = {
-          on_attach = on_attach,
-          capabilities = capabilities,
           filetypes = { "go", "gomod", "gowork", "gotmpl" },
-          root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+          root_dir = { "go.work", "go.mod", ".git" },
           settings = {
             gopls = {
               completeUnimported = true,

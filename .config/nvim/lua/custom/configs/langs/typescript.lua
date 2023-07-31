@@ -1,7 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-local util = require "lspconfig.util"
-
 ---@type NvPluginSpec[]
 local plugins = {
   {
@@ -30,10 +26,8 @@ local plugins = {
     opts = {
       servers = {
         tsserver = {
-          on_attach = on_attach,
-          capabilities = capabilities,
           filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-          root_dir = util.root_pattern("package.json", "yarn.lock", "package-lock.json", ".git"),
+          root_dir = { "package.json", "yarn.lock", "package-lock.json", ".git" },
         },
       },
     },

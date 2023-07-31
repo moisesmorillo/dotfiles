@@ -1,6 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-local util = require "lspconfig.util"
 local install_root_dir = vim.fn.stdpath "data" .. "/mason"
 local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
@@ -65,10 +62,7 @@ local plugins = {
     opts = {
       servers = {
         rust_analyzer = {
-          on_attach = on_attach,
-          capabilities = capabilities,
           filetypes = { "rust" },
-          root_dir = util.root_pattern("Cargo.toml", "Cargo.lock", ".git"),
 
           settings = {
             ["rust-analyzer"] = {

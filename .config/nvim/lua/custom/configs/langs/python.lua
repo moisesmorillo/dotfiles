@@ -1,7 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-local util = require "lspconfig.util"
-
 local get_poetry_venv_path = function()
   local fn = vim.fn
   if fn.executable "poetry" == 1 then
@@ -39,10 +35,8 @@ local plugins = {
     opts = {
       servers = {
         pyright = {
-          on_attach = on_attach,
-          capabilities = capabilities,
           filetypes = { "python" },
-          root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+          root_dir = { "requirements.txt", "pyproject.toml", "poetry.lock", ".git" },
 
           settings = {
             pyright = {
@@ -58,13 +52,14 @@ local plugins = {
         },
         ruff_lsp = {
           on_attach = function(client, bufnr)
-            on_attach(client, bufnr)
+            local lspconfig_on_attach = require("plugins.configs.lspconfig").on_attach
+
+            lspconfig_on_attach(client, bufnr)
             -- Disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
           end,
-          capabilities = capabilities,
           filetypes = { "python" },
-          root_dir = util.root_pattern("requirements.txt", "pyproject.toml", "poetry.lock", ".git"),
+          root_dir = { "requirements.txt", "pyproject.toml", "poetry.lock", ".git" },
         },
       },
     },

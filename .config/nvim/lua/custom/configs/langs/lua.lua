@@ -1,6 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-
 ---@type NvPluginSpec[]
 local plugins = {
   {
@@ -29,8 +26,6 @@ local plugins = {
     opts = {
       servers = {
         lua_ls = {
-          on_attach = on_attach,
-          capabilities = capabilities,
           filetypes = { "lua" },
 
           settings = {

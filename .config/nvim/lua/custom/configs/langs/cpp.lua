@@ -1,6 +1,3 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-local util = require "lspconfig.util"
 local install_root_dir = vim.fn.stdpath "data" .. "/mason"
 local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
@@ -34,12 +31,13 @@ local plugins = {
       servers = {
         clangd = {
           on_attach = function(client, bufnr)
+            local lspconfig_on_attach = require("plugins.configs.lspconfig").on_attach
+
             client.server_capabilities.signatureHelpProvider = false
-            on_attach(client, bufnr)
+            lspconfig_on_attach(client, bufnr)
           end,
-          capabilities = capabilities,
           filetypes = { "c", "cpp" },
-          root_dir = util.root_pattern("main.cpp", ".git"),
+          root_dir = { "main.cpp", ".git" },
         },
       },
     },
