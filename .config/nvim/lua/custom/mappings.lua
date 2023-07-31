@@ -325,14 +325,14 @@ M.refactoring = {
 M.todo = {
   plugin = true,
   n = {
-    ["<leader>[t"] = {
+    ["[t"] = {
       function()
         require("todo-comments").jump_prev()
       end,
       "Previous TODO",
       opts = opts,
     },
-    ["<leader>]t"] = {
+    ["]t"] = {
       function()
         require("todo-comments").jump_next()
       end,
