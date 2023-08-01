@@ -73,7 +73,7 @@ brew install fd
 brew install so
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit
+rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 stow -R -t $HOME */
 
