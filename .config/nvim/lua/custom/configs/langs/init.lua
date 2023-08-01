@@ -100,6 +100,18 @@ local plugins = {
     event = "VeryLazy",
     dependencies = {
       { "smjonas/inc-rename.nvim", opts = {} },
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+        },
+        opts = { lsp = { auto_attach = true } },
+        config = function(_, opts)
+          require("core.utils").load_mappings "navbuddy"
+          require("nvim-navbuddy").setup(opts)
+        end,
+      },
     },
     opts = {
       servers = {},

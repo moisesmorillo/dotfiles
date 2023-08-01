@@ -351,4 +351,17 @@ M.markdown = {
   },
 }
 
+M.navbuddy = {
+  plugin = true,
+  n = {
+    ["<leader>vO"] = {
+      function()
+        require("nvim-navbuddy").open()
+      end,
+      "Code Outline (navbuddy)",
+      opts = opts,
+    },
+  },
+}
+
 return M
