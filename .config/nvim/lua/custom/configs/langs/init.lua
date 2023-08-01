@@ -112,6 +112,12 @@ local plugins = {
       local capabilities = require("plugins.configs.lspconfig").capabilities
       local util = require "lspconfig.util"
 
+      -- this is for nvim-ufo client
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+
       for server, setup in pairs(opts.servers) do
         if setup.on_attach == nil then
           setup.on_attach = on_attach

@@ -216,6 +216,20 @@ local plugins = {
       },
     },
   },
+
+  -- using <leader> z to get available mappings
+  {
+    "kevinhwang91/nvim-ufo",
+    event = "BufReadPost",
+    opts = {},
+    init = function(_)
+      vim.o.foldlevel = 999
+    end,
+    dependencies = {
+      "kevinhwang91/promise-async",
+      "neovim/nvim-lspconfig",
+    },
+  },
 }
 
 return plugins
