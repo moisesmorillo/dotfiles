@@ -2,7 +2,7 @@
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = "lua",
+    ft = "markdown",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "marksman" })
 
@@ -12,7 +12,7 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = "lua",
+    ft = "markdown",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "markdown", "markdown_inline", "mermaid" })
 
@@ -21,7 +21,7 @@ local plugins = {
   },
 
   {
-    ft = "lua",
+    ft = "markdown",
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
@@ -31,13 +31,12 @@ local plugins = {
   },
 
   {
-    ft = "lua",
-    "jose-elias-alvarez/null-ls.nvim",
-    opts = function(_, opts)
-      local b = require("null-ls").builtins
-      vim.list_extend(opts.servers, { b.formatting.stylua })
-
-      return opts
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+      require("core.utils").load_mappings "markdown"
     end,
   },
 }

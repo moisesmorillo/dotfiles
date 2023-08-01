@@ -343,4 +343,11 @@ M.todo = {
   },
 }
 
+M.markdown = {
+  plugin = true,
+  n = {
+    ["<leader>mp"] = { "<cmd> MarkdownPreviewToggle <CR>", "Markdown Preview Toggle", opts = opts },
+  },
+}
+
 return M
