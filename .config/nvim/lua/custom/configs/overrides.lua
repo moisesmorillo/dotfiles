@@ -128,6 +128,7 @@ M.telescope = {
     -- customs
     "ui-select",
     "refactoring",
+    "lazy",
   },
   extensions = {
     project = {

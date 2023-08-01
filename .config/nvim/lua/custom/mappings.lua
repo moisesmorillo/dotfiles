@@ -56,6 +56,7 @@ M.telescope = {
       "Open projects",
       opts = opts,
     },
+    ["<leader>fl"] = { "<cmd>Telescope lazy<CR>", "Open Lazy Plugins in Telescope", opts = opts },
   },
 }
 

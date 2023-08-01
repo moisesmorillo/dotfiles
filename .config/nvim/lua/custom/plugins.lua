@@ -66,6 +66,7 @@ local plugins = {
       "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-dap.nvim",
+      "tsakirist/telescope-lazy.nvim",
     },
   },
 
