@@ -87,6 +87,8 @@ local plugins = {
       },
     },
   },
+
+  -- TODO: add https://github.com/pmizio/typescript-tools.nvim
 }
 
 return plugins
