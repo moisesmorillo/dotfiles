@@ -75,12 +75,7 @@ brew install so
 ### Clone and set dotfiles ###
 rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-ln -sf ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
-ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/projects/dotfiles/.config/alacritty ~/.config/alacritty
-ln -sf ~/projects/dotfiles/.config/nvim/lua/custom ~/.config/nvim/lua/custom
-ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
-ln -sf ~/projects/dotfiles/.config/lazygit ~/.config/lazygit
+stow -R -t $HOME */
 
 ### Install Btop ###
 brew install btop
