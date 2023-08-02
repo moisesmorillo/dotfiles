@@ -28,6 +28,14 @@ local plugins = {
       },
     },
   },
+
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    enabled = false,
+    event = "BufReadPost",
+    opts = {},
+  },
 }
 
 return plugins
