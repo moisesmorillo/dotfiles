@@ -92,6 +92,7 @@ local plugins = {
     "folke/neodev.nvim",
     opts = {
       setup_jsonls = false,
+      library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
     },
   },
 
