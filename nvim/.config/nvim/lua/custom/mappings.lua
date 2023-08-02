@@ -6,6 +6,8 @@ local opts = {
   silent = true,
 }
 
+local opts_with_expr = vim.tbl_extend("force", opts, { expr = true })
+
 M.disabled = {
   n = {
     ["<C-n>"] = "",
@@ -23,6 +25,19 @@ M.general = {
       "<cmd> :noh <CR>",
       "Clear highlights",
       opts = opts,
+    },
+    ["i"] = {
+      function()
+        if vim.fn.getline "." == "" then
+          vim.print "holis"
+          return [["_cc]]
+        else
+          vim.print "alave"
+          return "i"
+        end
+      end,
+      "Fix identation in insert mode",
+      opts = opts_with_expr,
     },
   },
 }
@@ -360,6 +375,47 @@ M.navbuddy = {
       end,
       "Code Outline (navbuddy)",
       opts = opts,
+    },
+  },
+}
+
+M.codeium = {
+  plugin = true,
+  i = {
+    ["<A-m>"] = {
+      function()
+        return vim.fn["codeium#Accept"]()
+      end,
+      "Codeium Accept Suggestion",
+      opts = opts_with_expr,
+    },
+    ["<A-f>"] = {
+      function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end,
+      "Codeium Next Suggestion",
+      opts = opts_with_expr,
+    },
+    ["<A-b>"] = {
+      function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end,
+      "Codeium Previous Suggestion",
+      opts = opts_with_expr,
+    },
+    ["<A-x>"] = {
+      function()
+        return vim.fn["codeium#Clear"]()
+      end,
+      "Codeium Clear Suggestion",
+      opts = opts_with_expr,
+    },
+    ["<A-s>"] = {
+      function()
+        return vim.fn["codeium#Complete"]()
+      end,
+      "Codeium Complete Suggestion",
+      opts = opts_with_expr,
     },
   },
 }
