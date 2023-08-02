@@ -29,7 +29,6 @@ local plugins = {
     opts = {
       ensure_installed = {
         "bash",
-        "dockerfile",
         "jsdoc",
         "json",
         "jsonc",
