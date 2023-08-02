@@ -10,8 +10,6 @@ local plugins = {
     ft = "rust",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "rust-analyzer" })
-
-      return opts
     end,
   },
 
@@ -20,8 +18,6 @@ local plugins = {
     ft = "rust",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "rust" })
-
-      return opts
     end,
   },
 
@@ -44,8 +40,6 @@ local plugins = {
       vim.list_extend(opts.servers, {
         b.formatting.clang_format,
       })
-
-      return opts
     end,
   },
 
@@ -147,8 +141,6 @@ local plugins = {
     },
     opts = function(_, opts)
       vim.list_extend(opts.adapters, { require "neotest-rust" })
-
-      return opts
     end,
   },
 

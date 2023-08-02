@@ -5,8 +5,6 @@ local plugins = {
     ft = "lua",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "lua-language-server", "stylua" })
-
-      return opts
     end,
   },
 
@@ -15,8 +13,6 @@ local plugins = {
     ft = "lua",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "lua", "luadoc", "luap", "vim", "vimdoc" })
-
-      return opts
     end,
   },
 
@@ -72,8 +68,6 @@ local plugins = {
     opts = function(_, opts)
       local b = require("null-ls").builtins
       vim.list_extend(opts.servers, { b.formatting.stylua })
-
-      return opts
     end,
   },
 

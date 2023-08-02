@@ -14,8 +14,6 @@ local plugins = {
     ft = "python",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "pyright", "ruff", "ruff-lsp", "black", "debugpy" })
-
-      return opts
     end,
   },
 
@@ -24,8 +22,6 @@ local plugins = {
     ft = "python",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "python" })
-
-      return opts
     end,
   },
 
@@ -71,8 +67,6 @@ local plugins = {
     opts = function(_, opts)
       local b = require("null-ls").builtins
       vim.list_extend(opts.servers, { b.formatting.black.with { extra_args = { "-l", "79", "-double-quote" } } })
-
-      return opts
     end,
   },
   {
@@ -117,8 +111,6 @@ local plugins = {
     },
     opts = function(_, opts)
       vim.list_extend(opts.adapters, { require "neotest-python" { dap = { justMyCode = false }, runner = "pytest" } })
-
-      return opts
     end,
   },
 

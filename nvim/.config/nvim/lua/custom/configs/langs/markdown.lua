@@ -5,8 +5,6 @@ local plugins = {
     ft = "markdown",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "marksman" })
-
-      return opts
     end,
   },
 
@@ -15,8 +13,6 @@ local plugins = {
     ft = "markdown",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "markdown", "markdown_inline", "mermaid" })
-
-      return opts
     end,
   },
 

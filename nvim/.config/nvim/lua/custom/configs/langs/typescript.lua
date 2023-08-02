@@ -5,8 +5,6 @@ local plugins = {
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "typescript-language-server", "prettier", "deno" })
-
-      return opts
     end,
   },
 
@@ -15,8 +13,6 @@ local plugins = {
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "typescript", "javascript" })
-
-      return opts
     end,
   },
 
@@ -44,8 +40,6 @@ local plugins = {
           extra_args = { "--single-quote" },
         }, -- choosed deno for ts/js files cuz its very fast!
       })
-
-      return opts
     end,
   },
 
@@ -63,8 +57,6 @@ local plugins = {
           jestConfigFile = "jest.config.js",
         },
       })
-
-      return opts
     end,
   },
 

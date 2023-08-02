@@ -9,8 +9,6 @@ local plugins = {
     ft = { "c", "cpp" },
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "clangd", "clang-format", "codelldb" })
-
-      return opts
     end,
   },
 
@@ -19,8 +17,6 @@ local plugins = {
     ft = { "c", "cpp" },
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "c", "cpp" })
-
-      return opts
     end,
   },
 
@@ -51,8 +47,6 @@ local plugins = {
       vim.list_extend(opts.servers, {
         b.formatting.clang_format,
       })
-
-      return opts
     end,
   },
 

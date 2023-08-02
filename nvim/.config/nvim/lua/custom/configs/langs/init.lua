@@ -19,8 +19,6 @@ local plugins = {
         "shfmt",
       }
       vim.list_extend(opts.ensure_installed, ensure_installed)
-
-      return opts
     end,
   },
 

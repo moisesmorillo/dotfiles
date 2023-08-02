@@ -5,8 +5,6 @@ local plugins = {
     ft = "go",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "gopls", "golines", "gofumpt", "goimports-reviser", "delve" })
-
-      return opts
     end,
   },
 
@@ -15,8 +13,6 @@ local plugins = {
     ft = "go",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "go" })
-
-      return opts
     end,
   },
 
@@ -54,8 +50,6 @@ local plugins = {
         b.formatting.goimports_reviser.with { extra_args = { "-set-alias", "-rm-unused" } },
         b.formatting.golines.with { extra_args = { "-m", "120" } },
       })
-
-      return opts
     end,
   },
 
@@ -79,8 +73,6 @@ local plugins = {
     },
     opts = function(_, opts)
       vim.list_extend(opts.adapters, { require "neotest-go" })
-
-      return opts
     end,
   },
 
