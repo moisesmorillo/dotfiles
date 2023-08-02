@@ -1,24 +1,38 @@
+local ft = { "go", "gomod" }
+
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = "go",
+    ft = ft,
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "gopls", "golines", "gofumpt", "goimports-reviser", "delve" })
+      vim.list_extend(opts.ensure_installed, {
+        "delve",
+        "gofumpt",
+        "goimports-reviser",
+        "golangci-lint",
+        "golangci-lint-langserver",
+        "golangci-lint-langserver",
+        "golines",
+        "gopls",
+        "gotestsum",
+        "iferr",
+        "impl",
+      })
     end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = "go",
+    ft = ft,
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "go" })
+      vim.list_extend(opts.ensure_installed, { "go", "gomod" })
     end,
   },
 
   {
     "neovim/nvim-lspconfig",
-    ft = "go",
+    ft = ft,
     opts = {
       servers = {
         gopls = {
@@ -33,15 +47,27 @@ local plugins = {
                 unusedparams = true,
                 unusedvariable = true,
               },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              staticcheck = true,
+              semanticTokens = true,
             },
           },
         },
+        golangci_lint_ls = {},
       },
     },
   },
 
   {
-    ft = "go",
+    ft = ft,
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
@@ -55,7 +81,7 @@ local plugins = {
 
   {
     "leoluz/nvim-dap-go",
-    ft = "go",
+    ft = ft,
     dependencies = {
       "mfussenegger/nvim-dap",
     },
@@ -67,7 +93,7 @@ local plugins = {
 
   {
     "nvim-neotest/neotest",
-    ft = "go",
+    ft = ft,
     dependencies = {
       { "nvim-neotest/neotest-go" },
     },
@@ -78,7 +104,7 @@ local plugins = {
 
   {
     "danymat/neogen",
-    ft = "go",
+    ft = ft,
     opts = {
       languages = {
         go = {
@@ -88,6 +114,19 @@ local plugins = {
         },
       },
     },
+  },
+
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {},
+    event = { "CmdlineEnter" },
+    ft = ft,
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 }
 
