@@ -1,12 +1,13 @@
 local install_root_dir = vim.fn.stdpath "data" .. "/mason"
 local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
+local ft = { "c", "cpp" }
 
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = { "c", "cpp" },
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "clangd", "clang-format", "codelldb" })
     end,
@@ -14,15 +15,15 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = { "c", "cpp" },
+    ft = ft,
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "c", "cpp" })
+      vim.list_extend(opts.ensure_installed, ft)
     end,
   },
 
   {
     "neovim/nvim-lspconfig",
-    ft = { "c", "cpp" },
+    ft = ft,
     opts = {
       servers = {
         clangd = {
@@ -32,7 +33,7 @@ local plugins = {
             client.server_capabilities.signatureHelpProvider = false
             lspconfig_on_attach(client, bufnr)
           end,
-          filetypes = { "c", "cpp" },
+          filetypes = ft,
           root_dir = { "main.cpp", ".git" },
         },
       },
@@ -40,7 +41,7 @@ local plugins = {
   },
 
   {
-    ft = { "c", "cpp" },
+    ft = ft,
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
@@ -52,7 +53,7 @@ local plugins = {
 
   {
     "mfussenegger/nvim-dap",
-    ft = { "c", "cpp" },
+    ft = ft,
     opts = {
       setup = {
         codelldb = function()
@@ -86,7 +87,7 @@ local plugins = {
 
   {
     "danymat/neogen",
-    ft = { "c", "cpp" },
+    ft = ft,
     opts = {
       languages = {
         c = {

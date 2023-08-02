@@ -1,8 +1,10 @@
+local ft = { "markdown" }
+
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = "markdown",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "marksman" })
     end,
@@ -10,14 +12,14 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = "markdown",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "markdown", "markdown_inline", "mermaid" })
     end,
   },
 
   {
-    ft = "markdown",
+    ft = ft,
     "neovim/nvim-lspconfig",
     opts = {
       servers = {

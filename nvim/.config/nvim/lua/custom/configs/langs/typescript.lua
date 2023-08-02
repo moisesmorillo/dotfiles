@@ -1,8 +1,10 @@
+local ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
+
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "typescript-language-server", "prettier", "deno" })
     end,
@@ -10,7 +12,7 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "typescript", "javascript" })
     end,
@@ -18,7 +20,7 @@ local plugins = {
 
   {
     "neovim/nvim-lspconfig",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    ft = ft,
     opts = {
       servers = {
         tsserver = {
@@ -30,7 +32,7 @@ local plugins = {
   },
 
   {
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    ft = ft,
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
@@ -45,7 +47,7 @@ local plugins = {
 
   {
     "nvim-neotest/neotest",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    ft = ft,
     dependencies = {
       "nvim-neotest/neotest-jest",
     },
@@ -62,7 +64,7 @@ local plugins = {
 
   {
     "danymat/neogen",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    ft = ft,
     opts = {
       languages = {
         javscript = {

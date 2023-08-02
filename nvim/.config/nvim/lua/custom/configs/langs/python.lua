@@ -7,11 +7,13 @@ local get_poetry_venv_path = function()
   return ""
 end
 
+local ft = { "python" }
+
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = "python",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "pyright", "ruff", "ruff-lsp", "black", "debugpy" })
     end,
@@ -19,7 +21,7 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = "python",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "python" })
     end,
@@ -27,7 +29,7 @@ local plugins = {
 
   {
     "neovim/nvim-lspconfig",
-    ft = "python",
+    ft = ft,
     opts = {
       servers = {
         pyright = {
@@ -62,7 +64,7 @@ local plugins = {
   },
 
   {
-    ft = "python",
+    ft = ft,
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
@@ -105,7 +107,7 @@ local plugins = {
 
   {
     "nvim-neotest/neotest",
-    ft = "python",
+    ft = ft,
     dependencies = {
       "nvim-neotest/neotest-python",
     },
@@ -116,7 +118,7 @@ local plugins = {
 
   {
     "danymat/neogen",
-    ft = "python",
+    ft = ft,
     opts = {
       languages = {
         python = {

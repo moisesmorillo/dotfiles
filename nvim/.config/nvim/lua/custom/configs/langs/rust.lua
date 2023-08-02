@@ -2,12 +2,13 @@ local install_root_dir = vim.fn.stdpath "data" .. "/mason"
 local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
 local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+local ft = { "rust" }
 
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = "rust",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "rust-analyzer" })
     end,
@@ -15,7 +16,7 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = "rust",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "rust" })
     end,
@@ -23,7 +24,7 @@ local plugins = {
 
   {
     "hrsh7th/nvim-cmp",
-    ft = "rust",
+    ft = ft,
     opts = function()
       local M = require "plugins.configs.cmp"
       vim.list_extend(M.sources, { name = "crates" })
@@ -33,7 +34,7 @@ local plugins = {
   },
 
   {
-    ft = "rust",
+    ft = ft,
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
@@ -45,7 +46,7 @@ local plugins = {
 
   {
     "simrat39/rust-tools.nvim",
-    ft = "rust",
+    ft = ft,
     dependencies = {
       "rust-lang/rust.vim",
       "neovim/nvim-lspconfig",
@@ -135,7 +136,7 @@ local plugins = {
 
   {
     "nvim-neotest/neotest",
-    ft = "rust",
+    ft = ft,
     dependencies = {
       "rouge8/neotest-rust",
     },
@@ -146,7 +147,7 @@ local plugins = {
 
   {
     "danymat/neogen",
-    ft = "rust",
+    ft = ft,
     opts = {
       languages = {
         rust = {

@@ -1,8 +1,10 @@
+local ft = "lua"
+
 ---@type NvPluginSpec[]
 local plugins = {
   {
     "williamboman/mason.nvim",
-    ft = "lua",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "lua-language-server", "stylua" })
     end,
@@ -10,14 +12,14 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    ft = "lua",
+    ft = ft,
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, { "lua", "luadoc", "luap", "vim", "vimdoc" })
     end,
   },
 
   {
-    ft = "lua",
+    ft = ft,
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
@@ -63,7 +65,7 @@ local plugins = {
   },
 
   {
-    ft = "lua",
+    ft = ft,
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local b = require("null-ls").builtins
@@ -72,7 +74,7 @@ local plugins = {
   },
 
   {
-    ft = "lua",
+    ft = ft,
     "mfussenegger/nvim-dap",
     dependencies = {
       "jbyuki/one-small-step-for-vimkind",
@@ -111,7 +113,7 @@ local plugins = {
 
   {
     "danymat/neogen",
-    ft = "lua",
+    ft = ft,
     opts = {
       languages = {
         lua = {
