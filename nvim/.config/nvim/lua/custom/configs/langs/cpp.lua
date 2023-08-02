@@ -17,7 +17,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     ft = ft,
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, ft)
+      vim.list_extend(opts.ensure_installed, { "c", "cpp" })
     end,
   },
 
