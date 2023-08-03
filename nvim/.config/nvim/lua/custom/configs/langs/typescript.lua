@@ -6,7 +6,10 @@ local plugins = {
     "williamboman/mason.nvim",
     ft = ft,
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "typescript-language-server", "prettierd", "deno" })
+      vim.list_extend(
+        opts.ensure_installed,
+        { "typescript-language-server", "prettierd", "deno", "js-debug-adapter", "eslint-lsp" }
+      )
     end,
   },
 
@@ -19,34 +22,18 @@ local plugins = {
   },
 
   {
+    "pmizio/typescript-tools.nvim",
+    ft = ft,
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+
+  {
     "neovim/nvim-lspconfig",
     ft = ft,
     dependencies = { "jose-elias-alvarez/typescript.nvim" },
     opts = {
       servers = {
-        tsserver = {
-          filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-          root_dir = { "package.json", "yarn.lock", "package-lock.json", ".git" },
-          settings = {
-            typescript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-            },
-            javascript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-            },
-            completions = {
-              completeFunctionCalls = true,
-            },
-          },
-        },
         eslint = {
           settings = {
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
@@ -120,27 +107,28 @@ local plugins = {
 
   {
     "mfussenegger/nvim-dap",
-    ft = ft,
-    dependencies = {
-      { "mxsdev/nvim-dap-vscode-js" },
-      {
-        "microsoft/vscode-js-debug",
-        build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-      },
-    },
     opts = {
       setup = {
         vscode_js_debug = function()
           local function get_js_debug()
-            local path = vim.fn.stdpath "data"
-            return path .. "/lazy/vscode-js-debug"
+            local install_path = require("mason-registry").get_package("js-debug-adapter"):get_install_path()
+            return install_path .. "/js-debug/src/dapDebugServer.js"
           end
 
-          require("dap-vscode-js").setup {
-            node_path = "node",
-            debugger_path = get_js_debug(),
-            adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-          }
+          for _, adapter in ipairs { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" } do
+            require("dap").adapters[adapter] = {
+              type = "server",
+              host = "localhost",
+              port = "${port}",
+              executable = {
+                command = "node",
+                args = {
+                  get_js_debug(),
+                  "${port}",
+                },
+              },
+            }
+          end
 
           for _, language in ipairs { "typescript", "javascript" } do
             require("dap").configurations[language] = {
@@ -194,12 +182,34 @@ local plugins = {
               },
             }
           end
+
+          for _, language in ipairs { "typescriptreact", "javascriptreact" } do
+            require("dap").configurations[language] = {
+              {
+                type = "pwa-chrome",
+                name = "Attach - Remote Debugging",
+                request = "attach",
+                program = "${file}",
+                cwd = vim.fn.getcwd(),
+                sourceMaps = true,
+                protocol = "inspector",
+                port = 9222, -- Start Chrome google-chrome --remote-debugging-port=9222
+                webRoot = "${workspaceFolder}",
+              },
+              {
+                type = "pwa-chrome",
+                name = "Launch Chrome",
+                request = "launch",
+                url = "http://localhost:5173", -- This is for Vite. Change it to the framework you use
+                webRoot = "${workspaceFolder}",
+                userDataDir = "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir",
+              },
+            }
+          end
         end,
       },
     },
   },
-
-  -- TODO: add https://github.com/pmizio/typescript-tools.nvim
 }
 
 return plugins
