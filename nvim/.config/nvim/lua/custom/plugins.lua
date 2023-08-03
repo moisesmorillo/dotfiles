@@ -11,6 +11,32 @@ local plugins = {
   },
 
   {
+    "folke/which-key.nvim",
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "whichkey")
+      local wk = require "which-key"
+
+      wk.setup(opts)
+      wk.register {
+        -- Coding
+        ["<leader>cg"] = { name = "Neogen (Code Generation)" },
+        -- DAP
+        ["<leader>d"] = { name = "Dap" },
+        ["<leader>dp"] = { name = "Python" },
+        ["<leader>dg"] = { name = "Go" },
+        -- Files
+        ["<leader>f"] = { name = "Telescope (Files)" },
+        -- Git
+        ["<leader>g"] = { name = "Git" },
+        -- Task Runner
+        ["<leader>tr"] = { name = "Overseer (Task Runner)" },
+        -- Testing
+        ["<leader>tt"] = { name = "Neotest" },
+      }
+    end,
+  },
+
+  {
     "kylechui/nvim-surround",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",

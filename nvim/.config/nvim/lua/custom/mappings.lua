@@ -18,23 +18,21 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = opts },
     ["<leader>q"] = { ":q<cr>", "Quit", opts = opts },
-    ["<leader>pm"] = { "<cmd> Lazy <CR>", "Open Lazy Plugin Manager", opts = opts },
+    ["<leader>pm"] = { "<cmd> Lazy <cr>", "Open Lazy Plugin Manager", opts = opts },
     -- Overwrite default Esc behavior to add silent execution to avoid noice
     -- plugin drawing this command
     ["<Esc>"] = {
-      "<cmd> :noh <CR>",
+      "<cmd> :noh <cr>",
       "Clear highlights",
       opts = opts,
     },
     ["i"] = {
       function()
         if vim.fn.getline "." == "" then
-          vim.print "holis"
           return [["_cc]]
-        else
-          vim.print "alave"
-          return "i"
         end
+
+        return "i"
       end,
       "Fix identation in insert mode",
       opts = opts_with_expr,
@@ -71,20 +69,20 @@ M.telescope = {
       "Open projects",
       opts = opts,
     },
-    ["<leader>fl"] = { "<cmd>Telescope lazy<CR>", "Open Lazy Plugins in Telescope", opts = opts },
+    ["<leader>fl"] = { "<cmd>Telescope lazy<cr>", "Open Lazy Plugins in Telescope", opts = opts },
   },
 }
 
 M.nvimtree = {
   n = {
-    ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree", opts = opts },
+    ["<leader>e"] = { "<cmd> NvimTreeToggle <cr>", "Nvimtree (Explorer)", opts = opts },
   },
 }
 
 M.dap = {
   plugin = true,
   n = {
-    ["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>", "Toggle breakpoint", opts = opts },
+    ["<leader>db"] = { "<cmd> DapToggleBreakpoint <cr>", "Toggle breakpoint", opts = opts },
     ["<leader>du"] = {
       function()
         require("dapui").toggle()
@@ -96,7 +94,7 @@ M.dap = {
       function()
         require("dap").step_back()
       end,
-      "Step Back",
+      "Step back",
       opts = opts,
     },
     ["<leader>ds"] = {
@@ -110,21 +108,21 @@ M.dap = {
       function()
         require("dap").step_into()
       end,
-      "Step Into",
+      "Step into",
       opts = opts,
     },
     ["<leader>dso"] = {
       function()
         require("dap").step_over()
       end,
-      "Step Over",
+      "Step over",
       opts = opts,
     },
     ["<leader>dsx"] = {
       function()
         require("dap").step_out()
       end,
-      "Step Out",
+      "Step out",
       opts = opts,
     },
   },
@@ -133,16 +131,16 @@ M.dap = {
 M.lazygit = {
   plugin = true,
   n = {
-    ["<leader>lg"] = { "<cmd> LazyGit <CR>", "Open LazyGit", opts = opts },
+    ["<leader>lg"] = { "<cmd> LazyGit <cr>", "LazyGit", opts = opts },
   },
 }
 
 M.lspconfig = {
   n = {
     ["<leader>ra"] = { ":IncRename ", "LSP Rename", opts = opts },
-    ["<leader>lspi"] = { "<cmd> LspInfo <CR>", "Open LSP Info", opts = opts },
+    ["<leader>lspi"] = { "<cmd> LspInfo <cr>", "Open LSP Info", opts = opts },
     ["<leader>lspd"] = {
-      "<cmd> Neoconf lsp <CR>",
+      "<cmd> Neoconf lsp <cr>",
       "Debug LSP Client",
       opts = opts,
     },
@@ -193,81 +191,81 @@ M.python = {
 M.neotest = {
   plugin = true,
   n = {
-    ["<leader>tNF"] = {
+    ["<leader>ttF"] = {
       function()
         require("neotest").run.run { vim.fn.expand "%", strategy = "dap" }
       end,
-      "Neotest Debug Test File",
+      "Debug Test File",
       opts = opts,
     },
-    ["<leader>tNL"] = {
+    ["<leader>ttL"] = {
       function()
         require("neotest").run.run_last { strategy = "dap" }
       end,
-      "Neotest Debug Last Test",
+      "Debug Last Test",
       opts = opts,
     },
-    ["<leader>tNN"] = {
+    ["<leader>ttN"] = {
       function()
         require("neotest").run.run { strategy = "dap" }
       end,
-      "Neotest Debug Nearest Test",
+      "Debug Nearest Test",
       opts = opts,
     },
-    ["<leader>tNs"] = {
+    ["<leader>tts"] = {
       function()
         require("neotest").run.stop()
       end,
-      "Neotest Stop",
+      "Stop",
       opts = opts,
     },
-    ["<leader>tNS"] = {
+    ["<leader>ttS"] = {
       function()
         require("neotest").summary.toggle()
       end,
-      "Neotest Summary",
+      "Summary",
       opts = opts,
     },
-    ["<leader>tNa"] = {
+    ["<leader>tta"] = {
       function()
         require("neotest").summary.attach()
       end,
-      "Neotest Attach",
+      "Attach",
       opts = opts,
     },
-    ["<leader>tNf"] = {
+    ["<leader>ttf"] = {
       function()
         require("neotest").run.run(vim.fn.expand "%")
       end,
-      "Neotest Test File",
+      "Test File",
       opts = opts,
     },
-    ["<leader>tNl"] = {
+    ["<leader>ttl"] = {
       function()
         require("neotest").run.run_last()
       end,
-      "Neotest Test Last",
+      "Test Last",
       opts = opts,
     },
-    ["<leader>tNn"] = {
+    ["<leader>ttn"] = {
       function()
         require("neotest").run.run()
       end,
-      "Neotest Test Nearest",
+      "Test Nearest",
       opts = opts,
     },
-    ["<leader>tNo"] = {
+    ["<leader>tto"] = {
       function()
         require("neotest").output.open { enter = true }
       end,
-      "Neotest Output",
+      "Output",
       opts = opts,
     },
-    ["<leader>tNz"] = {
+    ["<leader>ttz"] = {
       function()
         require("neotest").run.run { vim.fn.getcwd() }
       end,
-      "Neotest Suite",
+      "Suite",
       opts = opts,
     },
   },
@@ -276,17 +274,17 @@ M.neotest = {
 M.overseer = {
   plugin = true,
   n = {
-    ["<leader>toR"] = { "<cmd>OverseerRunCmd<CR>", "Overseer Run Command", opts = opts },
-    ["<leader>toa"] = { "<cmd>OverseerTaskAction<CR>", "Overseer Task Action", opts = opts },
-    ["<leader>tob"] = { "<cmd>OverseerBuild<CR>", "Overseer Build", opts = opts },
-    ["<leader>toc"] = { "<cmd>OverseerClose<CR>", "Overseer Close", opts = opts },
-    ["<leader>tod"] = { "<cmd>OverseerDeleteBundle<CR>", "Overseer Delete Bundle", opts = opts },
-    ["<leader>tol"] = { "<cmd>OverseerLoadBundle<cr>", "Overseer Load Bundle", opts = opts },
-    ["<leader>too"] = { "<cmd>OverseerOpen<cr>", "Overseer Open", opts = opts },
-    ["<leader>toq"] = { "<cmd>OverseerQuickAction<cr>", "Overseer Quick Action", opts = opts },
-    ["<leader>tor"] = { "<cmd>OverseerRun<cr>", "Overseer Run", opts = opts },
-    ["<leader>tos"] = { "<cmd>OverseerSaveBundle<cr>", "Overseer Save Bundle", opts = opts },
-    ["<leader>tot"] = { "<cmd>OverseerToggle<cr>", "Overseer Toggle", opts = opts },
+    ["<leader>trR"] = { "<cmd>OverseerRunCmd<cr>", "Run Command", opts = opts },
+    ["<leader>tra"] = { "<cmd>OverseerTaskAction<cr>", "Task Action", opts = opts },
+    ["<leader>trb"] = { "<cmd>OverseerBuild<cr>", "Build", opts = opts },
+    ["<leader>trc"] = { "<cmd>OverseerClose<cr>", "Close", opts = opts },
+    ["<leader>trd"] = { "<cmd>OverseerDeleteBundle<cr>", "Delete Bundle", opts = opts },
+    ["<leader>trl"] = { "<cmd>OverseerLoadBundle<cr>", "Load Bundle", opts = opts },
+    ["<leader>tro"] = { "<cmd>OverseerOpen<cr>", "Open", opts = opts },
+    ["<leader>trq"] = { "<cmd>OverseerQuickAction<cr>", "Quick Action", opts = opts },
+    ["<leader>trr"] = { "<cmd>OverseerRun<cr>", "Run", opts = opts },
+    ["<leader>trs"] = { "<cmd>OverseerSaveBundle<cr>", "Save Bundle", opts = opts },
+    ["<leader>trt"] = { "<cmd>OverseerToggle<cr>", "Toggle", opts = opts },
   },
 }
 
@@ -297,28 +295,28 @@ M.neogen = {
       function()
         require("neogen").generate()
       end,
-      "Neogen Annotation",
+      "Annotation",
       opts = opts,
     },
     ["<leader>cgc"] = {
       function()
         require("neogen").generate { type = "class" }
       end,
-      "Neogen Class Annotation",
+      "Class Annotation",
       opts = opts,
     },
     ["<leader>cgf"] = {
       function()
         require("neogen").generate { type = "func" }
       end,
-      "Neogen Function Annotation",
+      "Function Annotation",
       opts = opts,
     },
     ["<leader>cgt"] = {
       function()
         require("neogen").generate { type = "type" }
       end,
-      "Neogen Type Annotation",
+      "Type Annotation",
       opts = opts,
     },
   },
@@ -331,7 +329,7 @@ M.refactoring = {
       function()
         require("telescope").extensions.refactoring.refactors()
       end,
-      "Open Refactoring",
+      "Refactoring",
       opts = opts,
     },
   },
@@ -354,15 +352,15 @@ M.todo = {
       "Next TODO",
       opts = opts,
     },
-    ["<leader>ct"] = { "<cmd>TodoTelescope<CR>", "Open TODO in Telescope", opts = opts },
-    ["<leader>cT"] = { "<cmd>TodoTrouble<CR>", "Open TODO in Trouble", opts = opts },
+    ["<leader>ct"] = { "<cmd>TodoTelescope<cr>", "Open TODO in Telescope", opts = opts },
+    ["<leader>cT"] = { "<cmd>TodoTrouble<cr>", "Open TODO in Trouble", opts = opts },
   },
 }
 
 M.markdown = {
   plugin = true,
   n = {
-    ["<leader>mp"] = { "<cmd> MarkdownPreviewToggle <CR>", "Markdown Preview Toggle", opts = opts },
+    ["<leader>mp"] = { "<cmd> MarkdownPreviewToggle <cr>", "Markdown Preview Toggle", opts = opts },
   },
 }
 

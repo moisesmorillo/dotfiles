@@ -73,6 +73,7 @@ local plugins = {
   },
   {
     "mfussenegger/nvim-dap",
+    ft = ft,
     dependencies = { "mfussenegger/nvim-dap-python" },
     opts = {
       servers = {
