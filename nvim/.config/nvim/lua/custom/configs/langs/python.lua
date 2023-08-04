@@ -113,7 +113,15 @@ local plugins = {
       "nvim-neotest/neotest-python",
     },
     opts = function(_, opts)
-      vim.list_extend(opts.adapters, { require "neotest-python" { dap = { justMyCode = false }, runner = "pytest" } })
+      vim.list_extend(opts.adapters, {
+        require "neotest-python" {
+          dap = { justMyCode = false },
+          runner = "pytest",
+          is_test_file = function(file_path)
+            return string.match(file_path, ".py$") ~= nil and string.match(file_path, "test?") ~= nil
+          end,
+        },
+      })
     end,
   },
 
