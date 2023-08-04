@@ -195,22 +195,41 @@ local plugins = {
   },
 
   {
+    "vim-test/vim-test",
+    opts = {
+      setup = {},
+    },
+    config = function(plugin, opts)
+      vim.g["test#strategy"] = "neovim"
+      vim.g["test#neovim#term_position"] = "belowright"
+      vim.g["test#neovim#preserve_screen"] = 1
+      vim.g["test#python#runner"] = "pytest"
+
+      -- Set up vim-test
+      for k, _ in pairs(opts.setup) do
+        opts.setup[k](plugin, opts)
+      end
+    end,
+  },
+
+  {
     "nvim-neotest/neotest",
     event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-plenary",
       { "stevearc/overseer.nvim", opts = {} },
+      "vim-test/vim-test",
+      "nvim-neotest/neotest-vim-test",
     },
     opts = {
-      adapters = {
-        library = { plugins = { "neotest" }, types = true },
-      },
+      adapters = {},
     },
     config = function(_, opts)
       vim.list_extend(opts.adapters, {
-        require "neotest-plenary",
+        require "neotest-vim-test" {
+          ignore_file_types = { "python", "vim", "lua", "go", "rust", "typescript", "javascript" },
+        },
       })
 
       opts.consumers = {
@@ -220,6 +239,16 @@ local plugins = {
         enabled = true,
         force_default = true,
       }
+
+      local neotest_ns = vim.api.nvim_create_namespace "neotest"
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
 
       require("core.utils").load_mappings "neotest"
       require("core.utils").load_mappings "overseer"

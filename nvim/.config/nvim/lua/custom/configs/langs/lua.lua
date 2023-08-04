@@ -112,6 +112,19 @@ local plugins = {
   },
 
   {
+    "nvim-neotest/neotest",
+    ft = ft,
+    dependencies = {
+      "nvim-neotest/neotest-plenary",
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, {
+        require "neotest-plenary",
+      })
+    end,
+  },
+
+  {
     "danymat/neogen",
     ft = ft,
     opts = {
