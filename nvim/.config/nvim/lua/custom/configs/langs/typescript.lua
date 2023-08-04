@@ -1,4 +1,4 @@
-local ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
+local ft = { "typescript", "javascript" }
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -31,7 +31,6 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     ft = ft,
-    dependencies = { "jose-elias-alvarez/typescript.nvim" },
     opts = {
       servers = {
         eslint = {
@@ -50,11 +49,11 @@ local plugins = {
     opts = function(_, opts)
       local b = require("null-ls").builtins
       vim.list_extend(opts.servers, {
-        b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
-        b.formatting.deno_fmt.with {
-          extra_args = { "--single-quote" },
-        }, -- choosed deno for ts/js files cuz its very fast!
-        require "typescript.extensions.null-ls.code-actions",
+        b.formatting.prettierd,
+        --- TODO: enable when prettierd can be replaced
+        -- b.formatting.deno_fmt.with {
+        --   extra_args = { "--single-quote" },
+        -- }, -- choosed deno for ts/js files cuz its very fast!
       })
     end,
   },
