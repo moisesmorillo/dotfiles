@@ -91,7 +91,9 @@ brew install yq
 
 ### Install Lazygit ###
 brew install jesseduffield/lazygit/lazygit
-brew install lazygit
+
+### Install Lazydocker
+brew install jesseduffield/lazydocker/lazydocker
 
 ### Install Tmux ###
 brew install tmux

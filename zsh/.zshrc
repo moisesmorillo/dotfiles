@@ -127,8 +127,10 @@ alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 alias ls="exa --icons"
 # alias to replace tree for exa
 alias tree="exa --icons --tree"
-# alias to git client
-alias lg="CONFIG_DIR='$HOME/.config/lazygit' lazygit"
+# alias to lazygit client
+alias lzg="CONFIG_DIR='$HOME/.config/lazygit' lazygit"
+# alias to lazydocker client
+alias lzd="lazydocker"
 # alias to kill docker in mac
 alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill"
 
