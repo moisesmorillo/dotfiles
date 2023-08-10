@@ -101,7 +101,9 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Load homebrew bin paths
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if command -v bre &> /dev/null; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # Preferred editor for local and remote sessions
 export EDITOR="nvim"
@@ -159,7 +161,6 @@ if [[ $(uname) == "Linux" ]]; then
     debian)
       alias cat="batcat"
       alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && omz update"
-      /boot/dietpi/dietpi-login
       ;;
   esac
 fi
@@ -204,4 +205,6 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 # Github Copilot CLI
-eval "$(github-copilot-cli alias -- "$0")"
+if command -v github-copilot-cli &> /dev/null; then
+  eval "$(github-copilot-cli alias -- "$0")"
+fi
