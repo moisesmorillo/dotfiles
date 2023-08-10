@@ -150,7 +150,7 @@ export NVM_DIR="$HOME/.nvm"
 # Load Linux OS customization
 if [[ $(uname) == "Linux" ]]; then
   # alias to replace cat for bat
-  export PATH="/usr/local/sbin:/snap/bin:/boot/dietpi:/sbin:/usr/sbin:$PATH"
+  export PATH="/usr/local/sbin:/snap/bin:/usr/local/go/bin:/sbin:/usr/sbin:$PATH"
   OS_NAME="$(grep '^ID=' /etc/os-release | cut -d '=' -f2)"
 
   case $OS_NAME in
