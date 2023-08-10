@@ -133,6 +133,8 @@ alias lzg="CONFIG_DIR='$HOME/.config/lazygit' lazygit"
 alias lzd="lazydocker"
 # alias to kill docker in mac
 alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill"
+# alias to fix TERM when using ssh
+alias ssh='TERM=xterm-256color ssh'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
