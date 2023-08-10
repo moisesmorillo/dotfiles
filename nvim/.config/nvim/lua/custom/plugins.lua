@@ -11,6 +11,11 @@ local plugins = {
   },
 
   {
+    "ThePrimeagen/vim-be-good",
+    cmd = "VimBeGood",
+  },
+
+  {
     "folke/which-key.nvim",
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
