@@ -3,13 +3,6 @@ local overrides = require "custom.configs.overrides"
 ---@type NvPluginSpec[]
 local plugins = {
   {
-    "NvChad/ui",
-    branch = "v2.0",
-    lazy = false,
-    submodules = true,
-  },
-
-  {
     import = "custom.configs.langs",
   },
 
