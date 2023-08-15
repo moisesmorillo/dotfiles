@@ -10,12 +10,8 @@ M.ui = {
   statusline = {
     theme = "vscode_colored",
     separator_style = "round",
-    overriden_modules = function()
-      return {
-        LSP_progress = function()
-          return ""
-        end,
-      }
+    overriden_modules = function(modules)
+      modules[6] = "" -- Disable LSP Progress
     end,
   },
 
