@@ -3,6 +3,13 @@ local overrides = require "custom.configs.overrides"
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "NvChad/ui",
+    branch = "v2.0",
+    lazy = false,
+    submodules = true,
+  },
+
+  {
     import = "custom.configs.langs",
   },
 
@@ -39,17 +46,6 @@ local plugins = {
         ["<leader>tt"] = { name = "Neotest" },
       }
     end,
-  },
-
-  {
-    "kylechui/nvim-surround",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    opts = {},
   },
 
   {
