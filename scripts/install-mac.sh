@@ -102,6 +102,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### Install 1Password CLI
 brew install --cask 1password/tap/1password-cli
 
+### Install Dozer (hide menu bar icons)
+brew install --cask dozer
+
 ### Set defaults mac os
 chmod +x ./install-mac.sh
 . ./install-mac.sh
