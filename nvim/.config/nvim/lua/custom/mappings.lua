@@ -16,7 +16,6 @@ M.disabled = {
 
 M.general = {
   n = {
-    [";"] = { ":", "enter command mode", opts = opts },
     ["<leader>q"] = { ":q<cr>", "Quit", opts = opts },
     ["<leader>pm"] = { "<cmd> Lazy <cr>", "Open Lazy Plugin Manager", opts = opts },
     -- Overwrite default Esc behavior to add silent execution to avoid noice
