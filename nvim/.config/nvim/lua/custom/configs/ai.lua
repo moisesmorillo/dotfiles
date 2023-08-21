@@ -3,6 +3,7 @@ local plugins = {
   {
     "Exafunction/codeium.vim",
     event = "BufReadPost",
+    enabled = false,
     build = ":Codeium Auth",
     config = function()
       vim.g.codeium_disable_bindings = 1
@@ -32,9 +33,22 @@ local plugins = {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    enabled = false,
+    enabled = true,
     event = "BufReadPost",
-    opts = {},
+    opts = {
+      panel = {
+        enabled = false,
+      },
+      suggestion = {
+        auto_trigger = true,
+        keymap = {
+          accept = "<a-cr>",
+          dismiss = "<a-esc>",
+          next = "<a-]>",
+          prev = "<a-[>",
+        },
+      },
+    },
   },
 }
 

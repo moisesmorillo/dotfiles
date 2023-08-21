@@ -20,7 +20,7 @@ M.general = {
     ["<leader>pm"] = { "<cmd> Lazy <cr>", "Open Lazy Plugin Manager", opts = opts },
     -- Overwrite default Esc behavior to add silent execution to avoid noice
     -- plugin drawing this command
-    ["<Esc>"] = {
+    ["<esc>"] = {
       "<cmd> :noh <cr>",
       "Clear highlights",
       opts = opts,
@@ -379,39 +379,32 @@ M.navbuddy = {
 M.codeium = {
   plugin = true,
   i = {
-    ["<A-m>"] = {
+    ["<a-cr>"] = {
       function()
         return vim.fn["codeium#Accept"]()
       end,
       "Codeium Accept Suggestion",
       opts = opts_with_expr,
     },
-    ["<A-f>"] = {
+    ["<a-[>"] = {
       function()
         return vim.fn["codeium#CycleCompletions"](1)
       end,
       "Codeium Next Suggestion",
       opts = opts_with_expr,
     },
-    ["<A-b>"] = {
+    ["<a-]>"] = {
       function()
         return vim.fn["codeium#CycleCompletions"](-1)
       end,
       "Codeium Previous Suggestion",
       opts = opts_with_expr,
     },
-    ["<A-x>"] = {
+    ["<a-esc>"] = {
       function()
         return vim.fn["codeium#Clear"]()
       end,
       "Codeium Clear Suggestion",
-      opts = opts_with_expr,
-    },
-    ["<A-s>"] = {
-      function()
-        return vim.fn["codeium#Complete"]()
-      end,
-      "Codeium Complete Suggestion",
       opts = opts_with_expr,
     },
   },
