@@ -69,9 +69,9 @@ local plugins = {
     opts = function(_, opts)
       vim.list_extend(opts.adapters, {
         require "neotest-jest" {
-          jestCommand = "npx jest --bail --verbose --ci --outputFile=lcov.info --",
+          jestCommand = "yarn jest --coverage=true --ci",
+          jestConfigFile = "jest.config.ts",
           env = { NODE_OPTIONS = "--experimental-vm-modules" },
-          jestConfigFile = "jest.config.js",
         },
         require "neotest-vitest",
         require("neotest-playwright").adapter {
