@@ -105,6 +105,9 @@ brew install --cask 1password/tap/1password-cli
 ### Install Dozer (hide menu bar icons)
 brew install --cask dozer
 
+### Install Raycast (Alfred alternative)
+brew install --cask raycast
+
 ### Set defaults mac os
 chmod +x ./install-mac.sh
 . ./install-mac.sh
