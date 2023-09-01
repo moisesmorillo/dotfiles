@@ -1,0 +1,15 @@
+gui:
+  scrollHeight: 2
+  returnImmediately: true
+  language: en
+  # use the mocha catppuccin theme
+  theme:
+    activeBorderColor:
+      - "#a6e3a1"
+      - bold
+    inactiveBorderColor:
+      - "#cdd6f4"
+    selectedLineBgColor:
+      - "#313244"
+    optionsTextColor:
+      - "#89b4fa"
