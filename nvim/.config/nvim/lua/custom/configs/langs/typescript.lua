@@ -22,13 +22,6 @@ local plugins = {
   },
 
   {
-    "pmizio/typescript-tools.nvim",
-    ft = ft,
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  },
-
-  {
     "neovim/nvim-lspconfig",
     ft = ft,
     opts = {
@@ -41,6 +34,23 @@ local plugins = {
         },
       },
     },
+  },
+
+  {
+    "pmizio/typescript-tools.nvim",
+    ft = ft,
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = function()
+      local on_attach = require("plugins.configs.lspconfig").on_attach
+      return {
+        on_attach = on_attach,
+        settings = {
+          expose_as_code_action = "all",
+          tsserver_path = vim.fn.stdpath "data"
+            .. "/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
+        },
+      }
+    end,
   },
 
   {
