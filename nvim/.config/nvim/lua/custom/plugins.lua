@@ -1,4 +1,8 @@
 local overrides = require "custom.configs.overrides"
+local get_mini_view_row_value = function()
+  local cmdheight = vim.o.cmdheight * -1 -- set cmdheight as negative value
+  return cmdheight - 1
+end
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -56,6 +60,9 @@ local plugins = {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
+        progress = {
+          throttle = 100,
+        },
       },
       presets = {
         bottom_search = false, -- use a classic bottom cmdline for search
@@ -63,6 +70,13 @@ local plugins = {
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
+      views = {
+        mini = {
+          position = {
+            row = get_mini_view_row_value(),
+          },
+        },
       },
     },
   },
