@@ -82,13 +82,6 @@ local plugins = {
     },
   },
 
-  -- TODO: review if this is still required after integrating noice.nvim
-  -- {
-  --   "stevearc/dressing.nvim",
-  --   event = "VeryLazy",
-  --   opts = {},
-  -- },
-
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
