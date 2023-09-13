@@ -29,6 +29,7 @@ local plugins = {
       wk.register {
         -- Coding
         ["<leader>cg"] = { name = "Neogen (Code Generation)" },
+        ["<leader>s"] = { name = "Search Diagnostic" },
         -- DAP
         ["<leader>d"] = { name = "Dap" },
         ["<leader>dp"] = { name = "Python" },
@@ -247,6 +248,19 @@ local plugins = {
       "kevinhwang91/promise-async",
       "neovim/nvim-lspconfig",
     },
+  },
+
+  {
+    "piersolenski/wtf.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {},
+    config = function(_, opts)
+      require("core.utils").load_mappings "wtf"
+      require("wtf").setup(opts)
+    end,
   },
 }
 

@@ -410,4 +410,24 @@ M.codeium = {
   },
 }
 
+M.wtf = {
+  plugin = true,
+  n = {
+    ["<leader>sd"] = {
+      function()
+        require("wtf").ai()
+      end,
+      "Search Diagnostic with AI",
+      opts = opts,
+    },
+    ["<leader>sD"] = {
+      function()
+        require("wtf").search()
+      end,
+      "Search Diagnostic with Google",
+      opts = opts,
+    },
+  },
+}
+
 return M
