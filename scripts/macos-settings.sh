@@ -17,6 +17,7 @@ defaults write -globalDomain AppleFirstWeekday -dict gregorian -int 2
 defaults write -globalDomain AppleKeyboardUIMode -int 0
 defaults write -globalDomain InitialKeyRepeat -float 25
 defaults write -globalDomain KeyRepeat -float 2
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 ################################################################################
 # Finder
