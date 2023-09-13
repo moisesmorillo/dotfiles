@@ -50,7 +50,9 @@ yarn global add @githubnext/github-copilot-cli
 brew install rbenv ruby-build
 
 ### Install Go ###
-brew install go
+brew install goenv
+goenv install 1.21.0
+goenv global 1.21.0
 
 ### Install Java ###
 brew install openjdk@17

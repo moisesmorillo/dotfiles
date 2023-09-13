@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -175,9 +175,12 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # Golang customization
-if command -v go &> /dev/null; then
-  export GOPATH="$HOME/projects/go"
-  export PATH="$PATH:$(go env GOPATH)/bin:$HOME/.local/bin"
+if command -v goenv &> /dev/null; then
+  export GOENV_ROOT="$HOME/.goenv"
+  export PATH="$GOENV_ROOT/bin:$PATH"
+  eval "$(goenv init -)"
+  export PATH="$GOROOT/bin:$PATH"
+  export PATH="$PATH:$GOPATH/bin"
 fi
 
 # Ruby customization
