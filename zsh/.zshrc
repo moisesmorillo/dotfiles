@@ -211,3 +211,8 @@ fi
 if command -v github-copilot-cli &> /dev/null; then
   eval "$(github-copilot-cli alias -- "$0")"
 fi
+
+# To add useful environment variables that shoul not be synced
+if [[ -f ~/.zshenv ]]; then
+  source ~/.zshenv
+fi

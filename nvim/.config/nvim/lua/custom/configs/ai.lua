@@ -20,7 +20,6 @@ local plugins = {
       "nvim-telescope/telescope.nvim",
     },
     opts = {
-      api_key_cmd = "op read op://Work/OpenAI_API_Key/api_key_cmd --no-newline",
       openai_params = {
         model = "gpt-4-32k",
       },
