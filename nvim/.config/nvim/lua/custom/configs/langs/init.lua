@@ -13,8 +13,6 @@ local plugins = {
         -- "sqlls",
         -- yaml stuff
         -- "yaml-language-server",
-        -- others
-        "write-good",
         -- shell
         "shfmt",
       }
@@ -154,9 +152,6 @@ local plugins = {
 
       return {
         servers = {
-          b.diagnostics.write_good.with {
-            filetypes = { "python", "go", "markdown", "typescript", "javascript", "rust" },
-          },
           b.formatting.shfmt,
         },
       }
