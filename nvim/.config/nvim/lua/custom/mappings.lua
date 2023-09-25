@@ -10,7 +10,7 @@ local opts_with_expr = vim.tbl_extend("force", opts, { expr = true })
 
 M.disabled = {
   n = {
-    ["<C-n>"] = "",
+    ["<C-n>"] = "", -- Disable nvim-tree NvChad builtin
   },
 }
 
