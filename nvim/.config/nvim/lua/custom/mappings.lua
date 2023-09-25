@@ -379,28 +379,28 @@ M.navbuddy = {
 M.codeium = {
   plugin = true,
   i = {
-    ["<a-cr>"] = {
+    ["<Tab>"] = {
       function()
         return vim.fn["codeium#Accept"]()
       end,
       "Codeium Accept Suggestion",
       opts = opts_with_expr,
     },
-    ["<a-[>"] = {
+    ["<C-[>"] = {
       function()
         return vim.fn["codeium#CycleCompletions"](1)
       end,
       "Codeium Next Suggestion",
       opts = opts_with_expr,
     },
-    ["<a-]>"] = {
+    ["<C-]>"] = {
       function()
         return vim.fn["codeium#CycleCompletions"](-1)
       end,
       "Codeium Previous Suggestion",
       opts = opts_with_expr,
     },
-    ["<a-esc>"] = {
+    ["<Esc>"] = {
       function()
         return vim.fn["codeium#Clear"]()
       end,

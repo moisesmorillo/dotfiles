@@ -41,10 +41,10 @@ local plugins = {
       suggestion = {
         auto_trigger = true,
         keymap = {
-          accept = "<a-cr>",
-          dismiss = "<a-esc>",
-          next = "<a-]>",
-          prev = "<a-[>",
+          accept = "<Tab>",
+          dismiss = "<Esc>",
+          next = "<C-]>",
+          prev = "<C-[>",
         },
       },
     },

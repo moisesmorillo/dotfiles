@@ -1,6 +1,28 @@
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local cmp = require "cmp"
+      local cmp_conf = require "plugins.configs.cmp"
+
+      cmp_conf.mapping = {
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        },
+      }
+
+      return cmp_conf
+    end,
+  },
+
+  {
     "williamboman/mason.nvim",
     event = "VeryLazy",
     opts = function(_, opts)
