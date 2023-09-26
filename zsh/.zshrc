@@ -81,10 +81,20 @@ plugins=(
   aws
   docker
   docker-compose
+  fzf
   gh
   git
+  golang
   helm
   jsontools
+  jump
+  kubectl
+  nvm
+  pyenv
+  sudo
+  tmux
+  tmuxinator
+  web-search
   xcode
   zsh-autosuggestions
   zsh-interactive-cd
