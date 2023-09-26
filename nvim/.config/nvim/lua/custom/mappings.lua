@@ -379,7 +379,7 @@ M.navbuddy = {
 M.codeium = {
   plugin = true,
   i = {
-    ["<Tab>"] = {
+    ["<A-CR>"] = {
       function()
         return vim.fn["codeium#Accept"]()
       end,
