@@ -9,6 +9,9 @@ if ! command -v brew &>/dev/null; then
 	exit 1
 fi
 
+### Removed all existing brew formulae ###
+brew uninstall --force $(brew list) --ignore-dependencies
+
 ### Update Brew
 brew update && brew upgrade
 
@@ -21,14 +24,10 @@ xargs brew install <./brew-formulae.txt
 ### Install All Brew Casks ###
 xargs brew install --cask <./brew-cask.txt
 
-### Install Oh My Zsh ###
+### Clean Oh My Zsh directories ###
 rm -rf ~/.oh-my-zsh
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o install_ohmyzsh.sh
-
-# Disable oh my zsh reloading after installing
-awk '!/exec zsh -l/ { print } /exec zsh -l/ { print "# " $0 }' install_ohmyzsh.sh >temp_install.sh && mv temp_install.sh install_ohmyzsh.sh
-sh install_ohmyzsh.sh
-rm install_ohmyzsh.sh
+mkdir -p ~/.oh-my-zsh/custom/plugins
+mkdir -p ~/.oh-my-zsh/custom/themes
 
 ### Install Zsh Plugins ###
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -56,14 +55,13 @@ brew install golangci-lint mockery
 sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 
 ### Install Rust ###
-brew uninstall rust | true
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 ### Install FzF completions ###
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh
+rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh ~/.tmux
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 stow -R -t $HOME */
 
@@ -73,3 +71,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### Set defaults mac os
 chmod +x ./macos-settings.sh
 . ./macos-settings.sh
+
+### Install Oh My Zsh ###
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

@@ -17,7 +17,7 @@ rbenv
 ripgrep
 ruby-build
 so
-speedtest
+speedtest-cli
 stow
 tmux
 yq
