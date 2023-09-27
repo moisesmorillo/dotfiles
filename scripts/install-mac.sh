@@ -16,7 +16,7 @@ fi
 brew update && brew upgrade
 
 ### Remove alacrity terminfo ###
-rm -rf ~/.terminfo
+sudo rm -rf ~/.terminfo
 
 ### Enable Brew Taps ###
 brew tap homebrew/cask-fonts
