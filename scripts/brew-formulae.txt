@@ -21,4 +21,3 @@ speedtest-cli
 stow
 tmux
 yq
-zsh
