@@ -1,5 +1,8 @@
 #!/bin/bash
 
+### Uninstall Brew ###
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
 ### Install Brew ###
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -9,8 +12,11 @@ if ! command -v brew &>/dev/null; then
 	exit 1
 fi
 
-### Removed all existing brew formulae ###
+### Remove all existing brew formulae ###
 brew uninstall --force $(brew list) --ignore-dependencies
+
+### Remove all existing brew casks ###
+brew uninstall --cask --force $(brew list --cask) --ignore-dependencies
 
 ### Update Brew
 brew update && brew upgrade
@@ -61,7 +67,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh ~/.tmux
+rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 stow -R -t $HOME */
 
@@ -69,8 +75,8 @@ stow -R -t $HOME */
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### Set defaults mac os
-chmod +x ./macos-settings.sh
-. ./macos-settings.sh
+chmod +x ./scripts/macos-settings.sh
+. ./scripts/macos-settings.sh
 
 ### Install Oh My Zsh ###
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
