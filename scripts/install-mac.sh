@@ -1,8 +1,13 @@
 #!/bin/bash
 
 ### Install Brew ###
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if ! command -v brew &>/dev/null; then
+	echo "brew could not be found, exiting"
+	exit 1
+fi
 
 ### Update Brew
 brew update && brew upgrade
