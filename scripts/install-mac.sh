@@ -19,10 +19,10 @@ brew update && brew upgrade
 brew tap homebrew/cask-fonts
 
 ### Install All Brew Formulae ###
-xargs brew install <./scripts/brew-formulae.txt
+xargs brew install --force <./scripts/brew-formulae.txt
 
 ### Install All Brew Casks ###
-xargs brew install --cask <./scripts/brew-cask.txt
+xargs brew install --cask --force <./scripts/brew-cask.txt
 
 ### Clean Oh My Zsh directories ###
 rm -rf ~/.oh-my-zsh
