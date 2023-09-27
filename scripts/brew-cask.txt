@@ -1,0 +1,5 @@
+1password/tap/1password-cli
+alacritty
+dozer
+font-jetbrains-mono-nerd-font
+raycast
