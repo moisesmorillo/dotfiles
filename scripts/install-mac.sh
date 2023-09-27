@@ -71,5 +71,5 @@ stow -R -t $HOME */
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### Set defaults mac os
-chmod +x ./install-mac.sh
-. ./install-mac.sh
+chmod +x ./macos-settings.sh
+. ./macos-settings.sh
