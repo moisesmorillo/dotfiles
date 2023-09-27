@@ -12,12 +12,6 @@ if ! command -v brew &>/dev/null; then
 	exit 1
 fi
 
-### Remove all existing brew formulae ###
-brew uninstall --force $(brew list) --ignore-dependencies
-
-### Remove all existing brew casks ###
-brew uninstall --cask --force $(brew list --cask) --ignore-dependencies
-
 ### Update Brew
 brew update && brew upgrade
 
@@ -25,10 +19,10 @@ brew update && brew upgrade
 brew tap homebrew/cask-fonts
 
 ### Install All Brew Formulae ###
-xargs brew install <./brew-formulae.txt
+xargs brew install <./scripts/brew-formulae.txt
 
 ### Install All Brew Casks ###
-xargs brew install --cask <./brew-cask.txt
+xargs brew install --cask <./scripts/brew-cask.txt
 
 ### Clean Oh My Zsh directories ###
 rm -rf ~/.oh-my-zsh
