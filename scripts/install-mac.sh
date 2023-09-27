@@ -12,8 +12,11 @@ if ! command -v brew &>/dev/null; then
 	exit 1
 fi
 
-### Update Brew
+### Update Brew ###
 brew update && brew upgrade
+
+### Remove alacrity terminfo ###
+rm -rf ~/.terminfo
 
 ### Enable Brew Taps ###
 brew tap homebrew/cask-fonts
@@ -50,11 +53,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ### Install FzF completions ###
 $(brew --prefix)/opt/fzf/install --all --key-bindings --completion
 
-### Clone and set dotfiles ###
-rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-stow -R -t $HOME */
-
 ### Install Tpm ###
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -70,3 +68,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+### Clone and set dotfiles ###
+rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+stow -R -t $HOME */
