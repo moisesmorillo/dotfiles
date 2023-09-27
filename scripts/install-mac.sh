@@ -24,16 +24,6 @@ xargs brew install --force <./scripts/brew-formulae.txt
 ### Install All Brew Casks ###
 xargs brew install --cask --force <./scripts/brew-cask.txt
 
-### Clean Oh My Zsh directories ###
-rm -rf ~/.oh-my-zsh
-mkdir -p ~/.oh-my-zsh/custom/plugins
-mkdir -p ~/.oh-my-zsh/custom/themes
-
-### Install Zsh Plugins ###
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
 ### Install Alacritty ###
 curl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info -o alacritty.info
 sudo tic -xe alacritty,alacritty-direct alacritty.info
@@ -73,4 +63,10 @@ chmod +x ./scripts/macos-settings.sh
 . ./scripts/macos-settings.sh
 
 ### Install Oh My Zsh ###
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+rm -rf ~/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+### Install Zsh Plugins ###
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
