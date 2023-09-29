@@ -101,8 +101,6 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -226,3 +224,5 @@ fi
 if [[ -f ~/.zshenv ]]; then
   source ~/.zshenv
 fi
+
+source $ZSH/oh-my-zsh.sh
