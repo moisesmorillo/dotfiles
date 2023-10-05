@@ -59,7 +59,9 @@ local plugins = {
     opts = function(_, opts)
       local b = require("null-ls").builtins
       vim.list_extend(opts.servers, {
-        b.formatting.prettierd,
+        b.formatting.prettierd.with {
+          filetypes = { "javascript", "typescript", "json", "jsonc" },
+        },
         --- TODO: enable when prettierd can be replaced
         -- b.formatting.deno_fmt.with {
         --   extra_args = { "--single-quote" },
