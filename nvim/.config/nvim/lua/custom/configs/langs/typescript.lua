@@ -46,8 +46,6 @@ local plugins = {
         on_attach = on_attach,
         settings = {
           expose_as_code_action = "all",
-          tsserver_path = vim.fn.stdpath "data"
-            .. "/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
         },
       }
     end,
