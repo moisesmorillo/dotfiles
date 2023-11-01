@@ -3,4 +3,5 @@ alacritty
 devtoys
 dozer
 font-jetbrains-mono-nerd-font
+orbstack
 raycast
