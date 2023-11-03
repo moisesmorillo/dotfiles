@@ -192,11 +192,11 @@ if [[ $(uname) == "Darwin" ]]; then
   bindkey "^[[1;3D" backward-word
 fi
 
-# Node Version Manager
+# Node customization
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-# # Golang customization
+# Golang customization
 if command -v goenv &> /dev/null; then
   export GOENV_ROOT="$HOME/.goenv"
   export GOENV_SHELL=zsh
@@ -214,10 +214,6 @@ if command -v pyenv &> /dev/null; then
   eval "$(pyenv init -)"
 fi
 
-if command -v yarn &> /dev/null; then
-  export PATH="$PATH:$(yarn global bin)"
-fi
-
 #macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
 function kdo() {
   ps ax| grep -i docker| egrep -iv 'grep|com.docker.vmnetd'| awk '{print $1}'| xargs kill
@@ -225,16 +221,6 @@ function kdo() {
 
 if [ -f "$HOME/.cargo/env" ]; then
   source "$HOME/.cargo/env"
-fi
-
-# Github Copilot CLI
-if command -v github-copilot-cli &> /dev/null; then
-  eval "$(github-copilot-cli alias -- "$0")"
-fi
-
-# To add useful environment variables that should not be synced
-if [[ -f ~/.zshenv ]]; then
-  source ~/.zshenv
 fi
 
 source $ZSH/oh-my-zsh.sh

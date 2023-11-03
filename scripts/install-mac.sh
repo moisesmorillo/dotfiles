@@ -36,7 +36,6 @@ rm alacritty.info
 curl https://get.volta.sh | bash
 omz reload
 volta install node yarn # To install LTS Version
-npm install -g @githubnext/github-copilot-cli
 
 ### Install Go ###
 goenv install 1.21.1
