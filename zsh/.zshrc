@@ -105,7 +105,6 @@ plugins=(
   jsontools
   jump
   kubectl
-  pyenv
   sudo
   tmux
   tmuxinator
@@ -192,30 +191,48 @@ if [[ $(uname) == "Darwin" ]]; then
   bindkey "^[[1;3D" backward-word
 fi
 
-# Node customization
+# Path customization
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-# Golang customization
-if command -v goenv &> /dev/null; then
+# Ruby customization
+if type rbenv &> /dev/null; then
+  export PATH="$PATH:$HOME/.rbenv/bin"
+
+  rbenv () {
+    unset -f rbenv > /dev/null 2>&1
+    eval "$(rbenv init - -zsh)"
+    rbenv "$@"
+  }
+fi
+
+# Python customization
+if type pyenv &> /dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+
+  pyenv () {
+    unset -f pyenv > /dev/null 2>&1
+    eval "$(pyenv init -)"
+    pyenv "$@"
+  }
+fi
+
+# Go customization
+if type rbenv &> /dev/null; then
   export GOENV_ROOT="$HOME/.goenv"
   export GOENV_SHELL=zsh
   export PATH="$PATH:$GOENV_ROOT/shims:$GOENV_ROOT/bin:$GOROOT/bin:$GOPATH/bin"
+
+  goenv () {
+    unset -f goenv > /dev/null 2>&1
+    eval "$(goenv init -)"
+    goenv "$@"
+  }
 fi
 
-# Ruby customization
-if command -v rbenv &> /dev/null; then
-  export PATH="$PATH:$HOME/.rbenv/bin"
-  eval "$(rbenv init - -zsh)"
-fi
-
-# Pyenv customization
-if command -v pyenv &> /dev/null; then
-  eval "$(pyenv init -)"
-fi
-
-#macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
-function kdo() {
+# Macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
+kdo() {
   ps ax| grep -i docker| egrep -iv 'grep|com.docker.vmnetd'| awk '{print $1}'| xargs kill
 }
 
