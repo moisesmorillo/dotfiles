@@ -1,3 +1,19 @@
+# On slow systems, checking the cached .zcompdump file to see if it must be 
+# regenerated adds a noticable delay to zsh startup.  This little hack restricts 
+# it to once a day.  It should be pasted into your own completion file.
+#
+# The globbing is a little complicated here:
+# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
+# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
+# - '.' matches "regular files"
+# - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -89,7 +105,6 @@ plugins=(
   jsontools
   jump
   kubectl
-  nvm
   pyenv
   sudo
   tmux
@@ -130,7 +145,6 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # Example aliases
 # alias for neovim
 alias nv="nvim"
-alias vim="nvim"
 # alias to find files using fzf
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 # alias to replace ls for exa
@@ -148,10 +162,6 @@ alias ssh='TERM=xterm-256color ssh'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -182,13 +192,15 @@ if [[ $(uname) == "Darwin" ]]; then
   bindkey "^[[1;3D" backward-word
 fi
 
-# Golang customization
+# Node Version Manager
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# # Golang customization
 if command -v goenv &> /dev/null; then
   export GOENV_ROOT="$HOME/.goenv"
-  export PATH="$GOENV_ROOT/bin:$PATH"
-  eval "$(goenv init -)"
-  export PATH="$GOROOT/bin:$PATH"
-  export PATH="$PATH:$GOPATH/bin"
+  export GOENV_SHELL=zsh
+  export PATH="$PATH:$GOENV_ROOT/shims:$GOENV_ROOT/bin:$GOROOT/bin:$GOPATH/bin"
 fi
 
 # Ruby customization

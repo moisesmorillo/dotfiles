@@ -32,12 +32,11 @@ curl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritt
 sudo tic -xe alacritty,alacritty-direct alacritty.info
 rm alacritty.info
 
-### Install Nvm ###
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-nvm install --lts && nvm alias default node
-npm install -g yarn
-yarn global add @githubnext/github-copilot-cli
+### Install Volta (Node Package Manager) ###
+curl https://get.volta.sh | bash
+omz reload
+volta install node yarn # To install LTS Version
+npm install -g @githubnext/github-copilot-cli
 
 ### Install Go ###
 goenv install 1.21.1
