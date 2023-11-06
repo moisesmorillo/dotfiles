@@ -48,21 +48,7 @@ local plugins = {
   {
     "williamboman/mason.nvim",
     event = "VeryLazy",
-    opts = function(_, opts)
-      -- Overwrite defaults ensure_installed from nvchad
-      -- FIX: split into file-specifc settings or enable bellow
-      local ensure_installed = {
-        -- bash stuff
-        -- "bash-language-server",
-        -- sql stuff
-        -- "sqlls",
-        -- yaml stuff
-        -- "yaml-language-server",
-        -- shell
-        "shfmt",
-      }
-      vim.list_extend(opts.ensure_installed, ensure_installed)
-    end,
+    opts = {},
   },
 
   {
@@ -71,7 +57,6 @@ local plugins = {
     -- Overwrite nvchad defaults
     opts = {
       ensure_installed = {
-        "bash",
         "jsdoc",
         "json",
         "jsonc",
@@ -81,7 +66,6 @@ local plugins = {
         "sql",
         "terraform",
         "toml",
-        "yaml",
       },
       highlight = {
         enable = true,
