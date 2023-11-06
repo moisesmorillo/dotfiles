@@ -146,7 +146,7 @@ local plugins = {
   --   opts = {
   --     commands = true,
   --     load_coverage_cb = function(ftype)
-  --       vim.notify("Loaded " .. ftype .. " coverage") -- TODO: change this by nvim notify
+  --       vim.notify("Loaded " .. ftype .. " coverage")
   --     end,
   --     lang = {
   --       python = {
@@ -158,25 +158,6 @@ local plugins = {
   --     require("coverage").setup(opts)
   --   end,
   -- },
-
-  -- FIX: full integration of catppuccin in installed plugins
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     flavour = "mocha",
-  --     integrations = {
-  --       notify = true,
-  --       fidget = true,
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require("catppuccin").setup(opts)
-  --   end,
-  -- },
-  --
   {
     "ThePrimeagen/refactoring.nvim",
     event = "VeryLazy",

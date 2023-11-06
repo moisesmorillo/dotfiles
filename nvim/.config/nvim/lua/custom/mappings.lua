@@ -162,7 +162,6 @@ M.rust = {
 M.go = {
   plugin = true,
   n = {
-    --TODO: add more debug methods for go
     ["<leader>dgt"] = {
       function()
         require("dap-go").debug_test()
@@ -176,7 +175,6 @@ M.go = {
 M.python = {
   plugin = true,
   n = {
-    --TODO: add more debug methods for python
     ["<leader>dpt"] = {
       function()
         require("dap-python").test_method()

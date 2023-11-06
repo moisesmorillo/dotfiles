@@ -60,10 +60,6 @@ local plugins = {
         b.formatting.prettierd.with {
           filetypes = { "javascript", "typescript", "json", "jsonc" },
         },
-        --- TODO: enable when prettierd can be replaced
-        -- b.formatting.deno_fmt.with {
-        --   extra_args = { "--single-quote" },
-        -- }, -- choosed deno for ts/js files cuz its very fast!
       })
     end,
   },
