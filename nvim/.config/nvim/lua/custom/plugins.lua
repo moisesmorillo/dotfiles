@@ -137,27 +137,28 @@ local plugins = {
     event = "VeryLazy",
   },
 
-  -- TODO: complete this integration
-  -- {
-  --   "andythigpen/nvim-coverage",
-  --   branch = "main",
-  --   cmd = { "Coverage", "CoverageShow", "CoverageHide", "CoverageToggle", "CoverageSummary" },
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   opts = {
-  --     commands = true,
-  --     load_coverage_cb = function(ftype)
-  --       vim.notify("Loaded " .. ftype .. " coverage")
-  --     end,
-  --     lang = {
-  --       python = {
-  --         coverage_file = "project/.coverage",
-  --       },
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require("coverage").setup(opts)
-  --   end,
-  -- },
+  {
+    "andythigpen/nvim-coverage",
+    branch = "main",
+    cmd = { "Coverage", "CoverageToggle", "CoverageSummary" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      commands = true,
+      auto_reload = true,
+      load_coverage_cb = function(ftype)
+        vim.notify("Loaded " .. ftype .. " coverage")
+      end,
+      lang = {
+        python = {
+          coverage_file = "project/.coverage",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("coverage").setup(opts)
+    end,
+  },
+
   {
     "ThePrimeagen/refactoring.nvim",
     event = "VeryLazy",
