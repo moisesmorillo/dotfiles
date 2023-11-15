@@ -1,8 +1,8 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 import:
   - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
-env:
-  TERM: alacritty
+# env:
+#   TERM: alacritty
 window:
   dimensions:
     columns: 160
@@ -11,8 +11,8 @@ window:
     x: 0
     y: 0
   padding:
-   x: 5
-   y: 5
+    x: 5
+    y: 5
   decorations: buttonless
   opacity: 0.95
   startup_mode: Windowed
@@ -34,15 +34,15 @@ font:
     style: SemiBold Italic
   size: 18.0
   offset:
-   x: 0
-   y: 0
+    x: 0
+    y: 0
   glyph_offset:
-   x: 0
-   y: 0
+    x: 0
+    y: 0
   builtin_box_drawing: false
 draw_bold_text_with_bright_colors: true
 shell:
- program: /bin/zsh
+  program: /bin/zsh
 cursor:
   style:
     shape: Beam
