@@ -1,18 +1,14 @@
-# On slow systems, checking the cached .zcompdump file to see if it must be 
-# regenerated adds a noticable delay to zsh startup.  This little hack restricts 
-# it to once a day.  It should be pasted into your own completion file.
-#
-# The globbing is a little complicated here:
-# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
-# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
-# - '.' matches "regular files"
-# - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
+[ -z "$ZPROF" ] || zmodload zsh/zprof
+
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-	compinit;
-else
-	compinit -C;
-fi;
+() {
+  if [[ $# -gt 0 ]]; then
+    compinit
+  else
+    compinit -C
+  fi
+} ${ZDOTDIR:-$HOME}/.zcompdump(N.mh+24)
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -21,142 +17,25 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 5
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  aws
-  docker
-  docker-compose
-  fzf
-  gh
-  git
-  golang
-  helm
-  jsontools
-  jump
-  kubectl
-  sudo
-  tmux
-  tmuxinator
-  web-search
-  xcode
-  zsh-autosuggestions
-  zsh-interactive-cd
-  zsh-syntax-highlighting
-)
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Load homebrew bin paths
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Preferred editor for local and remote sessions
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# export TERM=xterm-256color
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias for neovim
 alias nv="nvim"
-# alias to find files using fzf
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-# alias to replace ls for exa
 alias ls="exa --icons"
-# alias to replace tree for exa
+alias ll="exa --icons --long --all --header"
 alias tree="exa --icons --tree"
-# alias to lazygit client
 alias lzg="CONFIG_DIR='$HOME/.config/lazygit' lazygit"
-# alias to lazydocker client
 alias lzd="lazydocker"
-# alias to kill docker in mac
-alias kd="ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill"
-# alias to fix TERM when using ssh
 alias ssh='TERM=xterm-256color ssh'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -165,28 +44,16 @@ alias ssh='TERM=xterm-256color ssh'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load Linux OS customization
-if [[ $(uname) == "Linux" ]]; then
+if [[ $(uname -s) == "Linux" ]]; then
   # alias to replace cat for bat
   export PATH="/usr/local/sbin:/snap/bin:/usr/local/go/bin:/sbin:/usr/sbin:$PATH"
-  OS_NAME="$(grep '^ID=' /etc/os-release | cut -d '=' -f2)"
-
-  case $OS_NAME in
-    fedora)
-      alias cat="bat"
-      alias fu="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf clean all -y && sudo dnf autoremove -y && omz update"
-      ;;
-    debian)
-      alias cat="batcat"
-      alias fu="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && omz update"
-      ;;
-  esac
+  alias cat="batcat"
 fi
 
 # Load Mac OS customization
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $(uname -s) == "Darwin" ]]; then
   # alias to replace cat for bat
   alias cat="bat"
-  alias fu="brew update && brew upgrade && omz update"
   bindkey "^[[1;3C" forward-word
   bindkey "^[[1;3D" backward-word
 fi
@@ -240,5 +107,33 @@ if [ -f "$HOME/.cargo/env" ]; then
   source "$HOME/.cargo/env"
 fi
 
-source $ZSH/oh-my-zsh.sh
+zsh_time() {
+  repeat 10 {time zsh -i -c exit}
+}
 
+fu() {
+  OS=$(uname -s)
+
+  echo "*** Updating OS packages and zsh plugins ***"
+
+  if [[ "$OS" == "Darwin" ]]; then
+    brew update
+    brew upgrade
+  fi
+
+  if [[ "$OS" == "Linux" ]]; then
+    sudo apt update -y
+    sudo apt full-upgrade -y
+    sudo apt autoremove -y
+    sudo apt autoclean -y
+  fi
+
+  zprezto-update
+}
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+[ -z "$ZPROF" ] || zprof > ~/.zprof.log 

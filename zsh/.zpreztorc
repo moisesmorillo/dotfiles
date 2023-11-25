@@ -1,0 +1,23 @@
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:load' pmodule \
+  'history' \
+  'completion' \
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'autosuggestions' \
+  'git' \
+  'prompt'
+
+zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+zstyle ':prezto:module:history' histsize 10000
+zstyle ':prezto:module:history' savehist 10000
+zstyle ':prezto:module:history-substring-search' color 'no'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
+
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
