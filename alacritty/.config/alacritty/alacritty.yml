@@ -21,16 +21,16 @@ scrolling:
   history: 10000
 font:
   normal:
-    family: JetBrainsMono NF
+    family: JetBrainsMono Nerd Font
     style: ExtraLight
   bold:
-    family: JetBrainsMono NF
+    family: JetBrainsMono Nerd Font
     style: SemiBold
   italic:
-    family: JetBrainsMono NF
+    family: JetBrainsMono Nerd Font
     style: ExtraLight Italic
   bold_italic:
-    family: JetBrainsMono NF
+    family: JetBrainsMono Nerd Font
     style: SemiBold Italic
   size: 18.0
   offset:
