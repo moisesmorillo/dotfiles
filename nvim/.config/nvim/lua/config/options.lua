@@ -1,15 +1,19 @@
 local opt = vim.opt
 local options = {
 	colorcolumn = "120",
+	expandtab = false,
+	fillchars = { eob = "~" },
 	modelines = 0,
 	number = true,
 	rnu = true,
 	ruler = true,
-	textwidth = 120,
 	scrolloff = 8,
+	shiftwidth = 2,
 	showmatch = true,
+	softtabstop = 0,
 	swapfile = false,
-	fillchars = { eob = "~" },
+	tabstop = 2,
+	textwidth = 120,
 }
 
 -- better search
