@@ -5,8 +5,6 @@ return {
 		servers = {
 			lua_ls = {
 				filetypes = { "lua" },
-
-				---@type LazyKeysSpec[]
 				settings = {
 					Lua = {
 						codeLens = {
