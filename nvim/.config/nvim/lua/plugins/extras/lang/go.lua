@@ -1,6 +1,22 @@
 -- Using lazyvim.plugins.extras.lang.go + personal setup
 return {
 	{
+		"williamboman/mason.nvim",
+		opts = function(_, opts)
+			vim.list_extend(opts.ensure_installed, {
+				"delve",
+				"gofumpt",
+				"golangci-lint",
+				"golangci-lint-langserver",
+				"golines",
+				"gopls",
+				"gotestsum",
+				"iferr",
+				"impl",
+			})
+		end,
+	},
+	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
@@ -32,7 +48,7 @@ return {
 		},
 		ft = { "go", "gomod" },
 		opts = {},
-		event = { "CmdlineEnter" }, -- TODO: better handler
+		event = { "CmdlineEnter" },
 		build = ":lua require(\"go.install\").update_all_sync()", -- if you need to install/update all binaries
 	},
 }
