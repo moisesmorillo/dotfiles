@@ -7,26 +7,24 @@ end
 
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	keys = {
-		{
-			"<leader>e",
-			function()
-				require("neo-tree.command").execute({ dir = vim.fn.getcwd(), reveal = true, toggle = true })
-			end,
-			desc = "Explorer NeoTree (root dir)",
-		},
-		{
-			"<leader>fe",
-			function()
-				require("neo-tree.command").execute({ dir = get_buff_cwd(), reveal = true, toggle = true })
-			end,
-			desc = "Explorer NeoTree (buffer cwd)",
-		},
-		{ "<leader>E", false },
-		{ "<leader>fE", false },
-		{ "<leader>be", false },
-		{ "<leader>ge", false },
-	},
+	keys = function()
+		return {
+			{
+				"<leader>e",
+				function()
+					require("neo-tree.command").execute({ dir = vim.fn.getcwd(), reveal = true, toggle = true })
+				end,
+				desc = "Explorer NeoTree (root dir)",
+			},
+			{
+				"<leader>fe",
+				function()
+					require("neo-tree.command").execute({ dir = get_buff_cwd(), reveal = true, toggle = true })
+				end,
+				desc = "Explorer NeoTree (buffer cwd)",
+			},
+		}
+	end,
 	opts = {
 		filesystem = {
 			filtered_items = {
