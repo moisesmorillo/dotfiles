@@ -67,4 +67,30 @@ return {
 			return opts
 		end,
 	},
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/neotest-plenary",
+		},
+		opts = function(_, opts)
+			vim.list_extend(opts.adapters, {
+				require("neotest-plenary"),
+			})
+		end,
+	},
+	{
+		"danymat/neogen",
+		opts = function(_, opts)
+			opts = vim.tbl_deep_extend("force", opts or {}, {
+				languages = {
+					lua = {
+						template = {
+							annotation_convention = "ldoc",
+						},
+					},
+				},
+			})
+			return opts
+		end,
+	},
 }
