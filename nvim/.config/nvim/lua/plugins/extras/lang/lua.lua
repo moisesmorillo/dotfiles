@@ -25,7 +25,6 @@ return {
 		opts = {
 			servers = {
 				lua_ls = {
-					filetypes = { "lua" },
 					settings = {
 						Lua = {
 							codeLens = {
