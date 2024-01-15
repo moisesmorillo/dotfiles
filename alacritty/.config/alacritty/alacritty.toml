@@ -1,0 +1,70 @@
+import = ["/Users/moisesmorillo/.config/alacritty/catppuccin-mocha.toml"]
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+blink_interval = 250
+blink_timeout = 5
+thickness = 0.15
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "Off"
+shape = "Beam"
+
+[cursor.vi_mode_style]
+blinking = "off"
+shape = "Block"
+
+[font]
+builtin_box_drawing = false
+size = 18.0
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "SemiBold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "SemiBold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "ExtraLight Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "ExtraLight"
+
+[font.offset]
+x = 0
+y = 0
+
+[scrolling]
+history = 10000
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+decorations = "buttonless"
+opacity = 0.95
+option_as_alt = "OnlyLeft"
+startup_mode = "Windowed"
+
+[window.dimensions]
+columns = 160
+lines = 40
+
+[window.padding]
+x = 5
+y = 5
+
+[window.position]
+x = 0
+y = 0
