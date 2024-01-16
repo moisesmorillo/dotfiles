@@ -3,24 +3,29 @@ return {
 	{
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
+			opts.ensure_installed = opts.ensure_installed or {}
+			-- delve, gofumpt, gomodifytags, impl are already handled by lazynvim.plugins.extras.lang.go
 			vim.list_extend(opts.ensure_installed, {
-				"delve",
 				"gofumpt",
 				"golangci-lint",
-				"golangci-lint-langserver",
 				"golines",
 				"gopls",
 				"gotestsum",
 				"iferr",
-				"impl",
 			})
 		end,
 	},
+	-- enable optional plugins (already configured in lazyvim.plugins.extras.lang.go)
+	{ "stevearc/conform.nvim" },
+	{ "nvim-neotest/neotest" },
+	{ "mfussenegger/nvim-dap" },
+	-- TODO: test code actions before
+	-- { "nvimtools/none-ls.nvim" },
 	{
-		"neovim/nvim-lspconfig",
+		"mfussenegger/nvim-lint",
 		opts = {
-			servers = {
-				golangci_lint_ls = {},
+			linters_by_ft = {
+				go = { "golangcilint" },
 			},
 		},
 	},
@@ -46,7 +51,6 @@ return {
 			"neovim/nvim-lspconfig",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		ft = { "go", "gomod" },
 		opts = {},
 		event = { "CmdlineEnter" },
 	},

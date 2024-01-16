@@ -36,25 +36,10 @@ return {
 			},
 		},
 	},
-	{
-		"stevearc/conform.nvim",
-		opts = function(_, opts)
-			opts.formatters_by_ft = {
-				lua = { "stylua" },
-			}
-			return opts
-		end,
-	},
+	{ "nvim-neotest/neotest-plenary" },
 	{
 		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-neotest/neotest-plenary",
-		},
-		opts = function(_, opts)
-			vim.list_extend(opts.adapters, {
-				require("neotest-plenary"),
-			})
-		end,
+		opts = { adapters = { "neotest-plenary" } },
 	},
 	{
 		"danymat/neogen",
