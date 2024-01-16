@@ -18,10 +18,14 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.dap.core" },
 		{ import = "lazyvim.plugins.extras.test.core" },
 		-- lua
+		{ import = "lazyvim.plugins.extras.dap.nlua" },
 		{ import = "plugins.extras.lang.lua" },
 		-- go
 		{ import = "lazyvim.plugins.extras.lang.go" },
 		{ import = "plugins.extras.lang.go" },
+		-- ai
+		{ import = "lazyvim.plugins.extras.coding.copilot" },
+		--  { import = "lazyvim.plugins.extras.coding.codeium" },
 		-- local plugins
 		{ import = "plugins" },
 	},
