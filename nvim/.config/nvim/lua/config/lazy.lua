@@ -26,6 +26,8 @@ require("lazy").setup({
 		-- ai
 		{ import = "lazyvim.plugins.extras.coding.copilot" },
 		--  { import = "lazyvim.plugins.extras.coding.codeium" },
+		-- utils
+		{ import = "lazyvim.plugins.extras.util.project" },
 		-- local plugins
 		{ import = "plugins" },
 	},
