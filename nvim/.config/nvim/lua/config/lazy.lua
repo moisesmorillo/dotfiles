@@ -25,9 +25,10 @@ require("lazy").setup({
 		{ import = "plugins.extras.lang.go" },
 		-- typescript
 		{ import = "plugins.extras.lang.typescript" },
-		-- ai
+		-- coding
 		{ import = "lazyvim.plugins.extras.coding.copilot" },
-		--  { import = "lazyvim.plugins.extras.coding.codeium" },
+		-- editor
+		{ import = "lazyvim.plugins.extras.editor.aerial" },
 		-- utils
 		{ import = "lazyvim.plugins.extras.util.project" },
 		-- local plugins
