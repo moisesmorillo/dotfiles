@@ -23,6 +23,8 @@ require("lazy").setup({
 		-- go
 		{ import = "lazyvim.plugins.extras.lang.go" },
 		{ import = "plugins.extras.lang.go" },
+		-- typescript
+		{ import = "plugins.extras.lang.typescript" },
 		-- ai
 		{ import = "lazyvim.plugins.extras.coding.copilot" },
 		--  { import = "lazyvim.plugins.extras.coding.codeium" },
