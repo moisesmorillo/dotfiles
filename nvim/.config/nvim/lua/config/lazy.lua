@@ -17,11 +17,13 @@ require("lazy").setup({
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "lazyvim.plugins.extras.dap.core" },
 		{ import = "lazyvim.plugins.extras.test.core" },
-		--bash
+		-- bash
 		{ import = "plugins.extras.lang.bash" },
-		--c/c++
+		-- c/c++
 		{ import = "lazyvim.plugins.extras.lang.clangd" },
 		{ import = "plugins.extras.lang.cpp" },
+		-- docker
+		{ import = "lazyvim.plugins.extras.lang.docker" },
 		-- lua
 		{ import = "lazyvim.plugins.extras.dap.nlua" },
 		{ import = "plugins.extras.lang.lua" },
