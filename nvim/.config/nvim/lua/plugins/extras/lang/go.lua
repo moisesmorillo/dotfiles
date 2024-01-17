@@ -1,4 +1,3 @@
--- Using lazyvim.plugins.extras.lang.go + personal setup
 return {
 	{
 		"williamboman/mason.nvim",
