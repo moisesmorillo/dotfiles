@@ -15,16 +15,34 @@ require("lazy").setup({
 	spec = {
 		-- add LazyVim and import its plugins
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
+		-- dap and testing
 		{ import = "lazyvim.plugins.extras.dap.core" },
 		{ import = "lazyvim.plugins.extras.test.core" },
-		-- lua
-		{ import = "lazyvim.plugins.extras.dap.nlua" },
-		{ import = "plugins.extras.lang.lua" },
+		-- bash
+		{ import = "plugins.extras.lang.bash" },
+		-- c/c++
+		{ import = "lazyvim.plugins.extras.lang.clangd" },
+		{ import = "plugins.extras.lang.cpp" },
+		-- docker
+		{ import = "lazyvim.plugins.extras.lang.docker" },
+		-- python
+		-- TODO: Compare with https://github.com/moisesmorillo/dotfiles/blob/46ca5f2b716b5732c2d3c773d503a9a26fffc322/nvim/.config/nvim/lua/custom/configs/langs/python.lua
 		-- go
 		{ import = "lazyvim.plugins.extras.lang.go" },
 		{ import = "plugins.extras.lang.go" },
+		-- lua
+		{ import = "lazyvim.plugins.extras.dap.nlua" },
+		{ import = "plugins.extras.lang.lua" },
+		-- markdown
+		{ import = "lazyvim.plugins.extras.lang.markdown" },
 		-- typescript
 		{ import = "plugins.extras.lang.typescript" },
+		-- rust
+		-- TODO: Compare with https://github.com/moisesmorillo/dotfiles/blob/46ca5f2b716b5732c2d3c773d503a9a26fffc322/nvim/.config/nvim/lua/custom/configs/langs/rust.lua
+		-- yaml
+		-- TODO: add schemas https://github.com/moisesmorillo/dotfiles/blob/46ca5f2b716b5732c2d3c773d503a9a26fffc322/nvim/.config/nvim/lua/custom/configs/langs/yaml.lua#L38-L47
+		{ import = "lazyvim.plugins.extras.lang.yaml" },
+		{ import = "plugins.extras.lang.yaml" },
 		-- coding
 		{ import = "lazyvim.plugins.extras.coding.copilot" },
 		-- linting and formatting
