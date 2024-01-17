@@ -27,6 +27,9 @@ require("lazy").setup({
 		{ import = "plugins.extras.lang.typescript" },
 		-- coding
 		{ import = "lazyvim.plugins.extras.coding.copilot" },
+		-- linting and formatting
+		{ import = "lazyvim.plugins.extras.linting.eslint" },
+		{ import = "lazyvim.plugins.extras.formatting.prettier" },
 		-- editor
 		{ import = "lazyvim.plugins.extras.editor.aerial" },
 		-- utils
