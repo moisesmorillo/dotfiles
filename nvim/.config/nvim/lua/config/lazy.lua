@@ -19,6 +19,9 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.test.core" },
 		--bash
 		{ import = "plugins.extras.lang.bash" },
+		--c/c++
+		{ import = "lazyvim.plugins.extras.lang.clangd" },
+		{ import = "plugins.extras.lang.cpp" },
 		-- lua
 		{ import = "lazyvim.plugins.extras.dap.nlua" },
 		{ import = "plugins.extras.lang.lua" },
