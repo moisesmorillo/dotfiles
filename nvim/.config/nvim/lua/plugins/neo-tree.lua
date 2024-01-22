@@ -23,6 +23,13 @@ return {
 				end,
 				desc = "Explorer NeoTree (buffer cwd)",
 			},
+			{
+				"<leader>be",
+				function()
+					require("neo-tree.command").execute({ source = "buffers", toggle = true })
+				end,
+				desc = "Explorer NeoTree (buffers)",
+			},
 		}
 	end,
 	opts = {
