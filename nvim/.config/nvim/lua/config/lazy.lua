@@ -42,7 +42,6 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.rust" },
 		{ import = "plugins.extras.lang.rust" },
 		-- yaml
-		-- TODO: add schemas https://github.com/moisesmorillo/dotfiles/blob/46ca5f2b716b5732c2d3c773d503a9a26fffc322/nvim/.config/nvim/lua/custom/configs/langs/yaml.lua#L38-L47
 		{ import = "lazyvim.plugins.extras.lang.yaml" },
 		{ import = "plugins.extras.lang.yaml" },
 		-- coding
