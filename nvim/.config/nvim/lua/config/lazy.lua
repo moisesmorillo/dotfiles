@@ -26,7 +26,8 @@ require("lazy").setup({
 		-- docker
 		{ import = "lazyvim.plugins.extras.lang.docker" },
 		-- python
-		-- TODO: Compare with https://github.com/moisesmorillo/dotfiles/blob/46ca5f2b716b5732c2d3c773d503a9a26fffc322/nvim/.config/nvim/lua/custom/configs/langs/python.lua
+		{ import = "lazyvim.plugins.extras.lang.python" },
+		{ import = "plugins.extras.lang.python" },
 		-- go
 		{ import = "lazyvim.plugins.extras.lang.go" },
 		{ import = "plugins.extras.lang.go" },
