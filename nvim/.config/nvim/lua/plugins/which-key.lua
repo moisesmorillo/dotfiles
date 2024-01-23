@@ -6,6 +6,8 @@ return {
 			["<leader>cl"] = { name = "+lsp" },
 			-- Neogen
 			["<leader>cg"] = { name = "+neogen" },
+			-- Overseer
+			["<leader>o"] = { name = "+overseer" },
 		})
 		return opts
 	end,
