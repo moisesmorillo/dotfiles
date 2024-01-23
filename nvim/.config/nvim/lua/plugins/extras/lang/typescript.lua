@@ -34,7 +34,6 @@ return {
 	},
 	{
 		"nvim-neotest/neotest",
-		ft = ft,
 		dependencies = {
 			"nvim-neotest/neotest-jest",
 		},

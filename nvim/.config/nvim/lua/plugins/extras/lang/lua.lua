@@ -36,10 +36,12 @@ return {
 			},
 		},
 	},
-	{ "nvim-neotest/neotest-plenary" },
 	{
 		"nvim-neotest/neotest",
-		opts = { adapters = { "neotest-plenary" } },
+		dependencies = {
+			"nvim-neotest/neotest-plenary",
+		},
+		opts = { adapters = { ["neotest-plenary"] = {} } },
 	},
 	{
 		"danymat/neogen",
