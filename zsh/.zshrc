@@ -131,6 +131,8 @@ fu() {
     sudo apt autoclean -y
   fi
 
+	cd ~/projects/dotfiles/ && git pull origin main && cd -
+
   zprezto-update
 }
 
