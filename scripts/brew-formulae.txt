@@ -20,6 +20,8 @@ ripgrep
 ruby-build
 so
 speedtest-cli
+starship
 stow
 tmux
+volta
 yq
