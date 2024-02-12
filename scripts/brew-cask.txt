@@ -1,8 +1,6 @@
 1password/tap/1password-cli
-alacritty
 dbeaver-community
 devtoys
-dozer
 font-jetbrains-mono-nerd-font
 orbstack
 raycast
