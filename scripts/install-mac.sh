@@ -38,9 +38,9 @@ omz reload
 volta install node yarn # To install LTS Version
 
 ### Install Go ###
-goenv install 1.21.1
-goenv global 1.21.1
-brew install golangci-lint mockery
+goenv install latest
+goenv global "$(goenv versions --bare | sort -V | tail -n 2)"
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)/bin latest"
 
 ### Install Java ###
 sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
