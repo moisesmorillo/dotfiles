@@ -15,9 +15,6 @@ fi
 ### Update Brew ###
 brew update && brew upgrade
 
-### Remove alacrity terminfo ###
-sudo rm -rf ~/.terminfo
-
 ### Enable Brew Taps ###
 brew tap homebrew/cask-fonts
 
@@ -27,10 +24,12 @@ xargs brew install --force <./scripts/brew-formulae.txt
 ### Install All Brew Casks ###
 xargs brew install --cask --force <./scripts/brew-cask.txt
 
-### Install Alacritty ###
-curl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info -o alacritty.info
-sudo tic -xe alacritty,alacritty-direct alacritty.info
-rm alacritty.info
+### Install Catppuccin for Warp ###
+mkdir -p ~/.warp/themes/
+curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_latte.yml
+curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_frappe.yml
+curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_macchiato.yml
+curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_mocha.yml
 
 ### Install Volta (Node Package Manager) ###
 curl https://get.volta.sh | bash
@@ -48,20 +47,13 @@ sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/Java
 ### Install Rust ###
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-### Install FzF completions ###
-$(brew --prefix)/opt/fzf/install --all --key-bindings --completion
-
 ### Install Tpm ###
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-### Install Prezto for ZSH ###
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
 ### Set defaults mac os
 chmod +x ./scripts/macos-settings.sh
 . ./scripts/macos-settings.sh
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/alacritty ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.p10k.zsh ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+rm -rf ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
 stow -R -t $HOME */
