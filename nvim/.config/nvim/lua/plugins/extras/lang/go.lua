@@ -14,10 +14,6 @@ return {
 			})
 		end,
 	},
-	-- enable optional plugins (already configured in lazyvim.plugins.extras.lang.go)
-	{ "stevearc/conform.nvim" },
-	{ "nvim-neotest/neotest" },
-	{ "mfussenegger/nvim-dap" },
 	-- TODO: test code actions before
 	-- { "nvimtools/none-ls.nvim" },
 	{
@@ -25,6 +21,31 @@ return {
 		opts = {
 			linters_by_ft = {
 				go = { "golangcilint" },
+			},
+		},
+	},
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/neotest-go",
+		},
+		keys = {
+			{
+				"<leader>tT",
+				function()
+					require("neotest").run.run(vim.fn.getcwd())
+				end,
+				desc = "Run All Test Files",
+			},
+		},
+		opts = {
+			adapters = {
+				["neotest-go"] = {
+					experimental = {
+						test_table = true,
+					},
+					recursive_run = true,
+				},
 			},
 		},
 	},

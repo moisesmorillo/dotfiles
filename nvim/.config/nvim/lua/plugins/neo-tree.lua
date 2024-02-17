@@ -12,7 +12,7 @@ return {
 			{
 				"<leader>e",
 				function()
-					require("neo-tree.command").execute({ dir = vim.fn.getcwd(), reveal = true, toggle = true })
+					require("neo-tree.command").execute({ focus = true })
 				end,
 				desc = "Explorer NeoTree (root dir)",
 			},
@@ -43,7 +43,7 @@ return {
 			},
 		},
 		window = {
-			position = "float",
+			position = "right",
 		},
 	},
 }
