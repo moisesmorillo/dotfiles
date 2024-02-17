@@ -25,6 +25,31 @@ return {
 		},
 	},
 	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/neotest-go",
+		},
+		keys = {
+			{
+				"<leader>tT",
+				function()
+					require("neotest").run.run(vim.fn.getcwd())
+				end,
+				desc = "Run All Test Files",
+			},
+		},
+		opts = {
+			adapters = {
+				["neotest-go"] = {
+					experimental = {
+						test_table = true,
+					},
+					recursive_run = true,
+				},
+			},
+		},
+	},
+	{
 		"danymat/neogen",
 		opts = function(_, opts)
 			opts = vim.tbl_deep_extend("force", opts or {}, {
