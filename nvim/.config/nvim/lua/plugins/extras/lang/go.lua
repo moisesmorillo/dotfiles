@@ -14,10 +14,6 @@ return {
 			})
 		end,
 	},
-	-- enable optional plugins (already configured in lazyvim.plugins.extras.lang.go)
-	{ "stevearc/conform.nvim" },
-	{ "nvim-neotest/neotest" },
-	{ "mfussenegger/nvim-dap" },
 	-- TODO: test code actions before
 	-- { "nvimtools/none-ls.nvim" },
 	{
