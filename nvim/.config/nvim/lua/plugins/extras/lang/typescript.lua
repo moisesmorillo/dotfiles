@@ -1,5 +1,3 @@
-local ft = { "typescript", "javascript" }
-
 return {
 	{
 		"williamboman/mason.nvim",
@@ -21,7 +19,6 @@ return {
 	},
 	{
 		"pmizio/typescript-tools.nvim",
-		ft = ft,
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = function()
 			return {
@@ -34,8 +31,9 @@ return {
 	},
 	{
 		"nvim-neotest/neotest",
+		-- TODO: remove commit version after this PR is merged https://github.com/nvim-neotest/neotest-jest/pull/100
 		dependencies = {
-			"nvim-neotest/neotest-jest",
+			{ "nvim-neotest/neotest-jest", commit = "6ea51a1b9fd65c36f58729267b4a9abd992d05a4" },
 		},
 		opts = {
 			adapters = {
