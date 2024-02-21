@@ -73,14 +73,16 @@ if type pyenv &>/dev/null; then
 fi
 
 # Go customization
-if type rbenv &>/dev/null; then
+if type goenv &>/dev/null; then
 	export GOENV_ROOT="$HOME/.goenv"
 	export GOENV_SHELL=zsh
-	export PATH="$PATH:$GOENV_ROOT/shims:$GOENV_ROOT/bin:$GOROOT/bin:$GOPATH/bin"
+	export PATH="$PATH:$GOENV_ROOT/shims:$GOENV_ROOT/bin"
 
 	goenv() {
 		unset -f goenv >/dev/null 2>&1
 		eval "$(goenv init -)"
+		export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+		export GOBIN="$GOPATH/bin"
 		goenv "$@"
 	}
 fi
