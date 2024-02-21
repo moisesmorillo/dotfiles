@@ -73,5 +73,6 @@ return {
 		},
 		opts = {},
 		event = { "CmdlineEnter" },
+		build = ":lua require(\"go.install\").update_all_sync()",
 	},
 }
