@@ -31,9 +31,8 @@ return {
 	},
 	{
 		"nvim-neotest/neotest",
-		-- TODO: remove commit version after this PR is merged https://github.com/nvim-neotest/neotest-jest/pull/100
 		dependencies = {
-			{ "nvim-neotest/neotest-jest", commit = "6ea51a1b9fd65c36f58729267b4a9abd992d05a4" },
+			"nvim-neotest/neotest-jest",
 		},
 		opts = {
 			adapters = {

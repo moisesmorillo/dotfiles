@@ -1,6 +1,6 @@
--- Fix cursor block when exiting from neovim
-vim.api.nvim_create_autocmd("VimLeave", {
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.Jenkinsfile",
 	callback = function()
-		vim.cmd([[set guicursor=a:ver100]])
+		vim.bo.filetype = "groovy"
 	end,
 })

@@ -5,6 +5,7 @@ exa
 fd
 fzf
 git
+gnu-sed
 gnupg
 goenv
 gpg2
@@ -24,4 +25,5 @@ starship
 stow
 tmux
 volta
+wget
 yq
