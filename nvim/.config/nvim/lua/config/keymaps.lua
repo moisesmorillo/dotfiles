@@ -1,4 +1,4 @@
-local map = vim.keymap.set
+local map = require("lazyvim.util").safe_keymap_set
 
 -- LSP
 map("n", "<leader>cli", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
