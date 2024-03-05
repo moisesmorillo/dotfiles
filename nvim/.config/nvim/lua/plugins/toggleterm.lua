@@ -9,13 +9,6 @@ return {
 			end,
 			desc = "Toggle Terminal Horizontal",
 		},
-		{
-			"<f2>",
-			function()
-				require("toggleterm").toggle_command("direction='vertical'")
-			end,
-			desc = "Toggle Terminal Vertical",
-		},
 	},
 	opts = {
 		size = function(term)
