@@ -9,6 +9,7 @@ gnu-sed
 gnupg
 goenv
 gpg2
+hashicorp/tap/terraform
 jesseduffield/lazydocker/lazydocker
 jesseduffield/lazygit/lazygit
 jq
