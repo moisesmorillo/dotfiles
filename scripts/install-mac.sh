@@ -18,6 +18,9 @@ brew update && brew upgrade
 ### Enable Brew Taps ###
 brew tap homebrew/cask-fonts
 
+### Enable Terrform Tap ###
+brew tap hashicorp/tap
+
 ### Install All Brew Formulae ###
 xargs brew install --force <./scripts/brew-formulae.txt
 
