@@ -13,15 +13,6 @@ return {
 			},
 		})
 
-		vim.list_extend(opts.bottom, {
-			{
-				title = "Neotest Output",
-				ft = "neotest-output",
-			},
-		})
-
-		vim.print(vim.inspect(opts.bottom))
-
 		return opts
 	end,
 }
