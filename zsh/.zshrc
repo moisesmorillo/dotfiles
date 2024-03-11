@@ -8,6 +8,7 @@ fi
 
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
+# shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
@@ -92,10 +93,11 @@ export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 
 # Macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
 kdo() {
-	ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill
+	pgrep -fi orbstack | xargs kill
 }
 
 if [ -f "$HOME/.cargo/env" ]; then
+	# shellcheck disable=SC1091
 	source "$HOME/.cargo/env"
 fi
 
