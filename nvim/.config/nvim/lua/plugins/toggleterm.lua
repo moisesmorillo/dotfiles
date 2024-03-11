@@ -5,9 +5,9 @@ return {
 		{
 			"<f1>",
 			function()
-				require("toggleterm").toggle_command("direction='horizontal'")
+				require("toggleterm").toggle_command("direction='vertical'")
 			end,
-			desc = "Toggle Terminal Horizontal",
+			desc = "Toggle Terminal Vertical",
 		},
 	},
 	opts = {

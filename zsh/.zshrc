@@ -8,6 +8,7 @@ fi
 
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
+# shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
@@ -16,7 +17,7 @@ alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 alias ls="exa --icons"
 alias ll="exa --icons --long --all --header"
 alias tree="exa --icons --tree"
-alias lzg="CONFIG_DIR='$HOME/.config/lazygit' lazygit"
+alias lzg="lazygit -ucd ~/.config/lazygit"
 alias lzd="lazydocker"
 alias ssh='TERM=xterm-256color ssh'
 
@@ -92,15 +93,16 @@ export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 
 # Macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
 kdo() {
-	ps ax | grep -i docker | egrep -iv 'grep|com.docker.vmnetd' | awk '{print $1}' | xargs kill
+	pgrep -fi orbstack | xargs kill
 }
 
 if [ -f "$HOME/.cargo/env" ]; then
+	# shellcheck disable=SC1091
 	source "$HOME/.cargo/env"
 fi
 
 zsh_time() {
-	repeat 10 {time zsh -i -c exit}
+	repeat 10 time zsh -i -c exit
 }
 
 fu() {
@@ -120,7 +122,8 @@ fu() {
 		sudo apt autoclean -y
 	fi
 
-	cd ~/projects/dotfiles/ && git pull origin main && cd -
+	cd ~/projects/dotfiles/ && git pull origin main && cd - || exit
+	nvim --headless -c "Lazy update" -c "Lazy! load mason.nvim nvim-treesitter" -c "TSUpdate" -c "MasonUpdate" +q
 }
 
 if type starship &>/dev/null; then
