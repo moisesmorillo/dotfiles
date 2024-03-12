@@ -23,12 +23,7 @@ map("t", "<c-l", "<cmd>wincmd l", { desc = "Go To Right Terminal", noremap = tru
 
 -- Lazygit remap to use local config
 map("n", "<leader>gg", function()
-	Util.terminal(
-		{ "lazygit", "-ucd", lazygitHomeDirConfig },
-		{ cwd = lazygitHomeDirConfig, esc_esc = false, ctrl_hjkl = false },
-		{ cwd = Util.root(), esc_esc = false, ctrl_hjkl = false }
-	)
-end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function()
 	Util.terminal({ "lazygit", "-ucd", lazygitHomeDirConfig }, { esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Lazygit (cwd)" })
+end, { desc = "Lazygit", noremap = true, silent = true })
+
+vim.keymap.del("n", "<leader>gG")
