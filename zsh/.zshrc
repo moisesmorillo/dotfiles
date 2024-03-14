@@ -108,7 +108,7 @@ zsh_time() {
 fu() {
 	OS=$(uname -s)
 
-	echo "*** Updating OS packages and zsh plugins ***"
+	echo "*** Updating OS packages***"
 
 	if [[ "$OS" == "Darwin" ]]; then
 		brew update
@@ -122,8 +122,11 @@ fu() {
 		sudo apt autoclean -y
 	fi
 
+	echo "*** Updating dotfiles ***"
 	cd ~/projects/dotfiles/ && git pull origin main && cd - || exit
-	nvim --headless -c "Lazy update" -c "Lazy! load mason.nvim nvim-treesitter" -c "TSUpdate" -c "MasonUpdate" +q
+
+	echo "*** Updating LazyVim core and plugins ***"
+	nvim --headless "+Lazy! sync" +qa
 }
 
 if type starship &>/dev/null; then
