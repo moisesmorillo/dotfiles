@@ -23,6 +23,8 @@ require("lazy").setup({
 		{ import = "plugins.extras.lang.go" },
 		-- jenkins
 		{ import = "plugins.extras.lang.jenkins" },
+		-- json
+		{ import = "plugins.extras.lang.json" },
 		-- lua
 		{ import = "plugins.extras.lang.lua" },
 		-- python
