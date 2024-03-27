@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
-	animation_fps = 100,
+	animation_fps = 75,
 	audible_bell = "Disabled",
 	color_scheme = "Catppuccin Mocha",
 	cursor_blink_ease_in = "Constant",
@@ -9,9 +9,18 @@ return {
 	cursor_blink_rate = 500,
 	cursor_thickness = 0.7,
 	default_cursor_style = "BlinkingBar",
+	default_cwd = wezterm.home_dir .. "/projects",
 	font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "Fira Code" }),
 	font_size = 18,
-	window_background_opacity = 0.96,
+	hide_tab_bar_if_only_one_tab = true,
+	hyperlink_rules = wezterm.default_hyperlink_rules(),
+	macos_window_background_blur = 10,
+	max_fps = 120,
+	prefer_to_spawn_tabs = true,
+	show_update_window = true,
+	tab_bar_at_bottom = true,
+	window_background_opacity = 0.8,
+	window_close_confirmation = "NeverPrompt",
 	window_padding = {
 		left = 0,
 		right = 0,
