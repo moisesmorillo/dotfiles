@@ -40,10 +40,20 @@ zsh_reload() {
 # This function is used to re-stow the dotfiles
 stow_dotfiles() {
 	echo "*** Restowing dotfiles ***"
-	cd ~/projects/dotfiles/ && stow -R -t "$HOME" ./* && cd - || exit
+	cd ~/projects/dotfiles/ && stow -R -t "$HOME" ./* && cd - || return
 }
 
 # This function is used to kill the orbstack process (docker)
 kdo() {
 	pgrep -fi orbstack | xargs kill
+}
+
+reinstall_lazyvim() {
+	echo "*** Reinstalling LazyVim ***"
+	cd ~/projects/dotfiles/ || return
+	stow -D nvim -t "$HOME"
+	rm -rf ~/.config/nvim/ ~/.local/share/nvim/ ~/.local/state/nvim/ ~/.cache/nvim/
+	stow -R -t "$HOME" nvim
+	cd - || return
+	nvim --headless "+Lazy! sync" +qa
 }
