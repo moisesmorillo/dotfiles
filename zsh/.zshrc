@@ -6,6 +6,13 @@ if [ -f /opt/homebrew/bin/brew ]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# shellcheck disable=SC1090
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# shellcheck disable=SC1090
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# shellcheck disable=SC1090
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
 # shellcheck disable=SC2155
@@ -32,8 +39,19 @@ fi
 if [[ $(uname -s) == "Darwin" ]]; then
 	# alias to replace cat for bat
 	alias cat="bat"
+
+	# reset zsh bindings
+	bindkey -d
+	# allow option + arrow keys to move by word
 	bindkey "^[[1;3C" forward-word
 	bindkey "^[[1;3D" backward-word
+
+	# allow ctrl-r to search the history
+	bindkey '^r' fzf-history-widget
+
+	# allow ctrl-a and ctrl-e to move to beginning/end of line
+	bindkey '^a' beginning-of-line
+	bindkey '^e' end-of-line
 fi
 
 # Path customization

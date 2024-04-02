@@ -3,10 +3,6 @@ return {
 	cmd = "ZenMode",
 	opts = {
 		plugins = {
-			alacritty = {
-				enabled = true,
-				font = "24",
-			},
 			options = {
 				laststatus = 0,
 			},

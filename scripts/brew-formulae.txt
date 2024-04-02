@@ -13,6 +13,7 @@ hashicorp/tap/terraform
 jesseduffield/lazydocker/lazydocker
 jesseduffield/lazygit/lazygit
 jq
+neofetch
 neovim
 openjdk@17
 pinentry-mac
