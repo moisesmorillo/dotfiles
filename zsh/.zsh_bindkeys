@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# reset zsh bindings
+bindkey -d
+# allow option + arrow keys to move by word
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+# allow ctrl-r to search the history
+bindkey '^r' fzf-history-widget
+
+# allow ctrl-a and ctrl-e to move to beginning/end of line
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
