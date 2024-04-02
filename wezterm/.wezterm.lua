@@ -1,30 +1,37 @@
 local wezterm = require("wezterm")
+local config = {}
 
-return {
-	animation_fps = 75,
-	audible_bell = "Disabled",
-	color_scheme = "Catppuccin Mocha",
-	cursor_blink_ease_in = "Constant",
-	cursor_blink_ease_out = "Constant",
-	cursor_blink_rate = 500,
-	cursor_thickness = 0.7,
-	default_cursor_style = "BlinkingBar",
-	default_cwd = wezterm.home_dir .. "/projects",
-	font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "Fira Code" }),
-	font_size = 18,
-	hide_tab_bar_if_only_one_tab = true,
-	hyperlink_rules = wezterm.default_hyperlink_rules(),
-	macos_window_background_blur = 10,
-	max_fps = 120,
-	prefer_to_spawn_tabs = true,
-	show_update_window = true,
-	tab_bar_at_bottom = true,
-	window_background_opacity = 0.8,
-	window_close_confirmation = "NeverPrompt",
-	window_padding = {
-		left = 0,
-		right = 0,
-		top = 0,
-		bottom = 0,
-	},
+if wezterm.config_builder then
+	config = wezterm.config_builder()
+end
+
+config.animation_fps = 75
+config.audible_bell = "Disabled"
+config.color_scheme = "Catppuccin Mocha"
+config.cursor_blink_ease_in = "Constant"
+config.cursor_blink_ease_out = "Constant"
+config.cursor_blink_rate = 500
+config.cursor_thickness = 0.7
+config.default_cursor_style = "BlinkingBar"
+config.default_cwd = wezterm.home_dir .. "/projects"
+config.default_workspace = "projects"
+config.font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "Fira Code" })
+config.font_size = 18
+config.hide_tab_bar_if_only_one_tab = true
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+config.macos_window_background_blur = 50
+config.max_fps = 120
+config.prefer_to_spawn_tabs = true
+config.show_update_window = true
+config.tab_bar_at_bottom = true
+config.window_background_opacity = 0.95
+config.window_close_confirmation = "NeverPrompt"
+config.window_decorations = "RESIZE"
+config.window_padding = {
+	left = 10,
+	right = 10,
+	top = 10,
+	bottom = 5,
 }
+
+return config

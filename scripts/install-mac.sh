@@ -57,6 +57,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 chmod +x ./scripts/macos-settings.sh
 . ./scripts/macos-settings.sh
 
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
 stow -R -t $HOME */
