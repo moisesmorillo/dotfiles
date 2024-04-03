@@ -1,12 +1,13 @@
 return {
 	"mistricky/codesnap.nvim",
-	cmd = "CodeSnapPreviewOn",
-	build = "make",
+	cmd = "CodeSnap",
+	build = "make build_generator",
+	version = "^1",
 	opts = {
-		watermark = "",
-		preview_title = "",
-		editor_font_family = "JetBrainsMono Nerd Font",
-		opacity = true,
+		bg_theme = "grape",
+		code_font_family = "JetBrainsMono Nerd Font",
 		mac_window_bar = true,
+		title = "",
+		watermark = "",
 	},
 }
