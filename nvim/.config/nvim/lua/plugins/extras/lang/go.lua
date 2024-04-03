@@ -1,21 +1,5 @@
 return {
-	{
-		"williamboman/mason.nvim",
-		opts = function(_, opts)
-			opts.ensure_installed = opts.ensure_installed or {}
-			-- delve, gofumpt, gomodifytags, impl are already handled by lazynvim.plugins.extras.lang.go
-			vim.list_extend(opts.ensure_installed, {
-				"gofumpt",
-				"golangci-lint",
-				"golines",
-				"gopls",
-				"gotestsum",
-				"iferr",
-			})
-		end,
-	},
-	-- TODO: test code actions before
-	-- { "nvimtools/none-ls.nvim" },
+	-- This will extend the extra go LazyVim setting https://www.lazyvim.org/extras/lang/go
 	{
 		"mfussenegger/nvim-lint",
 		opts = {
