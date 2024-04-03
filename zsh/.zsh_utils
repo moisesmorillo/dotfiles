@@ -41,7 +41,7 @@ zsh_reload() {
 stow_dotfiles() {
 	current_dir=$(pwd)
 	echo "*** Restowing dotfiles ***"
-	cd ~/projects/dotfiles/ && stow -R -t "$HOME" ./* && cd "$current_dir" || return
+	cd ~/projects/dotfiles/ && stow -R -t "$HOME" */ && cd "$current_dir" || return
 }
 
 # This function is used to kill the orbstack process (docker)
