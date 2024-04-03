@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = function(_, opts)
-			vim.list_extend(opts.ensure_installed, { "groovy" })
+			vim.list_extend(opts.ensure_installed or {}, { "groovy" })
 		end,
 	},
 	{
@@ -29,7 +29,6 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
 			formatters_by_ft = {
 				groovy = { "npm_groovy_lint" },

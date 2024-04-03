@@ -2,13 +2,12 @@ return {
 	{
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
-			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "typescript-language-server", "js-debug-adapter" })
+			vim.list_extend(opts.ensure_installed or {}, { "js-debug-adapter", "typescript-language-server" })
 		end,
 	},
+	-- Disable tsserver from LazyVim
 	{
 		"neovim/nvim-lspconfig",
-		-- disable tsserver from LazyVim
 		opts = {
 			setup = {
 				tsserver = function(_, _)
@@ -21,14 +20,12 @@ return {
 		"pmizio/typescript-tools.nvim",
 		ft = { "typescript", "javascript" },
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = function()
-			return {
-				settings = {
-					expose_as_code_action = "all",
-					complete_function_calls = true,
-				},
-			}
-		end,
+		opts = {
+			settings = {
+				expose_as_code_action = "all",
+				complete_function_calls = true,
+			},
+		},
 	},
 	{
 		"nvim-neotest/neotest",

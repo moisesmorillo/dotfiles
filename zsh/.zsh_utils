@@ -1,0 +1,80 @@
+#!/bin/bash
+# shellcheck disable=SC1090
+
+# This function is used to test the speed of zsh startup
+zsh_time() {
+	repeat 10 time zsh -i -c exit
+}
+
+# This function is used to update the OS packages, dotfiles and LazyVim core and plugins
+fu() {
+	OS=$(uname -s)
+
+	echo "*** Updating OS packages***"
+
+	if [[ "$OS" == "Darwin" ]]; then
+		brew update
+		brew upgrade
+	fi
+
+	if [[ "$OS" == "Linux" ]]; then
+		sudo apt update -y
+		sudo apt full-upgrade -y
+		sudo apt autoremove -y
+		sudo apt autoclean -y
+	fi
+
+	echo "*** Updating dotfiles ***"
+	cd ~/projects/dotfiles/ && git pull origin main && cd - || exit
+
+	echo "*** Updating LazyVim core and plugins ***"
+	nvim --headless "+Lazy! sync" +qa
+}
+
+# This function is used to reload the zsh configuration
+zsh_reload() {
+	echo "*** Reloading zsh configuration ***"
+	source ~/.zshrc
+}
+
+# This function is used to re-stow the dotfiles
+stow_dotfiles() {
+	current_dir=$(pwd)
+	echo "*** Restowing dotfiles ***"
+	cd ~/projects/dotfiles/ && stow -R -t "$HOME" ./* && cd "$current_dir" || return
+}
+
+# This function is used to kill the orbstack process (docker)
+kdo() {
+	pgrep -fi orbstack | xargs kill
+}
+
+# This function is used to reinstall the LazyVim dotfiles
+reinstall_lazyvim() {
+	current_dir=$(pwd)
+	echo "*** Unstowing Neovim directory ***"
+	cd ~/projects/dotfiles/ || return
+	stow -v -D nvim -t "$HOME"
+	echo "*** Removing Neovim and LazyVim directories ***"
+	rm -rf ~/.config/nvim/ ~/.local/share/nvim/ ~/.local/state/nvim/ ~/.cache/nvim/
+	echo "*** Restowing Neovim directory ***"
+	stow -v -R -t "$HOME" nvim
+	cd "$current_dir" || return
+	echo "*** Reinstalling LazyVim plugins ***"
+	nvim --headless "+Lazy! sync" +qa
+}
+
+# This function is used to install the LazyVim test environment
+install_lazyvim_test() {
+	mkdir ~/.config/lazytest
+	git clone https://github.com/LazyVim/starter ~/.config/lazytest
+	NVIM_APPNAME=lazytest nvim --headless "+Lazy! sync" +qa
+}
+
+# This function is used to clean the LazyVim test environment
+clean_lazyvim_test() {
+	rm -rf ~/.config/lazytest
+	rm -rf ~/.local/share/lazytest
+	rm -rf ~/.local/state/lazytest
+	rm -rf ~/.cache/lazytest
+}
