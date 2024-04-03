@@ -74,7 +74,7 @@ if type goenv &>/dev/null; then
 	}
 fi
 
-# Rustscustomization
+# Rusts customization
 [ -f ~/.cargo/env ] && source ~/.cargo/env
 
 if type starship &>/dev/null; then
