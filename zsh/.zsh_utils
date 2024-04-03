@@ -49,6 +49,7 @@ kdo() {
 	pgrep -fi orbstack | xargs kill
 }
 
+# This function is used to reinstall the LazyVim dotfiles
 reinstall_lazyvim() {
 	current_dir=$(pwd)
 	echo "*** Unstowing Neovim directory ***"
@@ -61,4 +62,19 @@ reinstall_lazyvim() {
 	cd "$current_dir" || return
 	echo "*** Reinstalling LazyVim plugins ***"
 	nvim --headless "+Lazy! sync" +qa
+}
+
+# This function is used to install the LazyVim test environment
+install_lazyvim_test() {
+	mkdir ~/.config/lazytest
+	git clone https://github.com/LazyVim/starter ~/.config/lazytest
+	NVIM_APPNAME=lazytest nvim --headless "+Lazy! sync" +qa
+}
+
+# This function is used to clean the LazyVim test environment
+clean_lazyvim_test() {
+	rm -rf ~/.config/lazytest
+	rm -rf ~/.local/share/lazytest
+	rm -rf ~/.local/state/lazytest
+	rm -rf ~/.cache/lazytest
 }
