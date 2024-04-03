@@ -29,7 +29,6 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
 			formatters_by_ft = {
 				groovy = { "npm_groovy_lint" },
