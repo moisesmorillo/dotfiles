@@ -39,8 +39,9 @@ zsh_reload() {
 
 # This function is used to re-stow the dotfiles
 stow_dotfiles() {
+	current_dir=$(pwd)
 	echo "*** Restowing dotfiles ***"
-	cd ~/projects/dotfiles/ && stow -R -t "$HOME" ./* && cd - || return
+	cd ~/projects/dotfiles/ && stow -R -t "$HOME" ./* && cd "$current_dir" || return
 }
 
 # This function is used to kill the orbstack process (docker)
@@ -49,11 +50,15 @@ kdo() {
 }
 
 reinstall_lazyvim() {
-	echo "*** Reinstalling LazyVim ***"
+	current_dir=$(pwd)
+	echo "*** Unstowing Neovim directory ***"
 	cd ~/projects/dotfiles/ || return
-	stow -D nvim -t "$HOME"
+	stow -v -D nvim -t "$HOME"
+	echo "*** Removing Neovim and LazyVim directories ***"
 	rm -rf ~/.config/nvim/ ~/.local/share/nvim/ ~/.local/state/nvim/ ~/.cache/nvim/
-	stow -R -t "$HOME" nvim
-	cd - || return
+	echo "*** Restowing Neovim directory ***"
+	stow -v -R -t "$HOME" nvim
+	cd "$current_dir" || return
+	echo "*** Reinstalling LazyVim plugins ***"
 	nvim --headless "+Lazy! sync" +qa
 }
