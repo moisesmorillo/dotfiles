@@ -1,4 +1,3 @@
--- This also has an autocmd in nvim/.config/nvim/lua/config/autocmds.lua which set Jenkinsfile to groovy filetype.
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
