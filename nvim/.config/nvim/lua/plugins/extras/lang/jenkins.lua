@@ -4,6 +4,17 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		opts = function(_, opts)
 			vim.list_extend(opts.ensure_installed or {}, { "groovy" })
+			vim.filetype.add({
+				pattern = {
+					[".*.Jenkinsfile"] = "groovy",
+				},
+			})
+		end,
+	},
+	{
+		"williamboman/mason.nvim",
+		opts = function(_, opts)
+			vim.list_extend(opts.ensure_installed or {}, { "npm-groovy-lint" })
 		end,
 	},
 	{
@@ -36,7 +47,7 @@ return {
 			formatters = {
 				npm_groovy_lint = {
 					command = "npm-groovy-lint",
-					args = { "--failon", "error", "--fix", "$FILENAME" },
+					args = { "--failon", "error", "--format", "$FILENAME" },
 					cwd = require("conform.util").root_file({ ".git" }),
 					stdin = false,
 				},
