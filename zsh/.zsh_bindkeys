@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# reset zsh bindings
-bindkey -d
+# reset zsh bindings to emacs style
+bindkey -e
 # allow option + arrow keys to move by word
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
