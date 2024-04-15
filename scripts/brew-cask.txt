@@ -4,5 +4,4 @@ devtoys
 font-jetbrains-mono-nerd-font
 orbstack
 raycast
-warp
 wezterm

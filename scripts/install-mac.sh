@@ -27,13 +27,6 @@ xargs brew install --force <./scripts/brew-formulae.txt
 ### Install All Brew Casks ###
 xargs brew install --cask --force <./scripts/brew-cask.txt
 
-### Install Catppuccin for Warp ###
-mkdir -p ~/.warp/themes/
-curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_latte.yml
-curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_frappe.yml
-curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_macchiato.yml
-curl --output-dir ~/.warp/themes -LO https://raw.githubusercontent.com/catppuccin/warp/main/dist/catppuccin_mocha.yml
-
 ### Install Volta (Node Package Manager) ###
 curl https://get.volta.sh | bash
 omz reload
