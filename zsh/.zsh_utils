@@ -29,12 +29,17 @@ fu() {
 
 	echo "*** Updating LazyVim core and plugins ***"
 	nvim --headless "+Lazy! sync" +qa
+
+	echo "*** Updating zinit and plugins ***"
+	zinit self-update
+	zinit update --parallel
 }
 
 # This function is used to reload the zsh configuration
 zsh_reload() {
 	echo "*** Reloading zsh configuration ***"
 	source ~/.zshrc
+	exec zsh
 }
 
 # This function is used to re-stow the dotfiles
