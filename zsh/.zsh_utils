@@ -83,3 +83,10 @@ clean_lazyvim_test() {
 	rm -rf ~/.local/state/lazytest
 	rm -rf ~/.cache/lazytest
 }
+
+# This function is used to rebuild the zsh completions
+rebuild_zsh_completions() {
+	echo "Rebuilding zcompdump"
+	rm -f ~/.zcompdump
+	compinit
+}

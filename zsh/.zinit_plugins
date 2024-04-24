@@ -8,7 +8,8 @@ zinit wait lucid light-mode for \
 	atinit"zicompinit; zicdreplay" \
 	zdharma-continuum/fast-syntax-highlighting \
 	atload"_zsh_autosuggest_start" \
-	zsh-users/zsh-autosuggestions
+	zsh-users/zsh-autosuggestions \
+	zsh-users/zsh-completions
 
 zinit wait"2" lucid light-mode for \
 	Aloxaf/fzf-tab
