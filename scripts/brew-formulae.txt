@@ -25,6 +25,7 @@ so
 speedtest-cli
 starship
 stow
+tlrc
 tmux
 volta
 wget
