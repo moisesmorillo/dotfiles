@@ -46,6 +46,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ### Install Tpm ###
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+### Customize bat ###
+mkdir -p "$(bat --config-dir)/themes"
+wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+bat cache --build
+
 ### Set defaults mac os
 chmod +x ./scripts/macos-settings.sh
 . ./scripts/macos-settings.sh
