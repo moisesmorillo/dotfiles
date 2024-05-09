@@ -1,9 +1,10 @@
+#!/bin/bash
 #
 # Browser
 #
 
 if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
-  export BROWSER="open"
+	export BROWSER="open"
 fi
 
 #
@@ -11,10 +12,10 @@ fi
 #
 
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL="nvim"
+	export VISUAL="nvim"
 fi
 if [[ -z "$PAGER" ]]; then
-  export PAGER="less"
+	export PAGER="less"
 fi
 
 #
@@ -22,9 +23,8 @@ fi
 #
 
 if [[ -z "$LANG" ]]; then
-  export LANG="en_US.UTF-8"
+	export LANG="en_US.UTF-8"
 fi
 
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
-
