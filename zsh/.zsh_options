@@ -1,10 +1,17 @@
 #!/bin/bash
 
+# General settings
+setopt CORRECT
+setopt INTERACTIVE_COMMENTS
+
+# History settings
 export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
+export HISTSIZE=20000
 export SAVEHIST=10000
 
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_VERIFY
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
