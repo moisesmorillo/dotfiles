@@ -15,6 +15,7 @@ compinit -C
 [ -f ~/.zsh_utils ] && source ~/.zsh_utils
 [ -f ~/.zsh_bindkeys ] && source ~/.zsh_bindkeys
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
+[ -f ~/.zsh_options ] && source ~/.zsh_options
 
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
