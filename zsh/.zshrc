@@ -26,6 +26,10 @@ export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export BAT_THEME="Catppuccin Mocha"
 # Set bat as default pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# Clangd libc++ path
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # Node customization
 if type volta &>/dev/null; then
