@@ -13,11 +13,13 @@ hashicorp/tap/terraform
 jesseduffield/lazydocker/lazydocker
 jesseduffield/lazygit/lazygit
 jq
+llvm
 neofetch
 neovim
 openjdk@17
 pinentry-mac
 pyenv
+pyenv-virtualenv
 rbenv
 ripgrep
 ruby-build
