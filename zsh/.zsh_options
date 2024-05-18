@@ -1,17 +1,32 @@
 #!/bin/bash
+# shellcheck disable=SC2034
 
 # General settings
 setopt CORRECT
 setopt INTERACTIVE_COMMENTS
 
 # History settings
-export HISTFILE=~/.zsh_history
-export HISTSIZE=20000
-export SAVEHIST=10000
+HISTFILE=~/.zsh_history
+HISTSIZE=20000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
 
-setopt SHARE_HISTORY
+setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
-setopt HIST_VERIFY
-setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+
+# Completion settings
+# case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# shellcheck disable=SC2296
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# shellcheck disable=SC2016
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons=always --all $realpath'
+zstyle ':completion:*' menu no
+
