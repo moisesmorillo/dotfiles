@@ -6,9 +6,6 @@ bindkey -e
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# allow ctrl-r to search the history
-bindkey "^r" fzf-history-widget
-
 # allo arrow keys to search history
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
