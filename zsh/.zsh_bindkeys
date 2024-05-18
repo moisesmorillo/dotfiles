@@ -9,10 +9,6 @@ bindkey "^[[1;3D" backward-word
 # allow ctrl-r to search the history
 bindkey "^r" fzf-history-widget
 
-# allow ctrl-a and ctrl-e to move to beginning/end of line
-bindkey "^a" beginning-of-line
-bindkey "^e" end-of-line
-
 # allo arrow keys to search history
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
