@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
 # Load homebrew bin paths
@@ -7,10 +7,23 @@ if [ -f /opt/homebrew/bin/brew ]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-autoload -U compinit
-compinit -C
+# Zinit autoinstaller
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [ ! -d "$ZINIT_HOME" ]; then
+	echo "Installing Zinit..."
+	mkdir -p "$(dirname "$ZINIT_HOME")"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-# Load custom files plugins and personal custom files
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Load zinit plugins
+[ -f ~/.zinit_plugins ] && source ~/.zinit_plugins
+
+autoload -U compinit && compinit -C
+zinit cdreplay -q
+
+# Load custom file plugins and personal custom files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zsh_utils ] && source ~/.zsh_utils
 [ -f ~/.zsh_bindkeys ] && source ~/.zsh_bindkeys
@@ -87,24 +100,5 @@ fi
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
 fi
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-	print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-	command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-	command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" &&
-		print -P "%F{33} %F{34}Installation successful.%f%b" ||
-		print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-# shellcheck disable=SC2154
-if [[ -n "${_comps+z}" ]]; then
-	_comps[zinit]=_zinit
-fi
-# Load zinit plugins
-[ -f ~/.zinit_plugins ] && source ~/.zinit_plugins
-### End of Zinit's installer chunk
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
