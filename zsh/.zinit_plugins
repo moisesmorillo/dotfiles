@@ -1,15 +1,14 @@
 #!/bin/bash
 
-zinit wait lucid light-mode for \
-	zdharma-continuum/zinit-annex-as-monitor \
-	zdharma-continuum/zinit-annex-bin-gem-node \
-	zdharma-continuum/zinit-annex-patch-dl \
-	zdharma-continuum/zinit-annex-rust \
-	atinit"zicompinit; zicdreplay" \
+zinit wait lucid for \
+	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
 	zdharma-continuum/fast-syntax-highlighting \
-	atload"_zsh_autosuggest_start" \
-	zsh-users/zsh-autosuggestions \
-	zsh-users/zsh-completions
+	blockf \
+	zsh-users/zsh-completions \
+	atload"!_zsh_autosuggest_start" \
+	zsh-users/zsh-autosuggestions
 
-zinit wait"2" lucid light-mode for \
-	Aloxaf/fzf-tab
+zinit ice wait"1" lucid
+zinit light Aloxaf/fzf-tab
+
+zinit snippet OMZP::git
