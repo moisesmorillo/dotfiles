@@ -1,14 +1,14 @@
 return {
-	{
-		"danymat/neogen",
-		opts = {
-			languages = {
-				rust = {
-					template = {
-						annotation_convention = "rustdoc",
-					},
-				},
-			},
-		},
-	},
+  {
+    "danymat/neogen",
+    opts = {
+      languages = {
+        rust = {
+          template = {
+            annotation_convention = "rustdoc",
+          },
+        },
+      },
+    },
+  },
 }

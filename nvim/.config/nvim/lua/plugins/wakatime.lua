@@ -1,4 +1,4 @@
 return {
-	"wakatime/vim-wakatime",
-	event = "LazyFile",
+  "wakatime/vim-wakatime",
+  event = "LazyFile",
 }
