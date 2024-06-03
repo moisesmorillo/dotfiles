@@ -1,7 +1,7 @@
 local opt = vim.opt
 local options = {
   colorcolumn = "120",
-  expandtab = false,
+  expandtab = true,
   fillchars = { eob = "~" },
   modelines = 0,
   number = true,
@@ -10,7 +10,7 @@ local options = {
   scrolloff = 8,
   shiftwidth = 2,
   showmatch = true,
-  softtabstop = 0,
+  softtabstop = 2,
   swapfile = false,
   tabstop = 2,
   textwidth = 120,
