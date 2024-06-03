@@ -1,14 +1,14 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			servers = {
-				jsonls = {
-					settings = {
-						validate = { enable = true },
-					},
-				},
-			},
-		},
-	},
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        jsonls = {
+          settings = {
+            validate = { enable = true },
+          },
+        },
+      },
+    },
+  },
 }

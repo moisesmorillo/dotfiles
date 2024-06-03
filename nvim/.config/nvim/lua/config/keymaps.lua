@@ -8,10 +8,10 @@ map("n", "<leader>cld", "<cmd>Neoconf lsp<cr>", { desc = "LSP Debug" })
 
 -- Telescope
 map("n", "<leader>fd", function()
-	require("telescope.builtin").git_files({
-		prompt_title = "<Dotfiles>",
-		cwd = "~/projects/dotfiles/",
-	})
+  require("telescope.builtin").git_files({
+    prompt_title = "<Dotfiles>",
+    cwd = "~/projects/dotfiles/",
+  })
 end, { desc = "Find Dotfiles" })
 
 -- ToggleTerm
@@ -23,7 +23,7 @@ map("t", "<c-l", "<cmd>wincmd l", { desc = "Go To Right Terminal", noremap = tru
 
 -- Lazygit remap to use local config
 map("n", "<leader>gg", function()
-	Util.terminal({ "lazygit", "-ucd", lazygitHomeDirConfig }, { esc_esc = false, ctrl_hjkl = false })
+  Util.terminal({ "lazygit", "-ucd", lazygitHomeDirConfig }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit", noremap = true, silent = true })
 
 vim.keymap.del("n", "<leader>gG")
