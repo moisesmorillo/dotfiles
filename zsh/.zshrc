@@ -83,13 +83,13 @@ fi
 if type goenv &>/dev/null; then
 	export GOENV_ROOT="$HOME/.goenv"
 	export GOENV_SHELL=zsh
+	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 	export PATH="$PATH:$GOENV_ROOT/shims:$GOENV_ROOT/bin"
+	source "$(dirname "$(greadlink -f "$(whence -p goenv)")")/../completions/goenv.zsh"
+	export GOBIN="$GOPATH/bin"
 
 	goenv() {
 		unset -f goenv >/dev/null 2>&1
-		eval "$(goenv init -)"
-		export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
-		export GOBIN="$GOPATH/bin"
 		goenv "$@"
 	}
 fi
