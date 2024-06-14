@@ -4,7 +4,7 @@ local lazygitHomeDirConfig = os.getenv("HOME") .. "/.config/lazygit"
 
 -- LSP
 map("n", "<leader>cli", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
-map("n", "<leader>cld", "<cmd>Neoconf lsp<cr>", { desc = "LSP Debug" })
+map("n", "<leader>cld", "<cmd>LazyDev lsp<cr>", { desc = "LSP Debug" })
 
 -- Telescope
 map("n", "<leader>fd", function()
