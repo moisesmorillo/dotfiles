@@ -37,6 +37,7 @@ return {
       filtered_items = {
         hide_by_name = {
           "node_modules",
+          ".git",
         },
         hide_dotfiles = false,
         hide_gitignored = false,
