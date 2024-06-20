@@ -33,6 +33,7 @@ fu() {
 	echo "*** Updating zinit and plugins ***"
 	zinit self-update
 	zinit update --parallel
+	stow_dotfiles
 }
 
 # This function is used to reload the zsh configuration
