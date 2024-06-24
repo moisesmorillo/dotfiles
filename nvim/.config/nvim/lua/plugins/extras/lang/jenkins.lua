@@ -1,20 +1,15 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, { "groovy" })
-      vim.filetype.add({
-        pattern = {
-          [".*.Jenkinsfile"] = "groovy",
-        },
-      })
-    end,
+    opts = {
+      ensure_installed = "groovy",
+    },
   },
   {
     "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, { "npm-groovy-lint" })
-    end,
+    opts = {
+      ensure_installed = { "npm-groovy-lint" },
+    },
   },
   {
     "neovim/nvim-lspconfig",
