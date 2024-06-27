@@ -1,5 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -23,14 +24,10 @@ require("lazy").setup({
     { import = "plugins.extras.lang.go" },
     -- jenkins
     { import = "plugins.extras.lang.jenkins" },
-    -- json
-    { import = "plugins.extras.lang.json" },
     -- lua
     { import = "plugins.extras.lang.lua" },
     -- python
     { import = "plugins.extras.lang.python" },
-    -- rust
-    { import = "plugins.extras.lang.rust" },
     -- typescript
     { import = "plugins.extras.lang.typescript" },
     -- yaml
