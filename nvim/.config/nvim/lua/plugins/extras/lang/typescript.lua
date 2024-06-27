@@ -24,12 +24,6 @@ return {
     "danymat/neogen",
     opts = {
       languages = {
-        javscript = {
-          template = {
-            annotation_convention = "jsdoc",
-          },
-        },
-
         typescript = {
           template = {
             annotation_convention = "tsdoc",
