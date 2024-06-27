@@ -1,5 +1,24 @@
 return {
   {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              -- Using Ruff's import organizer
+              disableOrganizeImports = true,
+              analysis = {
+                -- Ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { "*" },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/neotest-python",

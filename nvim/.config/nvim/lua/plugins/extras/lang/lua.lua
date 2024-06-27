@@ -43,19 +43,4 @@ return {
     },
     opts = { adapters = { ["neotest-plenary"] = {} } },
   },
-  {
-    "danymat/neogen",
-    opts = function(_, opts)
-      opts = vim.tbl_deep_extend("force", opts or {}, {
-        languages = {
-          lua = {
-            template = {
-              annotation_convention = "ldoc",
-            },
-          },
-        },
-      })
-      return opts
-    end,
-  },
 }
