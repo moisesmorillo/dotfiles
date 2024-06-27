@@ -1,12 +1,9 @@
 return {
   {
     "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, {
-        "yamlfmt",
-        "yamllint",
-      })
-    end,
+    opts = {
+      ensure_installed = { "yamlfmt", "yamllint" },
+    },
   },
   {
     "mfussenegger/nvim-lint",
