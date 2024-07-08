@@ -9,26 +9,32 @@ gui:
   language: 'en' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko'
   timeFormat: '02 Jan 06' # https://pkg.go.dev/time#Time.Format
   shortTimeFormat: '3:04PM'
-  # use the mocha catppuccin theme
+  # use the tokyo-night
   theme:
-    lightTheme: false
     activeBorderColor:
-      - "#a6e3a1" # Green
-      - bold
+      - "#ff9e64"
+      - "bold"
     inactiveBorderColor:
-      - "#cdd6f4" # Text
+      - "#27a1b9"
+    searchingActiveBorderColor:
+      - "#ff9e64"
+      - "bold"
     optionsTextColor:
-      - "#89b4fa" # Blue
+      - "#7aa2f7"
     selectedLineBgColor:
-      - "#313244" # Surface0
-    selectedRangeBgColor:
-      - "#313244" # Surface0
-    cherryPickedCommitBgColor:
-      - "#94e2d5" # Teal
+      - "#283457"
     cherryPickedCommitFgColor:
-      - "#cba6f7" # Mauve
+      - "#7aa2f7"
+    cherryPickedCommitBgColor:
+      - "#bb9af7"
+    markedBaseCommitFgColor:
+      - "#7aa2f7"
+    markedBaseCommitBgColor:
+      - "#e0af68"
     unstagedChangesColor:
-      - "#f38ba8" # Red
+      - "#db4b4b"
+    defaultFgColor:
+      - "#c0caf5"
   commitLength:
     show: true
   mouseEvents: false
