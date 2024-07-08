@@ -7,7 +7,7 @@ end
 
 config.animation_fps = 75
 config.audible_bell = "Disabled"
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Tokyo Night (Gogh)"
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 config.cursor_blink_rate = 500

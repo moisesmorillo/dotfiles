@@ -1,15 +1,32 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
+# in osx this should be in: ~/Library/Application Support/lazydocker/config.yml
 gui:
   scrollHeight: 2
   returnImmediately: true
   language: en
-  # use the mocha catppuccin theme
+  # use the tokyonight theme
   theme:
     activeBorderColor:
-      - "#a6e3a1"
-      - bold
+      - "#ff9e64"
+      - "bold"
     inactiveBorderColor:
-      - "#cdd6f4"
-    selectedLineBgColor:
-      - "#313244"
+      - "#27a1b9"
+    searchingActiveBorderColor:
+      - "#ff9e64"
+      - "bold"
     optionsTextColor:
-      - "#89b4fa"
+      - "#7aa2f7"
+    selectedLineBgColor:
+      - "#283457"
+    cherryPickedCommitFgColor:
+      - "#7aa2f7"
+    cherryPickedCommitBgColor:
+      - "#bb9af7"
+    markedBaseCommitFgColor:
+      - "#7aa2f7"
+    markedBaseCommitBgColor:
+      - "#e0af68"
+    unstagedChangesColor:
+      - "#db4b4b"
+    defaultFgColor:
+      - "#c0caf5"
