@@ -6,7 +6,6 @@ return {
 
     for i, v in ipairs(right) do
       if v.ft == "copilot-chat" then
-        vim.print("Removing Copilot Chat from the right side")
         table.remove(right, i)
         break
       end
