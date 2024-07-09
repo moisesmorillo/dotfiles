@@ -35,6 +35,7 @@ export EDITOR="nvim"
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS="--ignore-case"
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export BAT_THEME="Enki-Tokyo-Night"
 # Set bat as default pager
