@@ -4,7 +4,6 @@ return {
     defaults = {
       -- Coverage
       ["<leader>tc"] = { name = "+coverage" },
-      -- LSP
     },
   },
 }
