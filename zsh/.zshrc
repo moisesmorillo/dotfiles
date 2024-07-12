@@ -44,18 +44,8 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
-# Node customization
-if type volta &>/dev/null; then
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$PATH:$VOLTA_HOME/bin"
-
-  volta() {
-    unset -f volta >/dev/null 2>&1
-    eval "$(volta completions zsh)"
-    volta "$@"
-  }
-fi
+# ASDF customization
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # Ruby customization
 if type rbenv &>/dev/null; then
@@ -65,33 +55,6 @@ if type rbenv &>/dev/null; then
     unset -f rbenv >/dev/null 2>&1
     eval "$(rbenv init - -zsh)"
     rbenv "$@"
-  }
-fi
-
-# Python customization
-if type pyenv &>/dev/null; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-
-  pyenv() {
-    unset -f pyenv >/dev/null 2>&1
-    eval "$(pyenv init -)"
-    pyenv "$@"
-  }
-fi
-
-# Go customization
-if type goenv &>/dev/null; then
-  export GOENV_ROOT="$HOME/.goenv"
-  export GOENV_SHELL=zsh
-  export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
-  export PATH="$PATH:$GOENV_ROOT/shims:$GOENV_ROOT/bin"
-  source "$(dirname "$(greadlink -f "$(whence -p goenv)")")/../completions/goenv.zsh"
-  export GOBIN="$GOPATH/bin"
-
-  goenv() {
-    unset -f goenv >/dev/null 2>&1
-    goenv "$@"
   }
 fi
 
