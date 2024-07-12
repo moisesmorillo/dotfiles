@@ -10,7 +10,8 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
-$custom \
+$custom\
+[](fg:#212736 bg:transparent)\
 \n$character"""
 
 
@@ -34,12 +35,6 @@ format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 [git_status]
 style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
-
-[time]
-disabled = false
-time_format = "%R"                                      # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [custom.nodejs]
 command = "asdf current nodejs | awk '{print $2}'"
