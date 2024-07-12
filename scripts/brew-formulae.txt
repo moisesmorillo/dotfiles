@@ -1,3 +1,4 @@
+asdf
 bat
 btop
 cocoapods
@@ -7,7 +8,6 @@ fzf
 git
 gnu-sed
 gnupg
-goenv
 gpg2
 hashicorp/tap/terraform
 jesseduffield/lazydocker/lazydocker
@@ -18,17 +18,12 @@ neofetch
 neovim
 openjdk@17
 pinentry-mac
-pyenv
-pyenv-virtualenv
-rbenv
 ripgrep
-ruby-build
 so
 speedtest-cli
 starship
 stow
 tlrc
 tmux
-volta
 wget
 yq
