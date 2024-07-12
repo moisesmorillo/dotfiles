@@ -1,9 +1,9 @@
 return {
   "folke/which-key.nvim",
   opts = {
-    defaults = {
+    spec = {
       -- Coverage
-      ["<leader>tc"] = { name = "+coverage" },
+      { "<leader>tc", group = "+coverage" },
     },
   },
 }
