@@ -25,5 +25,6 @@ starship
 stow
 tlrc
 tmux
+uv
 wget
 yq
