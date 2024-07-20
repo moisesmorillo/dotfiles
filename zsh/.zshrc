@@ -47,20 +47,6 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 # ASDF customization
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
-# Ruby customization
-if type rbenv &>/dev/null; then
-  export PATH="$PATH:$HOME/.rbenv/bin"
-
-  rbenv() {
-    unset -f rbenv >/dev/null 2>&1
-    eval "$(rbenv init - -zsh)"
-    rbenv "$@"
-  }
-fi
-
-# Rusts customization
-[ -f ~/.cargo/env ] && source ~/.cargo/env
-
 if type starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
