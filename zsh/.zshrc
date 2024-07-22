@@ -44,8 +44,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-# ASDF customization
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
