@@ -2,7 +2,6 @@
 node = "lts"
 go = "latest"
 python = "3.11"
-rust = "latest"
 ruby = "system"
 
 [settings]

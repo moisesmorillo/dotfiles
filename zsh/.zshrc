@@ -53,4 +53,8 @@ if type mise &>/dev/null; then
 	eval "$(mise activate zsh)"
 fi
 
+if [[ -f ~/.cargo/env ]]; then
+	source ~/.cargo/env
+fi
+
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
