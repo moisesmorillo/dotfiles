@@ -4,15 +4,15 @@
 
 # Load homebrew bin paths
 if [ -f /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Zinit autoinstaller
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
-  echo "Installing Zinit..."
-  mkdir -p "$(dirname "$ZINIT_HOME")"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+	echo "Installing Zinit..."
+	mkdir -p "$(dirname "$ZINIT_HOME")"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
@@ -48,7 +48,11 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 if type starship &>/dev/null; then
-  eval "$(starship init zsh)"
+	eval "$(starship init zsh)"
+fi
+
+if type mise &>/dev/null; then
+	eval "$(mise activate zsh)"
 fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log

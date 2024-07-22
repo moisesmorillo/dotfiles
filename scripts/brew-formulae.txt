@@ -1,4 +1,3 @@
-asdf
 bat
 btop
 cocoapods
@@ -14,6 +13,7 @@ jesseduffield/lazydocker/lazydocker
 jesseduffield/lazygit/lazygit
 jq
 llvm
+mise
 neofetch
 neovim
 openjdk@17

@@ -10,7 +10,10 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
-$custom\
+$nodejs\
+$golang\
+$python\
+$rust\
 [](fg:#212736 bg:transparent)\
 \n$character"""
 
@@ -36,55 +39,3 @@ format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
-[custom.nodejs]
-command = "asdf current nodejs | awk '{print $2}'"
-description = "The currently installed version of NodeJS via asdf"
-detect_files = ['package.json', '.node-version']
-detect_folders = ["node_modules"]
-detect_extensions = ["js", "ts"]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($output) ](fg:#769ff0 bg:#212736)]($style)'
-
-[custom.golang]
-command = "asdf current golang | awk '{print $2}'"
-description = "The currently installed version of Golang via asdf"
-detect_files = [
-  'go.mod',
-  'go.sum',
-  'go.work',
-  'glide.yaml',
-  'Gopkg.yml',
-  'Gopkg.lock',
-  '.go-version',
-]
-detect_extensions = ["go"]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($output) ](fg:#769ff0 bg:#212736)]($style)'
-
-[custom.rust]
-command = "asdf current rust | awk '{print $2}'"
-description = "The currently installed version of Rust via asdf"
-detect_files = ['Cargo.toml']
-detect_extensions = ["rs"]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($output) ](fg:#769ff0 bg:#212736)]($style)'
-
-[custom.python]
-command = "asdf current python | awk '{print $2}'"
-description = "The currently installed version of Python via asdf"
-detect_files = [
-  '.python-version',
-  'Pipfile',
-  '__init__.py',
-  'pyproject.toml',
-  'requirements.txt',
-  'setup.py',
-  'tox.ini',
-]
-detect_extensions = ["py"]
-symbol = "🐍"
-style = "bg:#212736"
-format = '[[ $symbol ($output) ](fg:#769ff0 bg:#212736)]($style)'

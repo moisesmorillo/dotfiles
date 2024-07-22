@@ -27,16 +27,11 @@ xargs brew install --force <./scripts/brew-formulae.txt
 ### Install All Brew Casks ###
 xargs brew install --cask --force <./scripts/brew-cask.txt
 
-### Install asdf plugins
-asdf plugin add nodejs
-asdf install nodejs latest:20
-asdf plugin add golang
-asdf install golang latest
-asdf plugin add ruby
-asdf plugin add python
-asdf install python latest:3.11
-asdf plugin add rust
-asdf install rust latest
+### Install mise plugins (tool version manager)
+mise install node@lts
+mise install golang@latest
+mise install rust@latest
+mise install python@3.11
 
 ### Install Java ###
 sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
