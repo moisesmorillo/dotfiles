@@ -92,3 +92,14 @@ rebuild_zsh_completions() {
 	rm -f ~/.zcompdump
 	compinit
 }
+
+# This function is used to create python virtual environment
+venv_create() {
+	python -m venv .venv
+}
+
+# This function is used to activate python virtual environment
+venv_activate() {
+	# shellcheck disable=SC1091
+	source .venv/bin/activate
+}

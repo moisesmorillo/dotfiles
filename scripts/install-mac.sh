@@ -30,8 +30,10 @@ xargs brew install --cask --force <./scripts/brew-cask.txt
 ### Install mise plugins (tool version manager)
 mise install node@lts
 mise install golang@latest
-mise install rust@latest
 mise install python@3.11
+
+### Install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 ### Install Java ###
 sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
@@ -41,13 +43,17 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### Customize bat ###
 mkdir -p "$(bat --config-dir)/themes"
-wget -P "$(bat --config-dir)/themes" https://raw.githubusercontent.com/enkia/enki-theme/master/scheme/Enki-Tokyo-Night.tmTheme
+# shellcheck disable=SC2164
+cd "$(bat --config-dir)/themes"
+git clone git@github.com:enkia/enki-theme.git
 bat cache --build
 
 ### Set defaults mac os
 chmod +x ./scripts/macos-settings.sh
-. ./scripts/macos-settings.sh
+#shellcheck disable=SC1091
+source ./scripts/macos-settings.sh
 
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
-stow -R -t $HOME */
+# shellcheck disable=SC2035
+stow -R -t "$HOME" */
