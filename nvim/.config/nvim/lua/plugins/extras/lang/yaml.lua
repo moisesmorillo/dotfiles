@@ -18,13 +18,14 @@ return {
     opts = {
       formatters = {
         yamlfmt = {
-          args = function()
+          prepend_args = function()
+            local args = {}
             local local_config_file = vim.fn.getcwd() .. "/.yamlfmt"
             if vim.fn.filereadable(local_config_file) == 1 then
-              return { "-conf", local_config_file, "$FILENAME" }
+              args = { "-conf", local_config_file }
             end
 
-            return { "-global_conf", "$FILENAME" }
+            return args
           end,
         },
       },
