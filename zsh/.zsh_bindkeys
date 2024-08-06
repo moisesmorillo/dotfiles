@@ -6,6 +6,9 @@ bindkey -e
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# allo arrow keys to search history
+# allow arrow keys to search history
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+
+# use ctrl + n to switch between nvim distro
+bindkey -s ^n "switch_nvim_distro\n"

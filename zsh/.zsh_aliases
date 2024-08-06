@@ -9,5 +9,11 @@ alias lzg="lazygit -ucd ~/.config/lazygit"
 alias lzd="lazydocker"
 alias ssh='TERM=xterm-256color ssh'
 alias cat="bat"
-alias nvtest="NVIM_APPNAME=lazytest nvim"
 alias kubectl="minikube kubectl --"
+
+# Neovim Aliases
+alias nvim-lazytest="NVIM_APPNAME=lazytest nvim"
+alias nvim-nvchad="NVIM_APPNAME=nvchad nvim"
+alias nvim-kickstart="NVIM_APPNAME=kickstart nvim"
+alias nvim-cybernvim="NVIM_APPNAME=cybernvim nvim"
+alias nvim-astronvim="NVIM_APPNAME=astronvim nvim"
