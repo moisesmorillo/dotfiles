@@ -72,18 +72,46 @@ reinstall_lazyvim() {
 }
 
 # This function is used to install the LazyVim test environment
-install_lazyvim_test() {
-	mkdir ~/.config/lazytest
-	git clone https://github.com/LazyVim/starter ~/.config/lazytest
-	NVIM_APPNAME=lazytest nvim --headless "+Lazy! sync" +qa
+install_nvim_distro() {
+	distro=$1
+
+	case $distro in
+	"nvchad")
+		echo "Installing NvChad..."
+		git clone --depth 1 https://github.com/NvChad/starter "$HOME/.config/$distro"
+		;;
+	"lazytest")
+		echo "Installing LazyVim Test..."
+		git clone --depth 1 https://github.com/LazyVim/starter "$HOME/.config/$distro"
+		;;
+	"kickstart")
+		echo "Installing Kickstart..."
+		git clone --depth 1 https://github.com/nvim-lua/kickstart.nvim "$HOME/.config/$distro"
+		;;
+	"cybernvim")
+		echo "Installing CyberNvim..."
+		git clone --depth 1 https://github.com/pgosar/CyberNvim "$HOME/.config/$distro"
+		;;
+	"astronvim")
+		echo "Installing AstroNvim..."
+		git clone --depth 1 https://github.com/AstroNvim/template "$HOME/.config/$distro"
+		;;
+	*)
+		echo "Invalid distro"
+		;;
+	esac
+
+	rm -rf "$HOME/.config/$distro/.git"
 }
 
 # This function is used to clean the LazyVim test environment
-clean_lazyvim_test() {
-	rm -rf ~/.config/lazytest
-	rm -rf ~/.local/share/lazytest
-	rm -rf ~/.local/state/lazytest
-	rm -rf ~/.cache/lazytest
+clean_nvim_distro() {
+	distro=$1
+	echo "Cleaning $distro..."
+	rm -rf "$HOME/.config/$distro"
+	rm -rf "$HOME/.local/share/$distro"
+	rm -rf "$HOME/.local/state/$distro"
+	rm -rf "$HOME/.cache/$distro"
 }
 
 # This function is used to rebuild the zsh completions
@@ -102,4 +130,15 @@ venv_create() {
 venv_activate() {
 	# shellcheck disable=SC1091
 	source .venv/bin/activate
+}
+
+# This function is used to switch between nvim distros
+switch_nvim_distro() {
+	items=("LazyVim Test" "NvChad" "AstroNvim" "CyberNvim" "Kickstart")
+	config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --border --exit-0)
+	if [[ -z $config ]]; then
+		echo "Nothing selected"
+		return 0
+	fi
+	NVIM_APPNAME=$config nvim "$@"
 }
