@@ -6,3 +6,4 @@ ruby = "system"
 
 [settings]
 go_set_gobin = true
+pipx_uvx = true
