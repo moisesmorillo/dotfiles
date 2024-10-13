@@ -11,18 +11,6 @@ return {
       end
     end
 
-    vim.list_extend(left, {
-      {
-        ft = "copilot-chat",
-        title = "Copilot Chat",
-        pinned = true,
-        open = function()
-          vim.cmd("Neotree close")
-          vim.cmd("CopilotChat toggle")
-        end,
-      },
-    })
-
     -- Swap the left and right sides, and leave the right side empty for NeoTree
     opts.left = right
     opts.right = left
