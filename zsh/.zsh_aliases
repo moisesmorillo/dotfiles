@@ -10,6 +10,7 @@ alias lzd="lazydocker"
 alias ssh='TERM=xterm-256color ssh'
 alias cat="bat"
 alias kubectl="minikube kubectl --"
+alias cd="z" # zoxide
 
 # Neovim Aliases
 alias nvim-lazytest="NVIM_APPNAME=lazytest nvim"

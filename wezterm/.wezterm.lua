@@ -1,6 +1,35 @@
 local wezterm = require("wezterm")
 local config = {}
 
+local function getModelName()
+	local empty_model = ""
+
+	local handle = io.popen("system_profiler SPHardwareDataType | grep 'Model Name' | awk -F': ' '{print $2}'")
+	if not handle then
+		return empty_model
+	end
+
+	local read_result = handle:read("*a")
+	if not read_result then
+		return empty_model
+	end
+
+	handle:close()
+
+	return read_result
+end
+
+local function getFontSizeBasedOnModelName()
+	local font_size = 18
+	local model_name = getModelName()
+
+	if model_name:lower():find("macbook pro") then
+		font_size = 16
+	end
+
+	return font_size
+end
+
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -18,7 +47,7 @@ config.default_cwd = wezterm.home_dir .. "/projects"
 config.default_workspace = "projects"
 config.enable_tab_bar = false
 config.font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "Fira Code" })
-config.font_size = 18
+config.font_size = getFontSizeBasedOnModelName()
 config.hide_tab_bar_if_only_one_tab = true
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 config.macos_window_background_blur = 10
