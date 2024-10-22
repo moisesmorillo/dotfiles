@@ -3,6 +3,7 @@ btop
 cocoapods
 eza
 fd
+figlet
 fzf
 git
 gnu-sed
