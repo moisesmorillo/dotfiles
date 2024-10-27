@@ -53,6 +53,10 @@ chmod +x ./scripts/macos-settings.sh
 #shellcheck disable=SC1091
 source ./scripts/macos-settings.sh
 
+### Customize Eza ###
+mkdir -p ~/.config/eza
+curl -L https://github.com/folke/tokyonight.nvim/raw/main/extras/eza/tokyonight.yml -o ~/.config/eza/theme.yml
+
 ### Clone and set dotfiles ###
 rm -rf ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
 # shellcheck disable=SC2035

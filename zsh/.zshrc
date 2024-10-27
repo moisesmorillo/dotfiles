@@ -44,6 +44,8 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+# Eza config dir
+export EZA_CONFIG_DIR="$HOME/.config/eza"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
