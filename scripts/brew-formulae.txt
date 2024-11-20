@@ -20,6 +20,7 @@ neovim
 openjdk@17
 pinentry-mac
 ripgrep
+rust-analyzer
 so
 speedtest-cli
 starship
