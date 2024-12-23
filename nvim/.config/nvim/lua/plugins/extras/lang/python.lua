@@ -19,6 +19,12 @@ return {
     },
   },
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = { "debugpy" },
+    },
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/neotest-python",
@@ -43,6 +49,19 @@ return {
           template = {
             annotation_convention = "numpydoc",
           },
+        },
+      },
+    },
+  },
+  {
+    "neolooong/whichpy.nvim",
+    keys = {
+      { "<leader>cv", "<cmd>:WhichPy select<cr>", desc = "Select VirtualEnv", ft = "python" },
+    },
+    opts = {
+      picker = {
+        ["fzf-lua"] = {
+          prompt = "Select Python Interpreter",
         },
       },
     },
