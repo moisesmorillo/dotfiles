@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+
 ### Uninstall Brew ###
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
@@ -22,10 +26,10 @@ brew tap homebrew/cask-fonts
 brew tap hashicorp/tap
 
 ### Install All Brew Formulae ###
-xargs brew install --force <./scripts/brew-formulae.txt
+xargs brew install --force < "${SCRIPT_DIR}/brew-formulae.txt"
 
 ### Install All Brew Casks ###
-xargs brew install --cask --force <./scripts/brew-cask.txt
+xargs brew install --cask --force < "${SCRIPT_DIR}/brew-cask.txt"
 
 ### Install mise plugins (tool version manager)
 mise install node@lts
@@ -49,15 +53,31 @@ git clone git@github.com:enkia/enki-theme.git
 bat cache --build
 
 ### Set defaults mac os
-chmod +x ./scripts/macos-settings.sh
+chmod +x "${SCRIPT_DIR}/macos-settings.sh"
 #shellcheck disable=SC1091
-source ./scripts/macos-settings.sh
+source "${SCRIPT_DIR}/macos-settings.sh"
 
 ### Customize Eza ###
 mkdir -p ~/.config/eza
 curl -L https://github.com/folke/tokyonight.nvim/raw/main/extras/eza/tokyonight.yml -o ~/.config/eza/theme.yml
 
 ### Clone and set dotfiles ###
-rm -rf ~/.config/nvim ~/.config/tmux ~/.local/share/nvim ~/.config/lazygit ~/.zshrc* ~/.tmux ~/.zprofile* ~/.zsh_history* ~/.zsh_sessions/ ~/.zshrc ~/.zshenv
+for pattern in \
+    ~/.config/nvim \
+    ~/.config/tmux \
+    ~/.local/share/nvim \
+    ~/.config/lazygit \
+    ~/.zshrc* \
+    ~/.tmux \
+    ~/.zprofile* \
+    ~/.zsh_history* \
+    ~/.zsh_sessions/ \
+    ~/.zshrc \
+    ~/.zshenv; do
+    rm -rf $pattern 2>/dev/null
+done
+
+# Change to root directory before running stow
+cd "$ROOT_DIR" || exit
 # shellcheck disable=SC2035
-stow -R -t "$HOME" */
+/opt/homebrew/bin/stow -R -t "$HOME" */
