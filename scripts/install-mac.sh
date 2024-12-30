@@ -19,9 +19,6 @@ fi
 ### Update Brew ###
 brew update && brew upgrade
 
-### Enable Brew Taps ###
-brew tap homebrew/cask-fonts
-
 ### Enable Terrform Tap ###
 brew tap hashicorp/tap
 
