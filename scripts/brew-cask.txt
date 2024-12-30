@@ -2,6 +2,7 @@
 dbeaver-community
 devtoys
 font-jetbrains-mono-nerd-font
+ghostty
 orbstack
 raycast
 wezterm
