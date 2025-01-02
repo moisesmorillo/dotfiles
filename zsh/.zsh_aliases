@@ -12,6 +12,9 @@ alias cat="bat"
 alias kubectl="minikube kubectl --"
 alias cd="z" # zoxide
 
+# custom git aliases
+alias gfp="git fetch --prune"
+
 # Neovim Aliases
 alias nvim-lazytest="NVIM_APPNAME=lazytest nvim"
 alias nvim-nvchad="NVIM_APPNAME=nvchad nvim"
