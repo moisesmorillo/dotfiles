@@ -46,6 +46,8 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 # Eza config dir
 export EZA_CONFIG_DIR="$HOME/.config/eza"
+# Lazygit config file
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
