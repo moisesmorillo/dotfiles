@@ -1,6 +1,7 @@
 auto-update = download
-background-blur-radius = 15
-background-opacity = 0.9
+background = #111111
+background-blur-radius = 20
+background-opacity = 0.95
 clipboard-read = allow
 confirm-close-surface = false
 cursor-style = bar
