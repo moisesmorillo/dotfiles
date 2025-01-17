@@ -1,5 +1,5 @@
 auto-update = download
-background = #111111
+background = #0A0F13
 background-blur-radius = 20
 background-opacity = 0.95
 clipboard-read = allow
