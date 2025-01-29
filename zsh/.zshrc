@@ -48,6 +48,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 # Lazygit config file
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"

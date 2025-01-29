@@ -142,3 +142,13 @@ switch_nvim_distro() {
 	fi
 	NVIM_APPNAME=$config nvim "$@"
 }
+
+sync_lazyvim_plugins() {
+	cd ~/projects/dotfiles || return
+
+	git checkout -b chore/sync
+	git add -A
+	git commit -m "chore: sync LazyVim plugins"
+	git push -u origin chore/sync
+	gh pr create --title "Sync LazyVim Plugins" --base main --head chore/sync
+}
