@@ -147,9 +147,8 @@ switch_nvim_distro() {
 sync_lazyvim_plugins() {
 	cd ~/projects/dotfiles || return
 
-	git checkout -b chore/sync
-	git add -A
-	git commit -m "chore: sync LazyVim plugins"
+	git checkout -B chore/sync
+	git commit -am "chore: sync LazyVim plugins"
 	git push -u origin chore/sync
 	gh pr create --fill --base main --head chore/sync
 }
