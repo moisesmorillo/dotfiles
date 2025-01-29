@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 ### Uninstall Brew ###
@@ -23,10 +23,13 @@ brew update && brew upgrade
 brew tap hashicorp/tap
 
 ### Install All Brew Formulae ###
-xargs brew install --force < "${SCRIPT_DIR}/brew-formulae.txt"
+xargs brew install --force <"${SCRIPT_DIR}/brew-formulae.txt"
 
 ### Install All Brew Casks ###
-xargs brew install --cask --force < "${SCRIPT_DIR}/brew-cask.txt"
+xargs brew install --cask --force <"${SCRIPT_DIR}/brew-cask.txt"
+
+### Enable ollama service
+brew services start ollama
 
 ### Install mise plugins (tool version manager)
 mise install node@lts
@@ -60,18 +63,18 @@ curl -L https://github.com/folke/tokyonight.nvim/raw/main/extras/eza/tokyonight.
 
 ### Clone and set dotfiles ###
 for pattern in \
-    ~/.config/nvim \
-    ~/.config/tmux \
-    ~/.local/share/nvim \
-    ~/.config/lazygit \
-    ~/.zshrc* \
-    ~/.tmux \
-    ~/.zprofile* \
-    ~/.zsh_history* \
-    ~/.zsh_sessions/ \
-    ~/.zshrc \
-    ~/.zshenv; do
-    rm -rf $pattern 2>/dev/null
+	~/.config/nvim \
+	~/.config/tmux \
+	~/.local/share/nvim \
+	~/.config/lazygit \
+	~/.zshrc* \
+	~/.tmux \
+	~/.zprofile* \
+	~/.zsh_history* \
+	~/.zsh_sessions/ \
+	~/.zshrc \
+	~/.zshenv; do
+	rm -rf $pattern 2>/dev/null
 done
 
 # Change to root directory before running stow
