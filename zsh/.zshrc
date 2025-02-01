@@ -64,3 +64,6 @@ if [[ -f ~/.cargo/env ]]; then
 fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/moisesmorillo/.lmstudio/bin"
