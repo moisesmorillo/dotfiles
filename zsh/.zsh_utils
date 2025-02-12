@@ -134,12 +134,23 @@ venv_activate() {
 
 # This function is used to switch between nvim distros
 switch_nvim_distro() {
+	declare -A config_map=(
+		["LazyVim Test"]="lazytest"
+		["NvChad"]="nvchad"
+		["AstroNvim"]="astronvim"
+		["CyberNvim"]="cybernvim"
+		["Kickstart"]="kickstart"
+	)
+
 	items=("LazyVim Test" "NvChad" "AstroNvim" "CyberNvim" "Kickstart")
-	config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --border --exit-0)
-	if [[ -z $config ]]; then
+	selected=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --border --exit-0)
+
+	if [[ -z $selected ]]; then
 		echo "Nothing selected"
 		return 0
 	fi
+
+	config=${config_map[$selected]} # Obtener el valor mapeado
 	NVIM_APPNAME=$config nvim "$@"
 }
 
