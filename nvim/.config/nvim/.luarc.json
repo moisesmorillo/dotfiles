@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "completion": {
+    "autoRequire": true,
+    "callSnippet": "Both",
+    "enable": true,
+    "showParams": true
+  },
+  "hint": {
+    "setType": true,
+    "paramName": "All"
+  },
+  "workspace": {
+    "maxPreload": 1000,
+    "preloadFileSize": 1000,
+    "library": [
+      "$VIMRUNTIME",
+      "$HOME/.local/share/nvim/lazy",
+      "${3rd}/luv/library"
+    ]
+  }
+}
