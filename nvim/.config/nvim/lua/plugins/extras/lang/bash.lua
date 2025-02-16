@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
   -- Default LazyVim tresitter config include bash
   -- Default LazyVim conform config include shfmt for sh

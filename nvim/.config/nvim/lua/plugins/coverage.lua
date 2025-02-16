@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "andythigpen/nvim-coverage",

@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
   -- This will extend the extra go LazyVim setting https://www.lazyvim.org/extras/lang/go
   {
