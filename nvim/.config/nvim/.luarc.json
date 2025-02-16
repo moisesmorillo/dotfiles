@@ -6,6 +6,9 @@
     "enable": true,
     "showParams": true
   },
+  "diagnostics": {
+    "globals": ["vim"]
+  },
   "hint": {
     "setType": true,
     "paramName": "All"
