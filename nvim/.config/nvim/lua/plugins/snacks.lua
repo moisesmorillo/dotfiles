@@ -1,15 +1,23 @@
+---@diagnostic disable: missing-fields
 ---@type LazySpec
 return {
   "folke/snacks.nvim",
   ---@type snacks.Config
   opts = {
-    ---@class snacks.explorer.Config
+    dashboard = {
+      sections = {
+        { section = "header" },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+        { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+        { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { section = "startup" },
+      },
+    },
     explorer = {
       replace_netrw = true,
     },
     picker = {
       sources = {
-        ---@class snacks.picker.explorer.Config
         explorer = {
           hidden = true,
           layout = { layout = { position = "right" } },
