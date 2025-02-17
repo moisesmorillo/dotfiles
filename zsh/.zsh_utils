@@ -162,4 +162,7 @@ sync_lazyvim_plugins() {
 	git commit -am "chore: sync LazyVim plugins"
 	git push -u origin chore/sync
 	gh pr create --fill --base main --head chore/sync
+	gh pr merge chore/sync
+	git checkout main
+	git branch -D chore/sync
 }
