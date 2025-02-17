@@ -165,4 +165,5 @@ sync_lazyvim_plugins() {
 	gh pr merge --merge chore/sync
 	git checkout main
 	git branch -D chore/sync
+	git pull origin main
 }
