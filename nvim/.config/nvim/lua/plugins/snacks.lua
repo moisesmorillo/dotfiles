@@ -20,7 +20,26 @@ return {
       sources = {
         explorer = {
           hidden = true,
-          layout = { layout = { position = "right" } },
+          layout = {
+            layout = {
+              backdrop = false,
+              width = 40,
+              min_width = 40,
+              height = 0,
+              position = "right",
+              border = "none",
+              box = "vertical",
+              {
+                win = "input",
+                height = 1,
+                border = "solid",
+              },
+              {
+                win = "list",
+                border = "none",
+              },
+            },
+          },
         },
       },
     },
