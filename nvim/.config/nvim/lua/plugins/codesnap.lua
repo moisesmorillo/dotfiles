@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "mistricky/codesnap.nvim",
   cmd = "CodeSnap",
