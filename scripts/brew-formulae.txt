@@ -10,6 +10,7 @@ gnu-sed
 gnupg
 gpg2
 hashicorp/tap/terraform
+imagemagick
 jesseduffield/lazydocker/lazydocker
 jesseduffield/lazygit/lazygit
 jq
