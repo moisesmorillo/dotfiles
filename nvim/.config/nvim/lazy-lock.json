@@ -1,6 +1,7 @@
 {
   "LazyVim": { "branch": "main", "commit": "3f034d0a7f58031123300309f2efd3bb0356ee21" },
   "SchemaStore.nvim": { "branch": "main", "commit": "6d840a01545b9be71c45843f2aabcc384d4fafbf" },
+  "avante.nvim": { "branch": "main", "commit": "b21d2632d3990f162aee57f9151864cd2fd77cac" },
   "blink.cmp": { "branch": "main", "commit": "18b352d12b35bca148427b607098df14b75a218f" },
   "blink.compat": { "branch": "main", "commit": "b0c87b64f9c669d3bcfaea8a80396fbc16e0fcb5" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
@@ -8,6 +9,7 @@
   "codesnap.nvim": { "branch": "main", "commit": "6400480aa6cc366cbd931146c429aaa64680dab9" },
   "conform.nvim": { "branch": "master", "commit": "a6f5bdb78caa305496357d17e962bbc4c0b392e2" },
   "crates.nvim": { "branch": "main", "commit": "1d92a7f449a2a76d8f4c3459bd98f450e76d2ea3" },
+  "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
   "dropbar.nvim": { "branch": "master", "commit": "70431765f36f768d1d93b5e4f5d428bc6d3e9a65" },
   "edgy.nvim": { "branch": "main", "commit": "7e8dedc39abebe40c289b8012cc89b11c69aa7a0" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
