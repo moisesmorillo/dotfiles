@@ -2,9 +2,9 @@
 
 alias nv="nvim"
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-alias ls="eza --icons"
-alias ll="eza --icons --long --all --header"
-alias tree="eza --icons --tree"
+alias ls="eza --icons=always --total-size"
+alias ll="eza --icons=always --total-size --long --all --header"
+alias tree="eza --icons=always --total-size --tree"
 alias lzg="lazygit -ucd ~/.config/lazygit"
 alias lzd="lazydocker"
 alias ssh='TERM=xterm-256color ssh'
