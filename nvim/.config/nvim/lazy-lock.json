@@ -8,7 +8,7 @@
   "codesnap.nvim": { "branch": "main", "commit": "6400480aa6cc366cbd931146c429aaa64680dab9" },
   "conform.nvim": { "branch": "master", "commit": "db8a4a9edb217067b1d7a2e0362c74bfe9cc944d" },
   "crates.nvim": { "branch": "main", "commit": "6bf1b4ceb62f205c903590ccc62061aafc17024a" },
-  "dropbar.nvim": { "branch": "master", "commit": "807ddc72457907a4d7e385cec0aa25648ee60a58" },
+  "dropbar.nvim": { "branch": "master", "commit": "009c214b6eadf49ec50fc81055ceb08ca3fcb8e1" },
   "edgy.nvim": { "branch": "main", "commit": "7e8dedc39abebe40c289b8012cc89b11c69aa7a0" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
