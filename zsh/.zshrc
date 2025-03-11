@@ -65,5 +65,11 @@ fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
 
+if ! type docker &>/dev/null; then
+	if [ ! -L /usr/local/bin/docker ]; then
+		sudo ln -s "$(which podman)" /usr/local/bin/docker
+	fi
+fi
+
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/moisesmorillo/.lmstudio/bin"
