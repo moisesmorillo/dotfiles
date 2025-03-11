@@ -11,6 +11,7 @@ alias ssh='TERM=xterm-256color ssh'
 alias cat="bat"
 alias kubectl="minikube kubectl --"
 alias cd="z" # zoxide
+alias docker="podman"
 
 # custom git aliases
 alias gfp="git fetch --prune"
