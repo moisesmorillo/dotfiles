@@ -22,6 +22,7 @@ ollama
 openjdk@17
 pinentry-mac
 podman
+podman-compose
 ripgrep
 rust-analyzer
 so
