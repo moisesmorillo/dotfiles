@@ -21,6 +21,7 @@ neovim
 ollama
 openjdk@17
 pinentry-mac
+podman
 ripgrep
 rust-analyzer
 so

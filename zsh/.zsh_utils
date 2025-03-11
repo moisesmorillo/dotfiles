@@ -51,9 +51,9 @@ stow_dotfiles() {
 	cd "$current_dir" || return
 }
 
-# This function is used to kill the orbstack process (docker)
+# This function is used to kill the podman process (docker)
 kdo() {
-	pgrep -fi orbstack | xargs kill
+	pgrep -fi podman | xargs kill
 }
 
 # This function is used to reinstall the LazyVim dotfiles

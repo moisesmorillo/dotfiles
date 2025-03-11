@@ -25,6 +25,3 @@ fi
 if [[ -z "$LANG" ]]; then
 	export LANG="en_US.UTF-8"
 fi
-
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
