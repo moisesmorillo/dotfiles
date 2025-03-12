@@ -1,6 +1,10 @@
 bat
 btop
 cocoapods
+colima
+docker
+docker-compose
+docker-buildx
 eza
 fd
 figlet
@@ -21,8 +25,6 @@ neovim
 ollama
 openjdk@17
 pinentry-mac
-podman
-podman-compose
 ripgrep
 rust-analyzer
 so
