@@ -53,7 +53,7 @@ stow_dotfiles() {
 
 # This function is used to kill the podman process (docker)
 kdo() {
-	pgrep -fi podman | xargs kill
+	pgrep -fi docker | xargs kill
 }
 
 # This function is used to reinstall the LazyVim dotfiles

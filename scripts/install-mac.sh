@@ -31,6 +31,9 @@ xargs brew install --cask --force <"${SCRIPT_DIR}/brew-cask.txt"
 ### Enable ollama service
 brew services start ollama
 
+### Create default colima machine
+colima start --cpu 2 --memory 2 --disk 50
+
 ### Install mise plugins (tool version manager)
 mise install node@lts
 mise install golang@latest
