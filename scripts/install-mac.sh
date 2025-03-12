@@ -31,6 +31,9 @@ xargs brew install --cask --force <"${SCRIPT_DIR}/brew-cask.txt"
 ### Enable ollama service
 brew services start ollama
 
+### Update docker config file
+. ./scripts/update-docker-config.sh
+
 ### Create default colima machine
 colima start --cpu 2 --memory 2 --disk 50
 
