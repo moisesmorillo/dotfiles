@@ -14,6 +14,7 @@ local options = {
   swapfile = false,
   tabstop = 2,
   textwidth = 120,
+  -- winborder = "rounded",
 }
 
 -- better search
