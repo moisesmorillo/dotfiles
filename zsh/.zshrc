@@ -36,6 +36,7 @@ export EDITOR="nvim"
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="--ignore-case"
+# Mason binaries
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export BAT_THEME="Enki-Tokyo-Night"
 # Set bat as default pager
@@ -50,6 +51,8 @@ export EZA_CONFIG_DIR="$HOME/.config/eza"
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
+# Yarn binaries
+export PATH="$PATH:$HOME/.yarn/bin"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
