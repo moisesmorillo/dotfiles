@@ -59,6 +59,13 @@ defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
 ################################################################################
 defaults write com.apple.Accessibility ReduceMotionEnabled -int 1
 
+################################################################################
+# Keyboard Repeat Reset
+################################################################################
+defaults delete -g ApplePressAndHoldEnabled
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false          # VSCode
+defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false # Cursor
+
 # Restart affected apps
 for app in "Dock" "Finder" "SystemUIServer"; do
 	killall "${app}" >/dev/null 2>&1

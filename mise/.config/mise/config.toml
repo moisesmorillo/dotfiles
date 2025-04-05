@@ -3,6 +3,7 @@ node = "lts"
 go = "latest"
 python = "3.11"
 ruby = "system"
+yarn = "1"
 
 [settings]
 go_set_gobin = true

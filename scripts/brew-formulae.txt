@@ -1,6 +1,10 @@
 bat
 btop
 cocoapods
+colima
+docker
+docker-compose
+docker-buildx
 eza
 fd
 figlet
