@@ -123,7 +123,12 @@ rebuild_zsh_completions() {
 
 # This function is used to create python virtual environment
 venv_create() {
-	python -m venv .venv
+	python_version=$1
+	if [[ -n $python_version ]]; then
+		uv venv -p "$python_version"
+	else
+		uv venv
+	fi
 }
 
 # This function is used to activate python virtual environment
