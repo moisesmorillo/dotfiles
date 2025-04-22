@@ -172,3 +172,7 @@ sync_lazyvim_plugins() {
 	git branch -D chore/sync
 	git pull origin main
 }
+# This function is used to generate/regenerate the ~/Brewfile file
+genarate_brewfile() {
+	brew bundle dump --force --file=~/Brewfile
+}
