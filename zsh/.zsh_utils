@@ -173,6 +173,16 @@ sync_lazyvim_plugins() {
 	git pull origin main
 }
 # This function is used to generate/regenerate the ~/Brewfile file
-genarate_brewfile() {
+brewfile_generate() {
 	brew bundle dump --force --file=~/Brewfile
+}
+
+# This function is used to install brew system from ~/Brewfile file
+brewfile_install() {
+	brew bundle install --file=~/Brewfile
+}
+
+# This function is used to force install brew system from ~/Brewfile file
+brewfile_force_install() {
+	brew bundle --force cleanup --file=~/Brewfile
 }
