@@ -123,7 +123,12 @@ rebuild_zsh_completions() {
 
 # This function is used to create python virtual environment
 venv_create() {
-	python -m venv .venv
+	python_version=$1
+	if [[ -n $python_version ]]; then
+		uv venv -p "$python_version"
+	else
+		uv venv
+	fi
 }
 
 # This function is used to activate python virtual environment
@@ -166,4 +171,18 @@ sync_lazyvim_plugins() {
 	git checkout main
 	git branch -D chore/sync
 	git pull origin main
+}
+# This function is used to generate/regenerate the ~/Brewfile file
+brewfile_generate() {
+	brew bundle dump --force --file=~/Brewfile
+}
+
+# This function is used to install brew system from ~/Brewfile file
+brewfile_install() {
+	brew bundle install --file=~/Brewfile
+}
+
+# This function is used to force install brew system from ~/Brewfile file
+brewfile_force_install() {
+	brew bundle --force cleanup --file=~/Brewfile
 }

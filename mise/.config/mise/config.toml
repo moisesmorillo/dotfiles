@@ -4,6 +4,7 @@ go = "latest"
 python = "3.11"
 ruby = "system"
 yarn = "1"
+uv = "0.6.13"
 
 [settings]
 go_set_gobin = true
