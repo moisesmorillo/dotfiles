@@ -1,4 +1,4 @@
-tap "1password/tap"
+tap "buo/cask-upgrade"
 tap "hashicorp/tap"
 tap "homebrew/services"
 tap "jesseduffield/lazydocker"
