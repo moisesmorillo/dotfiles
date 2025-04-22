@@ -19,14 +19,8 @@ fi
 ### Update Brew ###
 brew update && brew upgrade
 
-### Enable Terrform Tap ###
-brew tap hashicorp/tap
-
-### Install All Brew Formulae ###
-xargs brew install --force <"${SCRIPT_DIR}/brew-formulae.txt"
-
-### Install All Brew Casks ###
-xargs brew install --cask --force <"${SCRIPT_DIR}/brew-cask.txt"
+### Install from Brewfile
+brew bundle install --file=./brew/Brewfile
 
 ### Enable ollama service
 brew services start ollama

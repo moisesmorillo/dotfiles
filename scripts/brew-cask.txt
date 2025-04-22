@@ -1,7 +1,0 @@
-1password/tap/1password-cli
-dbeaver-community
-devtoys
-font-jetbrains-mono-nerd-font
-ghostty
-raycast
-wezterm
