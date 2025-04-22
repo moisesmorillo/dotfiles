@@ -34,6 +34,7 @@ fu() {
 	zinit self-update
 	zinit update --parallel
 	stow_dotfiles
+	zsh_reload
 }
 
 # This function is used to reload the zsh configuration
@@ -171,6 +172,7 @@ sync_lazyvim_plugins() {
 	git checkout main
 	git branch -D chore/sync
 	git pull origin main
+	git fetch --prune
 }
 # This function is used to generate/regenerate the ~/Brewfile file
 brewfile_generate() {
