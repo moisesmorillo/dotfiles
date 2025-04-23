@@ -1,0 +1,20 @@
+name: Lua Linting
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Luacheck linter
+        uses: lunarmodules/luacheck@v1
+
+      - name: Type Check Code Base
+        uses: mrcjkb/lua-typecheck-action@v1
+        with:
+          checkLevel: Hint
+          directories: |
+            nvim/.config/nvim/
+          configpath: nvim/.config/nvim/.luarc.json
