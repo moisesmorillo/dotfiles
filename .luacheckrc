@@ -1,2 +1,2 @@
 allow_defined = true
-globals = {"vim"}
+globals = {"vim", "Snacks"}
