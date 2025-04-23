@@ -10,8 +10,6 @@ jobs:
       
       - name: Luacheck linter
         uses: lunarmodules/luacheck@v1
-        with:
-          args: --globals vim .
 
       - name: Type Check Code Base
         uses: mrcjkb/lua-typecheck-action@v1
