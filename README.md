@@ -21,13 +21,6 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Various useful aliases and functions
 - Integration with tools like `fzf`, `ripgrep`, and more
 
-<details>
-<summary>📸 Screenshot</summary>
-<p align="center">
-  <img src="screenshots/zsh.png" alt="ZSH Screenshot" width="800">
-</p>
-</details>
-
 ### 🔮 Neovim
 
 - Full-featured development environment
@@ -35,13 +28,6 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Syntax highlighting and treesitter support
 - Telescope for fuzzy finding
 - Custom keybindings and plugins
-
-<details>
-<summary>📸 Screenshot</summary>
-<p align="center">
-  <img src="screenshots/nvim.png" alt="Neovim Screenshot" width="800">
-</p>
-</details>
 
 ### 📊 Tmux
 
@@ -74,27 +60,13 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Lazydocker for container management
 - Integration with Colima for macOS
 
-<details>
-<summary>📸 Screenshot</summary>
-<p align="center">
-  <img src="screenshots/lazydocker.png" alt="Lazydocker Screenshot" width="800">
-</p>
-</details>
-
 ### 🗂️ Lazygit
 
 - Terminal UI for Git commands
 - Custom keybindings and themes
 - Seamless Git workflow
 
-<details>
-<summary>📸 Screenshot</summary>
-<p align="center">
-  <img src="screenshots/lazygit.png" alt="Lazygit Screenshot" width="800">
-</p>
-</details>
-
-### 🔄 Mise (formerly rtx)
+### 🔄 Mise
 
 - Runtime version manager
 - Configuration for multiple languages
