@@ -26,8 +26,10 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Full-featured development environment
 - LSP integration with autocompletion
 - Syntax highlighting and treesitter support
-- Telescope for fuzzy finding
+- Snacks for fuzzy finding
 - Custom keybindings and plugins
+- AI integration with Avante and CodeCompanion
+- Cursor like features
 
 ### 📊 Tmux
 
