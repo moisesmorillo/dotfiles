@@ -7,7 +7,7 @@
     "showParams": true
   },
   "diagnostics": {
-    "globals": ["vim"]
+    "globals": ["vim", "Snacks"]
   },
   "hint": {
     "setType": true,
