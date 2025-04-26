@@ -11,7 +11,15 @@ return {
     "folke/snacks.nvim",
   },
   version = false,
+  -- TODO: add search service
+  -- TODO: fix applying changes to a new buffer
   opts = {
+    auto_suggestions_provider = "openrouter",
+    behaviour = {
+      auto_suggestions = true,
+      auto_apply_diff_after_generation = true,
+      enable_cursor_planning_mode = true,
+    },
     provider = "openrouter",
     vendors = {
       openrouter = {
