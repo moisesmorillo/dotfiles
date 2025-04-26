@@ -12,14 +12,15 @@ return {
   },
   version = false,
   opts = {
-    provider = "gemini",
-    gemini = {
-      model = "gemini-2.5-flash-preview-04-17", --"gemini-2.5-pro-exp-03-25",
-    },
-    ollama = {
-      endpoint = "http://127.0.0.1:11434",
-      model = "qwen2.5-coder",
-      disable_tools = true,
+    provider = "openrouter",
+    vendors = {
+      openrouter = {
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        api_key_name = "OPENROUTER_API_KEY",
+        model = "google/gemini-2.5-flash-preview",
+        disable_tools = true,
+      },
     },
     file_selector = {
       provider = "snacks",
