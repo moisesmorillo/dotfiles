@@ -12,9 +12,8 @@ return {
   },
   version = false,
   opts = {
-    auto_suggestions_provider = "openrouter",
+    cursor_applying_provider = "groq",
     behaviour = {
-      auto_suggestions = true,
       auto_apply_diff_after_generation = true,
       enable_cursor_planning_mode = true,
       use_cwd_as_project_root = true,
@@ -26,6 +25,13 @@ return {
         endpoint = "https://openrouter.ai/api/v1",
         api_key_name = "OPENROUTER_API_KEY",
         model = "openai/gpt-4.1-mini",
+      },
+      groq = {
+        __inherited_from = "openai",
+        api_key_name = "GROQ_API_KEY",
+        endpoint = "https://api.groq.com/openai/v1/",
+        model = "llama-3.3-70b-versatile",
+        max_completion_tokens = 32768,
       },
     },
     file_selector = {
