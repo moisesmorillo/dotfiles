@@ -11,14 +11,13 @@ return {
     "folke/snacks.nvim",
   },
   version = false,
-  -- TODO: add search service
-  -- TODO: fix applying changes to a new buffer
   opts = {
     auto_suggestions_provider = "openrouter",
     behaviour = {
       auto_suggestions = true,
       auto_apply_diff_after_generation = true,
       enable_cursor_planning_mode = true,
+      use_cwd_as_project_root = true,
     },
     provider = "openrouter",
     vendors = {
@@ -26,8 +25,7 @@ return {
         __inherited_from = "openai",
         endpoint = "https://openrouter.ai/api/v1",
         api_key_name = "OPENROUTER_API_KEY",
-        model = "google/gemini-2.5-flash-preview",
-        disable_tools = true,
+        model = "openai/gpt-4.1-mini",
       },
     },
     file_selector = {
@@ -43,6 +41,9 @@ return {
       host_mount = "~/projects/",
       llm_model = "qwen2.5-coder",
       embed_model = "nomic-embed-text",
+    },
+    web_search_engine = {
+      provider = "brave",
     },
   },
 }
