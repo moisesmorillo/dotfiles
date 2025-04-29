@@ -10,3 +10,4 @@ uv = "0.6.13"
 go_set_gobin = true
 pipx_uvx = true
 experimental = true
+idiomatic_version_file_enable_tools = []
