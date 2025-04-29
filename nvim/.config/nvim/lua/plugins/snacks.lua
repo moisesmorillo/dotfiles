@@ -46,5 +46,6 @@ return {
     lazygit = {
       configure = true,
     },
+    indent = { enabled = false },
   },
 }
