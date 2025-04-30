@@ -4,15 +4,15 @@
 
 # Load homebrew bin paths
 if [ -f /opt/homebrew/bin/brew ]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Zinit autoinstaller
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
-	echo "Installing Zinit..."
-	mkdir -p "$(dirname "$ZINIT_HOME")"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  echo "Installing Zinit..."
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
@@ -55,15 +55,19 @@ export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 
 if type starship &>/dev/null; then
-	eval "$(starship init zsh)"
+  eval "$(starship init zsh)"
 fi
 
 if type mise &>/dev/null; then
-	eval "$(mise activate zsh)"
+  eval "$(mise activate zsh)"
 fi
 
 if [[ -f ~/.cargo/env ]]; then
-	source ~/.cargo/env
+  source ~/.cargo/env
+fi
+
+if [[ -o login ]]; then
+  fastfetch
 fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
