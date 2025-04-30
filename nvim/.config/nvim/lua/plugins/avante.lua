@@ -43,13 +43,17 @@ return {
     rag_service = {
       enabled = true,
       provider = "ollama",
-      endpoint = "http://127.0.0.1:11434",
-      host_mount = "~/projects/",
-      llm_model = "qwen2.5-coder",
+      endpoint = "http://host.docker.internal:11434",
+      host_mount = "$HOME/projects/",
+      llm_model = "qwen3",
       embed_model = "nomic-embed-text",
+      docker_extra_args = "--add-host=host.docker.internal:host-gateway",
     },
     web_search_engine = {
       provider = "brave",
+    },
+    windows = {
+      position = "left",
     },
   },
 }
