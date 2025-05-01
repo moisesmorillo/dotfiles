@@ -3,6 +3,7 @@ local options = {
   colorcolumn = "120",
   expandtab = true,
   fillchars = { eob = "~" },
+  listchars = { tab = "  " },
   modelines = 0,
   number = true,
   rnu = true,
