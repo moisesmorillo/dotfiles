@@ -138,6 +138,12 @@ venv_activate() {
 	source .venv/bin/activate
 }
 
+# This function is used to install dependencies using poetry
+poetry_install_dependencies() {
+	poetry config virtualenvs.create false
+	poetry install -E dev -E test --no-interaction
+}
+
 # This function is used to switch between nvim distros
 switch_nvim_distro() {
 	declare -A config_map=(
