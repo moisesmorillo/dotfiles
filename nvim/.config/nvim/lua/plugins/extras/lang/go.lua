@@ -2,7 +2,7 @@
 return {
   -- This will extend the extra go LazyVim setting https://www.lazyvim.org/extras/lang/go
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = { "golangci-lint" },
     },
