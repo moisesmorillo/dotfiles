@@ -24,7 +24,7 @@ return {
     },
     provider = "copilot",
     copilot = {
-      model = "claude-3.7-sonnet-thought",
+      model = "claude-sonnet-4",
     },
     vendors = {
       openrouter = {
