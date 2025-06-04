@@ -23,22 +23,24 @@ return {
       use_cwd_as_project_root = true,
     },
     provider = "copilot",
-    copilot = {
-      model = "claude-sonnet-4",
-    },
-    vendors = {
-      openrouter = {
-        __inherited_from = "openai",
-        endpoint = "https://openrouter.ai/api/v1",
-        api_key_name = "OPENROUTER_API_KEY",
-        model = "google/gemini-2.5-flash-preview",
+    providers = {
+      copilot = {
+        model = "claude-sonnet-4",
       },
       groq = {
         __inherited_from = "openai",
         api_key_name = "GROQ_API_KEY",
         endpoint = "https://api.groq.com/openai/v1/",
         model = "llama-3.3-70b-versatile",
-        max_completion_tokens = 32768,
+        extra_request_body = {
+          max_tokens = 32768,
+        },
+      },
+      openrouter = {
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        api_key_name = "OPENROUTER_API_KEY",
+        model = "google/gemini-2.5-flash-preview",
       },
     },
     file_selector = {
