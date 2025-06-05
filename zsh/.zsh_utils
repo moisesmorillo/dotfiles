@@ -48,7 +48,7 @@ zsh_reload() {
 stow_dotfiles() {
 	current_dir=$(pwd)
 	echo "*** Restowing dotfiles ***"
-	cd ~/projects/dotfiles/ && stow -R */
+	cd ~/projects/dotfiles/ && stow --ignore="network_utils" -R */
 	cd "$current_dir" || return
 }
 
