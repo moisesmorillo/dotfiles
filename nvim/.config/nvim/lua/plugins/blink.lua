@@ -2,6 +2,9 @@
 return {
   "saghen/blink.cmp",
   version = "*",
+  enabled = function()
+    return not vim.tbl_contains({ "typr" }, vim.bo.filetype)
+  end,
   dependencies = {
     { "saghen/blink.compat", version = "*" },
   },
