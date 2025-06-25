@@ -29,6 +29,11 @@ return {
   {
     "mfussenegger/nvim-lint",
     opts = {
+      linters = {
+        shellcheck = {
+          args = { "-x" },
+        },
+      },
       linters_by_ft = {
         bash = { "shellcheck" },
         sh = { "shellcheck" },
