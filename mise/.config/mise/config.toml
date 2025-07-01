@@ -2,7 +2,6 @@
 node = "lts"
 go = "latest"
 python = "3.11"
-ruby = "system"
 yarn = "1"
 uv = "0.6.13"
 
@@ -11,3 +10,4 @@ go_set_gobin = true
 pipx_uvx = true
 experimental = true
 idiomatic_version_file_enable_tools = ["python"]
+disable_tools = ["ruby"]
