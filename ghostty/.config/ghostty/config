@@ -16,7 +16,7 @@ window-colorspace = display-p3
 window-padding-x = 5
 window-padding-y = 0
 window-save-state = always
-working-directory = /Users/moisesmorillo/projects/
+working-directory = /Users/moisesmorillo/workspace/
 
 keybind = cmd+shift+r=reload_config
 keybind = global:f12=toggle_quick_terminal

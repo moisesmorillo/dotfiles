@@ -29,7 +29,7 @@ fc-cache -fv
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.zshrc ~/.zshrc
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
-ln -sf ~/projects/dotfiles/.config/tmux ~/.config/tmux
+ln -sf ~/workspace/dotfiles/.config/tmux ~/.config/tmux
 
 ### Install Btop ###
 curl -LO https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz
