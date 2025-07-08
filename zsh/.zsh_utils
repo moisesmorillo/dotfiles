@@ -194,38 +194,53 @@ brewfile_install()        { emulate -L zsh; brew bundle install --file=~/Brewfil
 brewfile_force_install()  { emulate -L zsh; brew bundle cleanup --force --file=~/Brewfile }
 
 #───────────────────────────────────────────────────────────────────────────────
-# gitclone ─ Clone repo into ~/workspace/{owner}/{repo} (lowercase) & cd
+# gitclone ─ Clone a repo into ~/workspace/{owner}/{repo} (lower-case) and cd.
 # Usage: gitclone <url> [branch]
+# Env:   GITCLONE_WORKSPACE (optional root), GITCLONE_DEPTH (shallow depth)
 gitclone() {
   emulate -L zsh -o pipefail -o noclobber
 
   local repo_url=$1 branch=$2
-  [[ -z $repo_url ]] && { log_err "Repository URL required"; log_info "Usage: gitclone <url> [branch]"; return 1; }
+  if [[ -z $repo_url ]]; then
+    log_err "Repository URL required"
+    log_info "Usage: gitclone <url> [branch]"
+    return 1
+  fi
 
+  # Extract “owner” and “repo” (POSIX-friendly regex)
   local re='^(git@|https://)([^/:]+)[/:]([^/]+)/([^/]+)(\.git)?$'
   local owner repo
   if [[ $repo_url =~ $re ]]; then
-    owner=${match[3]:l}
-    repo=${match[4]:l}
-    repo=${repo%.git}
+    owner=${match[3]}
+    repo=${match[4]}
   else
     log_err "Unsupported URL format"
     return 1
   fi
 
-  local root=${GITCLONE_WORKSPACE:-$HOME/workspace}
-  local dir="${root:A}/${owner}/${repo}"
+  # Normalise to lower-case and strip “.git”
+  owner=$(printf '%s' "$owner" | tr '[:upper:]' '[:lower:]')
+  repo=$(printf '%s' "${repo%.git}" | tr '[:upper:]' '[:lower:]')
 
+  # Build absolute target path
+  local root=${GITCLONE_WORKSPACE:-$HOME/workspace}
+  [[ $root != /* ]] && root="$PWD/$root"   # make relative paths absolute
+  local dir="$root/$owner/$repo"
+
+  # Clone or reuse existing repo
   if [[ -d $dir/.git ]]; then
     log_warn "Repository already exists at $dir"
   else
     mkdir -p "$dir" || { log_err "Cannot create $dir"; return 1; }
     log_info "Cloning into $dir"
 
-    local depth_opt=()
-    (( ${+GITCLONE_DEPTH} && GITCLONE_DEPTH > 0 )) && depth_opt=(--depth "$GITCLONE_DEPTH")
-    git clone "$repo_url" "$dir" \
-      ${branch:+--branch "$branch" --single-branch} $depth_opt \
+    local -a depth_opt branch_opt
+    [[ -n $GITCLONE_DEPTH && $GITCLONE_DEPTH -gt 0 ]] && \
+      depth_opt=( --depth "$GITCLONE_DEPTH" )
+    [[ -n $branch ]] && \
+      branch_opt=( --branch "$branch" --single-branch )
+
+    git clone "$repo_url" "$dir" "${branch_opt[@]}" "${depth_opt[@]}" \
       || { log_err "Clone failed"; return 2; }
   fi
 
