@@ -1,248 +1,283 @@
 #!/usr/bin/env zsh
-autoload -U colors && colors       # enable $fg, $reset_color
+autoload -U colors && colors # enable $fg, $reset_color
 
 #───────────────────────────────────────────────────────────────────────────────
 # Helper logging functions
-log_info()  { print -P "%F{green}$*%f"; }
-log_warn()  { print -P "%F{yellow}$*%f"; }
-log_err()   { print -P "%F{red}$*%f"; }
+log_info() { print -P "%F{green}$*%f"; }
+log_warn() { print -P "%F{yellow}$*%f"; }
+log_err() { print -P "%F{red}$*%f"; }
 
 #───────────────────────────────────────────────────────────────────────────────
 # zsh_time ─ Benchmark startup time
 # Usage: zsh_time
 # Repeats interactive startup 10× and prints timing stats.
 zsh_time() {
-  emulate -L zsh -o pipefail
-  repeat 10 time zsh -i -c exit
+	emulate -L zsh -o pipefail
+	repeat 10 time zsh -i -c exit
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # fu ─ Full update: OS packages, dotfiles, LazyVim & zinit plugins
 # Usage: fu
 fu() {
-  emulate -L zsh -o pipefail
+	emulate -L zsh -o pipefail
 
-  log_info "*** Updating OS packages ***"
-  brew update && brew upgrade
+	log_info "*** Updating OS packages ***"
+	brew update && brew upgrade
 
-  log_info "*** Updating dotfiles ***"
-  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
-  git pull --ff-only origin main
-  popd >/dev/null
+	log_info "*** Updating dotfiles ***"
+	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+	git pull --ff-only origin main
+	popd >/dev/null
 
-  log_info "*** Updating LazyVim core and plugins ***"
-  nvim --headless "+Lazy! sync" +qa
+	log_info "*** Updating LazyVim core and plugins ***"
+	nvim --headless "+Lazy! sync" +qa
 
-  log_info "*** Updating zinit and plugins ***"
-  zinit self-update
-  zinit update --parallel
+	log_info "*** Updating zinit and plugins ***"
+	zinit self-update
+	zinit update --parallel
 
-  stow_dotfiles
-  zsh_reload
+	stow_dotfiles
+	zsh_reload
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # zsh_reload ─ Reload ~/.zshrc
 zsh_reload() {
-  emulate -L zsh
-  log_info "*** Reloading zsh configuration ***"
-  source ~/.zshrc
-  exec zsh
+	emulate -L zsh
+	log_info "*** Reloading zsh configuration ***"
+	source ~/.zshrc
+	exec zsh
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # stow_dotfiles ─ Restow dotfiles (excluding network_utils)
 stow_dotfiles() {
-  emulate -L zsh -o pipefail
-  log_info "*** Restowing dotfiles ***"
-  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
-  stow --ignore='network_utils' -R */
-  popd >/dev/null
+	emulate -L zsh -o pipefail
+	log_info "*** Restowing dotfiles ***"
+	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+	stow --ignore='network_utils' -R */
+	popd >/dev/null
 }
 #───────────────────────────────────────────────────────────────────────────────
 # reinstall_lazyvim ─ Unstow & reinstall LazyVim config
 reinstall_lazyvim() {
-  emulate -L zsh -o pipefail
-  log_info "*** Unstowing Neovim directory ***"
-  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
-  stow -v -D nvim
-  log_info "*** Removing Neovim caches ***"
-  rm -rf ~/.config/nvim ~/.local/{share,state}/nvim ~/.cache/nvim
-  log_info "*** Restowing Neovim directory ***"
-  stow -v -R nvim
-  popd >/dev/null
-  log_info "*** Reinstalling LazyVim plugins ***"
-  nvim --headless "+Lazy! sync" +qa
+	emulate -L zsh -o pipefail
+	log_info "*** Unstowing Neovim directory ***"
+	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+	stow -v -D nvim
+	log_info "*** Removing Neovim caches ***"
+	rm -rf ~/.config/nvim ~/.local/{share,state}/nvim ~/.cache/nvim
+	log_info "*** Restowing Neovim directory ***"
+	stow -v -R nvim
+	popd >/dev/null
+	log_info "*** Reinstalling LazyVim plugins ***"
+	nvim --headless "+Lazy! sync" +qa
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # install_nvim_distro ─ Clone a starter Neovim distro into ~/.config/<name>
 # Usage: install_nvim_distro <nvchad|lazytest|kickstart|cybernvim|astronvim>
 install_nvim_distro() {
-  emulate -L zsh -o pipefail
-  local distro=$1 repo
-  case $distro in
-    nvchad)     repo=https://github.com/NvChad/starter ;;
-    lazytest)   repo=https://github.com/LazyVim/starter ;;
-    kickstart)  repo=https://github.com/nvim-lua/kickstart.nvim ;;
-    cybernvim)  repo=https://github.com/pgosar/CyberNvim ;;
-    astronvim)  repo=https://github.com/AstroNvim/template ;;
-    *) log_err "Invalid distro"; return 1 ;;
-  esac
-  log_info "Installing $distro..."
-  git clone --depth 1 "$repo" "$HOME/.config/$distro"
-  rm -rf "$HOME/.config/$distro/.git"
+	emulate -L zsh -o pipefail
+	local distro=$1 repo
+	case $distro in
+	nvchad) repo=https://github.com/NvChad/starter ;;
+	lazytest) repo=https://github.com/LazyVim/starter ;;
+	kickstart) repo=https://github.com/nvim-lua/kickstart.nvim ;;
+	cybernvim) repo=https://github.com/pgosar/CyberNvim ;;
+	astronvim) repo=https://github.com/AstroNvim/template ;;
+	*)
+		log_err "Invalid distro"
+		return 1
+		;;
+	esac
+	log_info "Installing $distro..."
+	git clone --depth 1 "$repo" "$HOME/.config/$distro"
+	rm -rf "$HOME/.config/$distro/.git"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # clean_nvim_distro ─ Remove a test distro completely
 # Usage: clean_nvim_distro <name>
 clean_nvim_distro() {
-  emulate -L zsh -o pipefail
-  local distro=$1
-  [[ -z $distro ]] && { log_err "Distro name required"; return 1; }
-  log_info "Cleaning $distro..."
-  rm -rf "$HOME/.config/$distro" \
-         "$HOME/.local/share/$distro" \
-         "$HOME/.local/state/$distro" \
-         "$HOME/.cache/$distro"
+	emulate -L zsh -o pipefail
+	local distro=$1
+	[[ -z $distro ]] && {
+		log_err "Distro name required"
+		return 1
+	}
+	log_info "Cleaning $distro..."
+	rm -rf "$HOME/.config/$distro" \
+		"$HOME/.local/share/$distro" \
+		"$HOME/.local/state/$distro" \
+		"$HOME/.cache/$distro"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # rebuild_zsh_completions ─ Remove zcompdump & re-init completions
 rebuild_zsh_completions() {
-  emulate -L zsh
-  log_info "Rebuilding zcompdump"
-  rm -f ~/.zcompdump
-  compinit
+	emulate -L zsh
+	log_info "Rebuilding zcompdump"
+	rm -f ~/.zcompdump
+	compinit
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # venv_create ─ Create Python virtualenv via `uv`
 # Usage: venv_create [py_version]
 venv_create() {
-  emulate -L zsh -o pipefail
-  local py=$1
-  command -v uv >/dev/null || { log_err "'uv' not found"; return 1; }
-  [[ -n $py ]] && uv venv -p "$py" || uv venv
+	emulate -L zsh -o pipefail
+	local py=$1
+	command -v uv >/dev/null || {
+		log_err "'uv' not found"
+		return 1
+	}
+	[[ -n $py ]] && uv venv -p "$py" || uv venv
 }
 
 # venv_activate ─ Activate local .venv
 venv_activate() {
-  emulate -L zsh
-  [[ -f .venv/bin/activate ]] || { log_err ".venv not found"; return 1; }
-  # shellcheck disable=SC1091
-  source .venv/bin/activate
+	emulate -L zsh
+	[[ -f .venv/bin/activate ]] || {
+		log_err ".venv not found"
+		return 1
+	}
+	# shellcheck disable=SC1091
+	source .venv/bin/activate
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # poetry_install_dependencies ─ Install deps with poetry (no venv)
 poetry_install_dependencies() {
-  emulate -L zsh -o pipefail
-  pip install -U pip poetry
-  poetry config virtualenvs.create false
-  poetry install -E dev -E test --no-interaction
+	emulate -L zsh -o pipefail
+	pip install -U pip poetry
+	poetry config virtualenvs.create false
+	poetry install -E dev -E test --no-interaction
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # switch_nvim_distro ─ Choose & launch a Neovim distro via fzf
 # Usage: switch_nvim_distro [file | +args]
 switch_nvim_distro() {
-  emulate -L zsh -o pipefail
-  command -v fzf >/dev/null || { log_err "fzf not installed"; return 1; }
+	emulate -L zsh -o pipefail
+	command -v fzf >/dev/null || {
+		log_err "fzf not installed"
+		return 1
+	}
 
-  # Parallel arrays: labels[i] ↔ configs[i] (zsh arrays are 1-based)
-  local -a labels=( 'LazyVim Test' 'NvChad' 'AstroNvim' 'CyberNvim' 'Kickstart' )
-  local -a configs=( 'lazytest'     'nvchad' 'astronvim' 'cybernvim' 'kickstart' )
+	# Parallel arrays: labels[i] ↔ configs[i] (zsh arrays are 1-based)
+	local -a labels=('LazyVim Test' 'NvChad' 'AstroNvim' 'CyberNvim' 'Kickstart')
+	local -a configs=('lazytest' 'nvchad' 'astronvim' 'cybernvim' 'kickstart')
 
-  local selected
-  selected=$(printf '%s\n' "${labels[@]}" |
-             fzf --prompt=' Neovim Config: ' --height=50% \
-                 --layout=reverse --border --exit-0)
+	local selected
+	selected=$(printf '%s\n' "${labels[@]}" |
+		fzf --prompt=' Neovim Config: ' --height=50% \
+			--layout=reverse --border --exit-0)
 
-  [[ -z $selected ]] && { log_warn "Nothing selected"; return 0; }
+	[[ -z $selected ]] && {
+		log_warn "Nothing selected"
+		return 0
+	}
 
-  local i
-  for (( i = 1; i <= ${#labels[@]}; i++ )); do
-    if [[ "${labels[i]}" == "$selected" ]]; then
-      NVIM_APPNAME="${configs[i]}" nvim "$@"
-      return
-    fi
-  done
+	local i
+	for ((i = 1; i <= ${#labels[@]}; i++)); do
+		if [[ "${labels[i]}" == "$selected" ]]; then
+			NVIM_APPNAME="${configs[i]}" nvim "$@"
+			return
+		fi
+	done
 }
 #───────────────────────────────────────────────────────────────────────────────
 # sync_lazyvim_plugins ─ Create PR syncing LazyVim lockfile with dotfiles repo
 sync_lazyvim_plugins() {
-  emulate -L zsh -o pipefail
-  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
-  git checkout -B chore/sync
-  git commit --allow-empty -am "chore: sync LazyVim plugins"
-  git push -fu origin chore/sync
-  gh pr create --fill --base main --head chore/sync
-  gh pr merge --merge chore/sync
-  git checkout main
-  git branch -D chore/sync
-  git pull --ff-only origin main
-  git fetch --prune
-  popd >/dev/null
+	emulate -L zsh -o pipefail
+	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+	git checkout -B chore/sync
+	git commit --allow-empty -am "chore: sync LazyVim plugins"
+	git push -fu origin chore/sync
+	gh pr create --fill --base main --head chore/sync
+	gh pr merge --merge chore/sync
+	git checkout main
+	git branch -D chore/sync
+	git pull --ff-only origin main
+	git fetch --prune
+	popd >/dev/null
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # Brewfile helpers
-brewfile_generate()       { emulate -L zsh; brew bundle dump --force --file=~/Brewfile }
-brewfile_install()        { emulate -L zsh; brew bundle install --file=~/Brewfile }
-brewfile_force_install()  { emulate -L zsh; brew bundle cleanup --force --file=~/Brewfile }
+brewfile_generate() {
+	emulate -L zsh
+	brew bundle dump --force --file=~/Brewfile
+}
+
+brewfile_install() {
+	emulate -L zsh
+	brew bundle install --file=~/Brewfile
+}
+
+brewfile_force_install() {
+	emulate -L zsh
+	brew bundle cleanup --force --file=~/Brewfile
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # gitclone ─ Clone a repo into ~/workspace/{owner}/{repo} (lower-case) and cd.
 # Usage: gitclone <url> [branch]
 # Env:   GITCLONE_WORKSPACE (optional root), GITCLONE_DEPTH (shallow depth)
 gitclone() {
-  emulate -L zsh -o pipefail -o noclobber
+	emulate -L zsh -o pipefail -o noclobber
 
-  local repo_url=$1 branch=$2
-  if [[ -z $repo_url ]]; then
-    log_err "Repository URL required"
-    log_info "Usage: gitclone <url> [branch]"
-    return 1
-  fi
+	local repo_url=$1 branch=$2
+	if [[ -z $repo_url ]]; then
+		log_err "Repository URL required"
+		log_info "Usage: gitclone <url> [branch]"
+		return 1
+	fi
 
-  # Extract “owner” and “repo” (POSIX-friendly regex)
-  local re='^(git@|https://)([^/:]+)[/:]([^/]+)/([^/]+)(\.git)?$'
-  local owner repo
-  if [[ $repo_url =~ $re ]]; then
-    owner=${match[3]}
-    repo=${match[4]}
-  else
-    log_err "Unsupported URL format"
-    return 1
-  fi
+	# Extract “owner” and “repo” (POSIX-friendly regex)
+	local re='^(git@|https://)([^/:]+)[/:]([^/]+)/([^/]+)(\.git)?$'
+	local owner repo
+	if [[ $repo_url =~ $re ]]; then
+		owner=${match[3]}
+		repo=${match[4]}
+	else
+		log_err "Unsupported URL format"
+		return 1
+	fi
 
-  # Normalise to lower-case and strip “.git”
-  owner=$(printf '%s' "$owner" | tr '[:upper:]' '[:lower:]')
-  repo=$(printf '%s' "${repo%.git}" | tr '[:upper:]' '[:lower:]')
+	# Normalise to lower-case and strip “.git”
+	owner=$(printf '%s' "$owner" | tr '[:upper:]' '[:lower:]')
+	repo=$(printf '%s' "${repo%.git}" | tr '[:upper:]' '[:lower:]')
 
-  # Build absolute target path
-  local root=${GITCLONE_WORKSPACE:-$HOME/workspace}
-  [[ $root != /* ]] && root="$PWD/$root"   # make relative paths absolute
-  local dir="$root/$owner/$repo"
+	# Build absolute target path
+	local root=${GITCLONE_WORKSPACE:-$HOME/workspace}
+	[[ $root != /* ]] && root="$PWD/$root" # make relative paths absolute
+	local dir="$root/$owner/$repo"
 
-  # Clone or reuse existing repo
-  if [[ -d $dir/.git ]]; then
-    log_warn "Repository already exists at $dir"
-  else
-    mkdir -p "$dir" || { log_err "Cannot create $dir"; return 1; }
-    log_info "Cloning into $dir"
+	# Clone or reuse existing repo
+	if [[ -d $dir/.git ]]; then
+		log_warn "Repository already exists at $dir"
+	else
+		mkdir -p "$dir" || {
+			log_err "Cannot create $dir"
+			return 1
+		}
+		log_info "Cloning into $dir"
 
-    local -a depth_opt branch_opt
-    [[ -n $GITCLONE_DEPTH && $GITCLONE_DEPTH -gt 0 ]] && \
-      depth_opt=( --depth "$GITCLONE_DEPTH" )
-    [[ -n $branch ]] && \
-      branch_opt=( --branch "$branch" --single-branch )
+		local -a depth_opt branch_opt
+		[[ -n $GITCLONE_DEPTH && $GITCLONE_DEPTH -gt 0 ]] &&
+			depth_opt=(--depth "$GITCLONE_DEPTH")
+		[[ -n $branch ]] &&
+			branch_opt=(--branch "$branch" --single-branch)
 
-    git clone "$repo_url" "$dir" "${branch_opt[@]}" "${depth_opt[@]}" \
-      || { log_err "Clone failed"; return 2; }
-  fi
+		git clone "$repo_url" "$dir" "${branch_opt[@]}" "${depth_opt[@]}" ||
+			{
+				log_err "Clone failed"
+				return 2
+			}
+	fi
 
-  cd "$dir"
+	cd "$dir"
 }
