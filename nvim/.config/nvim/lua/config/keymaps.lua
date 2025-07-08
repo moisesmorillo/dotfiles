@@ -9,7 +9,7 @@ map("n", "<leader>fd", function()
   Snacks.picker.files({
     hidden = true,
     title = "<Dotfiles> ",
-    dirs = { "~/projects/dotfiles/" },
+    dirs = { "~/workspace/dotfiles/" },
   })
 end, { desc = "Find Dotfiles" })
 

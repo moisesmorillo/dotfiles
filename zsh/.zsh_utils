@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env zsh
+
+autoload -U colors && colors # enable $fg, $reset_color
 # shellcheck disable=SC1090
 
 # This function is used to test the speed of zsh startup
@@ -25,7 +27,7 @@ fu() {
 	fi
 
 	echo "*** Updating dotfiles ***"
-	cd ~/projects/dotfiles/ && git pull origin main && cd - || exit
+	cd ~/workspace/dotfiles/ && git pull origin main && cd - || exit
 
 	echo "*** Updating LazyVim core and plugins ***"
 	nvim --headless "+Lazy! sync" +qa
@@ -48,7 +50,7 @@ zsh_reload() {
 stow_dotfiles() {
 	current_dir=$(pwd)
 	echo "*** Restowing dotfiles ***"
-	cd ~/projects/dotfiles/ && stow --ignore="network_utils" -R */
+	cd ~/workspace/moisesmorillo/dotfiles/ && stow --ignore="network_utils" -R */
 	cd "$current_dir" || return
 }
 
@@ -61,7 +63,7 @@ kdo() {
 reinstall_lazyvim() {
 	current_dir=$(pwd)
 	echo "*** Unstowing Neovim directory ***"
-	cd ~/projects/dotfiles/ || return
+	cd ~/workspace/dotfiles/ || return
 	stow -v -D nvim
 	echo "*** Removing Neovim and LazyVim directories ***"
 	rm -rf ~/.config/nvim/ ~/.local/share/nvim/ ~/.local/state/nvim/ ~/.cache/nvim/
@@ -170,7 +172,7 @@ switch_nvim_distro() {
 
 # This function is used to sync the plugins in the LazyVim distro with the dotfiles repo
 sync_lazyvim_plugins() {
-	cd ~/projects/dotfiles || return
+	cd ~/workspace/dotfiles || return
 
 	git checkout -B chore/sync
 	git commit -am "chore: sync LazyVim plugins"
@@ -195,4 +197,61 @@ brewfile_install() {
 # This function is used to force install brew system from ~/Brewfile file
 brewfile_force_install() {
 	brew bundle --force cleanup --file=~/Brewfile
+}
+
+# Clone a repo into ~/workspace/{owner}/{repo} (all lowercase) and cd into it.
+# Usage:  gitclone <url> [branch]
+# Example: gitclone git@github.com:owner/repo.git main
+gitclone () {
+  # Local options: pipefail + noclobber only inside the function
+  emulate -L zsh -o pipefail -o noclobber
+
+  local repo_url=$1
+  local branch=$2
+
+  # ---------------- Validate arguments ----------------------------------
+  if [[ -z $repo_url ]]; then
+    print -P "%F{red}❌  Repository URL required%f"
+    print   "Usage: gitclone <url> [branch]"
+    return 1
+  fi
+
+  # ---------------- Extract owner/repo (POSIX-safe regex) --------------
+  local owner repo
+  local re='^(git@|https://)([^/:]+)[/:]([^/]+)/([^/]+)(\.git)?$'
+
+  if [[ $repo_url =~ $re ]]; then
+    owner=${match[3]:l}            # lowercase
+    repo=${match[4]:l}
+    repo=${repo%.git}              # strip trailing .git, if any
+  else
+    print -P "%F{red}❌  Unsupported URL format%f"
+    return 1
+  fi
+
+  # ---------------- Destination path ------------------------------------
+  local workspace_root=${GITCLONE_WORKSPACE:-$HOME/workspace}
+  local target_dir="$workspace_root/$owner/$repo"
+
+  # ---------------- Clone or reuse --------------------------------------
+  if [[ -d $target_dir/.git ]]; then
+    print -P "%F{yellow}⚠️  Repository already exists at%f $target_dir"
+  else
+    mkdir -p "$target_dir" || {
+      print -P "%F{red}❌  Cannot create%f $target_dir"
+      return 1
+    }
+
+    print -P "%F{green}🔄  Cloning into%f $target_dir"
+    if [[ -n $branch ]]; then
+      git clone --branch "$branch" --single-branch "$repo_url" "$target_dir" \
+        || { print -P "%F{red}❌  Clone failed%f"; return 1 }
+    else
+      git clone  "$repo_url" "$target_dir" \
+        || { print -P "%F{red}❌  Clone failed%f"; return 1 }
+    fi
+  fi
+
+  # ---------------- Enter the directory ---------------------------------
+  cd "$target_dir"
 }
