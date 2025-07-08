@@ -1,257 +1,233 @@
 #!/usr/bin/env zsh
+autoload -U colors && colors       # enable $fg, $reset_color
 
-autoload -U colors && colors # enable $fg, $reset_color
-# shellcheck disable=SC1090
+#───────────────────────────────────────────────────────────────────────────────
+# Helper logging functions
+log_info()  { print -P "%F{green}$*%f"; }
+log_warn()  { print -P "%F{yellow}$*%f"; }
+log_err()   { print -P "%F{red}$*%f"; }
 
-# This function is used to test the speed of zsh startup
+#───────────────────────────────────────────────────────────────────────────────
+# zsh_time ─ Benchmark startup time
+# Usage: zsh_time
+# Repeats interactive startup 10× and prints timing stats.
 zsh_time() {
-	repeat 10 time zsh -i -c exit
+  emulate -L zsh -o pipefail
+  repeat 10 time zsh -i -c exit
 }
 
-# This function is used to update the OS packages, dotfiles and LazyVim core and plugins
+#───────────────────────────────────────────────────────────────────────────────
+# fu ─ Full update: OS packages, dotfiles, LazyVim & zinit plugins
+# Usage: fu
 fu() {
-	OS=$(uname -s)
+  emulate -L zsh -o pipefail
 
-	echo "*** Updating OS packages***"
+  log_info "*** Updating OS packages ***"
+  brew update && brew upgrade
 
-	if [[ "$OS" == "Darwin" ]]; then
-		brew update
-		brew upgrade
-	fi
+  log_info "*** Updating dotfiles ***"
+  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+  git pull --ff-only origin main
+  popd >/dev/null
 
-	if [[ "$OS" == "Linux" ]]; then
-		sudo apt update -y
-		sudo apt full-upgrade -y
-		sudo apt autoremove -y
-		sudo apt autoclean -y
-	fi
+  log_info "*** Updating LazyVim core and plugins ***"
+  nvim --headless "+Lazy! sync" +qa
 
-	echo "*** Updating dotfiles ***"
-	cd ~/workspace/dotfiles/ && git pull origin main && cd - || exit
+  log_info "*** Updating zinit and plugins ***"
+  zinit self-update
+  zinit update --parallel
 
-	echo "*** Updating LazyVim core and plugins ***"
-	nvim --headless "+Lazy! sync" +qa
-
-	echo "*** Updating zinit and plugins ***"
-	zinit self-update
-	zinit update --parallel
-	stow_dotfiles
-	zsh_reload
+  stow_dotfiles
+  zsh_reload
 }
 
-# This function is used to reload the zsh configuration
+#───────────────────────────────────────────────────────────────────────────────
+# zsh_reload ─ Reload ~/.zshrc
 zsh_reload() {
-	echo "*** Reloading zsh configuration ***"
-	source ~/.zshrc
-	exec zsh
+  emulate -L zsh
+  log_info "*** Reloading zsh configuration ***"
+  source ~/.zshrc
+  exec zsh
 }
 
-# This function is used to re-stow the dotfiles
+#───────────────────────────────────────────────────────────────────────────────
+# stow_dotfiles ─ Restow dotfiles (excluding network_utils)
 stow_dotfiles() {
-	current_dir=$(pwd)
-	echo "*** Restowing dotfiles ***"
-	cd ~/workspace/moisesmorillo/dotfiles/ && stow --ignore="network_utils" -R */
-	cd "$current_dir" || return
+  emulate -L zsh -o pipefail
+  log_info "*** Restowing dotfiles ***"
+  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+  stow --ignore='network_utils' -R */
+  popd >/dev/null
 }
-
-# This function is used to kill the podman process (docker)
-kdo() {
-	pgrep -fi docker | xargs kill
-}
-
-# This function is used to reinstall the LazyVim dotfiles
+#───────────────────────────────────────────────────────────────────────────────
+# reinstall_lazyvim ─ Unstow & reinstall LazyVim config
 reinstall_lazyvim() {
-	current_dir=$(pwd)
-	echo "*** Unstowing Neovim directory ***"
-	cd ~/workspace/dotfiles/ || return
-	stow -v -D nvim
-	echo "*** Removing Neovim and LazyVim directories ***"
-	rm -rf ~/.config/nvim/ ~/.local/share/nvim/ ~/.local/state/nvim/ ~/.cache/nvim/
-	echo "*** Restowing Neovim directory ***"
-	stow -v -R nvim
-	cd "$current_dir" || return
-	echo "*** Reinstalling LazyVim plugins ***"
-	nvim --headless "+Lazy! sync" +qa
+  emulate -L zsh -o pipefail
+  log_info "*** Unstowing Neovim directory ***"
+  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+  stow -v -D nvim
+  log_info "*** Removing Neovim caches ***"
+  rm -rf ~/.config/nvim ~/.local/{share,state}/nvim ~/.cache/nvim
+  log_info "*** Restowing Neovim directory ***"
+  stow -v -R nvim
+  popd >/dev/null
+  log_info "*** Reinstalling LazyVim plugins ***"
+  nvim --headless "+Lazy! sync" +qa
 }
 
-# This function is used to install the LazyVim test environment
+#───────────────────────────────────────────────────────────────────────────────
+# install_nvim_distro ─ Clone a starter Neovim distro into ~/.config/<name>
+# Usage: install_nvim_distro <nvchad|lazytest|kickstart|cybernvim|astronvim>
 install_nvim_distro() {
-	distro=$1
-
-	case $distro in
-	"nvchad")
-		echo "Installing NvChad..."
-		git clone --depth 1 https://github.com/NvChad/starter "$HOME/.config/$distro"
-		;;
-	"lazytest")
-		echo "Installing LazyVim Test..."
-		git clone --depth 1 https://github.com/LazyVim/starter "$HOME/.config/$distro"
-		;;
-	"kickstart")
-		echo "Installing Kickstart..."
-		git clone --depth 1 https://github.com/nvim-lua/kickstart.nvim "$HOME/.config/$distro"
-		;;
-	"cybernvim")
-		echo "Installing CyberNvim..."
-		git clone --depth 1 https://github.com/pgosar/CyberNvim "$HOME/.config/$distro"
-		;;
-	"astronvim")
-		echo "Installing AstroNvim..."
-		git clone --depth 1 https://github.com/AstroNvim/template "$HOME/.config/$distro"
-		;;
-	*)
-		echo "Invalid distro"
-		;;
-	esac
-
-	rm -rf "$HOME/.config/$distro/.git"
+  emulate -L zsh -o pipefail
+  local distro=$1 repo
+  case $distro in
+    nvchad)     repo=https://github.com/NvChad/starter ;;
+    lazytest)   repo=https://github.com/LazyVim/starter ;;
+    kickstart)  repo=https://github.com/nvim-lua/kickstart.nvim ;;
+    cybernvim)  repo=https://github.com/pgosar/CyberNvim ;;
+    astronvim)  repo=https://github.com/AstroNvim/template ;;
+    *) log_err "Invalid distro"; return 1 ;;
+  esac
+  log_info "Installing $distro..."
+  git clone --depth 1 "$repo" "$HOME/.config/$distro"
+  rm -rf "$HOME/.config/$distro/.git"
 }
 
-# This function is used to clean the LazyVim test environment
+#───────────────────────────────────────────────────────────────────────────────
+# clean_nvim_distro ─ Remove a test distro completely
+# Usage: clean_nvim_distro <name>
 clean_nvim_distro() {
-	distro=$1
-	echo "Cleaning $distro..."
-	rm -rf "$HOME/.config/$distro"
-	rm -rf "$HOME/.local/share/$distro"
-	rm -rf "$HOME/.local/state/$distro"
-	rm -rf "$HOME/.cache/$distro"
+  emulate -L zsh -o pipefail
+  local distro=$1
+  [[ -z $distro ]] && { log_err "Distro name required"; return 1; }
+  log_info "Cleaning $distro..."
+  rm -rf "$HOME/.config/$distro" \
+         "$HOME/.local/share/$distro" \
+         "$HOME/.local/state/$distro" \
+         "$HOME/.cache/$distro"
 }
 
-# This function is used to rebuild the zsh completions
+#───────────────────────────────────────────────────────────────────────────────
+# rebuild_zsh_completions ─ Remove zcompdump & re-init completions
 rebuild_zsh_completions() {
-	echo "Rebuilding zcompdump"
-	rm -f ~/.zcompdump
-	compinit
+  emulate -L zsh
+  log_info "Rebuilding zcompdump"
+  rm -f ~/.zcompdump
+  compinit
 }
 
-# This function is used to create python virtual environment
+#───────────────────────────────────────────────────────────────────────────────
+# venv_create ─ Create Python virtualenv via `uv`
+# Usage: venv_create [py_version]
 venv_create() {
-	python_version=$1
-	if [[ -n $python_version ]]; then
-		uv venv -p "$python_version"
-	else
-		uv venv
-	fi
+  emulate -L zsh -o pipefail
+  local py=$1
+  command -v uv >/dev/null || { log_err "'uv' not found"; return 1; }
+  [[ -n $py ]] && uv venv -p "$py" || uv venv
 }
 
-# This function is used to activate python virtual environment
+# venv_activate ─ Activate local .venv
 venv_activate() {
-	# shellcheck disable=SC1091
-	source .venv/bin/activate
+  emulate -L zsh
+  [[ -f .venv/bin/activate ]] || { log_err ".venv not found"; return 1; }
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
 }
 
-# This function is used to install dependencies using poetry
+#───────────────────────────────────────────────────────────────────────────────
+# poetry_install_dependencies ─ Install deps with poetry (no venv)
 poetry_install_dependencies() {
-	pip install -U pip
-	pip install poetry
-	poetry config virtualenvs.create false
-	poetry install -E dev -E test --no-interaction
+  emulate -L zsh -o pipefail
+  pip install -U pip poetry
+  poetry config virtualenvs.create false
+  poetry install -E dev -E test --no-interaction
 }
 
-# This function is used to switch between nvim distros
+#───────────────────────────────────────────────────────────────────────────────
+# switch_nvim_distro ─ Choose & launch a Neovim distro via fzf
+# Usage: switch_nvim_distro [file | +args]
 switch_nvim_distro() {
-	declare -A config_map=(
-		["LazyVim Test"]="lazytest"
-		["NvChad"]="nvchad"
-		["AstroNvim"]="astronvim"
-		["CyberNvim"]="cybernvim"
-		["Kickstart"]="kickstart"
-	)
+  emulate -L zsh -o pipefail
+  command -v fzf >/dev/null || { log_err "fzf not installed"; return 1; }
 
-	items=("LazyVim Test" "NvChad" "AstroNvim" "CyberNvim" "Kickstart")
-	selected=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --border --exit-0)
+  # Parallel arrays: labels[i] ↔ configs[i] (zsh arrays are 1-based)
+  local -a labels=( 'LazyVim Test' 'NvChad' 'AstroNvim' 'CyberNvim' 'Kickstart' )
+  local -a configs=( 'lazytest'     'nvchad' 'astronvim' 'cybernvim' 'kickstart' )
 
-	if [[ -z $selected ]]; then
-		echo "Nothing selected"
-		return 0
-	fi
+  local selected
+  selected=$(printf '%s\n' "${labels[@]}" |
+             fzf --prompt=' Neovim Config: ' --height=50% \
+                 --layout=reverse --border --exit-0)
 
-	config=${config_map[$selected]} # Obtener el valor mapeado
-	NVIM_APPNAME=$config nvim "$@"
+  [[ -z $selected ]] && { log_warn "Nothing selected"; return 0; }
+
+  local i
+  for (( i = 1; i <= ${#labels[@]}; i++ )); do
+    if [[ "${labels[i]}" == "$selected" ]]; then
+      NVIM_APPNAME="${configs[i]}" nvim "$@"
+      return
+    fi
+  done
 }
-
-# This function is used to sync the plugins in the LazyVim distro with the dotfiles repo
+#───────────────────────────────────────────────────────────────────────────────
+# sync_lazyvim_plugins ─ Create PR syncing LazyVim lockfile with dotfiles repo
 sync_lazyvim_plugins() {
-	cd ~/workspace/dotfiles || return
-
-	git checkout -B chore/sync
-	git commit -am "chore: sync LazyVim plugins"
-	git push -u origin chore/sync
-	gh pr create --fill --base main --head chore/sync
-	gh pr merge --merge chore/sync
-	git checkout main
-	git branch -D chore/sync
-	git pull origin main
-	git fetch --prune
-}
-# This function is used to generate/regenerate the ~/Brewfile file
-brewfile_generate() {
-	brew bundle dump --force --file=~/Brewfile
+  emulate -L zsh -o pipefail
+  pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
+  git checkout -B chore/sync
+  git commit --allow-empty -am "chore: sync LazyVim plugins"
+  git push -fu origin chore/sync
+  gh pr create --fill --base main --head chore/sync
+  gh pr merge --merge chore/sync
+  git checkout main
+  git branch -D chore/sync
+  git pull --ff-only origin main
+  git fetch --prune
+  popd >/dev/null
 }
 
-# This function is used to install brew system from ~/Brewfile file
-brewfile_install() {
-	brew bundle install --file=~/Brewfile
-}
+#───────────────────────────────────────────────────────────────────────────────
+# Brewfile helpers
+brewfile_generate()       { emulate -L zsh; brew bundle dump --force --file=~/Brewfile }
+brewfile_install()        { emulate -L zsh; brew bundle install --file=~/Brewfile }
+brewfile_force_install()  { emulate -L zsh; brew bundle cleanup --force --file=~/Brewfile }
 
-# This function is used to force install brew system from ~/Brewfile file
-brewfile_force_install() {
-	brew bundle --force cleanup --file=~/Brewfile
-}
-
-# Clone a repo into ~/workspace/{owner}/{repo} (all lowercase) and cd into it.
-# Usage:  gitclone <url> [branch]
-# Example: gitclone git@github.com:owner/repo.git main
-gitclone () {
-  # Local options: pipefail + noclobber only inside the function
+#───────────────────────────────────────────────────────────────────────────────
+# gitclone ─ Clone repo into ~/workspace/{owner}/{repo} (lowercase) & cd
+# Usage: gitclone <url> [branch]
+gitclone() {
   emulate -L zsh -o pipefail -o noclobber
 
-  local repo_url=$1
-  local branch=$2
+  local repo_url=$1 branch=$2
+  [[ -z $repo_url ]] && { log_err "Repository URL required"; log_info "Usage: gitclone <url> [branch]"; return 1; }
 
-  # ---------------- Validate arguments ----------------------------------
-  if [[ -z $repo_url ]]; then
-    print -P "%F{red}❌  Repository URL required%f"
-    print   "Usage: gitclone <url> [branch]"
-    return 1
-  fi
-
-  # ---------------- Extract owner/repo (POSIX-safe regex) --------------
-  local owner repo
   local re='^(git@|https://)([^/:]+)[/:]([^/]+)/([^/]+)(\.git)?$'
-
+  local owner repo
   if [[ $repo_url =~ $re ]]; then
-    owner=${match[3]:l}            # lowercase
+    owner=${match[3]:l}
     repo=${match[4]:l}
-    repo=${repo%.git}              # strip trailing .git, if any
+    repo=${repo%.git}
   else
-    print -P "%F{red}❌  Unsupported URL format%f"
+    log_err "Unsupported URL format"
     return 1
   fi
 
-  # ---------------- Destination path ------------------------------------
-  local workspace_root=${GITCLONE_WORKSPACE:-$HOME/workspace}
-  local target_dir="$workspace_root/$owner/$repo"
+  local root=${GITCLONE_WORKSPACE:-$HOME/workspace}
+  local dir="${root:A}/${owner}/${repo}"
 
-  # ---------------- Clone or reuse --------------------------------------
-  if [[ -d $target_dir/.git ]]; then
-    print -P "%F{yellow}⚠️  Repository already exists at%f $target_dir"
+  if [[ -d $dir/.git ]]; then
+    log_warn "Repository already exists at $dir"
   else
-    mkdir -p "$target_dir" || {
-      print -P "%F{red}❌  Cannot create%f $target_dir"
-      return 1
-    }
+    mkdir -p "$dir" || { log_err "Cannot create $dir"; return 1; }
+    log_info "Cloning into $dir"
 
-    print -P "%F{green}🔄  Cloning into%f $target_dir"
-    if [[ -n $branch ]]; then
-      git clone --branch "$branch" --single-branch "$repo_url" "$target_dir" \
-        || { print -P "%F{red}❌  Clone failed%f"; return 1 }
-    else
-      git clone  "$repo_url" "$target_dir" \
-        || { print -P "%F{red}❌  Clone failed%f"; return 1 }
-    fi
+    local depth_opt=()
+    (( ${+GITCLONE_DEPTH} && GITCLONE_DEPTH > 0 )) && depth_opt=(--depth "$GITCLONE_DEPTH")
+    git clone "$repo_url" "$dir" \
+      ${branch:+--branch "$branch" --single-branch} $depth_opt \
+      || { log_err "Clone failed"; return 2; }
   fi
 
-  # ---------------- Enter the directory ---------------------------------
-  cd "$target_dir"
+  cd "$dir"
 }
