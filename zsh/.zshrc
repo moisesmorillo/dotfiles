@@ -38,7 +38,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="--ignore-case"
 # Mason binaries
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
-export BAT_THEME="Enki-Tokyo-Night"
+export BAT_THEME="rose-pine"
 # Set bat as default pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Clangd libc++ path

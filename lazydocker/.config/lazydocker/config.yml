@@ -4,29 +4,13 @@ gui:
   scrollHeight: 2
   returnImmediately: true
   language: en
-  # use the tokyonight theme
-  theme:
+  theme: # rose-pine theme
     activeBorderColor:
-      - "#ff9e64"
-      - "bold"
+      - '#ebbcba' # Rose  – highlights the focused panel
+      - bold
     inactiveBorderColor:
-      - "#27a1b9"
-    searchingActiveBorderColor:
-      - "#ff9e64"
-      - "bold"
-    optionsTextColor:
-      - "#7aa2f7"
+      - '#524f67' # Highlight‑High – subtle grey‑violet
     selectedLineBgColor:
-      - "#283457"
-    cherryPickedCommitFgColor:
-      - "#7aa2f7"
-    cherryPickedCommitBgColor:
-      - "#bb9af7"
-    markedBaseCommitFgColor:
-      - "#7aa2f7"
-    markedBaseCommitBgColor:
-      - "#e0af68"
-    unstagedChangesColor:
-      - "#db4b4b"
-    defaultFgColor:
-      - "#c0caf5"
+      - '#26233a' # Overlay – row highlight
+    optionsTextColor:
+      - '#f6c177' # Gold – key‑hint menu & hotkeys

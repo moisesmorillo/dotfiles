@@ -10,32 +10,33 @@ gui:
   language: 'en' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko'
   timeFormat: '02 Jan 06' # https://pkg.go.dev/time#Time.Format
   shortTimeFormat: '3:04PM'
-  # use the tokyo-night
-  theme:
+  theme: # rose-pine theme
     activeBorderColor:
-      - "#ff9e64"
-      - "bold"
+      - '#ebbcba' # Rose
+      - bold
     inactiveBorderColor:
-      - "#27a1b9"
+      - '#524f67' # Highlight‑High
     searchingActiveBorderColor:
-      - "#ff9e64"
-      - "bold"
+      - '#f6c177' # Gold
+      - bold
     optionsTextColor:
-      - "#7aa2f7"
+      - '#f6c177' # Gold
     selectedLineBgColor:
-      - "#283457"
-    cherryPickedCommitFgColor:
-      - "#7aa2f7"
+      - '#26233a' # Overlay
+    inactiveViewSelectedLineBgColor:
+      - '#403d52' # Highlight‑Med
     cherryPickedCommitBgColor:
-      - "#bb9af7"
-    markedBaseCommitFgColor:
-      - "#7aa2f7"
+      - '#31748f' # Pine
+    cherryPickedCommitFgColor:
+      - '#f6c177' # Gold
     markedBaseCommitBgColor:
-      - "#e0af68"
+      - '#9ccfd8' # Foam
+    markedBaseCommitFgColor:
+      - '#31748f' # Pine
     unstagedChangesColor:
-      - "#db4b4b"
+      - '#eb6f92' # Love
     defaultFgColor:
-      - "#c0caf5"
+      - '#e0def4' # Text
   commitLength:
     show: true
   mouseEvents: false
