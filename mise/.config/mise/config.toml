@@ -1,9 +1,12 @@
 [tools]
-node = "lts"
+claude-code = "latest"
+gemini-cli = "latest"
 go = "latest"
+node = "lts"
+opencode = "latest"
 python = "3.11"
+uv = "latest"
 yarn = "1"
-uv = "0.6.13"
 
 [settings]
 go_set_gobin = true
