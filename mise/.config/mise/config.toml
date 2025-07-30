@@ -1,4 +1,5 @@
 [tools]
+bun = "latest"
 claude-code = "latest"
 gemini-cli = "latest"
 go = "latest"
