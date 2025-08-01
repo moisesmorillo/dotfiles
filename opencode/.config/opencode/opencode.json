@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-3-7-sonnet-20250219",
+  "small_model": "google/gemini-2.0-flash-lite",
+  "theme": "catppuccin",
+  "mode": {
+    "build": {
+      "model": "google/gemini-2.5-pro",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "plan": {
+      "model": "google/gemini-2.5-flash",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    }
+  }
+}
