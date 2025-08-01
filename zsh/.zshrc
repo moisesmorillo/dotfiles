@@ -66,8 +66,9 @@ if [[ -f ~/.cargo/env ]]; then
 	source ~/.cargo/env
 fi
 
-if [[ -o login ]]; then
+if [[ ! -f /tmp/.fastfetch_executed_$USER ]]; then
 	fastfetch
+	touch /tmp/.fastfetch_executed_$USER
 fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
