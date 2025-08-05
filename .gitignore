@@ -142,3 +142,5 @@ $RECYCLE.BIN/
 .config/tmux/plugins
 scripts/*.macos
 lazygit/.config/lazygit/state.yml
+karabiner/.config/karabiner/automatic_backups/
+karabiner/.config/karabiner/assets/
