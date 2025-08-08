@@ -5,20 +5,30 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Caps Lock to Ctrl+\\",
+                        "description": "Caps Lock behavior: Super Key on hold, Ctrl+\\ on tap",
                         "manipulators": [
                             {
+                                "type": "basic",
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "backslash",
-                                        "modifiers": ["control"]
+                                        "key_code": "left_shift",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command"
+                                        ]
                                     }
                                 ],
-                                "type": "basic"
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "backslash",
+                                        "modifiers": [ "left_control" ]
+                                    }
+                                ]
                             }
                         ]
                     }
