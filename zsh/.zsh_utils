@@ -37,6 +37,9 @@ fu() {
 	zinit self-update
 	zinit update --parallel
 
+	log_info "*** Updating mise packages ***"
+	mise up -j 8
+
 	stow_dotfiles
 	zsh_reload
 }
