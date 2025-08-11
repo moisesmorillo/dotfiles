@@ -197,7 +197,7 @@ sync_lazyvim_plugins() {
 	git commit --allow-empty -am "chore: sync LazyVim plugins"
 	git push -fu origin chore/sync
 	gh pr create --fill --base main --head chore/sync
-	gh pr merge --merge chore/sync
+	gh pr merge --merge --admin chore/sync
 	git checkout main
 	git branch -D chore/sync
 	git pull --ff-only origin main
