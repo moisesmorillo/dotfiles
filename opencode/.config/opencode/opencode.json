@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "anthropic/claude-sonnet-4-20250514",
+  "model": "github-copilot/claude-sonnet-4",
   "small_model": "openrouter/deepseek/deepseek-r1:free",
   "theme": "rosepine",
   "agent": {
