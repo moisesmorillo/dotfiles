@@ -8,30 +8,19 @@
                         "description": "Caps Lock behavior: Super Key on hold, Ctrl+\\ on tap",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "caps_lock",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": ["any"]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "left_shift",
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_option",
-                                            "left_command"
-                                        ]
+                                        "modifiers": ["left_control", "left_option", "left_command"]
                                     }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "backslash",
-                                        "modifiers": [ "left_control" ]
-                                    }
-                                ],
-                                "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 250
-                                }
+                                "type": "basic"
                             }
                         ]
                     }
@@ -43,3 +32,4 @@
         }
     ]
 }
+
