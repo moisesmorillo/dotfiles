@@ -3,6 +3,7 @@
   "model": "github-copilot/claude-sonnet-4",
   "small_model": "openrouter/deepseek/deepseek-r1:free",
   "theme": "rosepine",
+  "autoupdate": false,
   "agent": {
     "build": {
       "mode": "primary",
@@ -37,6 +38,13 @@
         "todoread": true,
         "webfetch": true
       }
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
     }
   }
 }
