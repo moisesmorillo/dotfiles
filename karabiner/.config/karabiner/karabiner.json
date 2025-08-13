@@ -28,7 +28,10 @@
                                         "key_code": "backslash",
                                         "modifiers": [ "left_control" ]
                                     }
-                                ]
+                                ],
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 250
+                                }
                             }
                         ]
                     }
