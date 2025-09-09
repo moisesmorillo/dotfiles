@@ -22,9 +22,6 @@ brew update && brew upgrade
 ### Install from Brewfile
 brew bundle install --file=./brew/Brewfile
 
-### Enable ollama service
-brew services start ollama
-
 ### Update docker config file
 . ./scripts/update-docker-config.sh
 
