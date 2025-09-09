@@ -77,4 +77,5 @@ fi
 echo -ne '\033[5 q\033[?12;25h'
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/moisesmorillo/.lmstudio/bin"
+export PATH="$PATH:/Users/moisesmorillo/.cache/lm-studio/bin"
+# End of LM Studio CLI section
