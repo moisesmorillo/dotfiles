@@ -50,7 +50,7 @@
   "nvim-lint": { "branch": "master", "commit": "0864f81c681e15d9bdc1156fe3a17bd07db5a3ed" },
   "nvim-lspconfig": { "branch": "master", "commit": "ef73a4f2a1ddf0439eb97b46de2aab265ddba1cd" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
-  "nvim-treesitter": { "branch": "main", "commit": "6ac9f2e51270cd6f57c4783a36c60cd03e4cfb94" },
+  "nvim-treesitter": { "branch": "main", "commit": "5a70b1eb8cbdf6c7f0a59dfb7356ad198421b620" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "1b2d85d3de6114c4bcea89ffb2cd1ce9e3a19931" },
   "nvim-ts-autotag": { "branch": "main", "commit": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc" },
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "1b212c2eee76d787bbea6aa5e92a2b534e7b4f8f" },
@@ -74,5 +74,5 @@
   "volt": { "branch": "main", "commit": "620de1321f275ec9d80028c68d1b88b409c0c8b1" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
   "whichpy.nvim": { "branch": "main", "commit": "4091361ed224e0e5ae92b2a5c412cb2ca7c26f65" },
-  "wtf.nvim": { "branch": "main", "commit": "f0427064602fb8a14a1a77816cba6d54af74decc" }
+  "wtf.nvim": { "branch": "main", "commit": "62437210d1da5a4343a74ab859b59c8ba0d682a2" }
 }
