@@ -1,10 +1,10 @@
 {
   "includeCoAuthoredBy": false,
+  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
-  "outputStyle": "Learning",
-  "model": "claude-sonnet-4-20250514",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
-  }
+  },
+  "outputStyle": "Learning"
 }
