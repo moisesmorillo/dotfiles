@@ -10,6 +10,7 @@ python = "3.11"
 uv = "latest"
 yarn = "1"
 yazi = "latest"
+wrangler = "4"
 
 [settings]
 go_set_gobin = true
