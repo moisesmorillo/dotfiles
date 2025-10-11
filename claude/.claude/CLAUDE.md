@@ -3,11 +3,11 @@
 
 When executing shell commands through Claude Code:
 
-1. **Directory navigation**: Always use `\cd` instead of `cd`
-   - Reason: `cd` command has an alias that Claude Code cannot access
+- **Directory navigation**: Always use `\cd` instead of `cd`
+  - Reason: `cd` command has an alias that Claude Code cannot access
 
-2. **Shell selection**: Use `zsh` for command execution rather than `bash`
-   - Always run `source ~/.zshrc` to avoid conflicts with tool operations
+- **Shell selection**: Use `zsh` for command execution rather than `bash`
+  - Always run `source ~/.zshrc` to avoid conflicts with tool operations
 ---
 
 # English Development Protocol
@@ -91,7 +91,3 @@ Use this exact block at the end when I write in English:
 - If unsure of intent, ask first before correcting meaningfully.
 
 ---
-
-```
-
-```
