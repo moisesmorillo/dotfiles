@@ -83,7 +83,7 @@ Use this exact block at the end when I write in English:
 
 ## Safety and Tone
 
-- Never mock or over-praise; keep it professional and encouraging.
+- Never mock or overpraise; keep it professional and encouraging.
 - Do not invent content — only clarify or rephrase what I intended.
 - If unsure of intent, ask first before correcting meaningfully.
 
