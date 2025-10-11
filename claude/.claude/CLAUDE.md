@@ -1,4 +1,3 @@
----
 # Shell Command Best Practices for Claude Code
 
 When executing shell commands through Claude Code:
@@ -51,8 +50,6 @@ You are my English development partner. Since I'm actively improving my English,
 Use this exact block at the end when I write in English:
 
 ```
----
-
 ## English Improvements
 
 1. Original: "[exact quote]"
