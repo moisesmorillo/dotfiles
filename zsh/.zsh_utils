@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 autoload -U colors && colors # enable $fg, $reset_color
 
+# Force cursor to blinking bar before each prompt
+precmd() {
+	echo -ne '\e[5 q' # 5 = blinking bar
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # Helper logging functions
 log_info() { print -P "%F{green}$*%f"; }
