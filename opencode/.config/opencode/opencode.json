@@ -1,13 +1,17 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "github-copilot/claude-sonnet-4",
+  "model": "openrouter/z-ai/glm-4.5-air",
   "small_model": "openrouter/deepseek/deepseek-r1:free",
   "theme": "rosepine",
   "autoupdate": false,
+  "instructions": [
+    "CLAUDE.md",
+    "GEMINI.md"
+  ],
   "agent": {
     "build": {
       "mode": "primary",
-      "model": "anthropic/claude-sonnet-4-20250514",
+      "model": "openrouter/z-ai/glm-4.5-air",
       "tools": {
         "write": true,
         "edit": true,
@@ -24,7 +28,7 @@
     },
     "plan": {
       "mode": "primary",
-      "model": "github-copilot/claude-sonnet-4",
+      "model": "openrouter/z-ai/glm-4.5-air",
       "tools": {
         "write": false,
         "edit": false,
@@ -54,7 +58,10 @@
     },
     "playwright": {
       "type": "local",
-      "command": ["npx", "@playwright/mcp@latest"],
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
       "enabled": true
     }
   }
