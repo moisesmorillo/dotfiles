@@ -56,6 +56,14 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Customized Brewfile with essential software
 - Automated installation of development tools
 
+### 📊 SketchyBar
+
+- Highly customizable macOS menu bar replacement
+- Custom status bar with system information
+- Tokyo Night inspired color scheme
+- Displays: workspace switcher, front app, time, volume, battery, WiFi, and CPU usage
+- Plugin-based architecture for easy customization
+
 ### 🐳 Docker & Lazydocker
 
 - Custom Docker configuration
@@ -111,6 +119,7 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── brew/         # Homebrew bundle files
 ├── ghostty/      # Ghostty terminal config
 ├── starship/     # Starship prompt config
+├── sketchybar/   # SketchyBar menu bar config
 ├── docker/       # Docker configuration
 ├── lazygit/      # Lazygit configuration
 ├── lazydocker/   # Lazydocker configuration

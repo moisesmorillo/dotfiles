@@ -1,0 +1,109 @@
+#!/bin/bash
+
+# Load colors and icons
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+
+# Bar Appearance
+sketchybar --bar position=top \
+                 height=40 \
+                 blur_radius=30 \
+                 color=$BAR_COLOR \
+                 border_width=0 \
+                 border_color=$BAR_BORDER_COLOR \
+                 shadow=off \
+                 sticky=on \
+                 padding_left=10 \
+                 padding_right=10 \
+                 margin=0 \
+                 topmost=window \
+                 font_smoothing=on \
+                 y_offset=0 \
+                 corner_radius=0
+
+# Default values
+sketchybar --default updates=when_shown \
+                     icon.font="sketchybar-app-font:Regular:16.0" \
+                     icon.color=$ITEM_ICON_COLOR \
+                     icon.padding_left=4 \
+                     icon.padding_right=4 \
+                     label.font="SF Pro:Semibold:13.0" \
+                     label.color=$ITEM_LABEL_COLOR \
+                     label.padding_left=4 \
+                     label.padding_right=4 \
+                     padding_left=4 \
+                     padding_right=4 \
+                     background.height=26 \
+                     background.corner_radius=6 \
+                     background.color=$ITEM_BG_COLOR \
+                     background.padding_left=4 \
+                     background.padding_right=4
+
+# Left Side Items
+sketchybar --add item apple.logo left \
+           --set apple.logo icon=$APPLE \
+                            icon.font="SF Pro:Black:16.0" \
+                            icon.color=$HIGHLIGHT_COLOR \
+                            padding_left=10 \
+                            padding_right=10 \
+                            background.color=$TRANSPARENT \
+                            click_script="sketchybar --set \$NAME popup.drawing=toggle"
+
+sketchybar --add item front_app left \
+           --set front_app icon.drawing=off \
+                           label.font="SF Pro:Bold:13.0" \
+                           background.color=$TRANSPARENT \
+                           script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+# Center Items - Spaces
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+for i in "${!SPACE_ICONS[@]}"
+do
+  sid=$(($i+1))
+  sketchybar --add space space.$sid center \
+             --set space.$sid associated_space=$sid \
+                              icon=${SPACE_ICONS[i]} \
+                              icon.padding_left=8 \
+                              icon.padding_right=8 \
+                              icon.highlight_color=$HIGHLIGHT_COLOR \
+                              background.color=$ITEM_BG_COLOR \
+                              background.corner_radius=6 \
+                              background.height=26 \
+                              background.drawing=on \
+                              label.drawing=off \
+                              script="$PLUGIN_DIR/space.sh" \
+             --subscribe space.$sid space_change mouse.clicked
+done
+
+# Right Side Items
+sketchybar --add item clock right \
+           --set clock update_freq=10 \
+                       icon=$BELL \
+                       script="$PLUGIN_DIR/clock.sh" \
+                       background.color=$ITEM_BG_COLOR
+
+sketchybar --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+
+sketchybar --add item battery right \
+           --set battery update_freq=120 \
+                         script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change
+
+sketchybar --add item wifi right \
+           --set wifi script="$PLUGIN_DIR/wifi.sh" \
+                      update_freq=10
+
+sketchybar --add item cpu right \
+           --set cpu update_freq=2 \
+                     icon=$CPU \
+                     script="$PLUGIN_DIR/cpu.sh"
+
+# Finalizing Setup
+sketchybar --update
+
+echo "sketchybar configuration loaded..."
