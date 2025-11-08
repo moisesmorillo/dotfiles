@@ -7,6 +7,10 @@ if [ -f /opt/homebrew/bin/brew ]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+if type mise &>/dev/null; then
+	eval "$(mise activate zsh)"
+fi
+
 # Zinit autoinstaller
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -56,10 +60,6 @@ export PATH="$PATH:$HOME/.yarn/bin"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
-fi
-
-if type mise &>/dev/null; then
-	eval "$(mise activate zsh)"
 fi
 
 if [[ -f ~/.cargo/env ]]; then
