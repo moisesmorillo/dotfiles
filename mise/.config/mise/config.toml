@@ -1,16 +1,18 @@
 [tools]
 bun = "latest"
 claude-code = "latest"
+devcontainer-cli = "latest"
 gemini-cli = "latest"
 go = "latest"
+neovim = "latest"
 node = "lts"
 opencode = "latest"
 pnpm = "10"
 python = "3.11"
 uv = "latest"
+wrangler = "4"
 yarn = "1"
 yazi = "latest"
-wrangler = "4"
 
 [settings]
 go_set_gobin = true
