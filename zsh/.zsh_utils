@@ -28,7 +28,7 @@ fu() {
 	emulate -L zsh -o pipefail
 
 	log_info "*** Updating OS packages ***"
-	brew update && brew upgrade
+	brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup
 
 	log_info "*** Updating dotfiles ***"
 	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
