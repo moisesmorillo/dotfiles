@@ -30,6 +30,9 @@ fu() {
 	log_info "*** Updating OS packages ***"
 	brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup
 
+	log_info "*** Updating mise core ***"
+	mise self-update
+
 	log_info "*** Updating dotfiles ***"
 	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
 	git pull --ff-only origin main

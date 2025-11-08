@@ -16,6 +16,9 @@ if ! command -v brew &>/dev/null; then
 	exit 1
 fi
 
+### Install mise ###
+curl https://mise.run | sh
+
 ### Update Brew ###
 brew update && brew upgrade
 
