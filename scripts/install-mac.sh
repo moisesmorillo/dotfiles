@@ -18,7 +18,7 @@ fi
 
 ### Install mise ###
 curl https://mise.run | sh
-eval "$(mise activate zsh)"
+eval "$(~/.local/bin/mise activate bash)"
 
 ### Update Brew ###
 brew update && brew upgrade
