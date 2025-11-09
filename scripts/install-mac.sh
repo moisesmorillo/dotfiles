@@ -63,4 +63,4 @@ cd "$ROOT_DIR" || exit
 
 # Post commands
 mise install
-bat cache --build
+mise exec -- bat cache --build
