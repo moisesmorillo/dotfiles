@@ -1,6 +1,11 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
 [ -z "$ZPROF" ] || zmodload zsh/zprof
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
+
+if type mise &>/dev/null; then
+	eval "$(mise activate zsh)"
+fi
 
 # Load homebrew bin paths
 if [ -f /opt/homebrew/bin/brew ]; then
@@ -30,7 +35,6 @@ zinit cdreplay -q
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zsh_options ] && source ~/.zsh_options
 
-export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
@@ -56,10 +60,6 @@ export PATH="$PATH:$HOME/.yarn/bin"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
-fi
-
-if type mise &>/dev/null; then
-	eval "$(mise activate zsh)"
 fi
 
 if [[ -f ~/.cargo/env ]]; then
