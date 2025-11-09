@@ -43,7 +43,7 @@ fu() {
 
 	log_info "*** Updating zinit and plugins ***"
 	zinit self-update
-	zinit update --parallel
+	zinit update --all --parallel
 
 	log_info "*** Updating mise packages ***"
 	mise up -j 8
