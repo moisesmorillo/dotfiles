@@ -10,9 +10,7 @@
                             {
                                 "from": {
                                     "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": ["any"]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [
                                     {
@@ -32,4 +30,3 @@
         }
     ]
 }
-
