@@ -1,11 +1,11 @@
 {
   "includeCoAuthoredBy": false,
-  "model": "sonnet",
+  "model": "haiku",
   "enableAllProjectMcpServers": true,
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
   },
   "outputStyle": "Learning",
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": true
 }
