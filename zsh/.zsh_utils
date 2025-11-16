@@ -42,7 +42,7 @@ fu() {
 	nvim --headless "+Lazy! sync" +qa
 
 	log_info "*** Updating zinit and plugins ***"
-	zinit self-update
+	zinit self-update -y
 	zinit update --all --parallel
 
 	log_info "*** Updating mise packages ***"
