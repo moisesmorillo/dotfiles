@@ -7,5 +7,5 @@
     "command": "bash ~/.claude/statusline.sh"
   },
   "outputStyle": "Learning",
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": false
 }
