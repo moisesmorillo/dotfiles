@@ -4,20 +4,20 @@
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 
 if type mise &>/dev/null; then
-	eval "$(mise activate zsh)"
+  eval "$(mise activate zsh)"
 fi
 
 # Load homebrew bin paths
 if [ -f /opt/homebrew/bin/brew ]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Zinit autoinstaller
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
-	echo "Installing Zinit..."
-	mkdir -p "$(dirname "$ZINIT_HOME")"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  echo "Installing Zinit..."
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
@@ -53,29 +53,27 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 # Lazygit config file
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 # Yarn binaries
 export PATH="$PATH:$HOME/.yarn/bin"
+# Added by Antigravity
+export PATH="$PATH:$HOME/.antigravity/antigravity/bin"
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
 if type starship &>/dev/null; then
-	eval "$(starship init zsh)"
+  eval "$(starship init zsh)"
 fi
 
 if [[ -f ~/.cargo/env ]]; then
-	source ~/.cargo/env
+  source ~/.cargo/env
 fi
 
 if [[ ! -f /tmp/.fastfetch_executed_$USER ]]; then
-	fastfetch
-	touch /tmp/.fastfetch_executed_$USER
+  fastfetch
+  touch /tmp/.fastfetch_executed_$USER
 fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
 
 # Force thin vertical blinking bar cursor in each new shell
 echo -ne '\033[5 q\033[?12;25h'
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/moisesmorillo/.cache/lm-studio/bin"
-# End of LM Studio CLI section
