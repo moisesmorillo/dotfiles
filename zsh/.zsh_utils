@@ -31,7 +31,7 @@ fu() {
 	brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup
 
 	log_info "*** Updating mise core ***"
-	mise self-update
+	mise self-update -y
 
 	log_info "*** Updating dotfiles ***"
 	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
