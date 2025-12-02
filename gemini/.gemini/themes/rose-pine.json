@@ -1,0 +1,24 @@
+{
+  "name": "rose-pine",
+  "type": "custom",
+  "Background": "#191724",
+  "Foreground": "#e0def4",
+  "LightBlue": "#9ccfd8",
+  "AccentBlue": "#31748f",
+  "AccentPurple": "#c4a7e7",
+  "AccentCyan": "#9ccfd8",
+  "AccentGreen": "#31748f",
+  "AccentYellow": "#f6c177",
+  "AccentRed": "#eb6f92",
+  "Comment": "#6e6a86",
+  "Gray": "#908caa",
+  "DiffAdded": "#212e3f",
+  "DiffModified": "#4a3d2c",
+  "DiffRemoved": "#482936",
+  "text": {
+    "primary": "#e0def4",
+    "secondary": "#908caa",
+    "link": "#c4a7e7",
+    "accent": "#ebbcba"
+  }
+}
