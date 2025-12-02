@@ -1,0 +1,29 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "general": {
+    "enablePromptCompletion": true,
+    "previewFeatures": true,
+    "preferredEditor": "nvim",
+    "vimMode": false
+  },
+  "output": {
+    "format": "text"
+  },
+  "ui": {
+    "showStatusInTitle": true,
+    "footer": {
+      "hideSandboxStatus": true,
+      "hideContextPercentage": false
+    },
+    "showMemoryUsage": true,
+    "showModelInfoInChat": true,
+    "theme": "$HOME/.gemini/themes/rose-pine.json"
+  },
+  "ide": {
+    "enabled": true
+  }
+}
