@@ -4,20 +4,20 @@
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 
 if type mise &>/dev/null; then
-  eval "$(mise activate zsh)"
+	eval "$(mise activate zsh)"
 fi
 
 # Load homebrew bin paths
 if [ -f /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Zinit autoinstaller
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
-  echo "Installing Zinit..."
-  mkdir -p "$(dirname "$ZINIT_HOME")"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+	echo "Installing Zinit..."
+	mkdir -p "$(dirname "$ZINIT_HOME")"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
@@ -39,7 +39,15 @@ export EDITOR="nvim"
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS="--ignore-case"
+# rose-pine color theme for fzf
+export FZF_DEFAULT_OPTS="
+  --ignore-case
+  --color=fg:#908caa,bg:#191724,hl:#ebbcba
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa
+"
 # Mason binaries
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export BAT_THEME="rose-pine"
@@ -59,18 +67,19 @@ export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.antigravity/antigravity/bin"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.lmstudio/bin"
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/"
 
 if type starship &>/dev/null; then
-  eval "$(starship init zsh)"
+	eval "$(starship init zsh)"
 fi
 
 if [[ -f ~/.cargo/env ]]; then
-  source ~/.cargo/env
+	source ~/.cargo/env
 fi
 
 if [[ ! -f /tmp/.fastfetch_executed_$USER ]]; then
-  fastfetch
-  touch /tmp/.fastfetch_executed_$USER
+	fastfetch
+	touch /tmp/.fastfetch_executed_$USER
 fi
 
 [ -z "$ZPROF" ] || zprof >~/.zprof.log
