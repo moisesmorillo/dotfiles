@@ -1,6 +1,6 @@
 {
   "includeCoAuthoredBy": false,
-  "model": "haiku",
+  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "statusLine": {
     "type": "command",

@@ -205,7 +205,8 @@ sync_lazyvim_plugins() {
 	emulate -L zsh -o pipefail
 	pushd ~/workspace/moisesmorillo/dotfiles >/dev/null || return
 	git checkout -B chore/sync
-	git commit --allow-empty -am "chore: sync LazyVim plugins"
+	git add .
+	git commit --allow-empty -m "chore: sync LazyVim plugins"
 	git push -fu origin chore/sync
 	gh pr create --fill --base main --head chore/sync
 	gh pr merge --merge --admin chore/sync
