@@ -4,7 +4,7 @@ gui:
   screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
-  sidePanelWidth: 0.25 # number from 0 to 1
+  sidePanelWidth: 0.2 # number from 0 to 1
   expandFocusedSidePanel: true
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
   language: 'en' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko'
