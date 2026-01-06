@@ -1,6 +1,8 @@
 ---
 description: Sync local changes to GitHub with automated PR creation
-model: claude-haiku-4-5
+agent: build
+model: openrouter/z-ai/glm-4.5-air:free
+subtask: true
 ---
 
 Sync my changes to GitHub following this workflow:
