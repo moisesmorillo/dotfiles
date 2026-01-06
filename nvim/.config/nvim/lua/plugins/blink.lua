@@ -11,11 +11,6 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    sources = {
-      per_filetype = {
-        codecompanion = { "codecompanion" },
-      },
-    },
     keymap = {
       preset = "enter",
       ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },

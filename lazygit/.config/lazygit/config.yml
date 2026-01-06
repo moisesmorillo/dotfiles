@@ -4,8 +4,8 @@ gui:
   screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
-  sidePanelWidth: 0.3333 # number from 0 to 1
-  expandFocusedSidePanel: false
+  sidePanelWidth: 0.25 # number from 0 to 1
+  expandFocusedSidePanel: true
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
   language: 'en' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko'
   timeFormat: '02 Jan 06' # https://pkg.go.dev/time#Time.Format
@@ -48,7 +48,6 @@ gui:
   showBranchCommitHash: false # show commit hashes alongside branch names
   showBottomLine: true # for hiding the bottom information line (unless it has important information to tell you)
   showCommandLog: true
-  showIcons: false # deprecated: use nerdFontsVersion instead
   nerdFontsVersion: "3" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font icons
   commandLogSize: 8
   splitDiff: 'auto' # one of 'auto' | 'always'
@@ -57,9 +56,11 @@ gui:
 git:
   pagers:
     - colorArg: always
-      useConfig: false
+      pager: delta --config ~/.config/delta/config
   commit:
     signOff: false
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
   merging:
     # only applicable to unix users
     manualCommit: false
@@ -81,12 +82,13 @@ git:
   mainBranches: [master, main]
   autoFetch: true
   autoRefresh: true
+  autoStageResolvedConflicts: true
   fetchAll: true # Pass --all flag when running git fetch. Set to false to fetch only origin (or the current branch's upstream remote if there is one)
   branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
   parseEmoji: false
-  diffContextSize: 3 # how many lines of context are shown around a change in diffs
+  diffContextSize: 12 # how many lines of context are shown around a change in diffs
   allBranchesLogCmds:
     - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
 os:
@@ -100,11 +102,11 @@ refresher:
   refreshInterval: 10 # File/submodule refresh interval in seconds. Auto-refresh can be disabled via option 'git.autoRefresh'.
   fetchInterval: 60 # Re-fetch interval in seconds. Auto-fetch can be disabled via option 'git.autoFetch'.
 update:
-  method: prompt # can be: prompt | background | never
+  method: background # can be: prompt | background | never
   days: 14 # how often an update is checked for
 confirmOnQuit: false
 # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
-quitOnTopLevelReturn: false
+quitOnTopLevelReturn: true
 disableStartupPopups: false
 notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip' | 'quit'
 promptToReturnFromSubprocess: true # display confirmation when subprocess terminates

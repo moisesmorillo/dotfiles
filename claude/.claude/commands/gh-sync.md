@@ -1,5 +1,6 @@
 ---
 description: Sync local changes to GitHub with automated PR creation
+model: claude-haiku-4-5
 ---
 
 ## Git Flow & Branching
@@ -12,6 +13,12 @@ description: Sync local changes to GitHub with automated PR creation
 * If currently on any other branch, proceed with the rest of the workflow without creating a new branch
 
 ## Linting, Formatting & Testing
+
+* **Before running checks**, verify if they need to be run:
+  * Check the conversation history to see if linting/formatting/testing have been run recently
+  * If checks were run in this conversation AND no files have been modified since (verify with `git status --porcelain`), skip the checks
+  * If any files have been modified or checks haven't been run in this conversation, proceed with all checks
+  * Store the result in conversation context for future reference in this session
 
 * Detect the project type by checking for configuration files and run the appropriate tools:
 
@@ -70,6 +77,7 @@ description: Sync local changes to GitHub with automated PR creation
 
 * Do not proceed until all checks pass
 * If no configuration files are found, skip linting and formatting, but still attempt to run tests
+* After all checks pass successfully, note in your response that checks have passed (this will be available in conversation context for future runs)
 
 ## Staging & Committing
 

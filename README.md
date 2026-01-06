@@ -12,6 +12,9 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - 🧪 GitHub Actions for automated testing
 - 🔧 Easy installation with environment detection
 - 🛠️ Modular configuration with GNU Stow
+- 🎨 Beautiful git diffs with Delta and Rose Pine theme
+- 🤖 AI-powered development tools (Claude, Gemini, OpenCode)
+- 📊 Modern CLI tools (bat, eza, yazi, btop)
 
 ## 🛠️ Tools & Configurations
 
@@ -67,12 +70,63 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Terminal UI for Git commands
 - Custom keybindings and themes
 - Seamless Git workflow
+- Integrated with delta for beautiful diffs
+
+### 🎨 Delta
+
+- Enhanced git diff viewer
+- Side-by-side diffs with syntax highlighting
+- Rose Pine theme integration
+- Optimized for lazygit
 
 ### 🔄 Mise
 
 - Runtime version manager
 - Configuration for multiple languages
 - Automatic version switching
+
+### 🦇 Bat
+
+- Modern `cat` replacement with syntax highlighting
+- Line numbers and git integration
+- Multiple theme support
+
+### 📊 Btop
+
+- Beautiful resource monitor
+- System resource visualization
+- Process management
+
+### 📁 Eza
+
+- Modern `ls` replacement with colors
+- Tree view support
+- Git integration
+
+### 🗄️ Yazi
+
+- Terminal file manager
+- Fast and efficient navigation
+- Preview support for multiple file types
+
+### ⌨️ Karabiner
+
+- Keyboard customization for macOS
+- Complex key mappings
+- Application-specific shortcuts
+
+### 🤖 AI Tools
+
+- **Claude CLI** - Claude AI integration
+- **Gemini CLI** - Google Gemini integration
+- **OpenCode** - AI coding assistant with Neovim integration
+
+### 🔧 Development Tools
+
+- **Git** - Global git configuration
+- **Yamlfmt** - YAML formatter
+- **Yamllint** - YAML linter
+- **Network Utils** - Network debugging utilities
 
 ## 📥 Installation
 
@@ -111,10 +165,22 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── brew/         # Homebrew bundle files
 ├── ghostty/      # Ghostty terminal config
 ├── starship/     # Starship prompt config
-├── docker/       # Docker configuration
 ├── lazygit/      # Lazygit configuration
 ├── lazydocker/   # Lazydocker configuration
+├── delta/        # Delta git diff viewer config
+├── git/          # Git global configuration
 ├── mise/         # Mise runtime manager config
+├── bat/          # Bat (cat replacement) config
+├── btop/         # Btop resource monitor config
+├── eza/          # Eza (ls replacement) config
+├── yazi/         # Yazi file manager config
+├── karabiner/    # Karabiner keyboard config
+├── claude/       # Claude CLI config
+├── gemini/       # Gemini CLI config
+├── opencode/     # OpenCode CLI config
+├── yamlfmt/      # YAML formatter config
+├── yamllint/     # YAML linter config
+├── network_utils/# Network utilities
 └── scripts/      # Installation scripts
 ```
 
