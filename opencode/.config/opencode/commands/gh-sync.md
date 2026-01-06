@@ -18,7 +18,7 @@ Sync my changes to GitHub following this workflow:
    - For Python: Detect tool (uv.lock→uv, poetry.lock→poetry, Pipfile→pipenv), run flake8/black/pytest if configured
    - Don't proceed until all checks pass
 
-3. Stage all changes with `git add .` and create a conventional commit message (feat:/fix:/refactor:/docs:/test:).
+3. Stage all changes with `git add .` and create a conventional commit message (feat:/fix:/refactor:/docs:/test:). Keep the subject line under 50 characters and use imperative mood (e.g., "add feature" not "added feature").
 
 4. Push to origin and create a PR using `gh pr create` with a detailed description including context and motivation.
 
