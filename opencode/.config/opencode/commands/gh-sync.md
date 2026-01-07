@@ -1,13 +1,13 @@
 ---
 description: Sync local changes to GitHub with automated PR creation
 agent: build
-model: openrouter/z-ai/glm-4.5-air:free
+model: openrouter/mistralai/devstral-2512:free
 subtask: true
 ---
 
 Sync my changes to GitHub following this workflow:
 
-1. Check current branch. If on main/master, create a new branch using Git Flow conventions (feature/* for features, bugfix/* for fixes, hotfix/* for urgent fixes, refactor/* for improvements).
+1. Check current branch. If on main/master, create a new branch using Git Flow conventions (feature/*for features, bugfix/* for fixes, hotfix/*for urgent fixes, refactor/* for improvements).
 
 2. Check conversation history - if tests/linting already ran AND no files changed (verify with `git status --porcelain`), skip checks. Otherwise:
    - Check for mise/rtx (.mise.toml or .tool-versions) and use `mise exec` or `mise run` if available
