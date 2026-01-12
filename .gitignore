@@ -152,3 +152,7 @@ claude/.claude/*
 gemini/.gemini/*
 !gemini/.gemini/settings.json
 !gemini/.gemini/themes
+opencode/.config/opencode/*
+!opencode/.config/opencode/commands
+!opencode/.config/opencode/AGENTS.md
+!opencode/.config/opencode/opencode.json
