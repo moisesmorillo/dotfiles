@@ -1,7 +1,7 @@
 ---
 description: Sync local changes to GitHub with automated PR creation
 agent: build
-model: openrouter/mistralai/devstral-2512:free
+model: opencode/minimax-m2.1-free
 subtask: true
 ---
 
