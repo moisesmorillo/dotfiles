@@ -3,9 +3,14 @@
 # Prompt for session name
 read "name?Session name: "
 
+# Replace spaces with hyphens
+name="${name// /-}"
+
 # Create session in detached mode if name is not empty
 if [[ -n "$name" ]]; then
-	tmux new-session -d -s "$name" 2>/dev/null
+	session_name=$(basename "$PWD")
+	[[ "$session_name" == "/" ]] && session_name="root"
+	tmux new-session -d -s "$name" -c "$PWD" -n "$session_name" 2>/dev/null
 
 	# Switch to the new session if creation was successful
 	if [ $? -eq 0 ]; then
