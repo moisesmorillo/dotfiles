@@ -59,12 +59,34 @@ defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
 ################################################################################
 defaults write com.apple.Accessibility ReduceMotionEnabled -int 1
 
-################################################################################
-# Keyboard Repeat Reset
-################################################################################
-defaults delete -g ApplePressAndHoldEnabled
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false          # VSCode
-defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false # Cursor
+###############################################################################
+# AeroSpace & Tiling Window Management                                        #
+###############################################################################
+
+# Disable Mission Control shortcuts that conflict with AeroSpace (Alt + Numbers/Arrows)
+# This releases the keys so AeroSpace can capture them.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0;}"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{enabled = 0;}"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 0;}"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 "{enabled = 0;}"
+
+# Group windows by application (Crucial for AeroSpace stability with Mission Control)
+defaults write com.apple.dock expose-group-apps -bool true
+
+# Disable automatic Space rearranging based on most recent use
+defaults write com.apple.dock "mru-spaces" -bool false
+
+# Reduce transparency and motion animations for faster tiling transitions
+defaults write com.apple.universalaccess reduceTransparency -bool true
+defaults write com.apple.universalaccess reduceMotion -bool true
+
+# Accelerate window resizing animation
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Keyboard optimizations (Press and Hold, Repeat rates for Neovim)
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Restart affected apps
 for app in "Dock" "Finder" "SystemUIServer"; do

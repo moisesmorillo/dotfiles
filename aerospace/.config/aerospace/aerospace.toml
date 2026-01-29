@@ -1,0 +1,106 @@
+config-version = 2
+
+# Accordion layout settings
+accordion-padding = 30
+
+# --- Workspace Definitions ---
+# Keep these workspaces active even if empty
+persistent-workspaces = ["1", "2", "3", "4", "5", "B", "T", "W"]
+
+# --- Startup Commands ---
+# Start window borders and enable login launch
+after-startup-command = ['exec-and-forget borders']
+start-at-login        = true
+
+# --- Appearance & Layout ---
+# Visual spacing between windows and screen edges
+[gaps]
+inner.horizontal = 8
+inner.vertical   = 8
+outer.left       = 8
+outer.bottom     = 8
+outer.top        = 8
+outer.right      = 8
+
+# --- Main Keybindings (Hyper Key) ---
+[mode.main.binding]
+# App Launching
+cmd-alt-ctrl-shift-g = "exec-and-forget open -na Ghostty"
+
+# Window Focus (HJKL)
+cmd-alt-ctrl-shift-h = 'focus left'
+cmd-alt-ctrl-shift-j = 'focus down'
+cmd-alt-ctrl-shift-k = 'focus up'
+cmd-alt-ctrl-shift-l = 'focus right'
+
+# Workspace Switching
+cmd-alt-ctrl-shift-1   = 'workspace 1'
+cmd-alt-ctrl-shift-2   = 'workspace 2'
+cmd-alt-ctrl-shift-3   = 'workspace 3'
+cmd-alt-ctrl-shift-4   = 'workspace 4'
+cmd-alt-ctrl-shift-5   = 'workspace 5'
+cmd-alt-ctrl-shift-b   = 'workspace B'
+cmd-alt-ctrl-shift-t   = 'workspace T'
+cmd-alt-ctrl-shift-w   = 'workspace W'
+cmd-alt-ctrl-shift-tab = 'workspace-back-and-forth'
+
+# Mode Switching
+cmd-alt-ctrl-shift-r = 'mode resize'
+cmd-alt-ctrl-shift-m = 'mode move'
+
+# --- Resize Mode ---
+[mode.resize.binding]
+h     = 'resize width -50'
+j     = 'resize height +50'
+k     = 'resize height -50'
+l     = 'resize width +50'
+esc   = ['reload-config', 'mode main']
+enter = ['reload-config', 'mode main']
+
+# --- Move & Join Mode ---
+[mode.move.binding]
+# Move window within the layout
+h = 'move left'
+j = 'move down'
+k = 'move up'
+l = 'move right'
+# Layout Toggling
+slash = 'layout tiles horizontal vertical'
+comma = 'layout accordion horizontal vertical'
+
+
+# Join containers (Nested layouts)
+shift-h = ['join-with left', 'mode main']
+shift-j = ['join-with down', 'mode main']
+shift-k = ['join-with up', 'mode main']
+shift-l = ['join-with right', 'mode main']
+
+# Move window to specific workspaces
+1     = 'move-node-to-workspace 1'
+2     = 'move-node-to-workspace 2'
+3     = 'move-node-to-workspace 3'
+4     = 'move-node-to-workspace 4'
+5     = 'move-node-to-workspace 5'
+b     = 'move-node-to-workspace B'
+t     = 'move-node-to-workspace T'
+w     = 'move-node-to-workspace W'
+esc   = ['reload-config', 'mode main']
+enter = ['reload-config', 'mode main']
+
+# --- Window Routing Rules ---
+# Automatically assign apps to specific workspaces
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run       = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run       = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run       = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+run       = 'move-node-to-workspace W'

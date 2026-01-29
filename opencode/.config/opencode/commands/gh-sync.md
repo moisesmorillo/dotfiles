@@ -1,7 +1,7 @@
 ---
 description: Sync local changes to GitHub with automated PR creation
 agent: build
-model: opencode/minimax-m2.1-free
+model: google/antigravity-gemini-3-flash
 subtask: true
 ---
 
