@@ -1,0 +1,6 @@
+.config/opencode/*
+!.config/opencode/commands
+!.config/opencode/AGENTS.md
+!.config/opencode/opencode.json
+!.config/opencode/README.md
+!.config/opencode/oh-my-opencode.json

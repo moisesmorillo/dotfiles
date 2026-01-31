@@ -1,0 +1,4 @@
+.gemini/*
+!.gemini/GEMINI.md
+!.gemini/settings.json
+!.gemini/themes

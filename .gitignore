@@ -139,23 +139,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,vim,lua
-.config/tmux/plugins
-scripts/*.macos
-lazygit/.config/lazygit/state.yml
-karabiner/.config/karabiner/automatic_backups/
-karabiner/.config/karabiner/assets/
-claude/.claude/*
-!claude/.claude/settings.json
-!claude/.claude/statusline.sh
-!claude/.claude/CLAUDE.md
-!claude/.claude/commands/
-gemini/.gemini/*
-!gemini/.gemini/GEMINI.md
-!gemini/.gemini/settings.json
-!gemini/.gemini/themes
-opencode/.config/opencode/*
-!opencode/.config/opencode/commands
-!opencode/.config/opencode/AGENTS.md
-!opencode/.config/opencode/opencode.json
-!opencode/.config/opencode/README.md
-!opencode/.config/opencode/oh-my-opencode.json
+
