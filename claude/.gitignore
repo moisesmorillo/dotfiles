@@ -1,0 +1,5 @@
+.claude/*
+!.claude/settings.json
+!.claude/statusline.sh
+!.claude/CLAUDE.md
+!.claude/commands/
