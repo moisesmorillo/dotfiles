@@ -150,6 +150,7 @@ claude/.claude/*
 !claude/.claude/CLAUDE.md
 !claude/.claude/commands/
 gemini/.gemini/*
+!gemini/.gemini/GEMINI.md
 !gemini/.gemini/settings.json
 !gemini/.gemini/themes
 opencode/.config/opencode/*
