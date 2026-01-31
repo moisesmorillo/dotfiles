@@ -157,3 +157,4 @@ opencode/.config/opencode/*
 !opencode/.config/opencode/AGENTS.md
 !opencode/.config/opencode/opencode.json
 !opencode/.config/opencode/README.md
+!opencode/.config/opencode/oh-my-opencode.json
