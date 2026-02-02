@@ -31,7 +31,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Syntax highlighting and treesitter support
 - Snacks for fuzzy finding
 - Custom keybindings and plugins
-- AI integration with Avante and CodeCompanion
+- AI integration with Sidekick
 - Cursor like features
 
 ### 📊 Tmux
@@ -119,7 +119,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
-- **OpenCode** - AI coding assistant with Neovim integration
+- **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
 
 ### 🔧 Development Tools
 
@@ -159,29 +159,32 @@ This repository includes GitHub Actions workflows to test the configuration:
 
 ```
 .
-├── zsh/          # ZSH configuration
-├── nvim/         # Neovim configuration
-├── tmux/         # Tmux configuration
-├── brew/         # Homebrew bundle files
-├── ghostty/      # Ghostty terminal config
-├── starship/     # Starship prompt config
-├── lazygit/      # Lazygit configuration
-├── lazydocker/   # Lazydocker configuration
-├── delta/        # Delta git diff viewer config
-├── git/          # Git global configuration
-├── mise/         # Mise runtime manager config
+├── aerospace/    # Window Manager
+├── agents/       # AI Agents
 ├── bat/          # Bat (cat replacement) config
+├── borders/      # Borders Config
+├── brew/         # Homebrew bundle files
 ├── btop/         # Btop resource monitor config
-├── eza/          # Eza (ls replacement) config
-├── yazi/         # Yazi file manager config
-├── karabiner/    # Karabiner keyboard config
 ├── claude/       # Claude CLI config
+├── delta/        # Delta git diff viewer config
+├── eza/          # Eza (ls replacement) config
 ├── gemini/       # Gemini CLI config
+├── ghostty/      # Ghostty terminal config
+├── karabiner/    # Karabiner keyboard config
+├── lazydocker/   # Lazydocker configuration
+├── lazygit/      # Lazygit configuration
+├── markdownlint/ # Markdown Linting
+├── mise/         # Mise runtime manager config
+├── network_utils/# Network utilities
+├── nvim/         # Neovim configuration
 ├── opencode/     # OpenCode CLI config
+├── scripts/      # Installation scripts
+├── starship/     # Starship prompt config
+├── tmux/         # Tmux configuration
 ├── yamlfmt/      # YAML formatter config
 ├── yamllint/     # YAML linter config
-├── network_utils/# Network utilities
-└── scripts/      # Installation scripts
+├── yazi/         # Yazi file manager config
+└── zsh/          # ZSH configuration
 ```
 
 ## ⚖️ License
