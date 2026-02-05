@@ -60,7 +60,8 @@
   "plugin": [
     "opencode-antigravity-auth@latest",
     "oh-my-opencode@latest",
-    "opencode-anthropic-auth@latest"
+    "opencode-anthropic-auth@latest",
+    "@franlol/opencode-md-table-formatter@latest"
   ],
   "provider": {
     "zai": {

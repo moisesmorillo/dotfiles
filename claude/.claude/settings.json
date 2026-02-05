@@ -1,6 +1,6 @@
 {
   "includeCoAuthoredBy": false,
-  "model": "sonnet",
+  "model": "opus",
   "enableAllProjectMcpServers": true,
   "statusLine": {
     "type": "command",
