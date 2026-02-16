@@ -1,5 +1,12 @@
 {
-  "includeCoAuthoredBy": false,
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "DISABLE_INSTALLATION_CHECKS": "true"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "model": "opus",
   "enableAllProjectMcpServers": true,
   "statusLine": {
@@ -7,5 +14,10 @@
     "command": "bash ~/.claude/statusline.sh"
   },
   "outputStyle": "Learning",
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": false,
+  "plansDirectory": "./plans",
+  "teammateMode": "tmux",
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true
+  }
 }
