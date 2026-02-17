@@ -2,6 +2,8 @@
 return {
   "nvzone/typr",
   dependencies = "nvzone/volt",
-  opts = {},
+  opts = {
+    mode = "phrases",
+  },
   cmd = { "Typr", "TyprStats" },
 }
