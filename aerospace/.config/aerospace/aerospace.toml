@@ -25,7 +25,7 @@ outer.right      = 8
 # --- Main Keybindings (Hyper Key) ---
 [mode.main.binding]
 # App Launching
-cmd-alt-ctrl-shift-g = "exec-and-forget open -na Ghostty"
+cmd-alt-ctrl-shift-g = 'exec-and-forget sh -c "aerospace focus-window-by-app-id com.mitchellh.ghostty || open -a Ghostty"'
 
 # Window Focus (HJKL)
 cmd-alt-ctrl-shift-h = 'focus left'
