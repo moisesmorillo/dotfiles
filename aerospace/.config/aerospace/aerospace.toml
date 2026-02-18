@@ -5,7 +5,7 @@ accordion-padding = 30
 
 # --- Workspace Definitions ---
 # Keep these workspaces active even if empty
-persistent-workspaces = ["1", "2", "3", "4", "5", "B", "T", "W"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "B", "C", "T", "W"]
 
 # --- Startup Commands ---
 # Start window borders and enable login launch
@@ -25,7 +25,7 @@ outer.right      = 8
 # --- Main Keybindings (Hyper Key) ---
 [mode.main.binding]
 # App Launching
-cmd-alt-ctrl-shift-g = "exec-and-forget open -na Ghostty"
+cmd-alt-ctrl-shift-g = 'exec-and-forget sh -c "aerospace focus-window-by-app-id com.mitchellh.ghostty || open -a Ghostty"'
 
 # Window Focus (HJKL)
 cmd-alt-ctrl-shift-h = 'focus left'
@@ -40,6 +40,7 @@ cmd-alt-ctrl-shift-3   = 'workspace 3'
 cmd-alt-ctrl-shift-4   = 'workspace 4'
 cmd-alt-ctrl-shift-5   = 'workspace 5'
 cmd-alt-ctrl-shift-b   = 'workspace B'
+cmd-alt-ctrl-shift-c   = 'workspace C'
 cmd-alt-ctrl-shift-t   = 'workspace T'
 cmd-alt-ctrl-shift-w   = 'workspace W'
 cmd-alt-ctrl-shift-tab = 'workspace-back-and-forth'
@@ -82,6 +83,7 @@ shift-l = ['join-with right', 'mode main']
 4     = 'move-node-to-workspace 4'
 5     = 'move-node-to-workspace 5'
 b     = 'move-node-to-workspace B'
+c     = 'move-node-to-workspace C'
 t     = 'move-node-to-workspace T'
 w     = 'move-node-to-workspace W'
 esc   = ['reload-config', 'mode main']
@@ -102,5 +104,9 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run       = 'move-node-to-workspace W'
 
 [[on-window-detected]]
-if.app-id = 'us.zoom.xos'
-run       = 'move-node-to-workspace W'
+if.app-id = 'net.whatsapp.WhatsApp'
+run       = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+if.app-id = 'ru.keepcoder.Telegram'
+run       = 'move-node-to-workspace C'
