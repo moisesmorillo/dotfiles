@@ -3,10 +3,10 @@
   "google_auth": false,
   "agents": {
     "sisyphus": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3.1-pro-preview"
     },
     "oracle": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
     "librarian": {
@@ -19,34 +19,34 @@
       "model": "google/antigravity-gemini-3-flash"
     },
     "prometheus": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3.1-pro-preview"
     },
     "metis": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
     "momus": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
     "atlas": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3.1-pro-preview"
     }
   },
   "categories": {
     "visual-engineering": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3.1-pro-preview"
     },
     "ultrabrain": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
     "deep": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
     "artistry": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
     "quick": {

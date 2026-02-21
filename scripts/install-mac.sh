@@ -30,7 +30,7 @@ brew bundle install --file=./brew/Brewfile
 . ./scripts/update-docker-config.sh
 
 ### Create default colima machine
-colima start --cpu 2 --memory 2 --disk 50
+colima start --cpu 2 --memory 8 --disk 50
 
 ### Install Tpm ###
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
