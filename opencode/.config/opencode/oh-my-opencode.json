@@ -3,14 +3,14 @@
   "google_auth": false,
   "agents": {
     "sisyphus": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
+      "model": "zai/glm-5"
     },
     "oracle": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "google/antigravity-claude-opus-4-6-thinking",
+      "variant": "max"
     },
     "librarian": {
-      "model": "zai-coding-plan/glm-4.7"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "explore": {
       "model": "google/antigravity-gemini-3-flash"
@@ -22,8 +22,7 @@
       "model": "google/antigravity-gemini-3.1-pro-preview"
     },
     "metis": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "google/antigravity-claude-sonnet-4-6"
     },
     "momus": {
       "model": "google/antigravity-gemini-3.1-pro-preview",
@@ -50,16 +49,16 @@
       "variant": "high"
     },
     "quick": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "zai/glm-4.7-flash"
     },
     "unspecified-low": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "zai/glm-4.7-flash"
     },
     "unspecified-high": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "zai/glm-5"
     },
     "writing": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "zai/glm-5"
     }
   }
 }
