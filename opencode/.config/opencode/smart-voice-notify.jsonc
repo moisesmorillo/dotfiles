@@ -45,7 +45,7 @@
   //   'tts-first'   - Speak TTS immediately, no sound
   //   'both'        - Play sound AND speak TTS immediately
   //   'sound-only'  - Only play sound, no TTS at all
-  "notificationMode": "sound-first",
+  "notificationMode": "sound-only",
   // ============================================================
   // TTS REMINDER SETTINGS (When user doesn't respond to sound)
   // ============================================================
@@ -57,7 +57,7 @@
   "idleReminderDelaySeconds": 30, // For task completion notifications
   "permissionReminderDelaySeconds": 20, // For permission requests (more urgent)
   // Follow-up reminders if user STILL doesn't respond after first TTS
-  "enableFollowUpReminders": true,
+  "enableFollowUpReminders": false,
   "maxFollowUpReminders": 3, // Max number of follow-up TTS reminders
   "reminderBackoffMultiplier": 1.5, // Each follow-up waits longer (30s, 45s, 67s...)
   // ============================================================
