@@ -2,17 +2,11 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "zai/glm-5",
   "small_model": "zai/glm-4.7-flash",
-  "theme": "rosepine",
   "autoupdate": false,
   "instructions": [
     "CLAUDE.md",
     "GEMINI.md"
   ],
-  "tui": {
-    "scroll_acceleration": {
-      "enabled": true
-    }
-  },
   "default_agent": "plan",
   "agent": {
     "build": {
@@ -51,14 +45,23 @@
         "https://mcp.linear.app/mcp"
       ],
       "enabled": true
+    },
+    "pencil": {
+      "command": [
+        "/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+        "--app",
+        "desktop"
+      ],
+      "enabled": true,
+      "type": "local"
     }
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
     "oh-my-opencode@latest",
-    "opencode-anthropic-auth@latest",
     "@franlol/opencode-md-table-formatter@latest",
-    "opencode-smart-voice-notify@latest"
+    "opencode-smart-voice-notify@latest",
+    "@tarquinen/opencode-dcp@latest"
   ],
   "enabled_providers": [
     "zai",
@@ -157,7 +160,7 @@
         "antigravity-claude-sonnet-4-6": {
           "name": "Claude Sonnet 4.6 (Antigravity)",
           "limit": {
-            "context": 200000,
+            "context": 1000000,
             "output": 64000
           },
           "modalities": {
@@ -174,7 +177,7 @@
         "antigravity-claude-opus-4-6-thinking": {
           "name": "Claude Opus 4.6 Thinking (Antigravity)",
           "limit": {
-            "context": 200000,
+            "context": 1000000,
             "output": 64000
           },
           "modalities": {

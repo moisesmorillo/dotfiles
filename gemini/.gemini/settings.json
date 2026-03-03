@@ -15,7 +15,12 @@
     "enablePromptCompletion": true,
     "previewFeatures": true,
     "preferredEditor": "nvim",
-    "vimMode": false
+    "vimMode": false,
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "warningAcknowledged": true
+    }
   },
   "output": {
     "format": "text"
@@ -32,5 +37,15 @@
   },
   "ide": {
     "enabled": true
+  },
+  "mcpServers": {
+    "pencil": {
+      "command": "/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+      "args": [
+        "--app",
+        "desktop"
+      ],
+      "env": {}
+    }
   }
 }

@@ -13,11 +13,11 @@
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
   },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true
+  },
   "outputStyle": "Learning",
   "alwaysThinkingEnabled": false,
   "plansDirectory": "./plans",
-  "teammateMode": "tmux",
-  "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true
-  }
+  "teammateMode": "tmux"
 }
