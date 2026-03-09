@@ -7,6 +7,11 @@
     "commit": "",
     "pr": ""
   },
+  "permissions": {
+    "allow": [
+      "mcp__pencil"
+    ]
+  },
   "model": "opus",
   "enableAllProjectMcpServers": true,
   "statusLine": {
@@ -20,5 +25,6 @@
   "outputStyle": "Learning",
   "alwaysThinkingEnabled": false,
   "plansDirectory": "./plans",
+  "skipDangerousModePermissionPrompt": true,
   "teammateMode": "tmux"
 }

@@ -46,3 +46,4 @@ pipx_uvx                            = true
 experimental                        = true
 idiomatic_version_file_enable_tools = ["python"]
 disable_tools                       = ["ruby"]
+auto_install                        = false
