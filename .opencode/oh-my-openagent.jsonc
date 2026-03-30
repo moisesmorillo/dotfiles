@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-openagent.schema.json",
   "sisyphus_agent": {
-    "disabled": false,
+    "disabled": true,
     "default_builder_enabled": true,
     "planner_enabled": false,
     "replace_plan": false
