@@ -1,52 +1,49 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  "google_auth": false,
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
-      "model": "zai/glm-5"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
+      "ultrawork": {
+        "model": "zai/glm-5.1"
+      }
     },
     "oracle": {
-      "model": "google/antigravity-claude-opus-4-6-thinking",
-      "variant": "max"
-    },
-    "librarian": {
-      "model": "google/antigravity-gemini-3-flash"
-    },
-    "explore": {
-      "model": "google/antigravity-gemini-3-flash"
-    },
-    "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "zai/glm-5.1"
     },
     "prometheus": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
+      "model": "zai/glm-5.1"
     },
     "metis": {
-      "model": "google/antigravity-claude-sonnet-4-6"
-    },
-    "momus": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "zai/glm-5.1"
     },
     "atlas": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+    },
+    "momus": {
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+    },
+    "explore": {
+      "model": "zai/glm-4.7-flash"
+    },
+    "librarian": {
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+    },
+    "multimodal-looker": {
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     }
   },
   "categories": {
-    "visual-engineering": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
-    },
     "ultrabrain": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "deep": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+    },
+    "visual-engineering": {
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "artistry": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "quick": {
       "model": "zai/glm-4.7-flash"
@@ -55,10 +52,10 @@
       "model": "zai/glm-4.7-flash"
     },
     "unspecified-high": {
-      "model": "zai/glm-5"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "writing": {
-      "model": "zai/glm-5"
+      "model": "zai/glm-5.1"
     }
   }
 }
