@@ -8,19 +8,22 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
+      "ultrawork": {
+        "model": "zai/glm-5.1"
+      }
     },
     "oracle": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+      "model": "zai/glm-5.1"
     },
     "prometheus": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+      "model": "zai/glm-5.1"
     },
     "metis": {
-      "model": "zai/glm-5"
+      "model": "zai/glm-5.1"
     },
     "atlas": {
-      "model": "zai/glm-5"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "momus": {
       "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
@@ -29,7 +32,7 @@
       "model": "zai/glm-4.7-flash"
     },
     "librarian": {
-      "model": "zai/glm-5"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "multimodal-looker": {
       "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
@@ -58,7 +61,7 @@
       "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "writing": {
-      "model": "zai/glm-5"
+      "model": "zai/glm-5.1"
     }
   }
 }
