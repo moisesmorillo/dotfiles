@@ -1,9 +1,73 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-openagent.schema.json",
   "sisyphus_agent": {
-    "disabled": true,
+    "disabled": false,
     "default_builder_enabled": true,
     "planner_enabled": false,
     "replace_plan": false
+  },
+  "agents": {
+    "sisyphus": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "oracle": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "prometheus": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "metis": {
+      "model": "anthropic/claude-sonnet-4-6"
+    },
+    "atlas": {
+      "model": "anthropic/claude-sonnet-4-6"
+    },
+    "momus": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "explore": {
+      "model": "github-copilot/grok-code-fast-1"
+    },
+    "librarian": {
+      "model": "zai-coding-plan/glm-5"
+    },
+    "multimodal-looker": {
+      "model": "google/antigravity-gemini-3-flash"
+    }
+  },
+  "categories": {
+    "ultrabrain": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "deep": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "visual-engineering": {
+      "model": "google/antigravity-gemini-3.1-pro-preview",
+      "variant": "high"
+    },
+    "artistry": {
+      "model": "google/antigravity-gemini-3.1-pro-preview",
+      "variant": "high"
+    },
+    "quick": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "unspecified-low": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "unspecified-high": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "writing": {
+      "model": "anthropic/claude-sonnet-4-6"
+    }
   }
 }

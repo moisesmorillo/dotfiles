@@ -1,46 +1,55 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  "google_auth": false,
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-openagent.schema.json",
+  "google_auth": true,
+  "sisyphus_agent": {
+    "disabled": false,
+    "default_builder_enabled": true,
+    "planner_enabled": false,
+    "replace_plan": false
+  },
   "agents": {
     "sisyphus": {
-      "model": "zai/glm-5"
-    },
-    "oracle": {
-      "model": "google/antigravity-claude-opus-4-6-thinking",
+      "model": "anthropic/claude-opus-4-6",
       "variant": "max"
     },
-    "librarian": {
-      "model": "google/antigravity-gemini-3-flash"
+    "oracle": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "prometheus": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "metis": {
+      "model": "anthropic/claude-sonnet-4-6"
+    },
+    "atlas": {
+      "model": "anthropic/claude-sonnet-4-6"
+    },
+    "momus": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "github-copilot/grok-code-fast-1"
+    },
+    "librarian": {
+      "model": "zai-coding-plan/glm-5"
     },
     "multimodal-looker": {
       "model": "google/antigravity-gemini-3-flash"
-    },
-    "prometheus": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
-    },
-    "metis": {
-      "model": "google/antigravity-claude-sonnet-4-6"
-    },
-    "momus": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
-    },
-    "atlas": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
     }
   },
   "categories": {
-    "visual-engineering": {
-      "model": "google/antigravity-gemini-3.1-pro-preview"
-    },
     "ultrabrain": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
     },
     "deep": {
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
+    },
+    "visual-engineering": {
       "model": "google/antigravity-gemini-3.1-pro-preview",
       "variant": "high"
     },
@@ -49,16 +58,17 @@
       "variant": "high"
     },
     "quick": {
-      "model": "zai/glm-4.7-flash"
+      "model": "anthropic/claude-haiku-4-5"
     },
     "unspecified-low": {
-      "model": "zai/glm-4.7-flash"
+      "model": "anthropic/claude-haiku-4-5"
     },
     "unspecified-high": {
-      "model": "zai/glm-5"
+      "model": "anthropic/claude-opus-4-6",
+      "variant": "max"
     },
     "writing": {
-      "model": "zai/glm-5"
+      "model": "anthropic/claude-sonnet-4-6"
     }
   }
 }
