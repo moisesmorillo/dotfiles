@@ -1,12 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-openagent.schema.json",
-  "google_auth": false,
-  "sisyphus_agent": {
-    "disabled": false,
-    "default_builder_enabled": true,
-    "planner_enabled": false,
-    "replace_plan": false
-  },
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
       "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
