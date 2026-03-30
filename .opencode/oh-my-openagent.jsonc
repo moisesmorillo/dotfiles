@@ -8,66 +8,57 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "oracle": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "prometheus": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "metis": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "zai/glm-5"
     },
     "atlas": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "zai/glm-5"
     },
     "momus": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "explore": {
-      "model": "github-copilot/grok-code-fast-1"
+      "model": "zai/glm-4.7-flash"
     },
     "librarian": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai/glm-5"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     }
   },
   "categories": {
     "ultrabrain": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "deep": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "visual-engineering": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "artistry": {
-      "model": "google/antigravity-gemini-3.1-pro-preview",
-      "variant": "high"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "quick": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "zai/glm-4.7-flash"
     },
     "unspecified-low": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "zai/glm-4.7-flash"
     },
     "unspecified-high": {
-      "model": "anthropic/claude-opus-4-6",
-      "variant": "max"
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
     "writing": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "zai/glm-5"
     }
   }
 }
