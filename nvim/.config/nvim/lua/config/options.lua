@@ -31,6 +31,7 @@ end
 
 local globals = {
   dap_virtual_text = true,
+  lazyvim_ts_lsp = "tsgo",
 }
 
 for k, v in pairs(globals) do
