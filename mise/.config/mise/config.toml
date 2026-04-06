@@ -42,9 +42,11 @@ yazi             = "latest"
 yq               = "latest"
 
 [settings]
-go_set_gobin                        = true
-pipx_uvx                            = true
-experimental                        = true
-idiomatic_version_file_enable_tools = ["python"]
-disable_tools                       = ["ruby"]
 auto_install                        = false
+disable_tools                       = ["ruby"]
+experimental                        = true
+go_set_gobin                        = true
+idiomatic_version_file_enable_tools = ["python"]
+
+[settings.pipx]
+uvx = true
