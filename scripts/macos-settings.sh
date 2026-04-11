@@ -86,6 +86,8 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Disable Press and Hold only in editors/terminals (keep accent popup globally)
+# Remove any global override so macOS uses its default (press-and-hold enabled)
+defaults delete NSGlobalDomain ApplePressAndHoldEnabled 2>/dev/null || true
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 defaults write com.mitchellh.ghostty ApplePressAndHoldEnabled -bool false
 
