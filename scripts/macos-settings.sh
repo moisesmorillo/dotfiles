@@ -17,7 +17,6 @@ defaults write -globalDomain AppleFirstWeekday -dict gregorian -int 2
 defaults write -globalDomain AppleKeyboardUIMode -int 0
 defaults write -globalDomain InitialKeyRepeat -float 25
 defaults write -globalDomain KeyRepeat -float 2
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 ################################################################################
 # Finder
@@ -82,10 +81,13 @@ defaults write com.apple.Accessibility ReduceTransparencyEnabled -int 1
 # Accelerate window resizing animation
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
-# Keyboard optimizations (Press and Hold, Repeat rates for Neovim)
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Keyboard optimizations (Repeat rates for Neovim/terminal workflows)
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Disable Press and Hold only in editors/terminals (keep accent popup globally)
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write com.mitchellh.ghostty ApplePressAndHoldEnabled -bool false
 
 # Restart affected apps
 for app in "Dock" "Finder" "SystemUIServer"; do
