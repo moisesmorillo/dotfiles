@@ -76,8 +76,8 @@ defaults write com.apple.dock expose-group-apps -bool true
 # Disable automatic Space rearranging based on most recent use
 defaults write com.apple.dock "mru-spaces" -bool false
 
-# Reduce transparency for faster tiling transitions (osascript bypasses SIP restrictions on com.apple.universalaccess)
-osascript -e 'tell application "System Events" to tell appearance preferences to set reduce transparency to true'
+# Reduce transparency for faster tiling transitions
+defaults write com.apple.Accessibility ReduceTransparencyEnabled -int 1
 
 # Accelerate window resizing animation
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
