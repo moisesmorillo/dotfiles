@@ -24,7 +24,10 @@ eval "$(~/.local/bin/mise activate bash)"
 brew update && brew upgrade
 
 ### Install from Brewfile
-brew bundle install --file=./brew/Brewfile
+if ! brew bundle install --file=./brew/Brewfile; then
+	echo "brew bundle failed, exiting"
+	exit 1
+fi
 
 ### Update docker config file
 . ./scripts/update-docker-config.sh
@@ -33,6 +36,7 @@ brew bundle install --file=./brew/Brewfile
 colima start --cpu 2 --memory 8 --disk 50
 
 ### Install Tpm ###
+rm -rf ~/.tmux/plugins/tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### Set defaults mac os
