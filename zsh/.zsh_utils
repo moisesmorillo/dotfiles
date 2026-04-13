@@ -30,6 +30,10 @@ fu() {
 	log_info "*** Updating OS packages ***"
 	brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup
 
+	log_info "*** Syncing Brewfile layers (DOTFILES_ENV=${DOTFILES_ENV:-personal}) ***"
+	brewfile_install
+	brewfile_cleanup
+
 	log_info "*** Updating mise core ***"
 	mise self-update -y
 
@@ -42,7 +46,7 @@ fu() {
 	nvim --headless "+Lazy! sync" +qa
 
 	log_info "*** Updating zinit and plugins ***"
-	zinit self-update -y
+	zinit self-update -q
 	zinit update --all --parallel
 
 	log_info "*** Updating mise packages ***"
@@ -218,20 +222,109 @@ sync_lazyvim_plugins() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# Brewfile helpers
-brewfile_generate() {
+# Brewfile helpers (layered by DOTFILES_ENV)
+# DOTFILES_ENV controls which layers are installed:
+#   "personal" → base + personal (default)
+#   "work"     → base + work
+#   "all"      → base + personal + work
+
+_brewfile_dir="$HOME/workspace/moisesmorillo/dotfiles/brew"
+
+_brewfile_layers() {
 	emulate -L zsh
-	brew bundle dump --formula --cask --tap --vscode --file=~/Brewfile --force
+	local env="${DOTFILES_ENV:-personal}"
+	local -a layers=("${_brewfile_dir}/Brewfile.base")
+
+	if [[ "$env" == "personal" || "$env" == "all" ]]; then
+		layers+=("${_brewfile_dir}/Brewfile.personal")
+	fi
+	if [[ "$env" == "work" || "$env" == "all" ]]; then
+		layers+=("${_brewfile_dir}/Brewfile.work")
+	fi
+
+	print -l "${layers[@]}"
 }
 
 brewfile_install() {
-	emulate -L zsh
-	brew bundle install --file=~/Brewfile
+	emulate -L zsh -o pipefail
+	local layer
+	for layer in $(_brewfile_layers); do
+		log_info "Installing ${layer:t}..."
+		brew bundle install --file="$layer" || return 1
+	done
 }
 
-brewfile_force_install() {
-	emulate -L zsh
-	brew bundle cleanup --force --file=~/Brewfile
+brewfile_cleanup() {
+	emulate -L zsh -o pipefail
+	local tmpfile
+	tmpfile=$(mktemp /tmp/Brewfile.merged.XXXXXX) || return 1
+
+	local layer
+	for layer in $(_brewfile_layers); do
+		cat "$layer" >> "$tmpfile"
+		echo "" >> "$tmpfile"
+	done
+
+	log_info "Cleaning packages not in active layers..."
+	brew bundle cleanup --force --file="$tmpfile"
+	rm -f "$tmpfile"
+}
+
+brewfile_generate() {
+	emulate -L zsh -o pipefail
+
+	# Dump current installed state to a temp file
+	local tmpfile
+	tmpfile=$(mktemp /tmp/Brewfile.dump.XXXXXX) || return 1
+	brew bundle dump --formula --cask --tap --file="$tmpfile" --force
+
+	# Merge all layers (base + personal + work) to find what's already tracked
+	local -a all_layers=("${_brewfile_dir}/Brewfile.base" "${_brewfile_dir}/Brewfile.personal" "${_brewfile_dir}/Brewfile.work")
+	local merged
+	merged=$(mktemp /tmp/Brewfile.tracked.XXXXXX) || return 1
+	for f in "${all_layers[@]}"; do
+		[[ -f "$f" ]] && cat "$f" >> "$merged"
+	done
+
+	# Find new entries (in dump but not in any layer)
+	local -a new_entries=()
+	while IFS= read -r line; do
+		# Skip empty lines
+		[[ -z "$line" ]] && continue
+		# Check if this exact line exists in any tracked file
+		if ! grep -qFx "$line" "$merged"; then
+			new_entries+=("$line")
+		fi
+	done < "$tmpfile"
+
+	rm -f "$tmpfile" "$merged"
+
+	if (( ${#new_entries[@]} == 0 )); then
+		log_info "No new packages to add. Everything is already tracked."
+		return 0
+	fi
+
+	log_info "Found ${#new_entries[@]} untracked package(s):"
+	echo ""
+
+	local entry target
+	for entry in "${new_entries[@]}"; do
+		echo "  → $entry"
+		target=$(gum choose --header="Add to which layer?" "base" "personal" "work" "skip")
+
+		case "$target" in
+			base|personal|work)
+				echo "$entry" >> "${_brewfile_dir}/Brewfile.${target}"
+				log_info "Added to Brewfile.${target}"
+				;;
+			skip)
+				log_warn "Skipped"
+				;;
+		esac
+		echo ""
+	done
+
+	log_info "Done! Run 'brewfile_install' to sync."
 }
 
 #───────────────────────────────────────────────────────────────────────────────
