@@ -1,0 +1,4 @@
+brew "helm"
+cask "google-chrome"
+cask "mitmproxy"
+cask "slack"
