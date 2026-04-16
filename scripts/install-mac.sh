@@ -13,9 +13,9 @@ echo "  3) all      — base + personal + work apps"
 echo ""
 read -rp "Enter choice [1]: " env_choice
 case "$env_choice" in
-	2) DOTFILES_ENV="work" ;;
-	3) DOTFILES_ENV="all" ;;
-	*) DOTFILES_ENV="personal" ;;
+2) DOTFILES_ENV="work" ;;
+3) DOTFILES_ENV="all" ;;
+*) DOTFILES_ENV="personal" ;;
 esac
 echo "Environment set to: $DOTFILES_ENV"
 echo ""
@@ -66,7 +66,7 @@ fi
 . ./scripts/update-docker-config.sh
 
 ### Create default colima machine
-colima start --cpu 2 --memory 8 --disk 50
+colima start --cpu 4 --memory 6 --disk 50 --vm-type vz --mount-type virtiofs
 
 ### Install Tpm ###
 rm -rf ~/.tmux/plugins/tpm
