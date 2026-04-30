@@ -64,7 +64,7 @@ DELETE_LOGIC="
 "
 
 # --- MAIN EXECUTION ---
-selected=$(generate_list | fzf \
+selected=$(generate_list | mise exec -- fzf \
 	--ansi \
 	--reverse \
 	--border \
