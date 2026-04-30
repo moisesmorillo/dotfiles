@@ -1,3 +1,9 @@
+# Git Identity — DO NOT TOUCH
+
+**NEVER run `git config user.email` or `git config user.name` (neither `--local` nor `--global`).** The git identity is pre-configured by the devcontainer feature at container build time. Changing it causes commits to show as "Unverified" on GitHub because the email won't match the user's verified GitHub account. If git complains about a missing identity, commit anyway and let the human fix the devcontainer config — do NOT invent an email address.
+
+---
+
 # Shell Command Best Practices
 
 When executing shell commands through an agentic code tool:
