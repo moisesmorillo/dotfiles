@@ -368,7 +368,7 @@
   // Show TUI toast notifications in OpenCode terminal
   "enableToast": true,
   // Enable audio notifications (sound files and TTS)
-  "enableSound": true,
+  "enableSound": false,
   // ============================================================
   // DESKTOP NOTIFICATION SETTINGS
   // ============================================================
