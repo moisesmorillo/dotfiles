@@ -29,5 +29,7 @@
   "alwaysThinkingEnabled": false,
   "plansDirectory": "./plans",
   "skipDangerousModePermissionPrompt": true,
-  "teammateMode": "tmux"
+  "theme": "dark-ansi",
+  "teammateMode": "tmux",
+  "agentPushNotifEnabled": true
 }

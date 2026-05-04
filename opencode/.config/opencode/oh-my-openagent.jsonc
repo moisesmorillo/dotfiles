@@ -1,61 +1,118 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/assets/oh-my-opencode.schema.json",
+
+  // ┌─────────────────────────────────────────────────────────┐
+  // │ HOW TO SWITCH PROFILES                                  │
+  // ├─────────────────────────────────────────────────────────┤
+  // │ 1. Wrap the currently active profile's "agents" and     │
+  // │    "categories" in /* ... */                            │
+  // │ 2. Remove /* and */ from the desired profile.           │
+  // │ 3. Each commented block starts with `,"agents":` —      │
+  // │    when uncommenting, EITHER add a trailing comma after │
+  // │    the previous block's "categories" closing brace, OR  │
+  // │    delete the leading `,` inside the now-active block.  │
+  // │ 4. Confirm exactly ONE profile is uncommented.          │
+  // │    Duplicate "agents" keys = invalid JSON.              │
+  // │ 5. Restart any running opencode session.                │
+  // │ 6. Verify with: bunx oh-my-opencode doctor              │
+  // └─────────────────────────────────────────────────────────┘
+
+  // ============================================================
+  // ACTIVE PROFILE: ECONOMIC  (default)
+  // To switch: comment this block with /* ... */ and uncomment
+  // exactly one of the BALANCED or QUALITY blocks below.
+  // Two uncommented profiles produce duplicate keys (invalid JSON).
+  // Slugs use the openrouter/ prefix because oh-my-openagent
+  // resolves models via the OpenCode cache, which namespaces
+  // OpenRouter models under "openrouter/<provider>/<model>".
+  // ============================================================
   "agents": {
     "sisyphus": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo",
-      "ultrawork": {
-        "model": "zai/glm-5.1"
-      }
+      "model": "opencode-go/kimi-k2.6",
+      "ultrawork": { "model": "openrouter/z-ai/glm-5.1" }
     },
-    "oracle": {
-      "model": "zai/glm-5.1"
-    },
-    "prometheus": {
-      "model": "zai/glm-5.1"
-    },
-    "metis": {
-      "model": "zai/glm-5.1"
-    },
-    "atlas": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "momus": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "explore": {
-      "model": "zai/glm-4.7-flash"
-    },
-    "librarian": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "multimodal-looker": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    }
+    "atlas":             { "model": "opencode-go/kimi-k2.6" },
+    "metis":             { "model": "openrouter/z-ai/glm-4.7" },
+    "hephaestus":        { "model": "opencode-go/kimi-k2.6" },
+    "oracle":            { "model": "openrouter/z-ai/glm-5.1" },
+    "prometheus":        { "model": "opencode-go/kimi-k2.6" },
+    "momus":             { "model": "openrouter/z-ai/glm-5.1" },
+    "explore":           { "model": "openrouter/z-ai/glm-4.7-flash" },
+    "librarian":         { "model": "openrouter/z-ai/glm-4.7-flash" },
+    "multimodal-looker": { "model": "openrouter/google/gemini-2.5-flash" }
   },
   "categories": {
-    "ultrabrain": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "deep": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "visual-engineering": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "artistry": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "quick": {
-      "model": "zai/glm-4.7-flash"
-    },
-    "unspecified-low": {
-      "model": "zai/glm-4.7-flash"
-    },
-    "unspecified-high": {
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "writing": {
-      "model": "zai/glm-5.1"
-    }
+    "ultrabrain":         { "model": "openrouter/z-ai/glm-5.1" },
+    "deep":               { "model": "openrouter/moonshotai/kimi-k2.5" },
+    "visual-engineering": { "model": "openrouter/google/gemini-2.5-flash" },
+    "artistry":           { "model": "openrouter/z-ai/glm-5.1" },
+    "quick":              { "model": "openrouter/z-ai/glm-4.7-flash" },
+    "unspecified-low":    { "model": "openrouter/z-ai/glm-4.7" },
+    "unspecified-high":   { "model": "openrouter/z-ai/glm-5.1" },
+    "writing":            { "model": "openrouter/google/gemini-2.5-flash" }
   }
+
+  // ============================================================
+  // PROFILE: BALANCED  (commented — uncomment to activate)
+  // Note: multimodal-looker uses glm-4.5v because glm-4.6v is
+  // not in the OpenCode model cache.
+  // ============================================================
+  /*
+  ,"agents": {
+    "sisyphus": {
+      "model": "openrouter/moonshotai/kimi-k2.5",
+      "ultrawork": { "model": "openrouter/openai/gpt-5" }
+    },
+    "atlas":             { "model": "openrouter/z-ai/glm-5.1" },
+    "metis":             { "model": "openrouter/z-ai/glm-5.1" },
+    "hephaestus":        { "model": "openrouter/moonshotai/kimi-k2.6" },
+    "oracle":            { "model": "openrouter/openai/gpt-5.1" },
+    "prometheus":        { "model": "openrouter/openai/gpt-5.1" },
+    "momus":             { "model": "openrouter/openai/gpt-5.1" },
+    "explore":           { "model": "openrouter/x-ai/grok-4-fast" },
+    "librarian":         { "model": "openrouter/x-ai/grok-4-fast" },
+    "multimodal-looker": { "model": "openrouter/z-ai/glm-4.5v" }
+  },
+  "categories": {
+    "ultrabrain":         { "model": "openrouter/openai/gpt-5.1" },
+    "deep":               { "model": "openrouter/moonshotai/kimi-k2.6" },
+    "visual-engineering": { "model": "openrouter/z-ai/glm-5.1" },
+    "artistry":           { "model": "openrouter/google/gemini-2.5-pro" },
+    "quick":              { "model": "openrouter/x-ai/grok-4-fast" },
+    "unspecified-low":    { "model": "openrouter/moonshotai/kimi-k2.5" },
+    "unspecified-high":   { "model": "openrouter/moonshotai/kimi-k2.6" },
+    "writing":            { "model": "openrouter/google/gemini-2.5-pro" }
+  }
+  */
+
+  // ============================================================
+  // PROFILE: QUALITY  (commented — uncomment to activate)
+  // ============================================================
+  /*
+  ,"agents": {
+    "sisyphus": {
+      "model": "openrouter/openai/gpt-5.1",
+      "ultrawork": { "model": "openrouter/google/gemini-3.1-pro-preview" }
+    },
+    "atlas":             { "model": "openrouter/moonshotai/kimi-k2.6" },
+    "metis":             { "model": "openrouter/openai/gpt-5.1" },
+    "hephaestus":        { "model": "openrouter/openai/gpt-5.1-codex" },
+    "oracle":            { "model": "openrouter/google/gemini-3.1-pro-preview" },
+    "prometheus":        { "model": "openrouter/openai/gpt-5.1" },
+    "momus":             { "model": "openrouter/openai/gpt-5.4" },
+    "explore":           { "model": "openrouter/google/gemini-2.5-flash" },
+    "librarian":         { "model": "openrouter/google/gemini-2.5-flash" },
+    "multimodal-looker": { "model": "openrouter/google/gemini-3.1-pro-preview" }
+  },
+  "categories": {
+    "ultrabrain":         { "model": "openrouter/openai/gpt-5.4" },
+    "deep":               { "model": "openrouter/openai/gpt-5.1-codex" },
+    "visual-engineering": { "model": "openrouter/google/gemini-3.1-pro-preview" },
+    "artistry":           { "model": "openrouter/google/gemini-3.1-pro-preview" },
+    "quick":              { "model": "openrouter/google/gemini-2.5-flash" },
+    "unspecified-low":    { "model": "openrouter/openai/gpt-5.1" },
+    "unspecified-high":   { "model": "openrouter/openai/gpt-5.1" },
+    "writing":            { "model": "openrouter/google/gemini-3.1-pro-preview" }
+  }
+  */
 }
