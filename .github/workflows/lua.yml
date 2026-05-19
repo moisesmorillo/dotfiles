@@ -7,6 +7,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      
-      - name: Luacheck linter
+
+      - name: Luacheck (nvim)
         uses: lunarmodules/luacheck@v1
+        with:
+          args: nvim/
+
+      - name: Luacheck (hammerspoon)
+        uses: lunarmodules/luacheck@v1
+        with:
+          args: hammerspoon/
