@@ -6,7 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
-      
-      - name: Luacheck linter
+        uses: actions/checkout@v6
+
+      - name: Luacheck (nvim)
         uses: lunarmodules/luacheck@v1
+        with:
+          args: nvim/
+
+      - name: Luacheck (hammerspoon)
+        uses: lunarmodules/luacheck@v1
+        with:
+          args: hammerspoon/
