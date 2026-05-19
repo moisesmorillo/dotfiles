@@ -90,7 +90,8 @@ for pattern in \
 	~/.zsh_sessions/ \
 	~/.zshrc \
 	~/.zshenv \
-	~/.hammerspoon; do
+	~/.hammerspoon \
+	~/.config/pi; do
 	rm -rf "$pattern" 2>/dev/null
 done
 
