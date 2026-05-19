@@ -89,7 +89,8 @@ for pattern in \
 	~/.zsh_history* \
 	~/.zsh_sessions/ \
 	~/.zshrc \
-	~/.zshenv; do
+	~/.zshenv \
+	~/.hammerspoon; do
 	rm -rf "$pattern" 2>/dev/null
 done
 

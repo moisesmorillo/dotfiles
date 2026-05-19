@@ -1,0 +1,2 @@
+globals = {"hs", "spoon", "rawrequire", "ls", "fs", "app", "window", "hotkey", "pathwatcher", "timer", "notify", "urlevent", "audiodevice", "keycodes", "screen", "geometry", "draw", "menubar", "styledtext", "inspect", "settings", "http", "json", "base64", "hash", "socket", "task", "pasteboard", "chooser", "dialog", "console", "dockicon", "image", "alert", "sound", "speech", "distributednotifications", "spaces", "serial", "httpserver", "websocket", "location", "network", "storekit", "itunes", "spotify", "pasteboard", "mjomatic", "mjolnir"}
+allow_defined = true
