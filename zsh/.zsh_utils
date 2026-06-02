@@ -91,6 +91,56 @@ reinstall_lazyvim() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+# reinstall_opencode_plugins ─ Clear OpenCode plugin/cache state
+# Usage: reinstall_opencode_plugins [--latest]
+#   default  → clear installed modules + runtime caches; keeps lockfiles
+#   --latest → also remove lockfiles so OpenCode/package managers resolve fresh
+reinstall_opencode_plugins() {
+	emulate -L zsh -o pipefail
+
+	local mode=${1:-}
+	local config_dir="$HOME/.config/opencode"
+	local -a paths=(
+		"$config_dir/node_modules"
+		"$HOME/.cache/opencode"
+		"$HOME/.cache/oh-my-opencode"
+		"$HOME/.local/share/opencode"
+		"$HOME/.local/share/oh-my-opencode"
+	)
+
+	case "$mode" in
+	""|--latest) ;;
+	*)
+		log_err "Invalid mode: $mode"
+		log_info "Usage: reinstall_opencode_plugins [--latest]"
+		return 1
+		;;
+	esac
+
+	[[ -d "$config_dir" ]] || {
+		log_err "OpenCode config directory not found: $config_dir"
+		return 1
+	}
+
+	if [[ "$mode" == "--latest" ]]; then
+		paths+=(
+			"$config_dir/bun.lock"
+			"$config_dir/package-lock.json"
+		)
+	fi
+
+	log_warn "Close running OpenCode sessions before continuing."
+	log_info "*** Clearing OpenCode plugin/cache state ***"
+	rm -rf "${paths[@]}"
+
+	if [[ "$mode" == "--latest" ]]; then
+		log_info "*** Lockfiles removed; next OpenCode start should resolve fresh plugin versions ***"
+	else
+		log_info "*** Lockfiles kept; next OpenCode start should reinstall pinned versions ***"
+	fi
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 # install_nvim_distro ─ Clone a starter Neovim distro into ~/.config/<name>
 # Usage: install_nvim_distro <nvchad|lazytest|kickstart|cybernvim|astronvim>
 install_nvim_distro() {

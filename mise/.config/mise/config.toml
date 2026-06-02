@@ -2,6 +2,7 @@
 bat              = "latest"
 bun              = "latest"
 claude-code      = "latest"
+codex            = "latest"
 colima           = "latest"
 devcontainer-cli = "latest"
 eza              = "latest"

@@ -134,8 +134,7 @@ keybinding:
     jumpToBlock: ['1', '2', '3', '4', '5'] # goto the Nth block / panel
     nextMatch: 'n'
     prevMatch: 'N'
-    optionMenu: <disabled> # show help menu
-    optionMenu-alt1: '?' # show help menu
+    optionMenu: '?' # show help menu
     select: '<space>'
     goInto: '<enter>'
     openRecentRepos: '<c-r>'
@@ -220,7 +219,7 @@ keybinding:
     pasteCommits: 'v'
     tagCommit: 'T'
     checkoutCommit: '<space>'
-    resetCherryPick: '<c-R>'
+    resetCherryPick: '<c-r>'
     openLogMenu: '<c-l>'
     viewBisectOptions: 'b'
   stash:
