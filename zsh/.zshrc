@@ -29,7 +29,11 @@ autoload -U compinit && compinit -C
 zinit cdreplay -q
 
 # Load custom file plugins and personal custom files
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf shell integration (Ctrl-T files, Alt-c cd, Ctrl-R history).
+# fzf >=0.48 ships bindings via `fzf --zsh` instead of the old ~/.fzf.zsh file.
+if command -v fzf &>/dev/null; then
+	source <(fzf --zsh)
+fi
 [ -f ~/.zsh_utils ] && source ~/.zsh_utils
 [ -f ~/.zsh_bindkeys ] && source ~/.zsh_bindkeys
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
@@ -39,12 +43,19 @@ export EDITOR="nvim"
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# Ctrl-T / Ctrl-F (files) and Ctrl-P (fzf-cd-widget -> directories).
+# Without FZF_ALT_C_COMMAND, the cd widget would fall back to the files command.
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 # rose-pine color theme for fzf
+# bg:-1 and gutter:-1 use the terminal's own background -> transparent, so fzf
+# blends with Ghostty instead of painting a solid rose-pine dark panel.
+# bg+ keeps a faint tint so the selected line stays visible.
 export FZF_DEFAULT_OPTS="
   --ignore-case
-  --color=fg:#908caa,bg:#191724,hl:#ebbcba
+  --color=fg:#908caa,bg:-1,hl:#ebbcba
 	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
-	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=border:#403d52,header:#31748f,gutter:-1
 	--color=spinner:#f6c177,info:#9ccfd8
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa
 "

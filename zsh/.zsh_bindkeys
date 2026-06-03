@@ -12,3 +12,13 @@ bindkey "^[[B" history-search-forward
 
 # use ctrl + n to switch between nvim distro
 bindkey -s ^n "switch_nvim_distro\n"
+
+# fzf shortcuts (widgets registered earlier by `fzf --zsh` in .zshrc):
+#   ^F -> recursive FILE search   (same as Ctrl-T; inserts a file path)
+#   ^P -> recursive DIR jump      (fzf-cd-widget; cd into the chosen directory)
+# We remap ^F (was forward-char) and ^P (was up-line-or-history); both are
+# already covered by arrow keys / Alt+arrows, so nothing useful is lost.
+if (( $+widgets[fzf-file-widget] )); then
+	bindkey "^F" fzf-file-widget
+	bindkey "^P" fzf-cd-widget
+fi
