@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Rosé Pine Colors
-# active  : Rose (soft, warm) at full opacity — visible but not loud.
+# active  : Foam (cool cyan) at full opacity — sober and frosty, stands
+#           out cleanly against dark backgrounds.
 # inactive: Muted (gray-mauve) at ~50% alpha (0x80) — barely there, so
 #           inactive windows recede instead of competing for attention.
 options=(
 	style=round
 	width=4.0
 	hidpi=on
-	active_color=0xffebbcba
+	active_color=0xff9ccfd8
 	inactive_color=0x806e6a86
 )
 
