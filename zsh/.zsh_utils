@@ -436,3 +436,26 @@ gitclone() {
 
 	cd "$dir"
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+# tmux_rename_window_to_dir ─ Rename the current tmux window to the basename of
+# the working directory on every `cd`. Wired into zsh's chpwd hook below.
+#
+# tmux has no native "directory changed" hook, so we drive it from the shell.
+# Requires `automatic-rename off` in tmux.conf so tmux doesn't fight us by
+# renaming the window to the running process name. With that off, the shell is
+# the single source of truth for the window name.
+#
+# Guard: only runs inside tmux ($TMUX set).
+#───────────────────────────────────────────────────────────────────────────────
+tmux_rename_window_to_dir() {
+	[[ -z $TMUX ]] && return
+	tmux rename-window "${PWD:t}"
+}
+
+# Register the hook (chpwd_functions fires after every directory change).
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd tmux_rename_window_to_dir
+
+# Name the window correctly for the directory the shell starts in, too.
+tmux_rename_window_to_dir

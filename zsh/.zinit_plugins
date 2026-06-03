@@ -24,3 +24,11 @@ zinit ice wait"1" as"command" from"gh-r" lucid \
 	atclone"./zoxide init zsh > init.zsh" \
 	atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light ajeetdsouza/zoxide
+
+# mise argument completion (mise <Tab> -> tasks/tools/flags via fzf-tab).
+# `as"completions"` makes zinit link the generated _mise into its completions
+# dir (already on fpath), so no manual fpath/compdef and no fragile wait timing.
+zinit ice lucid as"completion" id-as"mise-completion" nocompile \
+	atclone"mise completion zsh > _mise" \
+	atpull"%atclone"
+zinit light zdharma-continuum/null
