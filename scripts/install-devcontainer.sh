@@ -36,27 +36,34 @@ if ! command -v mise >/dev/null 2>&1; then
 	eval "$(mise activate bash)"
 fi
 
-# Packages the SANDBOX/FEATURE owns (stowing them breaks team config) + host/macOS-only
-# packages that have no meaning on Linux + non-package dirs. Space-separated.
-# NOTE: `zsh` is NOT skipped — we deliberately replace the feature-generated ~/.zshrc
-# with ours (it's self-contained: activates mise, installs zinit, sets the beam cursor,
-# inits zoxide via .zinit_plugins). The conflicting files are backed up below first.
-DEFAULT_SKIP="claude mise opencode gemini agents \
-              brew aerospace borders hammerspoon karabiner \
-              scripts plans screenshots"
-SKIP="${DOTFILES_SKIP_PACKAGES:-$DEFAULT_SKIP}"
+# Two sources of "don't stow this":
+#   1. OUR_SKIP — packages that are OUR repo's concern: macOS/host-only configs that
+#      mean nothing on Linux, plus non-package dirs. These belong here.
+#   2. $DOTFILES_SKIP_PACKAGES — injected by the HOST ENVIRONMENT (e.g. a devcontainer
+#      meta-repo) to name packages IT already manages (its shell/agent/toolchain config).
+#      That knowledge lives in the environment, not hardcoded here, so this repo stays
+#      generic across sandboxes. We merge both lists.
+# NOTE: `zsh` is intentionally NOT in OUR_SKIP — we replace the generated ~/.zshrc with
+# ours (self-contained: mise, zinit, beam cursor, zoxide). Conflicts are backed up below.
+OUR_SKIP="brew aerospace borders hammerspoon karabiner scripts plans screenshots"
+SKIP="$OUR_SKIP ${DOTFILES_SKIP_PACKAGES:-}"
 
-# The feature pre-generates these in $HOME; stow would abort on them. Since we own the
-# shell now, back them up once (timestamp-free .pre-dotfiles suffix) and remove so stow
-# can lay down our versions. Only the FILES our zsh package provides are touched.
-for f in .zshrc .zprofile .zsh_aliases .zsh_options .zsh_bindkeys .zsh_utils .zinit_plugins; do
-	t="$HOME/$f"
-	# Only back up a real file/dir that isn't already our symlink.
-	if [ -e "$t" ] && [ ! -L "$t" ]; then
-		[ -e "$t.pre-dotfiles" ] || cp -a "$t" "$t.pre-dotfiles"
-		rm -f "$t"
-	fi
-done
+# The feature pre-generates shell files in $HOME; stow would abort on them. Since we own
+# the shell now, back up each conflicting file once (.pre-dotfiles suffix) and remove it
+# so stow can lay down our version. Derive the file list FROM the zsh package itself
+# (top-level entries it ships) instead of hardcoding names — add a file to the package
+# and this picks it up automatically.
+if [ -d "$ROOT_DIR/zsh" ]; then
+	for src in "$ROOT_DIR"/zsh/.[!.]*; do
+		[ -e "$src" ] || continue
+		t="$HOME/$(basename "$src")"
+		# Only back up a real file/dir that isn't already our symlink.
+		if [ -e "$t" ] && [ ! -L "$t" ]; then
+			[ -e "$t.pre-dotfiles" ] || cp -a "$t" "$t.pre-dotfiles"
+			rm -rf "$t"
+		fi
+	done
+fi
 
 # Build the package list: explicit DOTFILES_PACKAGES wins; else every top-level dir
 # minus the skip list.
@@ -87,6 +94,7 @@ done
 
 echo "dotfiles(devcontainer): stowed:$stowed"
 echo "dotfiles(devcontainer): skipped:$skipped"
+rm -f /tmp/stow-*.err 2>/dev/null || true
 
 ### Merge our mise toolchain via conf.d (NOT by stowing config.toml) ###
 # The `mise` package is in the denylist because the sandbox/feature owns
