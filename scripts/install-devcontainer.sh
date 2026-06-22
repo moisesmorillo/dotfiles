@@ -116,7 +116,15 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
 fi
 
 ### Install everything the merged mise config now declares, then warm bat cache ###
-mise install || true
+# mise installs in parallel (--jobs), so a tool with no build for this platform (e.g.
+# resvg/colima on linux/arm64) fails on its own WITHOUT blocking the rest — but it still
+# makes `mise install` exit non-zero. We swallow that (|| true) and print a clear note so
+# a red "mise ERROR" doesn't read as a total failure. The tools your aliases need install
+# fine; the unsupported ones are simply skipped.
+if ! mise install; then
+	echo "dotfiles(devcontainer): note — some tools have no build for this platform" \
+	     "(e.g. resvg/colima/lima on linux/arm64) and were skipped; everything else installed."
+fi
 mise exec -- bat cache --build 2>/dev/null || true
 
 echo "dotfiles(devcontainer): done"
