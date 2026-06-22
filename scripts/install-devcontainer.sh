@@ -38,10 +38,25 @@ fi
 
 # Packages the SANDBOX/FEATURE owns (stowing them breaks team config) + host/macOS-only
 # packages that have no meaning on Linux + non-package dirs. Space-separated.
-DEFAULT_SKIP="claude mise zsh opencode gemini agents \
+# NOTE: `zsh` is NOT skipped — we deliberately replace the feature-generated ~/.zshrc
+# with ours (it's self-contained: activates mise, installs zinit, sets the beam cursor,
+# inits zoxide via .zinit_plugins). The conflicting files are backed up below first.
+DEFAULT_SKIP="claude mise opencode gemini agents \
               brew aerospace borders hammerspoon karabiner \
               scripts plans screenshots"
 SKIP="${DOTFILES_SKIP_PACKAGES:-$DEFAULT_SKIP}"
+
+# The feature pre-generates these in $HOME; stow would abort on them. Since we own the
+# shell now, back them up once (timestamp-free .pre-dotfiles suffix) and remove so stow
+# can lay down our versions. Only the FILES our zsh package provides are touched.
+for f in .zshrc .zprofile .zsh_aliases .zsh_options .zsh_bindkeys .zsh_utils .zinit_plugins; do
+	t="$HOME/$f"
+	# Only back up a real file/dir that isn't already our symlink.
+	if [ -e "$t" ] && [ ! -L "$t" ]; then
+		[ -e "$t.pre-dotfiles" ] || cp -a "$t" "$t.pre-dotfiles"
+		rm -f "$t"
+	fi
+done
 
 # Build the package list: explicit DOTFILES_PACKAGES wins; else every top-level dir
 # minus the skip list.
