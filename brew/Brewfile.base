@@ -1,6 +1,6 @@
-tap "felixkratz/formulae"
-tap "nikitabobko/tap"
-tap "steipete/tap"
+tap "felixkratz/formulae", trusted: true
+tap "nikitabobko/tap", trusted: true
+tap "steipete/tap", trusted: true
 brew "btop"
 brew "cocoapods"
 brew "docker"
@@ -24,7 +24,7 @@ brew "reattach-to-user-namespace"
 brew "stow"
 brew "watch"
 brew "wget"
-brew "felixkratz/formulae/borders"
+brew "felixkratz/formulae/borders", trusted: true
 cask "nikitabobko/tap/aerospace"
 cask "claude"
 cask "steipete/tap/codexbar"
@@ -42,5 +42,4 @@ cask "obsidian"
 cask "the-unarchiver"
 cask "yaak"
 cask "zed"
-cask "blackhole-2ch"
 cask "hammerspoon"
