@@ -88,12 +88,26 @@ done
 echo "dotfiles(devcontainer): stowed:$stowed"
 echo "dotfiles(devcontainer): skipped:$skipped"
 
+### Merge our mise toolchain via conf.d (NOT by stowing config.toml) ###
+# The `mise` package is in the denylist because the sandbox/feature owns
+# ~/.config/mise/config.toml. But our config declares all the CLI tools the aliases
+# need (eza, bat, fd, fzf, yazi, …). mise merges every ~/.config/mise/conf.d/*.toml
+# WITH the feature config — same mechanism the workspace itself uses — so symlink ours
+# in there to get our tools installed without clobbering the team toolchain. Resilient:
+# only if our config actually exists in the repo.
+MISE_CONFIG="$ROOT_DIR/mise/.config/mise/config.toml"
+if [ -f "$MISE_CONFIG" ]; then
+	mkdir -p "$HOME/.config/mise/conf.d"
+	ln -sf "$MISE_CONFIG" "$HOME/.config/mise/conf.d/dotfiles.toml"
+	echo "dotfiles(devcontainer): linked mise config -> conf.d/dotfiles.toml"
+fi
+
 ### Install tmux plugin manager (config references it) ###
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
 	git clone --quiet https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm" || true
 fi
 
-### Let mise install whatever the stowed mise config declares, then warm bat cache ###
+### Install everything the merged mise config now declares, then warm bat cache ###
 mise install || true
 mise exec -- bat cache --build 2>/dev/null || true
 
