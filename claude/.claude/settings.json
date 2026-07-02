@@ -31,5 +31,6 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "teammateMode": "tmux",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "tui": "fullscreen"
 }
