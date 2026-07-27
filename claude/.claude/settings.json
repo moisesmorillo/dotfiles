@@ -28,9 +28,10 @@
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": false,
   "plansDirectory": "./plans",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "teammateMode": "tmux",
   "agentPushNotifEnabled": true,
-  "tui": "fullscreen"
+  "model": "fable"
 }

@@ -335,7 +335,7 @@ brewfile_generate() {
 	# `tap "x", trusted: true` and `tap "x"` count as the same package. This
 	# stops options like `trusted: true` from making a tracked entry look new.
 	local -a all_layers=("${_brewfile_dir}/Brewfile.base" "${_brewfile_dir}/Brewfile.personal" "${_brewfile_dir}/Brewfile.work")
-	typeset -A tracked
+	typeset -A tracked tracked_layer
 	local f line key
 	for f in "${all_layers[@]}"; do
 		[[ -f "$f" ]] || continue
@@ -344,17 +344,36 @@ brewfile_generate() {
 			key=${line%%,*}
 			key=${key## }
 			key=${key%% }
-			[[ -n "$key" ]] && tracked[$key]=1
+			[[ -n "$key" ]] || continue
+			tracked[$key]=1
+			tracked_layer[$key]=$f
+		done < "$f"
+	done
+
+	# Identities from the layers active on this machine (per DOTFILES_ENV).
+	# Removal detection is scoped to these: a work laptop legitimately lacks
+	# the personal packages, so only active layers can be pruned safely.
+	local -a active_layers=($(_brewfile_layers))
+	typeset -A active_tracked
+	for f in "${active_layers[@]}"; do
+		[[ -f "$f" ]] || continue
+		while IFS= read -r line; do
+			key=${line%%,*}
+			key=${key## }
+			key=${key%% }
+			[[ -n "$key" ]] && active_tracked[$key]=1
 		done < "$f"
 	done
 
 	# Find new entries: dump lines whose identity isn't already tracked.
 	local -a new_entries=()
+	typeset -A installed
 	while IFS= read -r line; do
 		[[ -z "$line" ]] && continue
 		key=${line%%,*}
 		key=${key## }
 		key=${key%% }
+		installed[$key]=1
 		if [[ -z "${tracked[$key]}" ]]; then
 			new_entries+=("$line")
 		fi
@@ -362,8 +381,56 @@ brewfile_generate() {
 
 	rm -f "$tmpfile"
 
+	# Find removed entries: identities from active layers no longer present
+	# in the dump. Inactive layers (e.g. personal on a work machine) are
+	# skipped so their packages aren't falsely flagged as removed.
+	local -a removed_entries=()
+	for key in "${(@k)active_tracked}"; do
+		if [[ -z "${installed[$key]}" ]]; then
+			removed_entries+=("$key")
+		fi
+	done
+
+	if (( ${#new_entries[@]} == 0 && ${#removed_entries[@]} == 0 )); then
+		log_info "No changes. Everything is already tracked."
+		return 0
+	fi
+
+	if (( ${#removed_entries[@]} > 0 )); then
+		log_info "Found ${#removed_entries[@]} package(s) no longer installed:"
+		echo ""
+
+		local removed_file
+		for entry in "${removed_entries[@]}"; do
+			removed_file=${tracked_layer[$entry]}
+			echo "  → $entry (${removed_file:t})"
+			target=$(gum choose --header="Remove from ${removed_file:t}?" "remove" "keep")
+
+			case "$target" in
+				remove)
+					# Delete the line matching this identity (ignoring options) from the layer file.
+					local ltmp
+					ltmp=$(mktemp /tmp/Brewfile.layer.XXXXXX) || return 1
+					while IFS= read -r line; do
+						key=${line%%,*}
+						key=${key## }
+						key=${key%% }
+						[[ "$key" == "$entry" ]] && continue
+						echo "$line"
+					done < "$removed_file" > "$ltmp"
+					mv "$ltmp" "$removed_file"
+					log_info "Removed from ${removed_file:t}"
+					;;
+				keep)
+					log_warn "Kept"
+					;;
+			esac
+			echo ""
+		done
+	fi
+
 	if (( ${#new_entries[@]} == 0 )); then
-		log_info "No new packages to add. Everything is already tracked."
+		log_info "No new packages to add."
 		return 0
 	fi
 
