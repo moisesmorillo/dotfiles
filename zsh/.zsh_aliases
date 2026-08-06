@@ -9,8 +9,20 @@ alias lzg="lazygit -ucd ~/.config/lazygit"
 alias lzd="lazydocker"
 alias ssh='TERM=xterm-256color ssh'
 alias cat="bat"
-alias cd="z" # zoxide
 alias y="yazi"
+
+# cd -> zoxide, with a fallback. zoxide is loaded by zinit in turbo mode (wait"1"), so `z`
+# does not exist yet for roughly the first second of a shell — and in a non-interactive
+# shell that sources this file (an agent's Bash tool, `zsh -c`), turbo never fires at all,
+# so `z` never exists. A plain `alias cd="z"` fails with "command not found: z" in both
+# windows. A function that falls back to `builtin cd` keeps the shortcut and the builtin.
+cd() {
+	if (( $+functions[z] )); then
+		z "$@"
+	else
+		builtin cd "$@"
+	fi
+}
 
 # custom git aliases
 alias gfp="git fetch --prune"
