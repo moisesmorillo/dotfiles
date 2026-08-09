@@ -54,9 +54,9 @@ gui:
   skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
   border: 'rounded' # one of 'single' | 'double' | 'rounded' | 'hidden'
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --config ~/.config/delta/config
+      command: delta --config ~/.config/delta/config
   commit:
     signOff: false
     autoWrapCommitMessage: true
