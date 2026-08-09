@@ -1,4 +1,3 @@
-tap "charmbracelet/tap"
 cask "balenaetcher"
 cask "calibre"
 cask "iina"
