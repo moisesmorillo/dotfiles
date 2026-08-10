@@ -42,3 +42,8 @@ Available models:
 
 - `local-omlx/local-general:chat-fast`
 - `local-omlx/local-general:coding-robust`
+
+Pi's default compaction reserves 16K tokens, which is inappropriate for this
+32K local profile. The bundled settings reserve 4K (enough for the 2,048-token
+coding response) and retain the most recent 8K during compaction. Use
+`/compact` before a large change when you want to control the summary boundary.
