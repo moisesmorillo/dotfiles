@@ -36,7 +36,8 @@ cloud provider.
 After stowing `local-ai`, use `pi-local` rather than bare `pi` for the local
 provider. It points Pi at the loopback-only oMLX OpenAI endpoint and resolves
 the current oMLX API key into the process environment at request time; no API
-key is stored in Pi's config or this repository.
+key is stored in Pi's config or this repository. Pi's mutable state and
+sessions live under `~/.local/state/local-ai/pi/`, not alongside these dotfiles.
 
 Available models:
 
