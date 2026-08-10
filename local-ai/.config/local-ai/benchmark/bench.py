@@ -280,6 +280,10 @@ def chat_completion(
             if fragment:
                 content_parts.append(fragment)
                 first_token_at = first_token_at or time.perf_counter()
+            # Reasoning is still generated output. Some OpenAI-compatible
+            # servers stream it separately before returning visible content.
+            if delta.get("reasoning_content"):
+                first_token_at = first_token_at or time.perf_counter()
             if delta.get("tool_calls"):
                 merge_stream_tool_calls(tool_calls, delta["tool_calls"])
                 first_token_at = first_token_at or time.perf_counter()
@@ -446,6 +450,7 @@ def evaluate(scenario: dict[str, Any], content: str, tool_events: list[dict[str,
 def backend_timings(requests: list[dict[str, Any]]) -> dict[str, float | None]:
     prompt_rates: list[float] = []
     generation_rates: list[float] = []
+    ttfts: list[float] = []
     for request in requests:
         raw = request.get("raw", {})
         candidates = [raw]
@@ -454,18 +459,30 @@ def backend_timings(requests: list[dict[str, Any]]) -> dict[str, float | None]:
         for candidate in candidates:
             if not isinstance(candidate, dict):
                 continue
-            timings = candidate.get("timings", candidate)
-            if not isinstance(timings, dict):
-                continue
-            prompt_rate = timings.get("prompt_per_second") or timings.get("prompt_tokens_per_second")
-            generation_rate = timings.get("predicted_per_second") or timings.get("generated_tokens_per_second")
-            if isinstance(prompt_rate, (int, float)):
-                prompt_rates.append(float(prompt_rate))
-            if isinstance(generation_rate, (int, float)):
-                generation_rates.append(float(generation_rate))
+            timing_candidates = [candidate]
+            if isinstance(candidate.get("usage"), dict):
+                timing_candidates.append(candidate["usage"])
+            for timing_candidate in timing_candidates:
+                timings = timing_candidate.get("timings", timing_candidate)
+                if not isinstance(timings, dict):
+                    continue
+                prompt_rate = timings.get("prompt_per_second") or timings.get("prompt_tokens_per_second")
+                generation_rate = (
+                    timings.get("predicted_per_second")
+                    or timings.get("generated_tokens_per_second")
+                    or timings.get("generation_tokens_per_second")
+                )
+                ttft = timings.get("time_to_first_token")
+                if isinstance(prompt_rate, (int, float)):
+                    prompt_rates.append(float(prompt_rate))
+                if isinstance(generation_rate, (int, float)):
+                    generation_rates.append(float(generation_rate))
+                if isinstance(ttft, (int, float)):
+                    ttfts.append(float(ttft))
     return {
         "prompt_tokens_per_second": statistics.fmean(prompt_rates) if prompt_rates else None,
         "generated_tokens_per_second": statistics.fmean(generation_rates) if generation_rates else None,
+        "ttft_seconds": statistics.fmean(ttfts) if ttfts else None,
     }
 
 
@@ -480,7 +497,7 @@ def rate_metrics(requests: list[dict[str, Any]]) -> dict[str, Any]:
     )
     return {
         "elapsed_seconds": elapsed,
-        "ttft_seconds": ttfts[0] if ttfts else None,
+        "ttft_seconds": reported["ttft_seconds"] or (ttfts[0] if ttfts else None),
         "prompt_tokens": sum(int(item.get("usage", {}).get("prompt_tokens", 0)) for item in requests),
         "completion_tokens": completion_tokens,
         "generated_tokens_per_second": reported["generated_tokens_per_second"] or measured_generation_rate,
@@ -496,6 +513,7 @@ def run_repetition(
     model: str,
     base_url: str,
     chat_fn: Any = None,
+    request_overrides: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     messages: list[dict[str, Any]] = [
         {
@@ -525,6 +543,8 @@ def run_repetition(
             "reasoning_effort": config["benchmark"].get("reasoning_effort"),
             "stream": bool(config["benchmark"].get("stream", True) and not tools),
         }
+        if request_overrides:
+            payload.update(request_overrides)
         if payload["stream"]:
             payload["stream_options"] = {"include_usage": True}
         if tools:
@@ -605,6 +625,7 @@ def run_benchmark(
     state_dir: Path | None = None,
     chat_fn: Any = None,
     backend: dict[str, Any] | None = None,
+    request_overrides: dict[str, Any] | None = None,
 ) -> Path:
     safety = config["safety"]
     allow_remote = os.environ.get(safety.get("allow_remote_endpoint_env", "LOCAL_AI_ALLOW_REMOTE_ENDPOINT")) == "1"
@@ -629,6 +650,7 @@ def run_benchmark(
         "stream": config["benchmark"].get("stream"),
         "server_pid": server_pid,
         "backend": backend or {},
+        "request_overrides": request_overrides or {},
         "api_key_present": bool(os.environ.get(config["api"].get("api_key_env", ""))),
     }
     write_json(run_dir / "manifest.json", manifest)
@@ -638,7 +660,14 @@ def run_benchmark(
         sampler = PeakRSSSampler(server_pid)
         sampler.start()
         try:
-            result = run_repetition(config, scenario, model, base_url, chat_fn=chat_fn)
+            result = run_repetition(
+                config,
+                scenario,
+                model,
+                base_url,
+                chat_fn=chat_fn,
+                request_overrides=request_overrides,
+            )
         except BenchmarkError as error:
             result = {
                 "scenario_id": scenario["id"],
@@ -826,6 +855,12 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--quantization", required=True)
     run_parser.add_argument("--context-tokens", required=True, type=int)
     run_parser.add_argument("--runtime-flag", action="append", default=[])
+    run_parser.add_argument(
+        "--request-json",
+        type=json.loads,
+        default={},
+        help="JSON object merged into every API request (recorded in the manifest)",
+    )
     run_parser.add_argument("--base-url")
     run_parser.add_argument("--repetitions", type=int)
     run_parser.add_argument("--server-pid", type=int)
@@ -890,6 +925,7 @@ def main() -> int:
                     "context_tokens": args.context_tokens,
                     "flags": args.runtime_flag,
                 },
+                request_overrides=args.request_json,
             )
             print_json({"run_dir": str(run_dir), "summary": read_json(run_dir / "summary.json")})
             return 0
