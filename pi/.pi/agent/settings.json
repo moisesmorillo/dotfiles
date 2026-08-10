@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "theme": "rose-pine",
+  "defaultProvider": "openrouter",
+  "defaultModel": "moonshotai/kimi-k3",
+  "packages": [
+    "npm:pi-web-access"
+  ],
+  "tuiMode": "fullscreen"
+}
