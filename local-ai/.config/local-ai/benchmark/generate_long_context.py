@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import urllib.request
 from pathlib import Path
 
@@ -39,10 +40,13 @@ def count_tokens(base_url: str, model: str, corpus: str) -> int | None:
             ],
         }
     ).encode()
+    headers = {"Content-Type": "application/json"}
+    if api_key := os.environ.get("LOCAL_AI_API_KEY"):
+        headers["Authorization"] = f"Bearer {api_key}"
     request = urllib.request.Request(
         base_url.rstrip("/") + "/messages/count_tokens",
         data=payload,
-        headers={"Content-Type": "application/json"},
+        headers=headers,
         method="POST",
     )
     try:
