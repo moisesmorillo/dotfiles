@@ -147,3 +147,9 @@ $RECYCLE.BIN/
 # Local agent/runtime state
 .antigravitycli/
 .omo/
+
+# Pi agent runtime state (sessions, credentials, caches)
+pi/.pi/agent/sessions/
+pi/.pi/agent/auth.json
+pi/.pi/agent/models-store.json
+pi/.pi/agent/npm/
