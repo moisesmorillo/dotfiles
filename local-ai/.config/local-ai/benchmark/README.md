@@ -10,6 +10,14 @@ rules. Every run stores its full manifest and raw response outside Git.
 3. `run ID` executes a scenario against the configured endpoint.
 4. `summarize` aggregates the most recent run directory as JSON.
 
+The disabled `long-context-needle` scenario becomes runnable only after
+generating its ignored corpus. Use `generate_long_context.py` with a unique
+`--needle`; it reports the model-specific input-token count through oMLX's
+loopback token-count endpoint. Keep the generated corpus and its needle out of
+Git, then enable the scenario deliberately for the target context ladder.
+For an explicitly prepared one-off, `run --allow-disabled long-context-needle`
+keeps the scenario disabled in source control while recording the run normally.
+
 ## Result layout
 
 ```text

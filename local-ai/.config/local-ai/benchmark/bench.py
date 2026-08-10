@@ -864,6 +864,11 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--base-url")
     run_parser.add_argument("--repetitions", type=int)
     run_parser.add_argument("--server-pid", type=int)
+    run_parser.add_argument(
+        "--allow-disabled",
+        action="store_true",
+        help="run an explicitly disabled scenario after its required local artifacts are prepared",
+    )
     summary_parser = subparsers.add_parser("summarize", help="print a completed run summary")
     summary_parser.add_argument("run_dir", type=Path, nargs="?")
     subparsers.add_parser("self-test", help="exercise streaming and tools against a loopback mock server")
@@ -906,7 +911,7 @@ def main() -> int:
             scenario = scenarios.get(args.scenario)
             if not scenario:
                 raise BenchmarkError(f"unknown scenario: {args.scenario}")
-            if not scenario.get("enabled"):
+            if not scenario.get("enabled") and not args.allow_disabled:
                 raise BenchmarkError(f"scenario is disabled: {scenario.get('disabled_reason', 'no reason given')}")
             repetitions = args.repetitions or int(config["benchmark"]["default_repetitions"])
             if repetitions < 1 or repetitions > 20:
