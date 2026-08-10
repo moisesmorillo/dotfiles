@@ -10,7 +10,10 @@ if [[ ! -f "$pi_source_dir/models.json" || ! -f "$pi_source_dir/settings.json" ]
 fi
 mkdir -p "$pi_runtime_dir"
 ln -sfn "$pi_source_dir/models.json" "$pi_runtime_dir/models.json"
-ln -sfn "$pi_source_dir/settings.json" "$pi_runtime_dir/settings.json"
+# Pi writes UI/runtime metadata to settings.json; copy the declarative source so
+# those writes remain under local-ai state instead of changing dotfiles.
+rm -f "$pi_runtime_dir/settings.json"
+cp "$pi_source_dir/settings.json" "$pi_runtime_dir/settings.json"
 export LOCAL_OMLX_API_KEY="$(jq -r '.auth.api_key // empty' "$HOME/.omlx/settings.json")"
 if [[ -z "$LOCAL_OMLX_API_KEY" ]]; then
   print -u2 'oMLX API key is not configured'
