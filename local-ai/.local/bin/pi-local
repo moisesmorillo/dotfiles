@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+# Run Pi against loopback-only oMLX without storing its API key in Pi or Git.
+set -euo pipefail
+
+typeset pi_config_dir="${LOCAL_AI_PI_CONFIG_DIR:-$HOME/.config/local-ai/pi}"
+export LOCAL_OMLX_API_KEY="$(jq -r '.auth.api_key // empty' "$HOME/.omlx/settings.json")"
+if [[ -z "$LOCAL_OMLX_API_KEY" ]]; then
+  print -u2 'oMLX API key is not configured'
+  exit 1
+fi
+exec env PI_CODING_AGENT_DIR="$pi_config_dir" PI_OFFLINE="${PI_OFFLINE:-1}" pi "$@"

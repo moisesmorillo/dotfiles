@@ -30,3 +30,15 @@ local-ai-bench summarize
 
 The benchmark refuses remote endpoints by default. Set `LOCAL_AI_ALLOW_REMOTE_ENDPOINT=1` deliberately when testing a
 cloud provider.
+
+## Pi against oMLX
+
+After stowing `local-ai`, use `pi-local` rather than bare `pi` for the local
+provider. It points Pi at the loopback-only oMLX OpenAI endpoint and resolves
+the current oMLX API key into the process environment at request time; no API
+key is stored in Pi's config or this repository.
+
+Available models:
+
+- `local-omlx/local-general:chat-fast`
+- `local-omlx/local-general:coding-robust`
