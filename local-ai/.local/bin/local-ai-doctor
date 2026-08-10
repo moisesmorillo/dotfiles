@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -euo pipefail
+
+config_dir="${LOCAL_AI_CONFIG_DIR:-$HOME/.config/local-ai}"
+python_bin="${LOCAL_AI_PYTHON:-python3}"
+
+exec "$python_bin" "$config_dir/benchmark/bench.py" doctor "$@"

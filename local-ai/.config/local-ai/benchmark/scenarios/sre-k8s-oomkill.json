@@ -1,0 +1,16 @@
+{
+  "id": "sre-k8s-oomkill",
+  "category": "sre-kubernetes",
+  "prompt_file": "prompts/sre-k8s-oomkill.md",
+  "fixture_files": [
+    "fixtures/sre-k8s-oomkill/deployment.yaml",
+    "fixtures/sre-k8s-oomkill/pod-events.txt"
+  ],
+  "evaluation": {
+    "type": "contains_all",
+    "case_sensitive": false,
+    "terms": ["OOMKilled", "384Mi", "512Mi", "rollback"]
+  },
+  "tags": ["kubernetes", "sre", "reasoning"],
+  "enabled": true
+}

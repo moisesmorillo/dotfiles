@@ -1,0 +1,16 @@
+{
+  "id": "multimodal-screenshot",
+  "category": "multimodal",
+  "prompt_file": "prompts/multimodal-screenshot.md",
+  "evaluation": {
+    "type": "manual",
+    "rubric": [
+      "Identifies visible error accurately",
+      "Does not invent hidden details",
+      "Separates evidence from inference"
+    ]
+  },
+  "tags": ["vision", "screenshot"],
+  "enabled": false,
+  "disabled_reason": "Requires a versioned, sanitized image fixture and a vision-capable backend."
+}

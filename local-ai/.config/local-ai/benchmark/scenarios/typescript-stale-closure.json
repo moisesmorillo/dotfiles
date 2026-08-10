@@ -1,0 +1,16 @@
+{
+  "id": "typescript-stale-closure",
+  "category": "coding",
+  "prompt_file": "prompts/typescript-stale-closure.md",
+  "fixture_files": [
+    "fixtures/typescript-stale-closure/ClusterPanel.tsx",
+    "fixtures/typescript-stale-closure/ClusterPanel.test.tsx"
+  ],
+  "evaluation": {
+    "type": "contains_all",
+    "case_sensitive": false,
+    "terms": ["useCallback", "selectedCluster", "queryKey", "Vitest"]
+  },
+  "tags": ["typescript", "react", "tanstack-query"],
+  "enabled": true
+}

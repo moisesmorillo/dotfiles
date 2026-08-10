@@ -1,0 +1,51 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "get_pod_events",
+      "description": "Return sanitized Kubernetes events for one pod in the benchmark fixture.",
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {"type": "string"},
+          "pod": {"type": "string"}
+        },
+        "required": ["namespace", "pod"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_deployment_manifest",
+      "description": "Return the sanitized Deployment manifest for the benchmark fixture.",
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {"type": "string"},
+          "name": {"type": "string"}
+        },
+        "required": ["namespace", "name"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "validate_patch",
+      "description": "Validate a proposed resource patch without applying it.",
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {"type": "string"},
+          "name": {"type": "string"},
+          "patch": {"type": "object"}
+        },
+        "required": ["namespace", "name", "patch"]
+      }
+    }
+  }
+]

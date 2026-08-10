@@ -1,0 +1,12 @@
+{
+  "id": "rke2-private-registry-cis",
+  "category": "sre-kubernetes",
+  "prompt_file": "prompts/rke2-private-registry-cis.md",
+  "evaluation": {
+    "type": "contains_all",
+    "case_sensitive": false,
+    "terms": ["config.yaml", "registries.yaml", "cis", "docker.io"]
+  },
+  "tags": ["rke2", "rancher", "security"],
+  "enabled": true
+}

@@ -1,0 +1,16 @@
+{
+  "id": "go-goroutine-leak",
+  "category": "coding",
+  "prompt_file": "prompts/go-goroutine-leak.md",
+  "fixture_files": [
+    "fixtures/go-goroutine-leak/pool.go",
+    "fixtures/go-goroutine-leak/pool_test.go"
+  ],
+  "evaluation": {
+    "type": "contains_all",
+    "case_sensitive": false,
+    "terms": ["context", "close", "WaitGroup", "go test -race"]
+  },
+  "tags": ["go", "concurrency", "code-repair"],
+  "enabled": true
+}

@@ -1,0 +1,9 @@
+LAST STATE
+Reason: OOMKilled
+Exit Code: 137
+
+EVENTS
+Warning  BackOff  kubelet  Back-off restarting failed container api
+
+SANITIZED METRIC
+container_memory_working_set_bytes: 429916160

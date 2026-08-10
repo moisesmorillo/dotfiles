@@ -1,0 +1,16 @@
+{
+  "id": "research-sources",
+  "category": "research",
+  "prompt_file": "prompts/research-sources.md",
+  "evaluation": {
+    "type": "manual",
+    "rubric": [
+      "Uses primary sources only",
+      "Citations resolve and support the claim",
+      "Separates fact from inference",
+      "Refuses to fabricate when browsing is unavailable"
+    ]
+  },
+  "tags": ["research", "citations", "web"],
+  "enabled": true
+}

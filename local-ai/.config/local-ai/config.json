@@ -1,0 +1,23 @@
+{
+  "api": {
+    "base_url": "http://127.0.0.1:8080/v1",
+    "api_key_env": "LOCAL_AI_API_KEY",
+    "timeout_seconds": 600
+  },
+  "benchmark": {
+    "default_model": "local-general",
+    "default_repetitions": 3,
+    "temperature": 0.0,
+    "seed": 42,
+    "stream": true,
+    "state_dir": "~/.local/state/local-ai/benchmarks"
+  },
+  "safety": {
+    "allowed_hosts": [
+      "127.0.0.1",
+      "localhost",
+      "::1"
+    ],
+    "allow_remote_endpoint_env": "LOCAL_AI_ALLOW_REMOTE_ENDPOINT"
+  }
+}

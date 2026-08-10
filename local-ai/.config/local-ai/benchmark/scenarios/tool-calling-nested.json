@@ -1,0 +1,40 @@
+{
+  "id": "tool-calling-nested",
+  "category": "agentic",
+  "prompt_file": "prompts/tool-calling-nested.md",
+  "tools_file": "tool-schemas/mock-tools.json",
+  "tool_results": {
+    "get_pod_events": {
+      "last_state": {"reason": "OOMKilled", "exit_code": 137},
+      "working_set_mib": 410
+    },
+    "get_deployment_manifest": {
+      "namespace": "payments",
+      "name": "payments-api",
+      "request_mib": 256,
+      "limit_mib": 256
+    },
+    "validate_patch": {"valid": true, "applied": false, "mode": "dry-run"}
+  },
+  "tool_expectations": {
+    "get_pod_events": {"namespace": "payments", "pod": "payments-api-7b8d9"},
+    "get_deployment_manifest": {"namespace": "payments", "name": "payments-api"},
+    "validate_patch": {
+      "namespace": "payments",
+      "name": "payments-api",
+      "patch": {
+        "resources": {
+          "requests": {"memory": "384Mi"},
+          "limits": {"memory": "512Mi"}
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "type": "tool_sequence",
+    "expected_tools": ["get_pod_events", "get_deployment_manifest", "validate_patch"]
+  },
+  "max_tool_rounds": 6,
+  "tags": ["tools", "json-schema", "multi-step"],
+  "enabled": true
+}

@@ -1,0 +1,13 @@
+{
+  "id": "long-context-needle",
+  "category": "long-context",
+  "prompt_file": "prompts/long-context-needle.md",
+  "corpus_file": "generated/long-context.txt",
+  "evaluation": {
+    "type": "needle",
+    "expected_env": "LOCAL_AI_NEEDLE"
+  },
+  "tags": ["context", "rag", "prompt-injection"],
+  "enabled": false,
+  "disabled_reason": "Generate a deterministic corpus for each target context size before enabling."
+}
