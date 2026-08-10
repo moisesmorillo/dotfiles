@@ -521,6 +521,8 @@ def run_repetition(
             "messages": messages,
             "temperature": config["benchmark"].get("temperature", 0.0),
             "seed": config["benchmark"].get("seed", 42),
+            "max_tokens": config["benchmark"].get("max_tokens"),
+            "reasoning_effort": config["benchmark"].get("reasoning_effort"),
             "stream": bool(config["benchmark"].get("stream", True) and not tools),
         }
         if payload["stream"]:
@@ -621,6 +623,8 @@ def run_benchmark(
         "sampling": {
             "temperature": config["benchmark"].get("temperature"),
             "seed": config["benchmark"].get("seed"),
+            "max_tokens": config["benchmark"].get("max_tokens"),
+            "reasoning_effort": config["benchmark"].get("reasoning_effort"),
         },
         "stream": config["benchmark"].get("stream"),
         "server_pid": server_pid,

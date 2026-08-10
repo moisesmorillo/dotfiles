@@ -9,6 +9,8 @@
     "default_repetitions": 3,
     "temperature": 0.0,
     "seed": 42,
+    "max_tokens": 1024,
+    "reasoning_effort": "none",
     "stream": true,
     "state_dir": "~/.local/state/local-ai/benchmarks"
   },
