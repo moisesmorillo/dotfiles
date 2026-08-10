@@ -514,6 +514,7 @@ def run_repetition(
     content = ""
     max_rounds = int(scenario.get("max_tool_rounds", 1 if not tools else 6))
 
+    loop_error: str | None = None
     for _round in range(max_rounds):
         payload: dict[str, Any] = {
             "model": model,
@@ -546,16 +547,27 @@ def run_repetition(
                 }
             )
     else:
-        raise BenchmarkError(f"tool loop exceeded {max_rounds} rounds")
+        loop_error = f"tool loop exceeded {max_rounds} rounds"
+
+    evaluation = evaluate(scenario, content, tool_events)
+    if loop_error:
+        evaluation = {
+            "type": "runtime_error",
+            "passed": False,
+            "score": 0.0,
+            "error": loop_error,
+            "partial_evaluation": evaluation,
+        }
 
     return {
         "scenario_id": scenario["id"],
         "model": model,
         "content": content,
         "tool_events": tool_events,
-        "evaluation": evaluate(scenario, content, tool_events),
+        "evaluation": evaluation,
         "metrics": rate_metrics(requests),
         "requests": requests,
+        "error": loop_error,
     }
 
 

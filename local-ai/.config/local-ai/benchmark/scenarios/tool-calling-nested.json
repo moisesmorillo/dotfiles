@@ -23,9 +23,20 @@
       "namespace": "payments",
       "name": "payments-api",
       "patch": {
-        "resources": {
-          "requests": {"memory": "384Mi"},
-          "limits": {"memory": "512Mi"}
+        "spec": {
+          "template": {
+            "spec": {
+              "containers": [
+                {
+                  "name": "payments-api",
+                  "resources": {
+                    "requests": {"memory": "512Mi"},
+                    "limits": {"memory": "512Mi"}
+                  }
+                }
+              ]
+            }
+          }
         }
       }
     }

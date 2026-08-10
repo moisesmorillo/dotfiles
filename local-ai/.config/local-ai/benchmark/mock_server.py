@@ -100,7 +100,23 @@ class MockHandler(BaseHTTPRequestHandler):
                 {
                     "namespace": "payments",
                     "name": "payments-api",
-                    "patch": {"resources": {"requests": {"memory": "384Mi"}, "limits": {"memory": "512Mi"}}},
+                    "patch": {
+                        "spec": {
+                            "template": {
+                                "spec": {
+                                    "containers": [
+                                        {
+                                            "name": "payments-api",
+                                            "resources": {
+                                                "requests": {"memory": "512Mi"},
+                                                "limits": {"memory": "512Mi"},
+                                            },
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
                 },
             )
             return _assistant_response("", [call])
