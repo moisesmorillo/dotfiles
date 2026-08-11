@@ -51,3 +51,8 @@ cask "chatgpt"
 cask "google-gemini"
 cask "macshot"
 cask "orbstack"
+tap "ryyansafar/macmonitor", "https://github.com/ryyansafar/MacMonitor"
+cask "ryyansafar/macmonitor/macmonitor"
+cask "anythingllm"
+tap "jundot/omlx", "https://github.com/jundot/omlx", trusted: true
+brew "jundot/omlx/omlx"
