@@ -10,6 +10,15 @@
       },
       "models": [
         {
+          "id": "local-general:general-128k",
+          "name": "General — Qwen35 (128K)",
+          "reasoning": false,
+          "input": ["text"],
+          "contextWindow": 131072,
+          "maxTokens": 2048,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
           "id": "local-general:chat-fast",
           "name": "Local General Chat Fast",
           "reasoning": false,
@@ -38,10 +47,19 @@
         },
         {
           "id": "local-general:coding-256k",
-          "name": "Local General Coding 256K Experimental",
+          "name": "Coding — Qwen35 (256K experimental)",
           "reasoning": false,
           "input": ["text"],
           "contextWindow": 262144,
+          "maxTokens": 2048,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gemma-4-26B-A4B-it-qat-4bit:experimental-128k",
+          "name": "Experimental — Gemma 4 26B (128K)",
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 131072,
           "maxTokens": 2048,
           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
         }
