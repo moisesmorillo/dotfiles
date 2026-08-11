@@ -54,7 +54,32 @@
     "opencode-openai-codex-auth",
     "oh-my-openagent@latest"
   ],
+  "provider": {
+    "local-omlx": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Local oMLX",
+      "options": {
+        "baseURL": "http://127.0.0.1:8000/v1",
+        "apiKey": "{env:LOCAL_OMLX_API_KEY}"
+      },
+      "models": {
+        "local-general:general-128k": {
+          "name": "General — Qwen35 (128K)",
+          "limit": { "context": 131072, "output": 2048 }
+        },
+        "local-general:coding-256k": {
+          "name": "Coding — Qwen35 (256K experimental)",
+          "limit": { "context": 262144, "output": 2048 }
+        },
+        "gemma-4-26B-A4B-it-qat-4bit:experimental-128k": {
+          "name": "Experimental — Gemma 4 26B (128K)",
+          "limit": { "context": 131072, "output": 2048 }
+        }
+      }
+    }
+  },
   "enabled_providers": [
-    "openai"
+    "openai",
+    "local-omlx"
   ]
 }

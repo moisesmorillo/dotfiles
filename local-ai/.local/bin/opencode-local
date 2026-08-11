@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+omlx_settings="$HOME/.omlx/settings.json"
+if [[ ! -r "$omlx_settings" ]]; then
+  print -u2 "opencode-local: oMLX settings not found at $omlx_settings"
+  exit 1
+fi
+
+export LOCAL_OMLX_API_KEY="$(jq -r '.auth.api_key // empty' "$omlx_settings")"
+if [[ -z "$LOCAL_OMLX_API_KEY" ]]; then
+  print -u2 "opencode-local: oMLX API key is missing"
+  exit 1
+fi
+
+if (( $+commands[opencode] )); then
+  exec opencode "$@"
+fi
+
+opencode_bin="$HOME/.local/share/mise/installs/opencode/latest/opencode"
+if [[ -x "$opencode_bin" ]]; then
+  exec "$opencode_bin" "$@"
+fi
+
+print -u2 "opencode-local: opencode is not available on PATH or through mise"
+exit 127
