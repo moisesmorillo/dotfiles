@@ -35,6 +35,21 @@ keeps the scenario disabled in source control while recording the run normally.
 `generated_tokens_per_second` is computed only when the API returns token usage. Prefill throughput remains `null`
 unless a backend exposes reliable timing metadata; the harness never invents it from wall-clock latency.
 
+## Capacity probes for local oMLX
+
+The three standalone probes complement the quality harness. They deliberately use loopback HTTP only and write no
+results by themselves, so their JSON output can be attached to an experiment record without contaminating Git.
+
+- `concurrency_probe.py CORPUS MARKER` measures one request versus two equal independent requests.
+- `mixed_concurrency_probe.py LONG_CORPUS LONG_MARKER SHORT_CORPUS SHORT_MARKER` measures the practical cost of
+  a short subagent beside a long coordinator.
+- `prefix_reuse_probe.py CORPUS MARKER` compares a cold request with an exact repeated prefix to measure hot-cache
+  reuse.
+
+All require `LOCAL_AI_API_KEY`; `OMLX_PROBE_MODEL` defaults to `local-general:coding-256k`, and
+`OMLX_PROBE_BASE_URL` defaults to `http://127.0.0.1:8000/v1`. Keep a stable shared prefix when measuring cache
+reuse: changing any earlier prompt content turns it into a cold-prefill measurement.
+
 ## Safety model
 
 - endpoints must resolve to loopback unless explicitly overridden;
