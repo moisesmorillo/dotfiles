@@ -14,10 +14,11 @@ if [[ ! -f "$manifest" ]]; then
 fi
 
 usage() {
-  print 'Usage: local-ai-models [--provider PROVIDER] {list|download|dry-run} [MODEL|TIER]'
+  print 'Usage: local-ai-models [--provider PROVIDER] {list|download|dry-run|configure} [MODEL|TIER]'
   print 'Examples:'
   print '  local-ai-models list --provider omlx'
   print '  local-ai-models download core'
+  print '  local-ai-models configure --provider omlx'
   print '  local-ai-models --provider llama.cpp dry-run <model-id>'
 }
 
@@ -32,7 +33,7 @@ while (( $# )); do
       provider="${1#--provider=}"
       shift
       ;;
-    list|download|dry-run)
+    list|download|dry-run|configure)
       [[ -z "$action" ]] || { usage; exit 2; }
       action="$1"
       shift
@@ -69,6 +70,51 @@ select_models() {
     "$manifest"
 }
 
+configure_omlx() {
+  local omlx_dir="${OMLX_BASE_PATH:-$HOME/.omlx}"
+  local settings_file="$omlx_dir/settings.json"
+  local profiles_template="$config_dir/omlx/model-profiles.json"
+  local model_settings_template="$config_dir/omlx/model-settings.json"
+  local profiles_file="$omlx_dir/model_profiles.json"
+  local model_settings_file="$omlx_dir/model_settings.json"
+  local timestamp="$(date '+%Y%m%d%H%M%S')"
+  local temporary
+
+  if [[ ! -f "$settings_file" ]]; then
+    print -u2 "oMLX settings are not initialized: $settings_file"
+    print -u2 'Start oMLX once, then rerun this command.'
+    exit 1
+  fi
+  if [[ ! -f "$profiles_template" || ! -f "$model_settings_template" ]]; then
+    print -u2 'The oMLX bootstrap templates are missing from local-ai configuration.'
+    exit 1
+  fi
+
+  cp "$settings_file" "$settings_file.bootstrap-$timestamp.bak"
+  temporary="$(mktemp "$omlx_dir/settings.json.bootstrap.XXXXXX")"
+  jq --arg path "$model_dir" \
+    '.model.model_dirs = [$path] | .model.model_dir = $path' \
+    "$settings_file" > "$temporary"
+  mv "$temporary" "$settings_file"
+
+  for pair in "$profiles_file:$profiles_template" "$model_settings_file:$model_settings_template"; do
+    local target="${pair%%:*}"
+    local template="${pair#*:}"
+    if [[ -f "$target" ]]; then
+      cp "$target" "$target.bootstrap-$timestamp.bak"
+      temporary="$(mktemp "$omlx_dir/$(basename "$target").bootstrap.XXXXXX")"
+      jq -s '.[0] * .[1]' "$target" "$template" > "$temporary"
+      mv "$temporary" "$target"
+    else
+      cp "$template" "$target"
+    fi
+  done
+
+  print "Configured oMLX model directory: $model_dir"
+  print "Backups use the suffix .bootstrap-$timestamp.bak under $omlx_dir"
+  print 'Restart the service to apply the bootstrap: brew services restart jundot/omlx/omlx'
+}
+
 case "$action" in
   list)
     jq -r --arg provider "$provider" --arg model_dir "$model_dir" \
@@ -96,6 +142,19 @@ case "$action" in
       print "→ $repository → $destination"
       "${command[@]}"
     done <<<"$models"
+    ;;
+  configure)
+    if [[ -n "$selection" ]]; then
+      usage
+      exit 2
+    fi
+    case "$provider" in
+      omlx) configure_omlx ;;
+      *)
+        print -u2 "Bootstrap is not implemented for provider: $provider"
+        exit 2
+        ;;
+    esac
     ;;
   *)
     usage
