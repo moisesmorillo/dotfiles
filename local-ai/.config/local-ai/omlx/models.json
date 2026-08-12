@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "model_dir": "~/.local/share/local-ai/omlx-models",
+  "models": [
+    {
+      "id": "qwen35",
+      "repository": "mlx-community/Qwen3.6-35B-A3B-4bit",
+      "directory": "Qwen3.6-35B-A3B-4bit",
+      "role": "general-and-coding",
+      "tier": "core"
+    },
+    {
+      "id": "embeddings",
+      "repository": "mlx-community/Qwen3-Embedding-0.6B-4bit-DWQ",
+      "directory": "Qwen3-Embedding-0.6B-4bit-DWQ",
+      "role": "embeddings",
+      "tier": "core"
+    },
+    {
+      "id": "gemma26",
+      "repository": "mlx-community/gemma-4-26B-A4B-it-qat-4bit",
+      "directory": "gemma-4-26B-A4B-it-qat-4bit",
+      "role": "multimodal-experimental",
+      "tier": "experimental"
+    }
+  ]
+}

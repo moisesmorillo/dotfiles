@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+# Download declared oMLX models without storing weights in the dotfiles repo.
+set -euo pipefail
+
+typeset config_dir="${LOCAL_AI_CONFIG_DIR:-$HOME/.config/local-ai}"
+typeset manifest="$config_dir/omlx/models.json"
+typeset action="${1:-list}"
+typeset selection="${2:-}"
+
+if [[ ! -f "$manifest" ]]; then
+  print -u2 "Local AI model catalogue missing: $manifest"
+  exit 1
+fi
+
+typeset model_dir
+model_dir="$(jq -r '.model_dir' "$manifest")"
+model_dir="${model_dir/#\~/$HOME}"
+model_dir="${LOCAL_AI_MODEL_DIR:-$model_dir}"
+
+usage() {
+  print 'Usage: local-ai-models {list|download|dry-run} {core|qwen35|embeddings|gemma26}'
+}
+
+select_models() {
+  local selector="$1"
+  case "$selector" in
+    core) jq -c '.models[] | select(.tier == "core")' "$manifest" ;;
+    qwen35|embeddings|gemma26) jq -c --arg id "$selector" '.models[] | select(.id == $id)' "$manifest" ;;
+    *) return 1 ;;
+  esac
+}
+
+case "$action" in
+  list)
+    jq -r --arg model_dir "$model_dir" \
+      '.models[] | "\(.id)\t\(.tier)\t\(.role)\t\($model_dir)/\(.directory)\t\(.repository)"' \
+      "$manifest"
+    ;;
+  download|dry-run)
+    if [[ -z "$selection" ]] || ! models="$(select_models "$selection")"; then
+      usage
+      exit 2
+    fi
+    while IFS= read -r model; do
+      repository="$(jq -r '.repository' <<<"$model")"
+      directory="$(jq -r '.directory' <<<"$model")"
+      destination="$model_dir/$directory"
+      command=(uvx hf download "$repository" --local-dir "$destination")
+      if [[ "$action" == "dry-run" ]]; then
+        command+=(--dry-run)
+      fi
+      print "→ $repository → $destination"
+      "${command[@]}"
+    done <<<"$models"
+    ;;
+  *)
+    usage
+    exit 2
+    ;;
+esac

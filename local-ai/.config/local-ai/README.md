@@ -1,6 +1,7 @@
 # Local AI configuration
 
-This GNU Stow package contains reproducible local-AI client configuration.
+This GNU Stow package contains reproducible local-AI client configuration and
+a declarative oMLX model catalogue.
 
 It deliberately excludes:
 
@@ -12,21 +13,33 @@ It deliberately excludes:
 
 Runtime state is written below `~/.local/state/local-ai/`. Secrets are resolved at runtime and are never stored in this repository.
 
-## Pi against oMLX
+## Model catalogue and download
 
-After stowing `local-ai`, use `pi-local` rather than bare `pi` for the local
-provider. It points Pi at the loopback-only oMLX OpenAI endpoint and resolves
-the current oMLX API key into the process environment at request time; no API
-key is stored in Pi's config or this repository. Pi's mutable state and
-sessions live under `~/.local/state/local-ai/pi/`, not alongside these dotfiles.
+`omlx/models.json` is the source of truth for the model repositories and their
+directories below `~/.local/share/local-ai/omlx-models/`. It contains no model
+weights, API keys, cache or mutable runtime state.
 
-Available profiles:
+```bash
+local-ai-models list
+local-ai-models download core
+local-ai-models download gemma26
+local-ai-models dry-run qwen35
+```
 
-- `local-omlx/local-general:general-128k`
-- `local-omlx/local-general:coding-128k`
-- `local-omlx/local-general:coding-256k`
-- `local-omlx/gemma-4-26B-A4B-it-qat-4bit:experimental-128k`
+The command uses `uvx hf download --local-dir`, so it resumes safely and puts
+each model directly in an oMLX-discoverable subdirectory. `core` contains the
+Qwen general model plus the embedding model; experimental models are opt-in.
 
-Pi's bundled settings reserve 4K tokens for a 2,048-token response and retain
-the most recent 8K during compaction. Use
-`/compact` before a large change when you want to control the summary boundary.
+## Pi and OpenCode against oMLX
+
+Use oMLX's supported integration to select a Pi model directly:
+
+```bash
+omlx launch pi
+omlx launch pi --model local-general:coding-256k
+```
+
+The first command opens oMLX's model picker and writes Pi's own runtime
+configuration under `~/.pi/agent/`; it is intentionally not managed by Stow.
+OpenCode keeps explicit model definitions because it needs local context and
+output limits for each selectable profile.
