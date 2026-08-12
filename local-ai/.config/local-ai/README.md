@@ -15,20 +15,25 @@ Runtime state is written below `~/.local/state/local-ai/`. Secrets are resolved 
 
 ## Model catalogue and download
 
-`omlx/models.json` is the source of truth for the model repositories and their
-directories below `~/.local/share/local-ai/omlx-models/`. It contains no model
-weights, API keys, cache or mutable runtime state.
+`omlx/models.json` is the source of truth for provider-specific model
+repositories and directories below `~/.local/share/models/`. It contains no
+model weights, API keys, cache or mutable runtime state. The layout is designed
+for multiple runtimes: `models/omlx/` for MLX safetensors and `models/llama.cpp/`
+for GGUF.
 
 ```bash
-local-ai-models list
-local-ai-models download core
-local-ai-models download gemma26
+local-ai-models list                         # oMLX is the default provider
+local-ai-models list --provider omlx
+local-ai-models download core --provider omlx
 local-ai-models dry-run qwen35
+local-ai-models list --provider llama.cpp
 ```
 
 The command uses `uvx hf download --local-dir`, so it resumes safely and puts
-each model directly in an oMLX-discoverable subdirectory. `core` contains the
-Qwen general model plus the embedding model; experimental models are opt-in.
+each model directly in its provider subdirectory. `core` contains the Qwen
+general model plus the embedding model; experimental models are opt-in. The
+`llama.cpp` provider is ready for GGUF entries when a model is added to the
+catalogue.
 
 ## Pi and OpenCode against oMLX
 

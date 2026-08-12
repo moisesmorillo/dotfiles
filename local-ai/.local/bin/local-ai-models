@@ -1,44 +1,88 @@
 #!/usr/bin/env zsh
-# Download declared oMLX models without storing weights in the dotfiles repo.
+# Download declared local models without storing weights in the dotfiles repo.
 set -euo pipefail
 
 typeset config_dir="${LOCAL_AI_CONFIG_DIR:-$HOME/.config/local-ai}"
 typeset manifest="$config_dir/omlx/models.json"
-typeset action="${1:-list}"
-typeset selection="${2:-}"
+typeset provider="${LOCAL_AI_MODEL_PROVIDER:-omlx}"
+typeset action=""
+typeset selection=""
 
 if [[ ! -f "$manifest" ]]; then
   print -u2 "Local AI model catalogue missing: $manifest"
   exit 1
 fi
 
-typeset model_dir
-model_dir="$(jq -r '.model_dir' "$manifest")"
-model_dir="${model_dir/#\~/$HOME}"
-model_dir="${LOCAL_AI_MODEL_DIR:-$model_dir}"
-
 usage() {
-  print 'Usage: local-ai-models {list|download|dry-run} {core|qwen35|embeddings|gemma26}'
+  print 'Usage: local-ai-models [--provider PROVIDER] {list|download|dry-run} [MODEL|TIER]'
+  print 'Examples:'
+  print '  local-ai-models list --provider omlx'
+  print '  local-ai-models download core'
+  print '  local-ai-models --provider llama.cpp dry-run <model-id>'
 }
+
+while (( $# )); do
+  case "$1" in
+    --provider)
+      (( $# >= 2 )) || { usage; exit 2; }
+      provider="$2"
+      shift 2
+      ;;
+    --provider=*)
+      provider="${1#--provider=}"
+      shift
+      ;;
+    list|download|dry-run)
+      [[ -z "$action" ]] || { usage; exit 2; }
+      action="$1"
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      [[ -z "$selection" ]] || { usage; exit 2; }
+      selection="$1"
+      shift
+      ;;
+  esac
+done
+
+action="${action:-list}"
+if ! jq -e --arg provider "$provider" '.providers[$provider]' "$manifest" >/dev/null; then
+  print -u2 "Unknown provider: $provider"
+  print -u2 "Available providers: $(jq -r '.providers | keys | join(", ")' "$manifest")"
+  exit 2
+fi
+
+typeset storage_root provider_dir model_dir
+storage_root="$(jq -r '.storage_root' "$manifest")"
+storage_root="${storage_root/#\~/$HOME}"
+provider_dir="$(jq -r --arg provider "$provider" '.providers[$provider].directory' "$manifest")"
+model_dir="${LOCAL_AI_MODEL_DIR:-$storage_root/$provider_dir}"
 
 select_models() {
   local selector="$1"
-  case "$selector" in
-    core) jq -c '.models[] | select(.tier == "core")' "$manifest" ;;
-    qwen35|embeddings|gemma26) jq -c --arg id "$selector" '.models[] | select(.id == $id)' "$manifest" ;;
-    *) return 1 ;;
-  esac
+  jq -c --arg provider "$provider" --arg selector "$selector" \
+    '.models[] | select(.provider == $provider and (.id == $selector or .tier == $selector))' \
+    "$manifest"
 }
 
 case "$action" in
   list)
-    jq -r --arg model_dir "$model_dir" \
-      '.models[] | "\(.id)\t\(.tier)\t\(.role)\t\($model_dir)/\(.directory)\t\(.repository)"' \
+    jq -r --arg provider "$provider" --arg model_dir "$model_dir" \
+      '.models[] | select(.provider == $provider) | "\(.id)\t\(.tier)\t\(.role)\t\($model_dir)/\(.directory)\t\(.repository)"' \
       "$manifest"
     ;;
   download|dry-run)
-    if [[ -z "$selection" ]] || ! models="$(select_models "$selection")"; then
+    if [[ -z "$selection" ]]; then
       usage
+      exit 2
+    fi
+    models="$(select_models "$selection")"
+    if [[ -z "$models" ]]; then
+      print -u2 "No models for '$selection' under provider '$provider'"
       exit 2
     fi
     while IFS= read -r model; do
