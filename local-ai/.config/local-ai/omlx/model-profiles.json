@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "profiles": {
+    "Qwen3.6-35B-A3B-4bit": {
+      "chat-fast": {
+        "name": "chat-fast",
+        "display_name": "Local chat fast",
+        "api_name": "chat-fast",
+        "description": "Interactive local chat: 32K context, 1024 output tokens, thinking disabled.",
+        "created_at": "2026-08-10T17:18:01.101738+00:00",
+        "updated_at": "2026-08-10T17:18:01.101738+00:00",
+        "settings": {
+          "max_context_window": 32768,
+          "max_tokens": 1024,
+          "enable_thinking": false,
+          "chat_template_kwargs": { "enable_thinking": false }
+        },
+        "source_template": null,
+        "expose_as_model": true
+      },
+      "coding-robust": {
+        "name": "coding-robust",
+        "display_name": "Local coding robust",
+        "api_name": "coding-robust",
+        "description": "Local coding and agents: 32K context, 2048 output tokens, thinking disabled.",
+        "created_at": "2026-08-10T17:18:01.110569+00:00",
+        "updated_at": "2026-08-10T17:18:01.110569+00:00",
+        "settings": {
+          "max_context_window": 32768,
+          "max_tokens": 2048,
+          "enable_thinking": false,
+          "chat_template_kwargs": { "enable_thinking": false }
+        },
+        "source_template": null,
+        "expose_as_model": true
+      },
+      "coding-128k": {
+        "name": "coding-128k",
+        "display_name": "Local Coding 128K",
+        "api_name": "coding-128k",
+        "description": "Persistent 128K coding profile with 4-bit KV cache.",
+        "created_at": "2026-08-10T19:22:22.415128+00:00",
+        "updated_at": "2026-08-10T19:22:22.415128+00:00",
+        "settings": {
+          "max_context_window": 131072,
+          "max_tokens": 2048,
+          "enable_thinking": false,
+          "chat_template_kwargs": { "enable_thinking": false },
+          "turboquant_kv_enabled": true,
+          "turboquant_kv_bits": 4
+        },
+        "source_template": null,
+        "expose_as_model": true
+      },
+      "coding-256k": {
+        "name": "coding-256k",
+        "display_name": "Local Coding 256K Experimental",
+        "api_name": "coding-256k",
+        "description": "Experimental native-window profile with 4-bit KV cache.",
+        "created_at": "2026-08-10T19:26:19.333157+00:00",
+        "updated_at": "2026-08-10T19:26:19.333157+00:00",
+        "settings": {
+          "max_context_window": 262144,
+          "max_tokens": 2048,
+          "enable_thinking": false,
+          "chat_template_kwargs": { "enable_thinking": false },
+          "turboquant_kv_enabled": true,
+          "turboquant_kv_bits": 4
+        },
+        "source_template": null,
+        "expose_as_model": true
+      },
+      "general-128k": {
+        "name": "general-128k",
+        "display_name": "General",
+        "api_name": "general-128k",
+        "description": "Primary general profile: Qwen3.6-35B-A3B at 128K with 4-bit KV cache.",
+        "created_at": "2026-08-11T15:12:33.361654+00:00",
+        "updated_at": "2026-08-11T15:12:33.361654+00:00",
+        "settings": {
+          "max_context_window": 131072,
+          "max_tokens": 2048,
+          "enable_thinking": false,
+          "chat_template_kwargs": { "enable_thinking": false },
+          "turboquant_kv_enabled": true,
+          "turboquant_kv_bits": 4
+        },
+        "source_template": null,
+        "expose_as_model": true
+      }
+    },
+    "gemma-4-26B-A4B-it-qat-4bit": {
+      "experimental-128k": {
+        "name": "experimental-128k",
+        "display_name": "Experimental — Gemma 4 26B (128K)",
+        "api_name": "experimental-128k",
+        "description": "Gemma 4 26B-A4B QAT profile for an experimental 128K context probe.",
+        "created_at": "2026-08-11T15:54:07.109562+00:00",
+        "updated_at": "2026-08-11T15:54:07.109562+00:00",
+        "settings": {
+          "max_context_window": 131072,
+          "max_tokens": 128,
+          "enable_thinking": false,
+          "chat_template_kwargs": { "enable_thinking": false }
+        },
+        "source_template": null,
+        "expose_as_model": true
+      }
+    }
+  }
+}
