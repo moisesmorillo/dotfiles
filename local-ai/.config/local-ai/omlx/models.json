@@ -37,6 +37,22 @@
       "role": "multimodal-experimental",
       "tier": "experimental",
       "provider": "omlx"
+    },
+    {
+      "id": "qwen38",
+      "repository": "mlx-community/Qwen3.8-27B-4bit",
+      "directory": "Qwen3.8-27B-4bit",
+      "role": "multimodal-general-and-coding-experimental",
+      "tier": "experimental",
+      "provider": "omlx"
+    },
+    {
+      "id": "qwen38-mtp",
+      "repository": "scottlowry/Qwen3.8-27B-oQ4e-mtp",
+      "directory": "Qwen3.8-27B-oQ4e-mtp",
+      "role": "multimodal-general-and-coding-experimental-mtp-ab",
+      "tier": "experimental",
+      "provider": "omlx"
     }
   ]
 }

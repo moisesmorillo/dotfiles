@@ -70,6 +70,14 @@
           "name": "Coding — Qwen35 (256K experimental)",
           "limit": { "context": 262144, "output": 2048 }
         },
+        "experimental-qwen38:coding-128k": {
+          "name": "Experimental — Qwen3.8 27B (128K)",
+          "limit": { "context": 131072, "output": 2048 }
+        },
+        "experimental-qwen38-mtp:coding-128k": {
+          "name": "Experimental — Qwen3.8 27B MTP (128K)",
+          "limit": { "context": 131072, "output": 2048 }
+        },
         "gemma-4-26B-A4B-it-qat-4bit:experimental-128k": {
           "name": "Experimental — Gemma 4 26B (128K)",
           "limit": { "context": 131072, "output": 2048 }

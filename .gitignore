@@ -152,4 +152,7 @@ $RECYCLE.BIN/
 pi/.pi/agent/sessions/
 pi/.pi/agent/auth.json
 pi/.pi/agent/models-store.json
+pi/.pi/agent/models.json
+pi/.pi/agent/*.bak
+pi/.pi/agent/*.pre-*.bak
 pi/.pi/agent/npm/
