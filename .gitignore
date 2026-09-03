@@ -156,3 +156,6 @@ pi/.pi/agent/models.json
 pi/.pi/agent/*.bak
 pi/.pi/agent/*.pre-*.bak
 pi/.pi/agent/npm/
+
+# LazyGit local state
+lazygit/.config/lazygit/github_pull_requests.json
