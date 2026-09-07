@@ -53,6 +53,7 @@ cask "orbstack"
 cask "anythingllm"
 tap "jundot/omlx", "https://github.com/jundot/omlx", trusted: true
 brew "jundot/omlx/omlx"
+cask "stats"
 brew "iperf3"
 cask "iina"
 cask "transmission"
