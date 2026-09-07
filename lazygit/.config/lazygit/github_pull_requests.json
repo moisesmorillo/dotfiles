@@ -1,3 +1,44 @@
 {
-  "/Users/moisesmorillo/workspace/moisesmorillo/dotfiles": null
+  "/Users/moisesmorillo/workspace/moisesmorillo/dotfiles": [
+    {
+      "headRefName": "chore/sync",
+      "number": 486,
+      "title": "chore: sync LazyVim plugins",
+      "state": "MERGED",
+      "url": "https://github.com/moisesmorillo/dotfiles/pull/486",
+      "headRepositoryOwner": "moisesmorillo"
+    },
+    {
+      "headRefName": "chore/sync",
+      "number": 485,
+      "title": "chore: sync LazyVim plugins",
+      "state": "MERGED",
+      "url": "https://github.com/moisesmorillo/dotfiles/pull/485",
+      "headRepositoryOwner": "moisesmorillo"
+    },
+    {
+      "headRefName": "chore/sync",
+      "number": 484,
+      "title": "chore: sync LazyVim plugins",
+      "state": "MERGED",
+      "url": "https://github.com/moisesmorillo/dotfiles/pull/484",
+      "headRepositoryOwner": "moisesmorillo"
+    },
+    {
+      "headRefName": "chore/sync",
+      "number": 483,
+      "title": "chore: sync LazyVim plugins",
+      "state": "MERGED",
+      "url": "https://github.com/moisesmorillo/dotfiles/pull/483",
+      "headRepositoryOwner": "moisesmorillo"
+    },
+    {
+      "headRefName": "chore/sync",
+      "number": 476,
+      "title": "chore: sync LazyVim plugins",
+      "state": "MERGED",
+      "url": "https://github.com/moisesmorillo/dotfiles/pull/476",
+      "headRepositoryOwner": "moisesmorillo"
+    }
+  ]
 }
