@@ -1,10 +1,11 @@
 {
   "lastChangelogVersion": "0.85.1",
   "theme": "rose-pine",
-  "defaultProvider": "omlx",
-  "defaultModel": "local-general:coding-256k",
+  "defaultProvider": "openrouter",
+  "defaultModel": "moonshotai/kimi-k3",
   "packages": [
     "npm:pi-web-access"
   ],
-  "tuiMode": "fullscreen"
+  "tuiMode": "fullscreen",
+  "defaultThinkingLevel": "high"
 }
