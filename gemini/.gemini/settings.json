@@ -38,57 +38,5 @@
   "ide": {
     "enabled": true
   },
-  "mcpServers": {},
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/moisesmorillo/.superset/hooks/gemini-hook.sh"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/moisesmorillo/.superset/hooks/gemini-hook.sh"
-          }
-        ]
-      }
-    ],
-    "BeforeAgent": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/moisesmorillo/.superset/hooks/gemini-hook.sh"
-          }
-        ]
-      }
-    ],
-    "AfterAgent": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/moisesmorillo/.superset/hooks/gemini-hook.sh"
-          }
-        ]
-      }
-    ],
-    "AfterTool": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/moisesmorillo/.superset/hooks/gemini-hook.sh"
-          }
-        ]
-      }
-    ]
-  }
+  "mcpServers": {}
 }
