@@ -4,7 +4,11 @@
   "defaultProvider": "openrouter",
   "defaultModel": "moonshotai/kimi-k3",
   "packages": [
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "npm:pi-mcp-adapter",
+    "npm:pi-subagents",
+    "npm:pi-background-tasks",
+    "npm:pi-effort"
   ],
   "tuiMode": "fullscreen",
   "defaultThinkingLevel": "high"
