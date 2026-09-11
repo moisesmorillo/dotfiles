@@ -1,8 +1,9 @@
 {
   "lastChangelogVersion": "0.85.1",
   "theme": "rose-pine",
-  "defaultProvider": "openrouter",
-  "defaultModel": "moonshotai/kimi-k3",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-luna",
+  "skills": ["~/workspace/moisesmorillo/ai-engineering/skills"],
   "packages": [
     "npm:pi-web-access",
     "npm:pi-mcp-adapter",
