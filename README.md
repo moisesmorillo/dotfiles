@@ -120,6 +120,9 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
+- **Pi** - AI coding assistant configured to use `openai-codex/gpt-5.6-luna`
+
+Reusable Pi skills are owned by the separate `ai-engineering` repository. Pi's global settings register `~/workspace/moisesmorillo/ai-engineering/skills`, so pulling or updating `ai-engineering` updates the available skills without copying them into `dotfiles`.
 
 ### 🔧 Development Tools
 
