@@ -1,0 +1,7 @@
+{
+  "amp.skills.path": "~/workspace/moisesmorillo/ai-engineering/skills",
+  "amp.dangerouslyAllowAll": true,
+  "amp.git.commit.ampThread.enabled": false,
+  "amp.git.commit.coauthor.enabled": false,
+  "amp.updates.mode": "disabled"
+}

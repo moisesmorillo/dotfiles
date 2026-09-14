@@ -57,3 +57,5 @@ cask "stats"
 brew "iperf3"
 cask "iina"
 cask "transmission"
+tap "ampcode/tap"
+brew "ampcode/tap/ampcode", trusted: true
