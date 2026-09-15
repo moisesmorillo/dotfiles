@@ -1,0 +1,8 @@
+# Let other environments own pi's settings.json without breaking this package.
+# Some sandboxes write ~/.pi/agent/settings.json themselves before stow runs; stow
+# cannot overlay a pre-existing real file, so it would abort the whole `pi` package
+# on that conflict and never link themes/. Ignore settings.json so stow still lays
+# down themes/ (and anything else this package ships) while leaving an
+# externally-managed settings.json alone.
+\.pi/agent/settings\.json
+\.config/pi/settings\.json
