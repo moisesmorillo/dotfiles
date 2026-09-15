@@ -1,6 +1,6 @@
 #!/bin/bash
-# Dotfiles install for a devcontainer / Linux dev sandbox (e.g. the Saptiva workspace
-# meta-repo, driven by the `devcontainer` CLI — no VS Code). Unlike install-mac.sh this
+# Dotfiles install for a devcontainer / Linux dev sandbox (e.g. a workspace meta-repo
+# driven by the `devcontainer` CLI — no VS Code). Unlike install-mac.sh this
 # does NOT install brew, colima, or apply macOS defaults. It lays down config via stow
 # (skipping packages the sandbox already owns), then lets mise install the toolchain.
 #
