@@ -63,7 +63,13 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 
 - Custom Docker configuration
 - Lazydocker for container management
-- Integration with Colima for macOS
+- OrbStack as the container runtime on macOS
+- OrbStack VM settings (CPU/RAM limits) versioned in `orbstack/` and linked to `~/.orbstack/vmconfig.json`
+  - Note: OrbStack rewrites this file atomically, so any change made via the GUI or
+    `orb config set` replaces the symlink with a regular file. To change a setting,
+    edit `orbstack/.orbstack/vmconfig.json` in the repo, run `stow -R orbstack`, and
+    restart OrbStack. If you did change it via GUI/CLI, copy the new value into the
+    repo and re-run `stow -R orbstack` (delete the regular file first).
 
 ### 🗂️ Lazygit
 

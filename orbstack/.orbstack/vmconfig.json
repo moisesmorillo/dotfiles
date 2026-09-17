@@ -1,0 +1,6 @@
+{
+	"cpu": 5,
+	"memory_mib": 8192,
+	"network.https": false,
+	"rosetta": false
+}

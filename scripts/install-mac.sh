@@ -65,9 +65,6 @@ fi
 ### Update docker config file
 . ./scripts/update-docker-config.sh
 
-### Create default colima machine
-colima start --cpu 4 --memory 6 --disk 50 --vm-type vz --mount-type virtiofs
-
 ### Install Tpm ###
 rm -rf ~/.tmux/plugins/tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -91,9 +88,15 @@ for pattern in \
 	~/.zshrc \
 	~/.zshenv \
 	~/.hammerspoon \
-	~/.config/pi; do
+	~/.config/pi \
+	~/.orbstack/vmconfig.json; do
 	rm -rf "$pattern" 2>/dev/null
 done
+
+# ~/.orbstack holds runtime state (sockets, logs, ssh keys). Make sure it exists
+# as a real directory so stow only links vmconfig.json instead of folding the
+# whole directory into the repo.
+mkdir -p "$HOME/.orbstack"
 
 # Change to root directory before running stow
 cd "$ROOT_DIR" || exit
