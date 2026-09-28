@@ -11,7 +11,8 @@
     "npm:pi-mcp-adapter",
     "npm:pi-subagents",
     "npm:pi-background-tasks",
-    "npm:pi-effort"
+    "npm:pi-effort",
+    "npm:pi-btw"
   ],
   "tuiMode": "fullscreen",
   "defaultThinkingLevel": "high"
