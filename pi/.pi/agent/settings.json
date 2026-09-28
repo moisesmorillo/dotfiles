@@ -2,7 +2,7 @@
   "lastChangelogVersion": "0.87.1",
   "theme": "rose-pine",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-6-sol",
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
   ],
@@ -14,5 +14,9 @@
     "npm:pi-btw"
   ],
   "tuiMode": "fullscreen",
-  "defaultThinkingLevel": "high"
+  "defaultThinkingLevel": "medium",
+  "modelThinkingLevels": {
+    "openai-codex/gpt-6-sol": "medium",
+    "openai-codex/gpt-6-luna": "xhigh"
+  }
 }

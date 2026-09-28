@@ -27,6 +27,7 @@
   "extraKnownMarketplaces": {},
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": false,
+  "syncClaudeAiSkills": false,
   "plansDirectory": "./plans",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
