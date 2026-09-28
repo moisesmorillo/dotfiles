@@ -103,9 +103,7 @@ reinstall_opencode_plugins() {
 	local -a paths=(
 		"$config_dir/node_modules"
 		"$HOME/.cache/opencode"
-		"$HOME/.cache/oh-my-opencode"
 		"$HOME/.local/share/opencode"
-		"$HOME/.local/share/oh-my-opencode"
 	)
 
 	case "$mode" in

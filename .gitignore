@@ -141,7 +141,6 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,vim,lua
 
 .opencode/*
-!.opencode/oh-my-openagent.jsonc
 !.opencode/opencode.json
 
 # Local agent/runtime state
