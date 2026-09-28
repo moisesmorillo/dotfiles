@@ -1,1 +1,0 @@
-../../agents/.config/agents/AGENTS.md
