@@ -28,7 +28,7 @@ fu() {
 	emulate -L zsh -o pipefail
 
 	log_info "*** Updating OS packages ***"
-	brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup
+	brew update && brew upgrade --yes && brew upgrade --cask --greedy --yes && brew cleanup
 
 	log_info "*** Syncing Brewfile layers (DOTFILES_ENV=${DOTFILES_ENV:-personal}) ***"
 	brewfile_install
