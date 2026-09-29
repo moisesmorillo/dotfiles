@@ -23,6 +23,26 @@
     "title": {
       "model": "openai/gpt-6-luna",
       "variant": "low"
+    },
+    "code-review-sol": {
+      "description": "Review code with the ai-engineering code-review skill using GPT-6 Sol medium",
+      "mode": "subagent",
+      "model": "openai/gpt-6-sol",
+      "variant": "medium",
+      "permission": {
+        "edit": "deny"
+      },
+      "prompt": "Load and follow the code-review skill with the skill tool before reviewing. Report findings with file and line references. Do not modify files."
+    },
+    "design-review-sol": {
+      "description": "Review designs with the ai-engineering design-feasibility-review skill using GPT-6 Sol medium",
+      "mode": "subagent",
+      "model": "openai/gpt-6-sol",
+      "variant": "medium",
+      "permission": {
+        "edit": "deny"
+      },
+      "prompt": "Load and follow the design-feasibility-review skill with the skill tool before reviewing. Report findings with document references. Do not modify files."
     }
   },
   "mcp": {
