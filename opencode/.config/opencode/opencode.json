@@ -3,6 +3,9 @@
   "model": "openai/gpt-6-luna",
   "small_model": "openai/gpt-6-luna",
   "autoupdate": false,
+  "skills": [
+    "~/workspace/moisesmorillo/ai-engineering/skills"
+  ],
   "instructions": [
     "CLAUDE.md",
     "GEMINI.md"
