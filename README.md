@@ -128,7 +128,17 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
 - **Pi** - AI coding assistant configured to use `openai-codex/gpt-5.6-luna`
 
-Reusable skills are owned by the separate `ai-engineering` repository. Pi and OpenCode both register `~/workspace/moisesmorillo/ai-engineering/skills` in their global settings; pulling or updating `ai-engineering` updates the skills in both tools without copying them into `dotfiles`.
+Reusable skills are owned by the separate `ai-engineering` repository. Pi and OpenCode register
+`~/workspace/moisesmorillo/ai-engineering/skills` globally, so updating that repository updates both tools.
+
+| Review | OpenCode | Pi |
+| --- | --- | --- |
+| Code | `/code-review [scope]` | `/prompt-workflow code-review [scope]` |
+| Design | `/design-feasibility-review <document>` | `/prompt-workflow design-feasibility-review <document>` |
+
+These commands launch dedicated subagents on GPT-6 Sol with medium reasoning (`openai/gpt-6-sol` in
+OpenCode, `openai-codex/gpt-6-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
+current agent without switching models.
 
 ### 🔧 Development Tools
 
