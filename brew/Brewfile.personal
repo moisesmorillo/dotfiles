@@ -1,5 +1,6 @@
 cask "anythingllm"
 cask "iina"
+cask "lm-studio"
 cask "proton-drive"
 cask "proton-mail"
 cask "proton-pass"
