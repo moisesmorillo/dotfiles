@@ -44,13 +44,10 @@ brew "libtiff"
 cask "chatgpt"
 cask "macshot"
 cask "orbstack"
-cask "anythingllm"
 tap "jundot/omlx", "https://github.com/jundot/omlx", trusted: true
 brew "jundot/omlx/omlx"
 cask "stats"
 brew "iperf3"
-cask "iina"
-cask "transmission"
 tap "ampcode/tap"
 brew "ampcode/tap/ampcode", trusted: true
 tap "abue-ammar/tinycast", trusted: true
