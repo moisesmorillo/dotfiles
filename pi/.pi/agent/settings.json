@@ -2,7 +2,7 @@
   "lastChangelogVersion": "1.0.0",
   "theme": "rose-pine",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-sol",
+  "defaultModel": "gpt-6.1-sol",
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
   ],
