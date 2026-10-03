@@ -1,7 +1,7 @@
 [tools]
 bat                             = "latest"
 bun                             = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@anthropic-ai/claude-code" = { version = "latest", allow_builds = ["@anthropic-ai/claude-code"] }
 codex                           = "latest"
 colima                          = "latest"
 devcontainer-cli                = "latest"
