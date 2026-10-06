@@ -1,38 +1,84 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "DISABLE_INSTALLATION_CHECKS": "true"
-  },
+  "agentPushNotifEnabled": true,
+  "alwaysThinkingEnabled": false,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "includeCoAuthoredBy": false,
-  "permissions": {
-    "allow": [
-      "mcp__pencil"
-    ]
-  },
   "enableAllProjectMcpServers": true,
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline.sh"
-  },
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "engram@engram": true
   },
-  "extraKnownMarketplaces": {},
+  "env": {
+    "DISABLE_INSTALLATION_CHECKS": "true"
+  },
+  "extraKnownMarketplaces": {
+    "engram": {
+      "source": {
+        "source": "github",
+        "repo": "Gentleman-Programming/engram"
+      }
+    }
+  },
+  "includeCoAuthoredBy": false,
+  "model": "fable",
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": false,
-  "syncClaudeAiSkills": false,
+  "permissions": {
+    "allow": [
+      "mcp__pencil",
+      "mcp__engram__mem_capture_passive",
+      "mcp__engram__mem_compare",
+      "mcp__engram__mem_context",
+      "mcp__engram__mem_current_project",
+      "mcp__engram__mem_doctor",
+      "mcp__engram__mem_get_observation",
+      "mcp__engram__mem_judge",
+      "mcp__engram__mem_list_projects",
+      "mcp__engram__mem_pin",
+      "mcp__engram__mem_review",
+      "mcp__engram__mem_save",
+      "mcp__engram__mem_save_prompt",
+      "mcp__engram__mem_search",
+      "mcp__engram__mem_session_end",
+      "mcp__engram__mem_session_start",
+      "mcp__engram__mem_session_summary",
+      "mcp__engram__mem_suggest_topic_key",
+      "mcp__engram__mem_unpin",
+      "mcp__engram__mem_update",
+      "mcp__plugin_engram_engram__mem_capture_passive",
+      "mcp__plugin_engram_engram__mem_compare",
+      "mcp__plugin_engram_engram__mem_context",
+      "mcp__plugin_engram_engram__mem_current_project",
+      "mcp__plugin_engram_engram__mem_doctor",
+      "mcp__plugin_engram_engram__mem_get_observation",
+      "mcp__plugin_engram_engram__mem_judge",
+      "mcp__plugin_engram_engram__mem_list_projects",
+      "mcp__plugin_engram_engram__mem_pin",
+      "mcp__plugin_engram_engram__mem_review",
+      "mcp__plugin_engram_engram__mem_save",
+      "mcp__plugin_engram_engram__mem_save_prompt",
+      "mcp__plugin_engram_engram__mem_search",
+      "mcp__plugin_engram_engram__mem_session_end",
+      "mcp__plugin_engram_engram__mem_session_start",
+      "mcp__plugin_engram_engram__mem_session_summary",
+      "mcp__plugin_engram_engram__mem_suggest_topic_key",
+      "mcp__plugin_engram_engram__mem_unpin",
+      "mcp__plugin_engram_engram__mem_update"
+    ]
+  },
   "plansDirectory": "./plans",
-  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "dark-ansi",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  },
+  "syncClaudeAiSkills": false,
   "teammateMode": "tmux",
-  "agentPushNotifEnabled": true,
-  "model": "fable"
+  "theme": "dark-ansi",
+  "tui": "fullscreen"
 }
