@@ -1,22 +1,30 @@
 {
-  "lastChangelogVersion": "1.0.0",
-  "theme": "rose-pine",
-  "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
-  "skills": [
-    "~/workspace/moisesmorillo/ai-engineering/skills"
+  "defaultProvider": "openai-codex",
+  "defaultThinkingLevel": "medium",
+  "lastChangelogVersion": "1.0.0",
+  "modelThinkingLevels": {
+    "openai-codex/gpt-6-sol": "medium",
+    "openai-codex/gpt-6-luna": "xhigh"
+  },
+  "npmCommand": [
+    "mise",
+    "exec",
+    "node@24.21.0",
+    "--",
+    "npm"
   ],
   "packages": [
     "npm:pi-web-access",
     "npm:pi-subagents",
     "npm:pi-background-tasks",
     "npm:pi-btw",
-    "git:github.com/obra/superpowers"
+    "git:github.com/obra/superpowers",
+    "npm:gentle-engram@0.2.0"
   ],
-  "tuiMode": "fullscreen",
-  "defaultThinkingLevel": "medium",
-  "modelThinkingLevels": {
-    "openai-codex/gpt-6-sol": "medium",
-    "openai-codex/gpt-6-luna": "xhigh"
-  }
+  "skills": [
+    "~/workspace/moisesmorillo/ai-engineering/skills"
+  ],
+  "theme": "rose-pine",
+  "tuiMode": "fullscreen"
 }
