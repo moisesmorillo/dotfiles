@@ -78,6 +78,9 @@ fi
 
 cd "$ROOT_DIR" || exit 1
 
+# Keep Pi's writable state out of the repository before stowing its config.
+"$ROOT_DIR/scripts/prepare-pi-home.sh"
+
 stowed=""
 skipped=""
 for pkg in $candidates; do
@@ -125,6 +128,7 @@ if ! mise install; then
 	echo "dotfiles(devcontainer): note — some tools have no build for this platform" \
 	     "(e.g. resvg/colima/lima on linux/arm64) and were skipped; everything else installed."
 fi
+mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- bat cache --build 2>/dev/null || true
 
 echo "dotfiles(devcontainer): done"

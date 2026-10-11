@@ -149,12 +149,16 @@ $RECYCLE.BIN/
 
 # Pi agent runtime state (sessions, credentials, caches)
 pi/.pi/agent/sessions/
+pi/.pi/agent/pi-subagents/
 pi/.pi/agent/auth.json
 pi/.pi/agent/models-store.json
 pi/.pi/agent/models.json
+pi/.pi/agent/run-history.jsonl
 pi/.pi/agent/*.bak
 pi/.pi/agent/*.pre-*.bak
 pi/.pi/agent/npm/
+pi/.pi/agent/git/
+pi/.pi/agent/pi-pretty/
 pi/.pi/agent/missions/
 pi/.pi/agent/web-search-cache/
 pi/.pi/web-search-cache/

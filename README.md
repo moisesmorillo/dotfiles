@@ -126,7 +126,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
-- **Pi** - AI coding assistant configured to use `openai-codex/gpt-5.6-luna`
+- **Pi** - AI coding assistant configured to use `openai-codex/gpt-6-luna` with medium reasoning (`gpt-6.1-sol` is also configured for review subagents)
 
 Reusable skills are owned by the separate `ai-engineering` repository. Pi and OpenCode register
 `~/workspace/moisesmorillo/ai-engineering/skills` globally, so updating that repository updates both tools.
@@ -136,9 +136,25 @@ Reusable skills are owned by the separate `ai-engineering` repository. Pi and Op
 | Code | `/code-review [scope]` | `/prompt-workflow code-review [scope]` |
 | Design | `/design-feasibility-review <document>` | `/prompt-workflow design-feasibility-review <document>` |
 
-These commands launch dedicated subagents on GPT-6 Sol with medium reasoning (`openai/gpt-6-sol` in
-OpenCode, `openai-codex/gpt-6-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
+These commands launch dedicated subagents on GPT-6.1 Sol with medium reasoning (`openai/gpt-6.1-sol` in
+OpenCode, `openrouter/openai/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
 current agent without switching models.
+
+Pi packages are pinned in `pi/.pi/agent/settings.json`; update them deliberately by changing the
+pins in a reviewed PR instead of running a blind `pi update`. The installers merge the repository's
+Pi settings into `~/.pi/agent/settings.json`, preserving unrelated settings. Run `scripts/pi-status.sh`
+to compare the package declarations in both settings files for missing packages, extras, or version drift; it does not inspect the package manager's installed cache.
+
+We keep the Pi setup lean and do not currently add these optional integrations:
+
+- `pi-interactive-shell`: useful for interactive long-running commands, but not needed in the current workflow.
+- `@plannotator/pi-extension`: offers visual diff annotation; the existing review workflow does not require it.
+- `pi-ask-user`: interactive prompting is not currently needed for these agent workflows.
+- `@tmustier/pi-usage-extension`: adds usage analytics, which are not required here.
+- MCP: use Pi's native MCP support rather than adding `pi-mcp-adapter`.
+- `pi-claude-cli`: not applicable because Pi uses the `openai-codex` provider.
+
+`@juanibiapina/pi-extension-settings` is not installed, so no special package load order is required.
 
 ### 🔧 Development Tools
 
