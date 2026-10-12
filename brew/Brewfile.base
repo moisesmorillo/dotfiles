@@ -22,6 +22,7 @@ brew "mosh"
 brew "nmap"
 brew "reattach-to-user-namespace"
 brew "stow"
+brew "terminal-notifier"
 brew "watch"
 brew "wget"
 brew "felixkratz/formulae/borders", trusted: true

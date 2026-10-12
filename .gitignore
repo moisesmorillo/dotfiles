@@ -165,3 +165,5 @@ pi/.pi/web-search-cache/
 
 # LazyGit local state
 lazygit/.config/lazygit/github_pull_requests.json
+pi/.pi/agent/mcp.log
+pi/.pi/agent/mcp-auth.json

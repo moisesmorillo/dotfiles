@@ -126,7 +126,10 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
-- **Pi** - AI coding assistant configured to use `openai/gpt-6-luna` with medium reasoning (`gpt-6.1-sol` is also configured for review subagents)
+- **Pi** - AI coding assistant configured to use `openai/gpt-6-luna` with medium reasoning (`gpt-6.1-sol` is also configured for review subagents).
+  Global instructions live in `pi/.pi/agent/AGENTS.md`: code changes always happen in a Git worktree under
+  `~/.worktrees/<repo>/<branch>` via the superpowers `using-git-worktrees` skill, and finished branches are
+  pushed and opened as pull requests by `finishing-a-development-branch`.
 
 Reusable skills are owned by the separate `ai-engineering` repository. Pi and OpenCode register
 `~/workspace/moisesmorillo/ai-engineering/skills` globally, so updating that repository updates both tools.
@@ -146,13 +149,39 @@ releases when packages are installed or updated. The installers merge the reposi
 package sources for missing or extra entries. Since refs are unpinned, it does not detect whether installed
 package versions are current or inspect the package manager's cache.
 
+Installed Pi packages and what each one covers:
+
+| Package | Role |
+| --- | --- |
+| `pi-subagents`, `pi-background-tasks`, `pi-btw` | Delegation, durable background shell tasks (`/bg`, `bg_run`), side conversations |
+| `pi-web-access` | Web search, URL fetching, PDF and video extraction |
+| `git:github.com/obra/superpowers` | Process skills: brainstorming, TDD, systematic debugging, worktrees, finishing branches |
+| `gentle-engram` | Persistent memory shared across sessions |
+| `@narumitw/pi-worktree` | Interactive `/worktree` manager (list, create, switch, remove, prune); root `~/.worktrees` |
+| `pi-powerline-footer` | Powerline status bar (model, thinking, git, context %, cost); configured under `powerline` in settings |
+| `@juicesharp/rpiv-ask-user-question` | Structured `ask_user_question` tool with typed options |
+| `pi-lens` | LSP diagnostics, linters, formatters and type-checking after edits; config in `~/.pi-lens/config.json` and `.pi-lens.json` |
+| `cc-safety-net` | Blocks destructive commands (`rm -rf`, force push, `git reset --hard`) and secret-file reads; rules in `.cc-safety-net/` |
+| `@pi-unipi/notify` | Native macOS notifications (needs `terminal-notifier` from the Brewfile); config in `~/.unipi/config/notify/config.json` |
+
+A background task reported as `failed` means its command exited non-zero (for example a failing test
+suite); it is not a plugin error. Default tasks are killed on `/reload`, `/new` and resume unless started
+with `surviveReload: true`.
+
+Task tracking uses [Backlog.md](https://github.com/MrLesk/Backlog.md) per repository (`backlog init` in the
+project), installed through mise (`npm:backlog.md`) and exposed to Pi as the `backlog` MCP server in
+`pi/.pi/agent/mcp.json`. Pi's native MCP support is used instead of `pi-mcp-adapter`: since Pi 1.1 MCP tools
+are exposed lazily through `codemode`/`deferred`, so the adapter's context savings no longer apply; it would
+only add prompts-as-commands, elicitation and keychain OAuth while disabling the built-in client.
+
 We keep the Pi setup lean and do not currently add these optional integrations:
 
+- `@juicesharp/rpiv-todo`: session todo overlay; Backlog.md plus superpowers plans already cover tracking.
+- `@narumitw/pi-plan-mode`: enforced read-only planning; superpowers brainstorming covers the workflow.
+- `gentle-pi`: a full harness (own subagents, UI and ODD workflow) that would duplicate superpowers and `pi-subagents`.
 - `pi-interactive-shell`: useful for interactive long-running commands, but not needed in the current workflow.
 - `@plannotator/pi-extension`: offers visual diff annotation; the existing review workflow does not require it.
-- `pi-ask-user`: interactive prompting is not currently needed for these agent workflows.
 - `@tmustier/pi-usage-extension`: adds usage analytics, which are not required here.
-- MCP: use Pi's native MCP support rather than adding `pi-mcp-adapter`.
 - `pi-claude-cli`: not applicable because Pi uses the `openai` provider.
 
 `@juanibiapina/pi-extension-settings` is not installed, so no special package load order is required.

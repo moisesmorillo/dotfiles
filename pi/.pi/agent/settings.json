@@ -19,12 +19,22 @@
     "npm:pi-background-tasks",
     "npm:pi-btw",
     "git:github.com/obra/superpowers",
-    "npm:gentle-engram"
+    "npm:gentle-engram",
+    "npm:@narumitw/pi-worktree",
+    "npm:pi-powerline-footer",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-lens",
+    "npm:cc-safety-net",
+    "npm:@pi-unipi/notify"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
   ],
   "theme": "rose-pine",
   "tuiMode": "fullscreen",
-  "lastChangelogVersion": "1.1.0"
+  "lastChangelogVersion": "1.1.0",
+  "powerline": {
+    "preset": "full",
+    "placement": "below"
+  }
 }
