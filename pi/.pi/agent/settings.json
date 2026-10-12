@@ -3,7 +3,7 @@
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "medium",
   "modelThinkingLevels": {
-    "openrouter/openai/gpt-6.1-sol": "medium",
+    "openai-codex/gpt-6.1-sol": "medium",
     "openai-codex/gpt-6-luna": "medium"
   },
   "npmCommand": [
@@ -14,12 +14,12 @@
     "npm"
   ],
   "packages": [
-    "npm:pi-web-access@0.38.0",
-    "npm:pi-subagents@0.77.0",
-    "npm:pi-background-tasks@2.6.9",
-    "npm:pi-btw@0.8.0",
-    "git:github.com/obra/superpowers@bb92a77741419a4ab5f06e711a283343f1ada0c3",
-    "npm:gentle-engram@0.2.0"
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:pi-background-tasks",
+    "npm:pi-btw",
+    "git:github.com/obra/superpowers",
+    "npm:gentle-engram"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"

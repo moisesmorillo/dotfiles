@@ -137,13 +137,14 @@ Reusable skills are owned by the separate `ai-engineering` repository. Pi and Op
 | Design | `/design-feasibility-review <document>` | `/prompt-workflow design-feasibility-review <document>` |
 
 These commands launch dedicated subagents on GPT-6.1 Sol with medium reasoning (`openai/gpt-6.1-sol` in
-OpenCode, `openrouter/openai/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
+OpenCode, `openai-codex/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
 current agent without switching models.
 
-Pi packages are pinned in `pi/.pi/agent/settings.json`; update them deliberately by changing the
-pins in a reviewed PR instead of running a blind `pi update`. The installers merge the repository's
-Pi settings into `~/.pi/agent/settings.json`, preserving unrelated settings. Run `scripts/pi-status.sh`
-to compare the package declarations in both settings files for missing packages, extras, or version drift; it does not inspect the package manager's installed cache.
+Pi package references in `pi/.pi/agent/settings.json` are intentionally unpinned so Pi can resolve current
+releases when packages are installed or updated. The installers merge the repository's Pi settings into
+`~/.pi/agent/settings.json`, preserving unrelated settings. Run `scripts/pi-status.sh` to compare declared
+package sources for missing or extra entries. Since refs are unpinned, it does not detect whether installed
+package versions are current or inspect the package manager's cache.
 
 We keep the Pi setup lean and do not currently add these optional integrations:
 
