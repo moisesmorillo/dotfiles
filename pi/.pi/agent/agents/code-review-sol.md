@@ -1,8 +1,8 @@
 ---
 name: code-review-sol
-description: Review code with the ai-engineering code-review skill using GPT-6 Sol medium
+description: Review code with the ai-engineering code-review skill using GPT-6.1 Sol medium
 advertise: true
-model: openai-codex/gpt-6-sol
+model: openai-codex/gpt-6.1-sol
 thinking: medium
 tools: read, grep, find, ls, bash
 inheritSkills: false

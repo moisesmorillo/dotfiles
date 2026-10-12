@@ -1,11 +1,10 @@
 {
-  "defaultModel": "gpt-6.1-sol",
+  "defaultModel": "gpt-6-luna",
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "medium",
-  "lastChangelogVersion": "1.0.3",
   "modelThinkingLevels": {
-    "openai-codex/gpt-6-sol": "medium",
-    "openai-codex/gpt-6-luna": "xhigh"
+    "openai-codex/gpt-6.1-sol": "medium",
+    "openai-codex/gpt-6-luna": "medium"
   },
   "npmCommand": [
     "mise",
@@ -20,7 +19,7 @@
     "npm:pi-background-tasks",
     "npm:pi-btw",
     "git:github.com/obra/superpowers",
-    "npm:gentle-engram@0.2.0"
+    "npm:gentle-engram"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"

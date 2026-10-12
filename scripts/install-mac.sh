@@ -98,6 +98,9 @@ done
 # whole directory into the repo.
 mkdir -p "$HOME/.orbstack"
 
+# Keep Pi's writable state out of the repository before stowing its config.
+"$ROOT_DIR/scripts/prepare-pi-home.sh"
+
 # Change to root directory before running stow
 cd "$ROOT_DIR" || exit
 # shellcheck disable=SC2035
@@ -105,4 +108,5 @@ cd "$ROOT_DIR" || exit
 
 # Post commands
 mise install
+mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- bat cache --build
