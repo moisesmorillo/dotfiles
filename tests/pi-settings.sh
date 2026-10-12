@@ -20,6 +20,7 @@ cat >"$repo_settings" <<'JSON'
   "modelThinkingLevels": {"openai/gpt-6-luna": "medium"},
   "packages": ["npm:example@1.2.3"],
   "skills": ["~/skills"],
+  "subagents": {"defaultModel": "openai/gpt-6-luna", "defaultThinking": "high"},
   "npmCommand": ["npm"],
   "theme": "rose-pine",
   "lastChangelogVersion": "should-not-copy"
@@ -40,6 +41,7 @@ jq -e '
   .defaultModel == "gpt-6-luna" and
   .defaultThinkingLevel == "medium" and
   .packages == ["npm:example@1.2.3"] and
+  .subagents.defaultThinking == "high" and
   .customTool.enabled == true and
   .lastChangelogVersion == "local-runtime-state"
 ' "$user_settings" >/dev/null || fail "managed settings must merge while preserving local keys"

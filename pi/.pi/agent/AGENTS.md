@@ -21,6 +21,17 @@ Default choice unless the user says otherwise: push the branch, open a pull requ
 (title and body in English, conventional commit style), then remove the worktree. Never merge locally
 into `main` and never delete a branch that has unpushed commits.
 
+## Models
+
+The session default is `openai/gpt-6.1-sol` at medium thinking: it runs brainstorming, specs, plans and
+orchestration. Subagents default to `openai/gpt-6-luna` at high thinking through the `subagents` settings.
+When a skill asks you to pick a model for a subagent:
+
+- Implementers, task reviewers and scoped re-reviews: `openai/gpt-6-luna:high`.
+- Architecture or design questions, the final whole-branch review, and fix-loop escalation after round 3:
+  `openai/gpt-6.1-sol:medium`.
+- Never leave the model unset so that a child silently inherits the parent model.
+
 ## Tools
 
 - Use the `ask_user_question` tool when a real decision is open instead of guessing.

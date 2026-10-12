@@ -126,7 +126,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
-- **Pi** - AI coding assistant configured to use `openai/gpt-6-luna` with medium reasoning (`gpt-6.1-sol` is also configured for review subagents).
+- **Pi** - AI coding assistant; the session runs `openai/gpt-6.1-sol` with medium reasoning for brainstorming, specs, plans and orchestration, while subagents default to `openai/gpt-6-luna` with high reasoning for implementation and task review.
   Global instructions live in `pi/.pi/agent/AGENTS.md`: code changes always happen in a Git worktree under
   `~/.worktrees/<repo>/<branch>` via the superpowers `using-git-worktrees` skill, and finished branches are
   pushed and opened as pull requests by `finishing-a-development-branch`.
@@ -148,6 +148,13 @@ releases when packages are installed or updated. The installers merge the reposi
 `~/.pi/agent/settings.json`, preserving unrelated settings. Run `scripts/pi-status.sh` to compare declared
 package sources for missing or extra entries. Since refs are unpinned, it does not detect whether installed
 package versions are current or inspect the package manager's cache.
+
+Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.1-sol`, medium) covers the
+session, and `subagents.defaultModel` / `subagents.defaultThinking` (`openai/gpt-6-luna`, high) cover every
+pi-subagents child that does not pin its own model. The global `pi/.pi/agent/AGENTS.md` tells the agent which
+model to name when a superpowers skill asks for one, so implementers and task reviewers run on Luna and the
+final whole-branch review and architecture questions on Sol. The review agents in `pi/.pi/agent/agents/` pin
+Sol in their frontmatter and are unaffected by the subagent default.
 
 Installed Pi packages and what each one covers:
 
