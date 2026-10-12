@@ -8,3 +8,5 @@ cask "tailscale-app"
 cask "telegram"
 cask "transmission"
 cask "whatsapp"
+tap "aboudjem/tap"
+cask "aboudjem/tap/sleepless", trusted: true
