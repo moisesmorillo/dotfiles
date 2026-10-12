@@ -24,10 +24,11 @@ into `main` and never delete a branch that has unpushed commits.
 ## Models
 
 The session default is `openai/gpt-6.1-sol` at medium thinking: it runs brainstorming, specs, plans and
-orchestration. Subagents default to `openai/gpt-6-luna` at high thinking through the `subagents` settings.
-When a skill asks you to pick a model for a subagent:
+orchestration. Subagents default to `openai/gpt-6-luna` at medium thinking through the `subagents` settings;
+the `reviewer` and `oracle` roles are raised to high there. When a skill asks you to pick a model for a subagent:
 
-- Implementers, task reviewers and scoped re-reviews: `openai/gpt-6-luna:high`.
+- Implementers working from a plan, and scoped re-reviews of small fix diffs: `openai/gpt-6-luna:medium`.
+- Task reviewers and implementers working from prose without a plan: `openai/gpt-6-luna:high`.
 - Architecture or design questions, the final whole-branch review, and fix-loop escalation after round 3:
   `openai/gpt-6.1-sol:medium`.
 - Never leave the model unset so that a child silently inherits the parent model.
