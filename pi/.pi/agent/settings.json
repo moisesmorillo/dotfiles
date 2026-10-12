@@ -25,7 +25,8 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-lens",
     "npm:cc-safety-net",
-    "npm:@pi-unipi/notify"
+    "npm:@pi-unipi/notify",
+    "npm:@plannotator/pi-extension"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"

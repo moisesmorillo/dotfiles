@@ -15,7 +15,8 @@ home="$TMP_DIR/home"
 mkdir -p "$fixture/pi/.pi/agent/agents" "$fixture/pi/.pi/agent/prompts" \
 	"$fixture/pi/.pi/agent/themes" "$fixture/pi/.pi/agent/sessions" \
 	"$fixture/pi/.pi/agent/npm/cache" "$home"
-mkdir -p "$fixture/scripts"
+mkdir -p "$fixture/scripts" "$fixture/pi/.plannotator"
+printf '{"agentTool": true}\n' >"$fixture/pi/.plannotator/config.json"
 cp "$ROOT_DIR/scripts/prepare-pi-home.sh" "$fixture/scripts/prepare-pi-home.sh"
 cp "$ROOT_DIR/pi/.stow-local-ignore" "$fixture/pi/.stow-local-ignore"
 printf '{"defaultModel":"fixture","custom":"preserve"}\n' >"$fixture/pi/.pi/agent/settings.json"
@@ -49,5 +50,7 @@ HOME="$fresh_home" "$fixture/scripts/prepare-pi-home.sh"
 stow -d "$fixture" -t "$fresh_home" pi
 [ ! -L "$fresh_home/.pi" ] || fail "a fresh Stow install must not fold ~/.pi into the repository"
 [ ! -L "$fresh_home/.pi/agent" ] || fail "a fresh install must keep ~/.pi/agent writable outside the repository"
+[ ! -L "$fresh_home/.plannotator" ] || fail "a fresh install must not fold ~/.plannotator into the repository"
+[ -L "$fresh_home/.plannotator/config.json" ] || fail "Stow must link the Plannotator config"
 
 echo "PASS: Pi writable state stays outside the dotfiles repository"

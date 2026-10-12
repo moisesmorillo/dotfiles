@@ -163,6 +163,14 @@ Installed Pi packages and what each one covers:
 | `pi-lens` | LSP diagnostics, linters, formatters and type-checking after edits; config in `~/.pi-lens/config.json` and `.pi-lens.json` |
 | `cc-safety-net` | Blocks destructive commands (`rm -rf`, force push, `git reset --hard`) and secret-file reads; rules in `.cc-safety-net/` |
 | `@pi-unipi/notify` | Native macOS notifications (needs `terminal-notifier` from the Brewfile); config in `~/.unipi/config/notify/config.json` |
+| `@plannotator/pi-extension` | Browser-based review of plans, markdown and diffs with annotations sent back to the agent (`/plannotator-annotate`, `/plannotator-review`, `/plannotator-last`); the `plannotator` tool is enabled through the stowed `~/.plannotator/config.json` |
+
+Plannotator is used only as a review surface, never in its plan mode, so it does not compete with the
+superpowers planning and execution skills. Repositories opt in through their `AGENTS.md`: after the
+`writing-plans` skill saves a plan, the agent opens it with the `plannotator` tool for human annotation, and
+before `finishing-a-development-branch` it opens a code review of the branch diff. Feedback arrives as a
+later message in the same session. The tool only exists in interactive sessions; agents without it (for
+example Claude Code) fall back to presenting the plan and diff in the conversation.
 
 A background task reported as `failed` means its command exited non-zero (for example a failing test
 suite); it is not a plugin error. Default tasks are killed on `/reload`, `/new` and resume unless started
@@ -180,7 +188,6 @@ We keep the Pi setup lean and do not currently add these optional integrations:
 - `@narumitw/pi-plan-mode`: enforced read-only planning; superpowers brainstorming covers the workflow.
 - `gentle-pi`: a full harness (own subagents, UI and ODD workflow) that would duplicate superpowers and `pi-subagents`.
 - `pi-interactive-shell`: useful for interactive long-running commands, but not needed in the current workflow.
-- `@plannotator/pi-extension`: offers visual diff annotation; the existing review workflow does not require it.
 - `@tmustier/pi-usage-extension`: adds usage analytics, which are not required here.
 - `pi-claude-cli`: not applicable because Pi uses the `openai` provider.
 

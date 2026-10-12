@@ -23,3 +23,8 @@ fi
 
 # Prevent Stow's directory folding from making ~/.pi itself a symlink into the repo.
 mkdir -p "$PI_HOME/agent"
+
+# Plannotator keeps drafts and plan versions in ~/.plannotator next to its config.json.
+# Pre-create the directory so Stow links only config.json instead of folding the
+# whole directory, which would write that runtime state into the repository.
+mkdir -p "$HOME/.plannotator"
