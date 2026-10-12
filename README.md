@@ -126,7 +126,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
-- **Pi** - AI coding assistant configured to use `openai-codex/gpt-6-luna` with medium reasoning (`gpt-6.1-sol` is also configured for review subagents)
+- **Pi** - AI coding assistant configured to use `openai/gpt-6-luna` with medium reasoning (`gpt-6.1-sol` is also configured for review subagents)
 
 Reusable skills are owned by the separate `ai-engineering` repository. Pi and OpenCode register
 `~/workspace/moisesmorillo/ai-engineering/skills` globally, so updating that repository updates both tools.
@@ -137,7 +137,7 @@ Reusable skills are owned by the separate `ai-engineering` repository. Pi and Op
 | Design | `/design-feasibility-review <document>` | `/prompt-workflow design-feasibility-review <document>` |
 
 These commands launch dedicated subagents on GPT-6.1 Sol with medium reasoning (`openai/gpt-6.1-sol` in
-OpenCode, `openai-codex/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
+OpenCode, `openai/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
 current agent without switching models.
 
 Pi package references in `pi/.pi/agent/settings.json` are intentionally unpinned so Pi can resolve current
@@ -153,7 +153,7 @@ We keep the Pi setup lean and do not currently add these optional integrations:
 - `pi-ask-user`: interactive prompting is not currently needed for these agent workflows.
 - `@tmustier/pi-usage-extension`: adds usage analytics, which are not required here.
 - MCP: use Pi's native MCP support rather than adding `pi-mcp-adapter`.
-- `pi-claude-cli`: not applicable because Pi uses the `openai-codex` provider.
+- `pi-claude-cli`: not applicable because Pi uses the `openai` provider.
 
 `@juanibiapina/pi-extension-settings` is not installed, so no special package load order is required.
 

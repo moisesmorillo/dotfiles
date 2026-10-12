@@ -15,9 +15,9 @@ user_settings="$TMP_DIR/user-settings.json"
 cat >"$repo_settings" <<'JSON'
 {
   "defaultModel": "gpt-6-luna",
-  "defaultProvider": "openai-codex",
+  "defaultProvider": "openai",
   "defaultThinkingLevel": "medium",
-  "modelThinkingLevels": {"openai-codex/gpt-6-luna": "medium"},
+  "modelThinkingLevels": {"openai/gpt-6-luna": "medium"},
   "packages": ["npm:example@1.2.3"],
   "skills": ["~/skills"],
   "npmCommand": ["npm"],

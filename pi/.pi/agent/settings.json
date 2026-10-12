@@ -1,10 +1,10 @@
 {
   "defaultModel": "gpt-6-luna",
-  "defaultProvider": "openai-codex",
+  "defaultProvider": "openai",
   "defaultThinkingLevel": "medium",
   "modelThinkingLevels": {
-    "openai-codex/gpt-6.1-sol": "medium",
-    "openai-codex/gpt-6-luna": "medium"
+    "openai/gpt-6.1-sol": "medium",
+    "openai/gpt-6-luna": "medium"
   },
   "npmCommand": [
     "mise",
