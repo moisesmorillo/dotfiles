@@ -2,7 +2,7 @@
 name: design-review-sol
 description: Review implementation-facing designs with the ai-engineering design-feasibility-review skill using GPT-6.1 Sol medium
 advertise: true
-model: openai-codex/gpt-6.1-sol
+model: openai/gpt-6.1-sol
 thinking: medium
 tools: read, grep, find, ls, bash
 inheritSkills: false
