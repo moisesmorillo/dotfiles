@@ -8,7 +8,15 @@
   },
   "subagents": {
     "defaultModel": "openai/gpt-6-luna",
-    "defaultThinking": "high"
+    "defaultThinking": "medium",
+    "agentOverrides": {
+      "reviewer": {
+        "thinking": "high"
+      },
+      "oracle": {
+        "thinking": "high"
+      }
+    }
   },
   "npmCommand": [
     "mise",
