@@ -25,5 +25,6 @@
     "~/workspace/moisesmorillo/ai-engineering/skills"
   ],
   "theme": "rose-pine",
-  "tuiMode": "fullscreen"
+  "tuiMode": "fullscreen",
+  "lastChangelogVersion": "1.1.0"
 }
