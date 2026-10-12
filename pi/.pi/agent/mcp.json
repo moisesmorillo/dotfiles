@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "backlog": {
+      "command": "mise",
+      "args": [
+        "exec",
+        "--",
+        "backlog",
+        "mcp",
+        "start"
+      ],
+      "description": "Backlog.md per-repository task manager (markdown tasks in backlog/)"
+    }
+  }
+}
