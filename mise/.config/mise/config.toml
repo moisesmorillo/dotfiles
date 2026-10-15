@@ -47,7 +47,7 @@ yazi                                     = "latest"
 yq                                       = "latest"
 "github:Gentleman-Programming/engram"    = "latest"
 "github:Gentleman-Programming/gentle-ai" = "latest"
-herdr                                    = "latest"
+herdr                                    = "0.9.3"
 
 [settings]
 auto_install                        = false
