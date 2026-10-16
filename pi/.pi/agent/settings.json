@@ -38,7 +38,8 @@
     "npm:pi-lens",
     "npm:cc-safety-net",
     "npm:@pi-unipi/notify",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:agent-ste"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
