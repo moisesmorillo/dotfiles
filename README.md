@@ -144,10 +144,14 @@ OpenCode, `openai/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a
 current agent without switching models.
 
 Pi package references in `pi/.pi/agent/settings.json` are intentionally unpinned so Pi can resolve current
-releases when packages are installed or updated. The installers merge the repository's Pi settings into
-`~/.pi/agent/settings.json`, preserving unrelated settings. Run `scripts/pi-status.sh` to compare declared
-package sources for missing or extra entries. Since refs are unpinned, it does not detect whether installed
-package versions are current or inspect the package manager's cache.
+releases when packages are installed or updated. Two scripts keep a machine in step with the repository:
+`scripts/apply-pi-settings.sh` merges the managed keys into `~/.pi/agent/settings.json`, preserving
+unrelated settings, and `scripts/sync-pi-packages.sh` runs `pi install` for every declared package that is
+not yet installed. The installers run both, and the `fu` shell function runs them (plus `pi update
+--extensions`) through `pi_sync` on every full update, so adding a package to the repository is enough for the
+other machines to pick it up. Run `scripts/pi-status.sh` to compare declared package sources for missing,
+extra or not-installed entries. Since refs are unpinned, it does not detect whether installed package
+versions are current.
 
 Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.1-sol`, medium) covers the
 session, and `subagents.defaultModel` / `subagents.defaultThinking` (`openai/gpt-6-luna`, medium) cover every
@@ -168,11 +172,13 @@ Installed Pi packages and what each one covers:
 | `gentle-engram` | Persistent memory shared across sessions |
 | `@narumitw/pi-worktree` | Interactive `/worktree` manager (list, create, switch, remove, prune); root `~/.worktrees` |
 | `pi-powerline-footer` | Powerline status bar (model, thinking, git, context %, cost); configured under `powerline` in settings |
+| `pi-token-speed` | Live tokens/s and time-to-first-token while streaming, shown inside the powerline `extension_statuses` segment; configured under `tokenSpeed` in settings (`/tps` menu) |
 | `@juicesharp/rpiv-ask-user-question` | Structured `ask_user_question` tool with typed options |
 | `pi-lens` | LSP diagnostics, linters, formatters and type-checking after edits; config in `~/.pi-lens/config.json` and `.pi-lens.json` |
 | `cc-safety-net` | Blocks destructive commands (`rm -rf`, force push, `git reset --hard`) and secret-file reads; rules in `.cc-safety-net/` |
 | `@pi-unipi/notify` | Native macOS notifications (needs `terminal-notifier` from the Brewfile); config in `~/.unipi/config/notify/config.json` |
 | `@plannotator/pi-extension` | Browser-based review of plans, markdown and diffs with annotations sent back to the agent (`/plannotator-annotate`, `/plannotator-review`, `/plannotator-last`); the `plannotator` tool is enabled through the stowed `~/.plannotator/config.json` |
+| `agent-ste` | Enforces ASD-STE100 Simplified Technical English on file writes, commit messages and replies (hard rules block, soft rules warn); `ste_lint` tool, `/ste`, `/ste off`, `/ste strict`; optional per-rule config in a project `.ste.json` or `~/.config/ste/config.json` |
 
 Plannotator is used only as a review surface, never in its plan mode, so it does not compete with the
 superpowers planning and execution skills. Repositories opt in through their `AGENTS.md`: after the
@@ -180,6 +186,11 @@ superpowers planning and execution skills. Repositories opt in through their `AG
 before `finishing-a-development-branch` it opens a code review of the branch diff. Feedback arrives as a
 later message in the same session. The tool only exists in interactive sessions; agents without it (for
 example Claude Code) fall back to presenting the plan and diff in the conversation.
+
+`pi-token-speed` separates provider latency from harness latency: a low tokens/s while streaming means the
+provider is slow, while a normal tokens/s on a long turn points at time-to-first-token, tool calls or subagent
+orchestration. It renders through `ctx.ui.setStatus`, so it does not replace the powerline footer. Token counts
+come from the provider's reported usage (`useProviderTokens`) instead of the one-token-per-delta heuristic.
 
 A background task reported as `failed` means its command exited non-zero (for example a failing test
 suite); it is not a plugin error. Default tasks are killed on `/reload`, `/new` and resume unless started

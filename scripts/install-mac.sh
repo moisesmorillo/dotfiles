@@ -109,4 +109,5 @@ cd "$ROOT_DIR" || exit
 # Post commands
 mise install
 mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
+mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
 mise exec -- bat cache --build

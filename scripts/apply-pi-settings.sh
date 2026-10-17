@@ -34,7 +34,7 @@ trap 'rm -f "$TEMP_SETTINGS"' EXIT
 jq -s '
 	.[0] as $current |
 	.[1] as $repository |
-	["defaultModel", "defaultProvider", "defaultThinkingLevel", "modelThinkingLevels", "npmCommand", "packages", "powerline", "skills", "subagents", "theme", "tuiMode"] as $managed |
+	["defaultModel", "defaultProvider", "defaultThinkingLevel", "modelThinkingLevels", "npmCommand", "packages", "powerline", "skills", "subagents", "theme", "tokenSpeed", "tuiMode"] as $managed |
 	($current // {}) * ($repository | with_entries(select(.key as $key | $managed | index($key))))
 ' "$TARGET_SETTINGS" "$SOURCE_SETTINGS" >"$TEMP_SETTINGS"
 

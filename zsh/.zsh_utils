@@ -22,7 +22,7 @@ zsh_time() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# fu ─ Full update: OS packages, dotfiles, LazyVim & zinit plugins
+# fu ─ Full update: OS packages, dotfiles, LazyVim & zinit plugins, Pi packages
 # Usage: fu
 fu() {
 	emulate -L zsh -o pipefail
@@ -53,7 +53,22 @@ fu() {
 	mise up -j 8
 
 	stow_dotfiles
+	pi_sync
 	zsh_reload
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+# pi_sync ─ Converge Pi on the repository: merge managed settings, install
+# declared packages, update unpinned ones, then report any remaining drift.
+# Usage: pi_sync
+pi_sync() {
+	emulate -L zsh -o pipefail
+	local root=~/workspace/moisesmorillo/dotfiles
+	log_info "*** Syncing Pi settings and packages ***"
+	"$root/scripts/apply-pi-settings.sh" || return
+	"$root/scripts/sync-pi-packages.sh" || return
+	pi update --extensions
+	"$root/scripts/pi-status.sh" || log_warn "Pi packages drift from the repository (see above)"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
