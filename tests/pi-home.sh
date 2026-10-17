@@ -16,7 +16,10 @@ mkdir -p "$fixture/pi/.pi/agent/agents" "$fixture/pi/.pi/agent/prompts" \
 	"$fixture/pi/.pi/agent/themes" "$fixture/pi/.pi/agent/sessions" \
 	"$fixture/pi/.pi/agent/npm/cache" "$home"
 mkdir -p "$fixture/scripts" "$fixture/pi/.plannotator" "$fixture/pi/.pi/agent/extensions"
+mkdir -p "$fixture/pi/.pi-lens" "$fixture/pi/.pi/agent/extensions/subagent"
 printf '{"agentTool": true}\n' >"$fixture/pi/.plannotator/config.json"
+printf '{"ui": {"compactWidget": true}}\n' >"$fixture/pi/.pi-lens/config.json"
+printf '{"asyncWidget": false}\n' >"$fixture/pi/.pi/agent/extensions/subagent/config.json"
 # Managed single files next to runtime state: a folded ~/.pi copies them too, and
 # Stow refuses to link over a plain file, so the migration must drop those copies.
 printf 'global instructions\n' >"$fixture/pi/.pi/agent/AGENTS.md"
@@ -64,5 +67,10 @@ stow -d "$fixture" -t "$fresh_home" pi
 [ ! -L "$fresh_home/.pi/agent" ] || fail "a fresh install must keep ~/.pi/agent writable outside the repository"
 [ ! -L "$fresh_home/.plannotator" ] || fail "a fresh install must not fold ~/.plannotator into the repository"
 [ -L "$fresh_home/.plannotator/config.json" ] || fail "Stow must link the Plannotator config"
+[ ! -L "$fresh_home/.pi-lens" ] || fail "a fresh install must not fold ~/.pi-lens into the repository"
+[ -L "$fresh_home/.pi-lens/config.json" ] || fail "Stow must link the pi-lens config"
+[ ! -L "$fresh_home/.pi/agent/extensions/subagent" ] ||
+	fail "a fresh install must keep the subagent extension directory writable outside the repository"
+[ -L "$fresh_home/.pi/agent/extensions/subagent/config.json" ] || fail "Stow must link the pi-subagents config"
 
 echo "PASS: Pi writable state stays outside the dotfiles repository"

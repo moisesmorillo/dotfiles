@@ -38,5 +38,8 @@ the `reviewer` and `oracle` roles are raised to high there. When a skill asks yo
 - Use the `ask_user_question` tool when a real decision is open instead of guessing.
 - Long shell work (test suites, builds, servers) goes through `bg_run`; a `failed` status means the
   command exited non-zero, so read `bg_logs` before retrying.
+- A command that is expected to exit non-zero (negative control, "must fail" check) must not be the
+  task's last command. Wrap it so the task exits 0 and records the observed code, for example
+  `cmd; echo "observed exit=$?"`, then assert on the output. Only real failures may show as `failed`.
 - Projects that contain a `backlog/` directory track work with Backlog.md: run
   `backlog instructions overview` once per session and keep task status current.
