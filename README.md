@@ -168,6 +168,7 @@ Installed Pi packages and what each one covers:
 | `gentle-engram` | Persistent memory shared across sessions |
 | `@narumitw/pi-worktree` | Interactive `/worktree` manager (list, create, switch, remove, prune); root `~/.worktrees` |
 | `pi-powerline-footer` | Powerline status bar (model, thinking, git, context %, cost); configured under `powerline` in settings |
+| `pi-token-speed` | Live tokens/s and time-to-first-token while streaming, shown inside the powerline `extension_statuses` segment; configured under `tokenSpeed` in settings (`/tps` menu) |
 | `@juicesharp/rpiv-ask-user-question` | Structured `ask_user_question` tool with typed options |
 | `pi-lens` | LSP diagnostics, linters, formatters and type-checking after edits; config in `~/.pi-lens/config.json` and `.pi-lens.json` |
 | `cc-safety-net` | Blocks destructive commands (`rm -rf`, force push, `git reset --hard`) and secret-file reads; rules in `.cc-safety-net/` |
@@ -180,6 +181,11 @@ superpowers planning and execution skills. Repositories opt in through their `AG
 before `finishing-a-development-branch` it opens a code review of the branch diff. Feedback arrives as a
 later message in the same session. The tool only exists in interactive sessions; agents without it (for
 example Claude Code) fall back to presenting the plan and diff in the conversation.
+
+`pi-token-speed` separates provider latency from harness latency: a low tokens/s while streaming means the
+provider is slow, while a normal tokens/s on a long turn points at time-to-first-token, tool calls or subagent
+orchestration. It renders through `ctx.ui.setStatus`, so it does not replace the powerline footer. Token counts
+come from the provider's reported usage (`useProviderTokens`) instead of the one-token-per-delta heuristic.
 
 A background task reported as `failed` means its command exited non-zero (for example a failing test
 suite); it is not a plugin error. Default tasks are killed on `/reload`, `/new` and resume unless started

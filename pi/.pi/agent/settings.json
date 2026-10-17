@@ -39,7 +39,8 @@
     "npm:cc-safety-net",
     "npm:@pi-unipi/notify",
     "npm:@plannotator/pi-extension",
-    "npm:agent-ste"
+    "npm:agent-ste",
+    "npm:pi-token-speed"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
@@ -50,5 +51,10 @@
   "powerline": {
     "preset": "full",
     "placement": "below"
+  },
+  "tokenSpeed": {
+    "display": "full",
+    "useProviderTokens": true,
+    "slidingWindow": 1000
   }
 }
