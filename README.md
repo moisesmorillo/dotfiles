@@ -144,10 +144,14 @@ OpenCode, `openai/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a
 current agent without switching models.
 
 Pi package references in `pi/.pi/agent/settings.json` are intentionally unpinned so Pi can resolve current
-releases when packages are installed or updated. The installers merge the repository's Pi settings into
-`~/.pi/agent/settings.json`, preserving unrelated settings. Run `scripts/pi-status.sh` to compare declared
-package sources for missing or extra entries. Since refs are unpinned, it does not detect whether installed
-package versions are current or inspect the package manager's cache.
+releases when packages are installed or updated. Two scripts keep a machine in step with the repository:
+`scripts/apply-pi-settings.sh` merges the managed keys into `~/.pi/agent/settings.json`, preserving
+unrelated settings, and `scripts/sync-pi-packages.sh` runs `pi install` for every declared package that is
+not yet installed. The installers run both, and the `fu` shell function runs them (plus `pi update
+--extensions`) through `pi_sync` on every full update, so adding a package to the repository is enough for the
+other machines to pick it up. Run `scripts/pi-status.sh` to compare declared package sources for missing,
+extra or not-installed entries. Since refs are unpinned, it does not detect whether installed package
+versions are current.
 
 Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.1-sol`, medium) covers the
 session, and `subagents.defaultModel` / `subagents.defaultThinking` (`openai/gpt-6-luna`, medium) cover every
@@ -174,6 +178,7 @@ Installed Pi packages and what each one covers:
 | `cc-safety-net` | Blocks destructive commands (`rm -rf`, force push, `git reset --hard`) and secret-file reads; rules in `.cc-safety-net/` |
 | `@pi-unipi/notify` | Native macOS notifications (needs `terminal-notifier` from the Brewfile); config in `~/.unipi/config/notify/config.json` |
 | `@plannotator/pi-extension` | Browser-based review of plans, markdown and diffs with annotations sent back to the agent (`/plannotator-annotate`, `/plannotator-review`, `/plannotator-last`); the `plannotator` tool is enabled through the stowed `~/.plannotator/config.json` |
+| `agent-ste` | Enforces ASD-STE100 Simplified Technical English on file writes, commit messages and replies (hard rules block, soft rules warn); `ste_lint` tool, `/ste`, `/ste off`, `/ste strict`; optional per-rule config in a project `.ste.json` or `~/.config/ste/config.json` |
 
 Plannotator is used only as a review surface, never in its plan mode, so it does not compete with the
 superpowers planning and execution skills. Repositories opt in through their `AGENTS.md`: after the

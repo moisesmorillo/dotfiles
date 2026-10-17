@@ -3,8 +3,12 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+# shellcheck source=scripts/pi-package-lib.sh
+. "$SCRIPT_DIR/pi-package-lib.sh"
+
 REPO_SETTINGS="${PI_REPO_SETTINGS:-$ROOT_DIR/pi/.pi/agent/settings.json}"
-INSTALLED_SETTINGS="${PI_SETTINGS_FILE:-$HOME/.pi/agent/settings.json}"
+PI_AGENT_DIR="${PI_AGENT_DIR:-$HOME/.pi/agent}"
+INSTALLED_SETTINGS="${PI_SETTINGS_FILE:-$PI_AGENT_DIR/settings.json}"
 
 if ! command -v jq >/dev/null 2>&1; then
 	echo "pi-status: jq is required" >&2
@@ -65,9 +69,21 @@ DRIFT="$(jq -n -r --slurpfile desired "$REPO_SETTINGS" --slurpfile installed "$I
 	$wantedDrift[], $extraDrift[]
 ')"
 
-if [ -n "$DRIFT" ]; then
-	printf '%s\n' "$DRIFT"
+# A package can be declared in both settings files and still be absent on disk
+# (for example after apply-pi-settings.sh ran without sync-pi-packages.sh).
+NOT_INSTALLED=""
+while IFS= read -r spec; do
+	[ -n "$spec" ] || continue
+	path="$(pi_package_path "$spec" "$PI_AGENT_DIR")"
+	if [ -n "$path" ] && [ ! -e "$path" ]; then
+		NOT_INSTALLED="${NOT_INSTALLED}not-installed: $spec ($path)"$'\n'
+	fi
+done < <(jq -r '(.packages // [])[] | if type == "object" then .source else . end' "$REPO_SETTINGS")
+
+if [ -n "$DRIFT" ] || [ -n "$NOT_INSTALLED" ]; then
+	[ -z "$DRIFT" ] || printf '%s\n' "$DRIFT"
+	[ -z "$NOT_INSTALLED" ] || printf '%s' "$NOT_INSTALLED"
 	exit 1
 fi
 
-echo "Pi package declarations match the repository settings."
+echo "Pi package declarations match the repository settings and are installed."

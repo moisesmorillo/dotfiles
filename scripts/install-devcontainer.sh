@@ -129,6 +129,7 @@ if ! mise install; then
 	     "(e.g. resvg/colima/lima on linux/arm64) and were skipped; everything else installed."
 fi
 mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
+mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
 mise exec -- bat cache --build 2>/dev/null || true
 
 echo "dotfiles(devcontainer): done"
