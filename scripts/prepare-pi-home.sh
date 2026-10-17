@@ -44,6 +44,15 @@ fi
 # Prevent Stow's directory folding from making ~/.pi itself a symlink into the repo.
 mkdir -p "$PI_HOME/agent"
 
+# pi-subagents reads its config from ~/.pi/agent/extensions/subagent/config.json and may
+# keep runtime state next to it. Pre-create the directory so Stow links only config.json.
+mkdir -p "$PI_HOME/agent/extensions/subagent"
+
+# pi-lens keeps logs, caches and lock directories in ~/.pi-lens next to its config.json.
+# Pre-create the directory so Stow links only config.json instead of folding the whole
+# directory into the repository.
+mkdir -p "$HOME/.pi-lens"
+
 # Plannotator keeps drafts and plan versions in ~/.plannotator next to its config.json.
 # Pre-create the directory so Stow links only config.json instead of folding the
 # whole directory, which would write that runtime state into the repository.

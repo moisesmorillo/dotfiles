@@ -50,11 +50,30 @@
   "lastChangelogVersion": "1.1.0",
   "powerline": {
     "preset": "full",
-    "placement": "below"
+    "placement": "below",
+    "disabledSegments": [
+      "hostname",
+      "subagents",
+      "token_in",
+      "token_out",
+      "cache_read",
+      "time",
+      "cost"
+    ],
+    "secondaryOverflow": "wrap",
+    "customItems": [
+      {
+        "id": "tps",
+        "statusKey": "tokenSpeed",
+        "position": "right",
+        "selfColorize": true
+      }
+    ]
   },
   "tokenSpeed": {
     "display": "full",
     "useProviderTokens": true,
     "slidingWindow": 1000
-  }
+  },
+  "showLastPrompt": false
 }

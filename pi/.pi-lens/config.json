@@ -1,0 +1,6 @@
+{
+  "ui": {
+    "compactWidget": true,
+    "hideLspStatus": true
+  }
+}
