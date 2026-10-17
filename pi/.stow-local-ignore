@@ -7,6 +7,7 @@
 \.pi/agent/settings\.json
 \.pi/agent/(sessions|missions|npm|git|web-search-cache|pi-subagents|pi-pretty)(/|$)
 \.pi/agent/(auth\.json|models\.json|models-store\.json|run-history\.jsonl)
+\.pi/agent/(mcp\.log|mcp-auth\.json)
 \.pi/agent/.*\.bak
 \.pi/web-search-cache/
 \.config/pi/settings\.json
