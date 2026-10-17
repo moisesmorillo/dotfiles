@@ -130,6 +130,8 @@ if ! mise install; then
 fi
 mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
+# Herdr plugins build from source (Go); a missing herdr or Go here must not fail the run.
+mise exec -- "$ROOT_DIR/scripts/sync-herdr-plugins.sh" || echo "dotfiles(devcontainer): note — Herdr plugin sync skipped"
 mise exec -- bat cache --build 2>/dev/null || true
 
 echo "dotfiles(devcontainer): done"

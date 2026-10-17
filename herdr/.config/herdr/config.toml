@@ -1,0 +1,11 @@
+onboarding = false
+
+[ui.toast]
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "rose-pine"
+auto_switch = false

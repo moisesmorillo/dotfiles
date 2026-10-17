@@ -1,0 +1,8 @@
+# Herdr plugins installed by scripts/sync-herdr-plugins.sh.
+# One per line: owner/repo[/subdir][@ref]. "@ref" pins a tag, branch or commit.
+# Herdr records installs in ~/.config/herdr/plugins.json with machine-local paths,
+# so that file is runtime state and stays out of the repository.
+
+# Names tabs and panes after their content (directory + git branch, editor file,
+# ssh host, agent task). It reads only what Herdr already knows. No model, no API key.
+kryptamine/herdr-auto-title@v0.13.2

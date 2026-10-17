@@ -54,6 +54,7 @@ fu() {
 
 	stow_dotfiles
 	pi_sync
+	herdr_sync
 	zsh_reload
 }
 
@@ -69,6 +70,18 @@ pi_sync() {
 	"$root/scripts/sync-pi-packages.sh" || return
 	pi update --extensions
 	"$root/scripts/pi-status.sh" || log_warn "Pi packages drift from the repository (see above)"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+# herdr_sync ─ Install every Herdr plugin declared in herdr/plugins.txt that is
+# missing locally. New plugins start with the Herdr server, so the script says
+# when a restart is needed.
+# Usage: herdr_sync
+herdr_sync() {
+	emulate -L zsh -o pipefail
+	local root=~/workspace/moisesmorillo/dotfiles
+	log_info "*** Syncing Herdr plugins ***"
+	"$root/scripts/sync-herdr-plugins.sh" || log_warn "Herdr plugin sync failed (see above)"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -89,6 +89,7 @@ for pattern in \
 	~/.zshenv \
 	~/.hammerspoon \
 	~/.config/pi \
+	~/.config/herdr/config.toml \
 	~/.orbstack/vmconfig.json; do
 	rm -rf "$pattern" 2>/dev/null
 done
@@ -110,4 +111,5 @@ cd "$ROOT_DIR" || exit
 mise install
 mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
+mise exec -- "$ROOT_DIR/scripts/sync-herdr-plugins.sh"
 mise exec -- bat cache --build
