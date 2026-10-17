@@ -18,6 +18,26 @@ if [ -L "$PI_HOME" ] && [ -d "$SOURCE_PI" ]; then
 		rm "$PI_HOME"
 		mv "$MIGRATION_DIR" "$PI_HOME"
 		echo "prepare-pi-home: migrated Pi state out of the dotfiles repository"
+
+		# The copy also carries every managed single file (AGENTS.md, mcp.json, extension
+		# sources, ...). Stow refuses to link over a plain file, so ask it which targets
+		# conflict and drop the copies that are byte-identical to the repository file.
+		# Runtime files that Stow ignores never show up here, so they are kept.
+		# A dry run with conflicts exits non-zero on purpose, hence the `|| true`.
+		if command -v stow >/dev/null 2>&1; then
+			{ stow -n -d "$ROOT_DIR" -t "$HOME" pi 2>&1 || true; } |
+				sed -n 's/.*over existing target \(.*\) since neither a link nor a directory.*/\1/p' |
+				while IFS= read -r target; do
+					copy="$HOME/$target"
+					source="$ROOT_DIR/pi/$target"
+					if [ -f "$copy" ] && [ ! -L "$copy" ] && cmp -s "$copy" "$source"; then
+						rm "$copy"
+						echo "prepare-pi-home: removed migrated copy of $target so Stow can link it"
+					else
+						echo "prepare-pi-home: keeping $copy (differs from the repository); Stow will report it" >&2
+					fi
+				done
+		fi
 	fi
 fi
 
