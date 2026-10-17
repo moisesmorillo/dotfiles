@@ -1,0 +1,4 @@
+# plugins.txt is read by scripts/sync-herdr-plugins.sh; Herdr itself never reads it,
+# so keep it out of ~/.config/herdr.
+^/plugins\.txt$
+^/README.*

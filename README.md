@@ -121,6 +121,19 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Complex key mappings
 - Application-specific shortcuts
 
+### 🧭 Herdr
+
+- Terminal multiplexer for agent sessions. Stow links its config from `herdr/.config/herdr/config.toml`.
+- `herdr/plugins.txt` declares the plugins (`owner/repo@ref`, one per line). `scripts/sync-herdr-plugins.sh`
+  installs every declared plugin that `~/.config/herdr/plugins.json` does not list yet. The installers and the
+  `fu` function run it. Herdr starts plugins with its server, so a new plugin needs its restart action or
+  `herdr server stop` once.
+- `kryptamine/herdr-auto-title` names tabs and panes after their content (directory and git branch, editor
+  file, ssh host, agent task) from data Herdr already has. No model and no API key. Tabs renamed by hand are
+  left alone.
+- Agent integrations (`herdr integration install claude|pi|opencode`) live in the `claude`, `pi` and
+  `opencode` packages as `herdr-agent-state` hooks.
+
 ### 🤖 AI Tools
 
 - **Claude CLI** - Claude AI integration
