@@ -51,3 +51,5 @@ tap "ampcode/tap"
 brew "ampcode/tap/ampcode", trusted: true
 tap "abue-ammar/tinycast", trusted: true
 cask "abue-ammar/tinycast/tinycast", trusted: true
+tap "saffsanity/sill"
+cask "saffsanity/sill/sill", trusted: true
