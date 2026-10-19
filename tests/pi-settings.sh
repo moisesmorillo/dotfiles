@@ -20,7 +20,7 @@ cat >"$repo_settings" <<'JSON'
   "modelThinkingLevels": {"openai/gpt-6-luna": "medium"},
   "packages": ["npm:example@1.2.3"],
   "skills": ["~/skills"],
-  "subagents": {"defaultModel": "openai/gpt-6-luna", "defaultThinking": "high"},
+  "subagents": {"defaultModel": "openai/gpt-6-luna", "defaultThinking": "high", "agentOverrides": {"worker": {"timeoutMs": 5400000}}},
   "npmCommand": ["npm"],
   "theme": "rose-pine",
   "tokenSpeed": {"display": "full", "useProviderTokens": true},
@@ -43,6 +43,7 @@ jq -e '
   .defaultThinkingLevel == "medium" and
   .packages == ["npm:example@1.2.3"] and
   .subagents.defaultThinking == "high" and
+  .subagents.agentOverrides.worker.timeoutMs == 5400000 and
   .tokenSpeed.useProviderTokens == true and
   .customTool.enabled == true and
   .lastChangelogVersion == "local-runtime-state"
