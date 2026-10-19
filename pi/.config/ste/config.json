@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "length/sentence": "soft",
+    "length/paragraph": "soft"
+  }
+}
