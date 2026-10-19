@@ -50,8 +50,8 @@ d = decideMemorySave(ledger2, { title: 'T8' }, t0 + 61 * 60_000);
 assert(d.block === false, 'budget resets after an hour');
 
 // ste_lint is removed from the active tools, everything else stays.
-const pruned = pruneActiveTools(['read', 'ste_lint', 'edit']);
-assert(JSON.stringify(pruned) === JSON.stringify(['read', 'edit']), 'ste_lint pruned');
+const pruned = pruneActiveTools(['read', 'say', 'ste_lint', 'edit']);
+assert(JSON.stringify(pruned) === JSON.stringify(['read', 'edit']), 'ste_lint and say pruned');
 assert(pruneActiveTools(['read']) === null, 'no change returns null');
 
 console.log('pi-agent-budget: ok');

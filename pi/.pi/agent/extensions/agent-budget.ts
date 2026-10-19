@@ -7,7 +7,7 @@
  * in AGENTS.md competes with the text that the plugins inject, so these rules
  * run as code and cannot be argued with.
  *
- * 1. `ste_lint` is removed from the tools declared to the model. agent-ste still
+ * 1. `ste_lint` and `say` are removed from the tools declared to the model. agent-ste still
  *    gates writes and commit messages in its own `tool_call` hook and still
  *    reports faults on replies, so nothing is lost.
  * 2. `bg_logs.maxBytes` is clamped to MAX_LOG_BYTES. The full output stays on
@@ -26,8 +26,12 @@ export const TOPIC_WINDOW_MS = 30 * 60_000;
 export const SAVE_BUDGET = 6;
 /** Sliding window for SAVE_BUDGET. */
 export const BUDGET_WINDOW_MS = 60 * 60_000;
-/** Tools removed from the model's declaration at session start. */
-const PRUNED_TOOLS = new Set(["ste_lint"]);
+/**
+ * Tools removed from the model's declaration at session start. `say` is the
+ * agent-ste strict-mode reply gate; outside strict mode the model used it as
+ * a second lint call per reply. Remove it from this set before `/ste strict`.
+ */
+const PRUNED_TOOLS = new Set(["ste_lint", "say"]);
 
 type LogInput = { maxBytes?: unknown; [key: string]: unknown };
 type SaveInput = { topic_key?: unknown; title?: unknown; [key: string]: unknown };
