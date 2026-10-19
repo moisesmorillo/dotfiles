@@ -1,6 +1,8 @@
 {
   "rules": {
     "length/sentence": "soft",
-    "length/paragraph": "soft"
+    "length/paragraph": "soft",
+    "style/semicolon": "soft",
+    "dictionary/not-approved-word": "soft"
   }
 }

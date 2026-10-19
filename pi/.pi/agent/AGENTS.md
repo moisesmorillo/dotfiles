@@ -59,6 +59,8 @@ add a deferred Backlog task for the controller.
 
 ## Background tasks
 
+This section applies to the parent session. A worker subagent has no `bg_run`. It runs the project check with its own shell and waits for the result.
+
 End every `bg_run` command with a summary line: pass and fail counts and the exit code. Read `bg_logs`
 only after a terminal notification and only when the summary is not enough. The `agent-budget` extension caps the read at
 4 KiB. The full output stays in `.pi/tasks/`.
