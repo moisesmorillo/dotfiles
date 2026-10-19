@@ -1,3 +1,7 @@
 {
-  "asyncWidget": false
+  "asyncWidget": false,
+  "intercomBridge": {
+    "mode": "always",
+    "instructionFile": "./intercom-bridge.md"
+  }
 }
