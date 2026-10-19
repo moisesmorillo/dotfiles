@@ -93,7 +93,13 @@ export default function agentBudget(pi: ExtensionAPI) {
 	const ledger: MemoryLedger = new Map();
 	let blockedSaves = 0;
 
-	pi.on("session_start", (_event, ctx) => {
+	// The prune runs at the start of each model run, not at session_start. At
+	// session_start the other extensions have not restored their tool selection
+	// yet (pi-subagents restores subagent, subagent_supervisor and bg_wait from
+	// the transcript in its own session_start handler). A setActiveTools call
+	// made before that restore was recorded as the removal of those tools and
+	// pi-subagents then kept them off. before_agent_start sees the final set.
+	pi.on("before_agent_start", (_event, ctx) => {
 		const pruned = pruneActiveTools(pi.getActiveTools());
 		if (pruned) {
 			pi.setActiveTools(pruned);
