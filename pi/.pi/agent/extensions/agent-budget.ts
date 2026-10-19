@@ -93,7 +93,7 @@ export default function agentBudget(pi: ExtensionAPI) {
 		const pruned = pruneActiveTools(pi.getActiveTools());
 		if (pruned) {
 			pi.setActiveTools(pruned);
-			if (ctx.hasUI) ctx.ui.setStatus("budget", "budget: ste_lint off");
+			if (ctx.hasUI) ctx.ui.setStatus("budget", "budget: lint tool off");
 		}
 		return undefined;
 	});
