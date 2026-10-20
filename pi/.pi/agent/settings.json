@@ -17,7 +17,7 @@
         "thinking": "high"
       },
       "worker": {
-        "thinking": "medium",
+        "thinking": "high",
         "timeoutMs": 5400000
       }
     }
