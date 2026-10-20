@@ -3,5 +3,10 @@
   "reviewAnalysis": {
     "semanticDiff": true,
     "callFlow": false
+  },
+  "diffOptions": {
+    "expandUnchanged": false,
+    "hideWhitespace": false,
+    "diffStyle": "unified"
   }
 }
