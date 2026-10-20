@@ -76,6 +76,16 @@ not in the conversation.
 Batch open decisions into one `ask_user_question` per plan. Open one Plannotator review per plan and
 one per branch, not one per task.
 
+Ask the owner once per scope. After the owner approves a scope, do not ask again before the pull
+request. The only exceptions are a project check that cannot pass and a change to the spec. Never
+offer "stop and preserve the work" as an option. The owner stops the work by saying so.
+
+A review finding that needs evidence the repository cannot produce is not a blocker. Record it as
+intentionally deferred, cite the owner decision, and add a Backlog task with a trigger. Then continue
+to the pull request. A reviewer gives a verdict on the evidence it has. It does not ask for
+experiments, designs, or more investigation runs. A plan or brief written in the session cannot
+forbid this deferral.
+
 ## Memory
 
 Save memory at three moments: a decision the owner made, a bug root cause, and the session summary.
