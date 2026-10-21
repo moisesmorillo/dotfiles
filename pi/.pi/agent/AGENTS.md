@@ -23,15 +23,17 @@ into `main` and never delete a branch that has unpushed commits.
 
 ## Models
 
-The session default is `openai/gpt-6.1-sol` at medium thinking: it runs brainstorming, specs, plans and
-orchestration. Subagents default to `openai/gpt-6-luna` at medium thinking through the `subagents` settings;
-the `worker`, `reviewer` and `oracle` roles are raised to high there. When a skill asks you to pick a model for a subagent:
+Two tiers exist. The session model runs brainstorming, specs, plans, orchestration, the final
+whole-branch review, and architecture questions. The subagent model from `subagents.defaultModel`
+in `settings.json` runs implementers and task reviewers at high thinking. Scoped re-reviews of
+small fix diffs run on the subagent model at medium thinking. Never leave a child model unset so
+that a child silently inherits the parent model.
 
-- Scoped re-reviews of small fix diffs: `openai/gpt-6-luna:medium`.
-- Implementers, with or without a plan, and task reviewers: `openai/gpt-6-luna:high`.
-- Architecture or design questions, the final whole-branch review, and fix-loop escalation after round 3:
-  `openai/gpt-6.1-sol:medium`.
-- Never leave the model unset so that a child silently inherits the parent model.
+The session model is the most capable model configured. Escalate one tier when the subagent model
+is not capable enough. The signals are two incomplete deliveries of the same brief without a named
+blocker, or the same fix finding open after round 3. Then relaunch only the remaining scope on the
+session model with a fresh context. Do not ask the owner. Record the escalation and its signal in the
+task notes. A project rule about model approval does not apply to this escalation.
 
 ## Tools
 
