@@ -1,6 +1,6 @@
 ---
-name: design-review-sol
-description: Review implementation-facing designs with the ai-engineering design-feasibility-review skill using GPT-6.1 Sol medium
+name: design-review
+description: Review implementation-facing designs with the ai-engineering design-feasibility-review skill on the session model
 advertise: true
 model: openai/gpt-6.1-sol
 thinking: medium

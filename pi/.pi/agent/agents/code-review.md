@@ -1,6 +1,6 @@
 ---
-name: code-review-sol
-description: Review code with the ai-engineering code-review skill using GPT-6.1 Sol medium
+name: code-review
+description: Review code with the ai-engineering code-review skill on the session model
 advertise: true
 model: openai/gpt-6.1-sol
 thinking: medium
