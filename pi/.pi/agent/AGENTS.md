@@ -73,6 +73,9 @@ A completion notice does not survive an owner gate. Before an `ask_user_question
 gate, and again right after the owner answers, call `bg_status` once for each task started before
 the gate. Do not end a turn to wait for the notice of a task that is older than an owner gate.
 
+A guard block on one command is a command error, not a tool outage. Fix the command and continue.
+Escalate to the owner only after two different valid commands receive the same block.
+
 ## Sessions
 
 One session per Backlog task or pull request. After the owner merges a pull request, stop and report. The
