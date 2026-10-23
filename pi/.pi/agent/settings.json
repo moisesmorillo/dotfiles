@@ -50,7 +50,8 @@
     "npm:@pi-unipi/notify",
     "npm:@plannotator/pi-extension",
     "npm:agent-ste",
-    "npm:pi-token-speed"
+    "npm:pi-token-speed",
+    "npm:pi-fast-lane"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
