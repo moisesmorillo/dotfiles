@@ -87,6 +87,12 @@ not in the conversation.
 Batch open decisions into one `ask_user_question` per plan. Open one Plannotator review per plan and
 one per branch, not one per task.
 
+Before an owner question, search the project specification for the answer. A question the
+specification answers is not an owner decision. Cite the line in the plan and continue. When the
+specification is silent and a default keeps every contract and invariant, choose the default. Record
+it in the plan as a decision for the plan gate. Ask only when each option changes a contract, a cost,
+or a deliverable.
+
 Run every feasibility probe during planning, before the plan review. A probe is a read-only test of
 a runtime or platform capability, such as a SQLite feature or an API limit. Put its result and the
 decision it needs in the plan and in the plan gate. An approved plan cannot contain an owner gate.
