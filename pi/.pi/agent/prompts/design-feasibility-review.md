@@ -1,5 +1,5 @@
 ---
-description: Review a design with the design-feasibility-review skill on the session model
+description: Review a design with the design-feasibility-review skill on the subagent model
 argument-hint: "<document-or-scope>"
 subagent: design-review
 fresh: true

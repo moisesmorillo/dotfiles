@@ -1,5 +1,5 @@
 ---
-description: Review code with the code-review skill on the session model
+description: Review code with the code-review skill on the subagent model
 argument-hint: "[scope]"
 subagent: code-review
 fresh: true

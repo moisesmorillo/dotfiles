@@ -1,9 +1,7 @@
 ---
 name: code-review
-description: Review code with the ai-engineering code-review skill on the session model
+description: Review code with the ai-engineering code-review skill on the subagent model
 advertise: true
-model: openai/gpt-6.1-sol
-thinking: medium
 tools: read, grep, find, ls, bash
 inheritSkills: false
 skills: code-review, design-feasibility-review

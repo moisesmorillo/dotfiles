@@ -19,6 +19,12 @@
       "worker": {
         "thinking": "high",
         "timeoutMs": 5400000
+      },
+      "code-review": {
+        "thinking": "high"
+      },
+      "design-review": {
+        "thinking": "high"
       }
     }
   },
