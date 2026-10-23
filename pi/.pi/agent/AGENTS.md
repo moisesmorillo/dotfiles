@@ -84,6 +84,11 @@ not in the conversation.
 Batch open decisions into one `ask_user_question` per plan. Open one Plannotator review per plan and
 one per branch, not one per task.
 
+Run every feasibility probe during planning, before the plan review. A probe is a read-only test of
+a runtime or platform capability, such as a SQLite feature or an API limit. Put its result and the
+decision it needs in the plan and in the plan gate. An approved plan cannot contain an owner gate.
+A plan step that says "stop and ask the owner" is a planning defect. Resolve it before the review.
+
 Ask the owner once per scope. After the owner approves a scope, do not ask again before the pull
 request. The only exceptions are a project check that cannot pass and a change to the spec. Never
 offer "stop and preserve the work" as an option. The owner stops the work by saying so.
