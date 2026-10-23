@@ -51,7 +51,7 @@
     "npm:@plannotator/pi-extension",
     "npm:agent-ste",
     "npm:pi-token-speed",
-    "npm:pi-fast-lane"
+    "npm:pi-fast-lane@0.2.3"
   ],
   "skills": [
     "~/workspace/moisesmorillo/ai-engineering/skills"
