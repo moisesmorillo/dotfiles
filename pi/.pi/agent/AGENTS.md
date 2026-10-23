@@ -26,8 +26,10 @@ into `main` and never delete a branch that has unpushed commits.
 Two tiers exist. The session model runs brainstorming, specs, plans, orchestration, the final
 whole-branch review, and architecture questions. The subagent model from `subagents.defaultModel`
 in `settings.json` runs implementers and task reviewers at high thinking. Scoped re-reviews of
-small fix diffs run on the subagent model at medium thinking. Never leave a child model unset so
-that a child silently inherits the parent model.
+small fix diffs run on the subagent model at medium thinking. The `code-review` and `design-review`
+profiles run on the subagent model. The `branch-review` profile runs on the session model. Use it
+only for the final whole-branch review. Never leave a child model unset so that a child silently
+inherits the parent model.
 
 The session model is the most capable model configured. Escalate one tier when the subagent model
 is not capable enough. The signals are two incomplete deliveries of the same brief without a named
@@ -66,6 +68,10 @@ This section applies to the parent session. A worker subagent has no `bg_run`. I
 End every `bg_run` command with a summary line: pass and fail counts and the exit code. Read `bg_logs`
 only after a terminal notification and only when the summary is not enough. The `agent-budget` extension caps the read at
 4 KiB. The full output stays in `.pi/tasks/`.
+
+A completion notice does not survive an owner gate. Before an `ask_user_question` or a Plannotator
+gate, and again right after the owner answers, call `bg_status` once for each task started before
+the gate. Do not end a turn to wait for the notice of a task that is older than an owner gate.
 
 ## Sessions
 

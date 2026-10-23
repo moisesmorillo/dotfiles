@@ -1,9 +1,7 @@
 ---
 name: design-review
-description: Review implementation-facing designs with the ai-engineering design-feasibility-review skill on the session model
+description: Review implementation-facing designs with the ai-engineering design-feasibility-review skill on the subagent model
 advertise: true
-model: openai/gpt-6.1-sol
-thinking: medium
 tools: read, grep, find, ls, bash
 inheritSkills: false
 skills: design-feasibility-review
