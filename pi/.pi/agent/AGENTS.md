@@ -102,6 +102,10 @@ Ask the owner once per scope. After the owner approves a scope, do not ask again
 request. The only exceptions are a project check that cannot pass and a change to the spec. Never
 offer "stop and preserve the work" as an option. The owner stops the work by saying so.
 
+A Plannotator approval or an answered `ask_user_question` is the start signal for the approved
+work. Continue in the same turn. Do not end the turn with a status message after an approval.
+A kickoff that asks for a plan review also asks for the implementation after the approval.
+
 A review finding that needs evidence the repository cannot produce is not a blocker. Record it as
 intentionally deferred, cite the owner decision, and add a Backlog task with a trigger. Then continue
 to the pull request. A reviewer gives a verdict on the evidence it has. It does not ask for
