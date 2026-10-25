@@ -1,4 +1,5 @@
 {
+  "timeoutMs": 5400000,
   "asyncWidget": false,
   "intercomBridge": {
     "mode": "always",
