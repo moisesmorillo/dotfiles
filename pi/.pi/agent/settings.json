@@ -18,7 +18,10 @@
       },
       "worker": {
         "thinking": "high",
-        "timeoutMs": 5400000
+        "inheritGlobalContext": true,
+        "skills": [
+          "code-review"
+        ]
       },
       "code-review": {
         "thinking": "high"

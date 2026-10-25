@@ -57,6 +57,10 @@ then once per branch before the pull request. Escalate to the owner only a real 
 or a decision the plan does not settle. A worker that stops on a decision gets one answer and the
 authority to finish the task.
 
+A worker reads the current function body before an edit batch of more than one block. After an
+edit mismatch, it reads the file again and repairs only the remaining changes. Workers receive this
+file through `inheritGlobalContext` and the `code-review` skill through `agentOverrides.worker.skills`.
+
 Do not write a workflow controller or a handoff parser inside a product task. Use the native
 `subagent` async run plus one reviewer. If a scripted workflow fails, fall back to the native run and
 add a deferred Backlog task for the controller.
@@ -84,8 +88,9 @@ not in the conversation.
 
 ## Decision gates
 
-Batch open decisions into one `ask_user_question` per plan. Open one Plannotator review per plan and
-one per branch, not one per task.
+Write one plan per branch. The plan covers every subtask that ships in the same pull request. Do
+not write one plan per subtask. Batch open decisions into one `ask_user_question` per plan. Open
+one Plannotator review per plan and one per branch, not one per task.
 
 Before an owner question, search the project specification for the answer. A question the
 specification answers is not an owner decision. Cite the line in the plan and continue. When the
