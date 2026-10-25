@@ -5,4 +5,4 @@
 
 # Names tabs and panes after their content (directory + git branch, editor file,
 # ssh host, agent task). It reads only what Herdr already knows. No model, no API key.
-kryptamine/herdr-auto-title@v0.13.2
+kryptamine/herdr-auto-title@v0.15.0
