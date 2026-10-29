@@ -69,9 +69,9 @@ fi
 
 if [ -x "$ORCA_BIN" ] || command -v "$ORCA_BIN" >/dev/null 2>&1; then
 	live="$("$ORCA_BIN" terminal list --json 2>/dev/null \
-		| jq -r --arg repo "$REPO" --arg base "$(basename "$REPO")" '
+		| jq -r --arg repo "$REPO" --arg base "$(basename "$REPO")" --arg self "${ORCA_TERMINAL_HANDLE:-}" '
 			(.result.terminals // .terminals // [])
-			| map(select(.agentIdentity == "pi" and ((.worktreePath // "") | (startswith($repo) or contains("/" + $base + "/")))))
+			| map(select(.agentIdentity == "pi" and .handle != $self and ((.worktreePath // "") | (startswith($repo) or contains("/" + $base + "/")))))
 			| length' 2>/dev/null || echo 0)"
 	if [ "${live:-0}" -gt 0 ]; then
 		echo "precheck: $live live pi session(s) in $REPO"
