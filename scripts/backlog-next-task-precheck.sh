@@ -2,7 +2,8 @@
 # Exit 0 when the next Backlog.md subtask under a gate task can start in a repository.
 # Used as the precheck of an Orca automation and by agent-next-task.sh.
 # Exit codes: 3 no ready subtask, 4 open pull request, 5 subtask in progress,
-# 6 live pi session in the repository, 7 main checkout not updatable, 2 bad arguments.
+# 6 live pi session in the repository, 7 main checkout not updatable,
+# 8 an Orca worktree of the repository holds an unmerged task branch, 2 bad arguments.
 set -euo pipefail
 
 REPO="${1:?usage: backlog-next-task-precheck.sh <repo-path> <gate-task-id> [branch-prefix]}"
@@ -37,6 +38,27 @@ next="$(backlog task list --plain --ready -p "$GATE" 2>/dev/null | awk '/^  [A-Z
 if [ -z "$next" ]; then
 	echo "precheck: no ready subtask under $GATE"
 	exit 3
+fi
+
+# An automation run is not a terminal, and a worktree keeps its own Backlog
+# state. Look at every Orca worktree of the repository before the terminals.
+if command -v "$ORCA_BIN" >/dev/null 2>&1; then
+	while IFS= read -r worktree; do
+		[ -n "$worktree" ] && [ -d "$worktree" ] || continue
+		[ "$worktree" = "$REPO" ] && continue
+		wt_branch="$(git -C "$worktree" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+		case "$wt_branch" in
+		"$PREFIX"*)
+			echo "precheck: Orca worktree $worktree holds branch $wt_branch"
+			exit 8
+			;;
+		esac
+		wt_in_progress="$(cd "$worktree" && backlog task list --plain -s "In Progress" -p "$GATE" 2>/dev/null | grep -cE '^  [A-Z]+-[0-9.]+ - ' || true)"
+		if [ "$wt_in_progress" -gt 0 ]; then
+			echo "precheck: $wt_in_progress subtask(s) of $GATE in progress in $worktree"
+			exit 5
+		fi
+	done < <("$ORCA_BIN" worktree list --repo "path:$REPO" --json 2>/dev/null | jq -r '.result.worktrees[]?.path // empty')
 fi
 
 open_prs="$(gh pr list --state open --json headRefName --jq '.[].headRefName' 2>/dev/null | grep -c "^$PREFIX" || true)"
