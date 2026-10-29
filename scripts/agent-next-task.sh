@@ -18,10 +18,10 @@ if [ -n "${ORCA_TERMINAL_HANDLE:-}" ] || "$ORCA_BIN" status >/dev/null 2>&1; the
 	handle="$("$ORCA_BIN" terminal create --worktree "path:$REPO" --title "pi $GATE" --command "$PI_COMMAND" --json \
 		| jq -r '.result.terminal.handle')"
 	[ -n "$handle" ] && [ "$handle" != "null" ] || { echo "agent-next-task: Orca did not return a terminal handle" >&2; exit 1; }
-	"$ORCA_BIN" terminal wait --terminal "$handle" --for tui-idle --timeout 60000 >/dev/null
+	"$ORCA_BIN" terminal wait --terminal "$handle" --for tui-idle --timeout-ms 60000 >/dev/null
 	"$ORCA_BIN" terminal send --terminal "$handle" --text $'\r' >/dev/null
 	sleep 2
-	"$ORCA_BIN" terminal wait --terminal "$handle" --for tui-idle --timeout 30000 >/dev/null || true
+	"$ORCA_BIN" terminal wait --terminal "$handle" --for tui-idle --timeout-ms 30000 >/dev/null || true
 	"$ORCA_BIN" terminal send --terminal "$handle" --text "$KICKOFF"$'\r' >/dev/null
 	echo "agent-next-task: started pi in Orca terminal $handle"
 	exit 0
