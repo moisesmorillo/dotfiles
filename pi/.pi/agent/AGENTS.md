@@ -9,8 +9,13 @@ worktree, without asking for consent.**
 
 - Before editing files in a Git repository, follow the `using-git-worktrees` skill. Detect existing
   isolation first; if the current checkout is already a linked worktree, keep working there.
-- Worktree directory: `~/.worktrees/<repo>/<branch>`, where `<repo>` is the basename of the main
-  worktree. This matches the default root of the `/worktree` command, so both views agree.
+- Use the harness command when one exists. Inside Orca (`ORCA_WORKTREE_ID` is set) run
+  `orca worktree create --name <branch> --repo path:<repo>`; Orca places the checkout under
+  `~/orca/workspaces/<repo>/`. Inside Herdr (`HERDR_ENV=1`) run
+  `herdr worktree create --branch <branch> --cwd <repo>`. Elsewhere use plain Git worktrees at
+  `~/.worktrees/<repo>/<branch>`, where `<repo>` is the basename of the main worktree. This matches
+  the default root of the `/worktree` command, so both views agree.
+- Update `main` before you create the worktree.
 - Branch names follow Git Flow: `feature/*`, `bugfix/*`, `hotfix/*`, `refactor/*`, `chore/*`.
 - Read-only tasks (questions, reviews, explanations) do not need a worktree.
 
@@ -83,7 +88,9 @@ Escalate to the owner only after two different valid commands receive the same b
 ## Sessions
 
 One session per Backlog task or pull request. After the owner merges a pull request, stop and report. The
-owner starts a new session. State lives in Backlog.md, the plan file, and the memory session summary,
+owner, or the `agent-next-task` launcher in `scripts/`, starts a new session. A kickoff of one line is
+enough when the project `AGENTS.md` has a "Session start" section: "Pick the next ready subtask of the
+In Progress gate and do it." State lives in Backlog.md, the plan file, and the memory session summary,
 not in the conversation.
 
 ## Decision gates

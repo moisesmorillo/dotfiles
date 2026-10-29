@@ -166,6 +166,8 @@ other machines to pick it up. Run `scripts/pi-status.sh` to compare declared pac
 extra or not-installed entries. Since refs are unpinned, it does not detect whether installed package
 versions are current.
 
+Two more scripts start pi sessions from Backlog.md: `scripts/backlog-next-task-precheck.sh <repo> <gate>` exits 0 only when the next ready subtask of a gate task can start (no subtask in progress, no open feature pull request, no live pi session). `scripts/agent-next-task.sh <repo> <gate>` runs the precheck and starts pi with a one-line kickoff in Orca or Herdr. An Orca automation can use the precheck directly with `--precheck`.
+
 Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.1-sol`, medium) covers the
 session, and `subagents.defaultModel` / `subagents.defaultThinking` (`openai/gpt-6-luna`, medium) cover every
 pi-subagents child that does not pin its own model; `subagents.agentOverrides` raises the `reviewer` and `oracle`
