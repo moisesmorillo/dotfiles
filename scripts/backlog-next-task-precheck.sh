@@ -2,7 +2,7 @@
 # Exit 0 when the next Backlog.md subtask under a gate task can start in a repository.
 # Used as the precheck of an Orca automation and by agent-next-task.sh.
 # Exit codes: 3 no ready subtask, 4 open pull request, 5 subtask in progress,
-# 6 live pi session in the repository, 2 bad arguments.
+# 6 live pi session in the repository, 7 main checkout not updatable, 2 bad arguments.
 set -euo pipefail
 
 REPO="${1:?usage: backlog-next-task-precheck.sh <repo-path> <gate-task-id> [branch-prefix]}"
@@ -14,6 +14,18 @@ if ! command -v "$ORCA_BIN" >/dev/null 2>&1 && [ -x /Applications/Orca.app/Conte
 fi
 
 cd "$REPO"
+
+# Backlog.md state lives in git. Update the main checkout first, or a merged
+# subtask still looks ready and the agent starts it a second time.
+branch="$(git rev-parse --abbrev-ref HEAD)"
+if [ "$branch" != "main" ] || [ -n "$(git status --porcelain)" ]; then
+	echo "precheck: $REPO is not a clean main checkout ($branch)"
+	exit 7
+fi
+if ! git fetch -q origin main || ! git merge --ff-only -q origin/main; then
+	echo "precheck: cannot fast-forward main in $REPO"
+	exit 7
+fi
 
 in_progress="$(backlog task list --plain -s "In Progress" -p "$GATE" 2>/dev/null | grep -cE '^  [A-Z]+-[0-9.]+ - ' || true)"
 if [ "$in_progress" -gt 0 ]; then
