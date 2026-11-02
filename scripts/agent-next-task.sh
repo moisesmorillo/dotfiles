@@ -2,7 +2,8 @@
 # Start one pi session on the next ready Backlog.md subtask of a gate task.
 # Orca: creates a terminal in the repository worktree and sends the kickoff line.
 # Herdr: creates a tab, starts pi in its pane and submits the kickoff line (not yet verified on a live server).
-# The Orca automation does not use this script; it uses backlog-next-task-precheck.sh and its own launcher.
+# The Orca automation runs this script after its own precheck. Set SKIP_PRECHECK=1 there,
+# because the automation run sees itself as a live pi session.
 set -euo pipefail
 
 REPO="${1:?usage: agent-next-task.sh <repo-path> <gate-task-id> [kickoff-text]}"
@@ -12,7 +13,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ORCA_BIN="${ORCA_BIN:-orca}"
 PI_COMMAND="${PI_COMMAND:-pi --fast}"
 
-"$SCRIPT_DIR/backlog-next-task-precheck.sh" "$REPO" "$GATE"
+if [ "${SKIP_PRECHECK:-0}" != "1" ]; then
+	"$SCRIPT_DIR/backlog-next-task-precheck.sh" "$REPO" "$GATE"
+fi
 
 if [ -n "${ORCA_TERMINAL_HANDLE:-}" ] || "$ORCA_BIN" status >/dev/null 2>&1; then
 	handle="$("$ORCA_BIN" terminal create --worktree "path:$REPO" --title "pi $GATE" --command "$PI_COMMAND" --json \
