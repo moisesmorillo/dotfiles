@@ -11,8 +11,8 @@ worktree, without asking for consent.**
   isolation first; if the current checkout is already a linked worktree, keep working there.
 - Use the harness command when one exists. Inside Orca (`ORCA_WORKTREE_ID` is set) run
   `orca worktree create --name <branch> --repo path:<repo>`; Orca places the checkout under
-  `~/orca/workspaces/<repo>/`. Inside Herdr (`HERDR_ENV=1`) run
-  `herdr worktree create --branch <branch> --cwd <repo>`. Elsewhere use plain Git worktrees at
+  `~/orca/workspaces/<repo>/`. Elsewhere (herdr-app included: herdr-core has no worktree
+  command) use plain Git worktrees at
   `~/.worktrees/<repo>/<branch>`, where `<repo>` is the basename of the main worktree. This matches
   the default root of the `/worktree` command, so both views agree.
 - Update `main` before you create the worktree.

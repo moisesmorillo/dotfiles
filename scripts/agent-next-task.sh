@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Start one pi session on the next ready Backlog.md subtask of a gate task.
 # Orca: creates a terminal in the repository worktree and sends the kickoff line.
-# Herdr: creates a tab, starts pi in its pane and submits the kickoff line (not yet verified on a live server).
+# herdr-core (hc): starts pi as terminal pi-<gate> in a herdr-app tab and sends the kickoff line
+# (not yet verified on a live core).
 # The Orca automation runs this script after its own precheck. Set SKIP_PRECHECK=1 there,
 # because the automation run sees itself as a live pi session.
 set -euo pipefail
@@ -30,16 +31,26 @@ if [ -n "${ORCA_TERMINAL_HANDLE:-}" ] || "$ORCA_BIN" status >/dev/null 2>&1; the
 	exit 0
 fi
 
-if [ "${HERDR_ENV:-}" = "1" ] && command -v herdr >/dev/null 2>&1; then
-	herdr tab create --cwd "$REPO" --label "pi $GATE" --focus >/dev/null
-	pane="$(herdr pane current 2>/dev/null | awk 'NR==1{print $1}')"
-	[ -n "$pane" ] || { echo "agent-next-task: Herdr did not return a pane id" >&2; exit 1; }
+HC_BIN="${HC_BIN:-hc}"
+if command -v "$HC_BIN" >/dev/null 2>&1 && "$HC_BIN" ls >/dev/null 2>&1; then
+	# herdr-app shows a terminal with the labels herdr.space and herdr.tab in that space
+	# and tab. Inside an hc terminal, pi goes to the caller's space. Elsewhere it goes to a
+	# space of its own. An unknown tab id becomes a new tab.
+	space="sp-pi"
+	if [ -n "${HC_TERMINAL_ID:-}" ]; then
+		s="$("$HC_BIN" get "$HC_TERMINAL_ID" --json 2>/dev/null | jq -r '.labels["herdr.space"] // empty' || true)"
+		[ -z "$s" ] || space="$s"
+	fi
+	name="pi-$GATE"
+	# --outlive-parent: started from an agent's terminal, pi would otherwise end with it.
 	# shellcheck disable=SC2086
-	herdr agent start pi --kind pi --pane "$pane" -- ${PI_COMMAND#pi} >/dev/null
-	herdr agent prompt "$pane" "$KICKOFF" --wait --timeout 30000 >/dev/null || true
-	echo "agent-next-task: started pi in Herdr pane $pane"
+	"$HC_BIN" run --bg --keep --outlive-parent --name "$name" --cwd "$REPO" \
+		--label "herdr.space=$space" --label "herdr.tab=tb-$name" -- $PI_COMMAND >/dev/null
+	# `hc send` waits for a pause in the output, pastes the text and presses Enter.
+	"$HC_BIN" send "$name" "$KICKOFF" >/dev/null || true
+	echo "agent-next-task: started pi in herdr-core terminal $name"
 	exit 0
 fi
 
-echo "agent-next-task: no harness found (Orca or Herdr). Start pi in $REPO and send: $KICKOFF" >&2
+echo "agent-next-task: no harness found (Orca or herdr-core). Start pi in $REPO and send: $KICKOFF" >&2
 exit 1
