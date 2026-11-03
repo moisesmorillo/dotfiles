@@ -90,6 +90,8 @@ for pattern in \
 	~/.hammerspoon \
 	~/.config/pi \
 	~/.config/herdr/config.toml \
+	~/.config/herdr-app/settings.json \
+	~/.config/herdr-app/themes/rose-pine.json \
 	~/.orbstack/vmconfig.json; do
 	rm -rf "$pattern" 2>/dev/null
 done
@@ -98,6 +100,12 @@ done
 # as a real directory so stow only links vmconfig.json instead of folding the
 # whole directory into the repo.
 mkdir -p "$HOME/.orbstack"
+
+# ~/.config/herdr-app holds the app's runtime state (socket, telemetry, generated guides).
+# Make sure it exists as a real directory, so stow only links settings.json and the theme
+# and does not fold the whole directory into the repo. The app writes settings.json
+# through the symlink (checked with herdr-app 0.1.12), so the link survives its saves.
+mkdir -p "$HOME/.config/herdr-app/themes"
 
 # Keep Pi's writable state out of the repository before stowing its config.
 "$ROOT_DIR/scripts/prepare-pi-home.sh"
@@ -113,3 +121,13 @@ mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
 mise exec -- "$ROOT_DIR/scripts/sync-herdr-plugins.sh"
 mise exec -- bat cache --build
+
+### herdr-core (hc) for herdr-app ###
+# The herdr-app cask does not include hc. hc has no brew formula and no GitHub releases,
+# so mise cannot pin it. Upstream's installer checks the sha256 from the release
+# manifest. Keep HC_VERSION equal to the pin in saptiva-ai/workspace
+# .devcontainer/herdr-core/pin.env: `mise run dev:attach-core` compares the two.
+HC_VERSION="0.1.17"
+if [ "$("$HOME/.local/bin/hc" --version 2>/dev/null | awk '{print $2}')" != "$HC_VERSION" ]; then
+	curl -fsSL https://releases.herdr.dev/core/install.sh | HC_VERSION="$HC_VERSION" sh
+fi

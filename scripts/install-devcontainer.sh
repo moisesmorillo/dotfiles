@@ -45,7 +45,7 @@ fi
 #      generic across sandboxes. We merge both lists.
 # NOTE: `zsh` is intentionally NOT in OUR_SKIP — we replace the generated ~/.zshrc with
 # ours (self-contained: mise, zinit, beam cursor, zoxide). Conflicts are backed up below.
-OUR_SKIP="brew aerospace borders hammerspoon karabiner scripts plans screenshots"
+OUR_SKIP="brew aerospace borders hammerspoon karabiner herdr-app scripts plans screenshots"
 SKIP="$OUR_SKIP ${DOTFILES_SKIP_PACKAGES:-}"
 
 # The feature pre-generates shell files in $HOME; stow would abort on them. Since we own
