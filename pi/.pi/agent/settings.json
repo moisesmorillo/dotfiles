@@ -34,7 +34,7 @@
   "npmCommand": [
     "mise",
     "exec",
-    "node@24.21.0",
+    "node@24",
     "--",
     "npm"
   ],
