@@ -89,7 +89,6 @@ for pattern in \
 	~/.zshenv \
 	~/.hammerspoon \
 	~/.config/pi \
-	~/.config/herdr/config.toml \
 	~/.config/herdr-app/settings.json \
 	~/.config/herdr-app/themes/rose-pine.json \
 	~/.orbstack/vmconfig.json; do
@@ -119,7 +118,6 @@ cd "$ROOT_DIR" || exit
 mise install
 mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
-mise exec -- "$ROOT_DIR/scripts/sync-herdr-plugins.sh"
 mise exec -- bat cache --build
 
 ### herdr-core (hc) for herdr-app ###

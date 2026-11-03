@@ -87,19 +87,5 @@
   "syncClaudeAiSkills": false,
   "teammateMode": "tmux",
   "theme": "dark-ansi",
-  "tui": "fullscreen",
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "^(startup|resume|clear|compact|fork)$",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '~/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
+  "tui": "fullscreen"
 }

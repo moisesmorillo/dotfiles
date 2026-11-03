@@ -77,10 +77,14 @@ if [ -x "$ORCA_BIN" ] || command -v "$ORCA_BIN" >/dev/null 2>&1; then
 		echo "precheck: $live live pi session(s) in $REPO"
 		exit 6
 	fi
-elif [ "${HERDR_ENV:-}" = "1" ] && command -v herdr >/dev/null 2>&1; then
-	live="$(herdr agent list 2>/dev/null | grep -c "pi" || true)"
-	if [ "$live" -gt 0 ]; then
-		echo "precheck: $live live pi agent(s) in Herdr"
+elif command -v "${HC_BIN:-hc}" >/dev/null 2>&1; then
+	# Each entry of `hc ls --json` has the agent that reports in it and its folder.
+	live="$("${HC_BIN:-hc}" ls --json 2>/dev/null \
+		| jq -r --arg repo "$REPO" --arg self "${HC_TERMINAL_ID:-}" '
+			[.terminals[]? | select(.agent == "pi" and .address != $self and ((.cwd // "") | startswith($repo)))]
+			| length' 2>/dev/null || echo 0)"
+	if [ "${live:-0}" -gt 0 ]; then
+		echo "precheck: $live live pi agent(s) in herdr-core"
 		exit 6
 	fi
 fi
