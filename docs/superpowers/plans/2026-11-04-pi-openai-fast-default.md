@@ -70,7 +70,7 @@ No network request or paid model call is needed to verify the configuration chan
 - [x] Add the minimal configuration, writable-file merge, and Stow exclusion. Validate JSON objects before replacement.
 - [x] Run bash tests/pi-settings.sh, bash tests/pi-home.sh, and bash tests/pi-agent-budget.sh. Run ShellCheck on changed shell files.
 - [x] Update README.md and record test results in the task report.
-- [ ] Commit the task with a conventional commit message.
+- [x] Commit the task with a conventional commit message.
 
 ## Publication
 

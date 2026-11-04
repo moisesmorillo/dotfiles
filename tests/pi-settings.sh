@@ -54,6 +54,17 @@ fast_defaults="$ROOT_DIR/pi/.pi/agent/extensions/pi-fast-lane.json"
 jq -e '
   .persistState == true and
   .desiredActive == true and
+  .supportedModels == [
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-astra",
+    "openai/gpt-6-luna",
+    "openai/gpt-5.6-sol",
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-sol",
+    "openai-codex/gpt-6-astra",
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-5.6-sol"
+  ] and
   (.supportedModels | length) == 9 and
   all(.supportedModels[]; startswith("openai/") or startswith("openai-codex/")) and
   ([.supportedModels[] | select(startswith("anthropic/"))] | length) == 0 and
