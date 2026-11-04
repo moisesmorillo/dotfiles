@@ -126,7 +126,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **herdr-app** is the desktop window for terminals and coding agents (`cask "herdr-app"` in
   `brew/Brewfile.base`). Stow links `settings.json` and the rose-pine theme from the `herdr-app` package.
 - **herdr-core** (`hc`) runs the terminals. The cask does not include it, so `scripts/install-mac.sh` installs
-  the pinned version with upstream's installer. Keep it equal to the pin in saptiva-ai/workspace.
+  the pinned version with upstream's installer. A remote machine that runs its own hc needs the same version.
 - **Tab names.** The shipped tab bar shows a tab's number (`1`, `2`) until you name it. The `auto-tabs` mod
   (from [jenthous/herdr-app-auto-tab-titles](https://github.com/jenthous/herdr-app-auto-tab-titles), MIT)
   shows the live terminal title instead, for example Claude Code's session title. A name you give a tab

@@ -130,8 +130,7 @@ mise exec -- bat cache --build
 ### herdr-core (hc) for herdr-app ###
 # The herdr-app cask does not include hc. hc has no brew formula and no GitHub releases,
 # so mise cannot pin it. Upstream's installer checks the sha256 from the release
-# manifest. Keep HC_VERSION equal to the pin in saptiva-ai/workspace
-# .devcontainer/herdr-core/pin.env: `mise run dev:attach` compares the two.
+# manifest. A remote machine that runs its own hc needs the same version.
 HC_VERSION="0.1.17"
 if [ "$("$HOME/.local/bin/hc" --version 2>/dev/null | awk '{print $2}')" != "$HC_VERSION" ]; then
 	curl -fsSL https://releases.herdr.dev/core/install.sh | HC_VERSION="$HC_VERSION" sh
