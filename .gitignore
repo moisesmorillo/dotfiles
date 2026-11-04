@@ -170,3 +170,7 @@ pi/.pi/agent/mcp-auth.json
 
 # pi-background-tasks output from sessions run inside this repo
 /.pi/
+
+# herdr-app writes these into every mod folder (also on `herdr-app check`).
+herdr-app/.config/herdr-app/mods/*/gpui-kit.d.ts
+herdr-app/.config/herdr-app/mods/*/jsconfig.json
