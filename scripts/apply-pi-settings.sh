@@ -19,6 +19,21 @@ jq -e 'type == "object"' "$SOURCE_SETTINGS" >/dev/null || {
 	exit 1
 }
 
+SOURCE_EXTENSION="$(dirname "$SOURCE_SETTINGS")/extensions/pi-fast-lane.json"
+TARGET_EXTENSION="$(dirname "$TARGET_SETTINGS")/extensions/pi-fast-lane.json"
+if [ -f "$SOURCE_EXTENSION" ]; then
+	jq -e 'type == "object"' "$SOURCE_EXTENSION" >/dev/null || {
+		echo "apply-pi-settings: source extension config must be a JSON object: $SOURCE_EXTENSION" >&2
+		exit 1
+	}
+	if [ -f "$TARGET_EXTENSION" ]; then
+		jq -e 'type == "object"' "$TARGET_EXTENSION" >/dev/null || {
+			echo "apply-pi-settings: target extension config must be a JSON object: $TARGET_EXTENSION" >&2
+			exit 1
+		}
+	fi
+fi
+
 mkdir -p "$(dirname "$TARGET_SETTINGS")"
 if [ -f "$TARGET_SETTINGS" ]; then
 	jq -e 'type == "object"' "$TARGET_SETTINGS" >/dev/null || {
@@ -30,7 +45,14 @@ else
 fi
 
 TEMP_SETTINGS="$(mktemp "$(dirname "$TARGET_SETTINGS")/.settings.json.XXXXXX")"
-trap 'rm -f "$TEMP_SETTINGS"' EXIT
+TEMP_EXTENSION=""
+cleanup() {
+	rm -f "$TEMP_SETTINGS"
+	if [ -n "$TEMP_EXTENSION" ]; then
+		rm -f "$TEMP_EXTENSION"
+	fi
+}
+trap cleanup EXIT
 jq -s '
 	.[0] as $current |
 	.[1] as $repository |
@@ -40,4 +62,17 @@ jq -s '
 
 if ! cmp -s "$TEMP_SETTINGS" "$TARGET_SETTINGS"; then
 	mv "$TEMP_SETTINGS" "$TARGET_SETTINGS"
+fi
+
+if [ -f "$SOURCE_EXTENSION" ]; then
+	mkdir -p "$(dirname "$TARGET_EXTENSION")"
+	TEMP_EXTENSION="$(mktemp "$(dirname "$TARGET_EXTENSION")/.pi-fast-lane.json.XXXXXX")"
+	if [ -f "$TARGET_EXTENSION" ]; then
+		jq -s '.[0] * .[1]' "$TARGET_EXTENSION" "$SOURCE_EXTENSION" >"$TEMP_EXTENSION"
+	else
+		cp "$SOURCE_EXTENSION" "$TEMP_EXTENSION"
+	fi
+	if [ ! -f "$TARGET_EXTENSION" ] || ! cmp -s "$TEMP_EXTENSION" "$TARGET_EXTENSION"; then
+		mv "$TEMP_EXTENSION" "$TARGET_EXTENSION"
+	fi
 fi

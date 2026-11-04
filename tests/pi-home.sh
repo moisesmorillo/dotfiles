@@ -27,7 +27,10 @@ printf '{"mcpServers": {}}\n' >"$fixture/pi/.pi/agent/mcp.json"
 printf 'export default {}\n' >"$fixture/pi/.pi/agent/extensions/state.ts"
 printf 'runtime log\n' >"$fixture/pi/.pi/agent/mcp.log"
 cp "$ROOT_DIR/scripts/prepare-pi-home.sh" "$fixture/scripts/prepare-pi-home.sh"
+cp "$ROOT_DIR/scripts/apply-pi-settings.sh" "$fixture/scripts/apply-pi-settings.sh"
 cp "$ROOT_DIR/pi/.stow-local-ignore" "$fixture/pi/.stow-local-ignore"
+cp "$ROOT_DIR/pi/.pi/agent/extensions/pi-fast-lane.json" \
+	"$fixture/pi/.pi/agent/extensions/pi-fast-lane.json"
 printf '{"defaultModel":"fixture","custom":"preserve"}\n' >"$fixture/pi/.pi/agent/settings.json"
 printf 'runtime session\n' >"$fixture/pi/.pi/agent/sessions/session.jsonl"
 printf 'installed package\n' >"$fixture/pi/.pi/agent/npm/cache/package.txt"
@@ -53,6 +56,9 @@ stow -d "$fixture" -t "$home" pi || fail "Stow must succeed right after the migr
 [ -L "$home/.pi/agent/AGENTS.md" ] || fail "Stow must link the global AGENTS.md after migration"
 [ -L "$home/.pi/agent/mcp.json" ] || fail "Stow must link mcp.json after migration"
 [ -L "$home/.pi/agent/extensions/state.ts" ] || fail "Stow must link managed extensions after migration"
+[ -f "$home/.pi/agent/extensions/pi-fast-lane.json" ] &&
+	[ ! -L "$home/.pi/agent/extensions/pi-fast-lane.json" ] ||
+	fail "Stow must not link mutable fast config"
 [ ! -L "$home/.pi/agent/extensions" ] || fail "the extensions directory must stay writable for local extensions"
 [ -f "$home/.pi/agent/mcp.log" ] && [ ! -L "$home/.pi/agent/mcp.log" ] ||
 	fail "mcp.log is runtime state and must stay a real file outside the repository"
@@ -72,5 +78,25 @@ stow -d "$fixture" -t "$fresh_home" pi
 [ ! -L "$fresh_home/.pi/agent/extensions/subagent" ] ||
 	fail "a fresh install must keep the subagent extension directory writable outside the repository"
 [ -L "$fresh_home/.pi/agent/extensions/subagent/config.json" ] || fail "Stow must link the pi-subagents config"
+[ ! -e "$fresh_home/.pi/agent/extensions/pi-fast-lane.json" ] ||
+	fail "Stow must leave fast config absent until settings synchronization"
+
+HOME="$fresh_home" "$fixture/scripts/apply-pi-settings.sh" \
+	"$fixture/pi/.pi/agent/settings.json" "$fresh_home/.pi/agent/settings.json"
+fast_config="$fresh_home/.pi/agent/extensions/pi-fast-lane.json"
+[ -f "$fast_config" ] && [ ! -L "$fast_config" ] || fail "settings sync must create writable fast config"
+jq -e '.persistState == true and .desiredActive == true' "$fast_config" >/dev/null ||
+	fail "fresh settings sync must enable persistent fast mode"
+printf 'false\n' >"$TMP_DIR/runtime-state"
+jq --argjson desired "$(cat "$TMP_DIR/runtime-state")" '.desiredActive = $desired' "$fast_config" >"$TMP_DIR/runtime-config.json"
+mv "$TMP_DIR/runtime-config.json" "$fast_config"
+HOME="$fresh_home" "$fixture/scripts/apply-pi-settings.sh" \
+	"$fixture/pi/.pi/agent/settings.json" "$fresh_home/.pi/agent/settings.json"
+jq -e '.desiredActive == true' "$fast_config" >/dev/null ||
+	fail "settings sync must restore the repository desiredActive value"
+[ ! -L "$fixture/pi/.pi/agent/extensions/pi-fast-lane.json" ] ||
+	fail "runtime state must not write through to repository config"
+jq -e '.desiredActive == true' "$fixture/pi/.pi/agent/extensions/pi-fast-lane.json" >/dev/null ||
+	fail "runtime state changes must stay outside repository config"
 
 echo "PASS: Pi writable state stays outside the dotfiles repository"

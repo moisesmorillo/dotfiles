@@ -49,10 +49,76 @@ jq -e '
   .lastChangelogVersion == "local-runtime-state"
 ' "$user_settings" >/dev/null || fail "managed settings must merge while preserving local keys"
 
+# The repository extension defaults must enable only the nine supported OpenAI models.
+fast_defaults="$ROOT_DIR/pi/.pi/agent/extensions/pi-fast-lane.json"
+jq -e '
+  .persistState == true and
+  .desiredActive == true and
+  .supportedModels == [
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-astra",
+    "openai/gpt-6-luna",
+    "openai/gpt-5.6-sol",
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-sol",
+    "openai-codex/gpt-6-astra",
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-5.6-sol"
+  ] and
+  (.supportedModels | length) == 9 and
+  all(.supportedModels[]; startswith("openai/") or startswith("openai-codex/")) and
+  ([.supportedModels[] | select(startswith("anthropic/"))] | length) == 0 and
+  ([.supportedModels[] | select(startswith("openai/"))] | length) == 4 and
+  ([.supportedModels[] | select(startswith("openai-codex/"))] | length) == 5 and
+  (.supportedModels | index("openai-codex/gpt-6-sol") != null)
+' "$fast_defaults" >/dev/null || fail "repository fast defaults must cover all nine OpenAI models only"
+
+extension_target="$TMP_DIR/extensions/pi-fast-lane.json"
+mkdir -p "$(dirname "$extension_target")"
+printf '{"desiredActive":false,"customLocal":"keep","supportedModels":["stale/model"]}\n' >"$extension_target"
+"$ROOT_DIR/scripts/apply-pi-settings.sh" "$ROOT_DIR/pi/.pi/agent/settings.json" "$user_settings"
+jq -e '
+  .persistState == true and .desiredActive == true and .customLocal == "keep" and
+  (.supportedModels == input.supportedModels)
+' "$extension_target" "$fast_defaults" >/dev/null || fail "extension defaults must replace managed values and preserve local keys"
+[ ! -L "$extension_target" ] || fail "runtime extension config must be a writable real file"
+
 before="$(shasum -a 256 "$user_settings")"
-"$ROOT_DIR/scripts/apply-pi-settings.sh" "$repo_settings" "$user_settings"
+"$ROOT_DIR/scripts/apply-pi-settings.sh" "$ROOT_DIR/pi/.pi/agent/settings.json" "$user_settings"
 after="$(shasum -a 256 "$user_settings")"
 [ "$before" = "$after" ] || fail "a second apply must not change the file"
+
+# A custom settings source without sibling extension defaults must not touch extensions.
+custom_source="$TMP_DIR/custom/source/settings.json"
+custom_target="$TMP_DIR/custom/home/settings.json"
+mkdir -p "$(dirname "$custom_source")"
+printf '{"theme":"custom"}\n' >"$custom_source"
+"$ROOT_DIR/scripts/apply-pi-settings.sh" "$custom_source" "$custom_target"
+[ ! -e "$TMP_DIR/custom/home/extensions/pi-fast-lane.json" ] ||
+	fail "a custom source without extension defaults must keep existing behavior"
+
+# Malformed extension source and target objects must fail before any target replacement.
+malformed_source="$TMP_DIR/malformed/source/settings.json"
+malformed_target="$TMP_DIR/malformed/home/settings.json"
+mkdir -p "$(dirname "$malformed_source")" "$(dirname "$malformed_target")/extensions"
+printf '{"theme":"managed"}\n' >"$malformed_source"
+mkdir -p "$(dirname "$malformed_source")/extensions"
+printf '{"desiredActive":true}\n' >"$(dirname "$malformed_source")/extensions/pi-fast-lane.json"
+printf '{"theme":"local"}\n' >"$malformed_target"
+printf '[1,2,3]\n' >"$(dirname "$malformed_target")/extensions/pi-fast-lane.json"
+settings_before="$(shasum -a 256 "$malformed_target")"
+if "$ROOT_DIR/scripts/apply-pi-settings.sh" "$malformed_source" "$malformed_target" >"$TMP_DIR/malformed.out" 2>&1; then
+	fail "a non-object extension target must fail"
+fi
+[ "$settings_before" = "$(shasum -a 256 "$malformed_target")" ] ||
+	fail "malformed extension target must not replace settings"
+printf '{"desiredActive":true}\n' >"$(dirname "$malformed_target")/extensions/pi-fast-lane.json"
+printf '[]\n' >"$(dirname "$malformed_source")/extensions/pi-fast-lane.json"
+if "$ROOT_DIR/scripts/apply-pi-settings.sh" "$malformed_source" "$malformed_target" >"$TMP_DIR/malformed.out" 2>&1; then
+	fail "a non-object extension source must fail"
+fi
+[ "$settings_before" = "$(shasum -a 256 "$malformed_target")" ] ||
+	fail "malformed extension source must not replace settings"
 
 new_settings="$TMP_DIR/new/nested/settings.json"
 "$ROOT_DIR/scripts/apply-pi-settings.sh" "$repo_settings" "$new_settings"
