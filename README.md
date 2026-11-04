@@ -127,8 +127,13 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
   `brew/Brewfile.base`). Stow links `settings.json` and the rose-pine theme from the `herdr-app` package.
 - **herdr-core** (`hc`) runs the terminals. The cask does not include it, so `scripts/install-mac.sh` installs
   the pinned version with upstream's installer. Keep it equal to the pin in saptiva-ai/workspace.
-- No plugins and no agent hooks: herdr-app names tabs by itself, and Claude Code and pi report their status
-  over OSC 7501. Legacy herdr 0.9.x (the TUI) and its plugins are gone.
+- **Tab names.** The shipped tab bar shows a tab's number (`1`, `2`) until you name it. The `auto-tabs` mod
+  (from [jenthous/herdr-app-auto-tab-titles](https://github.com/jenthous/herdr-app-auto-tab-titles), MIT)
+  shows the live terminal title instead, for example Claude Code's session title. A name you give a tab
+  always wins. The layout `main-auto` is a copy of the shipped `main` that uses it. On a new Mac, press
+  `ctrl-shift-l` once to select `main-auto`: the app keeps the active layout in its own state, not here.
+- No plugins and no agent hooks: Claude Code and pi report their status over OSC 7501. Legacy herdr 0.9.x
+  (the TUI) and its plugins are gone.
 
 ### 🤖 AI Tools
 
