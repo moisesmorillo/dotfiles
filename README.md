@@ -172,7 +172,10 @@ defaults to the writable `~/.pi/agent/extensions/pi-fast-lane.json` file and pre
 Stow ignores the repository config, so `/fast` runtime changes stay in the home file and normal Pi restarts keep
 the selected state. A later settings sync restores the repository `desiredActive` value. Project configuration and
 inherited child state keep the extension's precedence. Fast mode can increase usage cost. The Codex fast cost
-multiplier defaults to 2.5.
+multiplier defaults to 2.5. Subagents load pi-fast-lane through `subagents.defaultSubagentOnlyExtensions` in the
+managed settings, so a child session runs fast when its parent does. The `pi` shell function in `zsh/.zsh_utils` starts
+interactive runs with `--fast` and leaves package, update, config, auth and mcp subcommands unchanged. Set
+`PI_FAST_DEFAULT=0` for one run without the flag.
 
 Two more scripts start pi sessions from Backlog.md: `scripts/backlog-next-task-precheck.sh <repo> <gate>` exits 0 only when the next ready subtask of a gate task can start (no subtask in progress, no open feature pull request, no live pi session). `scripts/agent-next-task.sh <repo> <gate>` runs the precheck and starts pi with a one-line kickoff in Orca or Herdr. An Orca automation can use the precheck directly with `--precheck`.
 

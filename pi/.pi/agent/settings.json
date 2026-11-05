@@ -29,7 +29,10 @@
       "design-review": {
         "thinking": "high"
       }
-    }
+    },
+    "defaultSubagentOnlyExtensions": [
+      "~/.pi/agent/npm/node_modules/pi-fast-lane/index.ts"
+    ]
   },
   "npmCommand": [
     "mise",

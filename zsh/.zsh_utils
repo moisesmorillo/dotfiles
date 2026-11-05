@@ -72,6 +72,28 @@ pi_sync() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+# pi ─ Start Pi with Fast Mode requested by default (pi-fast-lane `--fast`).
+# Only an interactive run gets the flag. Package, update, config, auth, and mcp
+# subcommands run unchanged. Set PI_FAST_DEFAULT=0 to start one run without it.
+# Usage: pi [options] [messages...]
+#        PI_FAST_DEFAULT=0 pi
+pi() {
+	emulate -L zsh
+	case "${1:-}" in
+		install | remove | uninstall | update | list | config | auth | mcp | --help | -h | --version | -v)
+			command pi "$@"
+			;;
+		*)
+			if [[ ${PI_FAST_DEFAULT:-1} == 0 ]]; then
+				command pi "$@"
+			else
+				command pi --fast "$@"
+			fi
+			;;
+	esac
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 # zsh_reload ─ Reload ~/.zshrc
 zsh_reload() {
 	emulate -L zsh
