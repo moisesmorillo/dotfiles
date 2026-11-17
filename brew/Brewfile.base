@@ -54,3 +54,4 @@ cask "abue-ammar/tinycast/tinycast", trusted: true
 tap "saffsanity/sill"
 cask "rustdesk"
 cask "herdr-app"
+cask "tinycast"
