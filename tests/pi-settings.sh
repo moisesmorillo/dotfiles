@@ -49,34 +49,57 @@ jq -e '
   .lastChangelogVersion == "local-runtime-state"
 ' "$user_settings" >/dev/null || fail "managed settings must merge while preserving local keys"
 
-# The repository extension defaults must enable only the nine supported OpenAI models.
+# Active Sol routes must use 6.2 without changes to Luna routes or reasoning levels.
+jq -e '
+  .defaultModel == "gpt-6.2-sol" and
+  .defaultProvider == "openai" and
+  .defaultThinkingLevel == "medium" and
+  .modelThinkingLevels["openai/gpt-6.2-sol"] == "medium" and
+  .modelThinkingLevels["openai/gpt-6-luna"] == "medium" and
+  .subagents.defaultModel == "openai/gpt-6-luna" and
+  .subagents.defaultThinking == "medium"
+' "$ROOT_DIR/pi/.pi/agent/settings.json" >/dev/null || fail "Pi must use Sol 6.2 and keep Luna defaults"
+
+jq -e '
+  all(.agent.plan, .agent["code-review-sol"], .agent["design-review-sol"];
+    .model == "openai/gpt-6.2-sol" and .variant == "medium") and
+  .agent.build.model == "openai/gpt-6-luna" and .agent.build.variant == "xhigh" and
+  .agent.title.model == "openai/gpt-6-luna" and .agent.title.variant == "low" and
+  .model == "openai/gpt-6-luna" and .small_model == "openai/gpt-6-luna"
+' "$ROOT_DIR/opencode/.config/opencode/opencode.json" >/dev/null ||
+	fail "OpenCode must use Sol 6.2 and keep Luna routes"
+
+# Fast mode must use 6.2 Sol and Astra while keeping Luna and GPT-5.6 Sol.
 fast_defaults="$ROOT_DIR/pi/.pi/agent/extensions/pi-fast-lane.json"
 jq -e '
   .persistState == true and
   .desiredActive == true and
   .supportedModels == [
-    "openai/gpt-6.1-sol",
-    "openai/gpt-6-astra",
+    "openai/gpt-6.2-sol",
+    "openai/gpt-6.2-astra",
     "openai/gpt-6-luna",
     "openai/gpt-5.6-sol",
-    "openai-codex/gpt-6.1-sol",
-    "openai-codex/gpt-6-sol",
-    "openai-codex/gpt-6-astra",
+    "openai-codex/gpt-6.2-sol",
+    "openai-codex/gpt-6.2-astra",
     "openai-codex/gpt-6-luna",
     "openai-codex/gpt-5.6-sol"
   ] and
-  (.supportedModels | length) == 9 and
+  (.supportedModels | length) == 8 and
   all(.supportedModels[]; startswith("openai/") or startswith("openai-codex/")) and
   ([.supportedModels[] | select(startswith("anthropic/"))] | length) == 0 and
   ([.supportedModels[] | select(startswith("openai/"))] | length) == 4 and
-  ([.supportedModels[] | select(startswith("openai-codex/"))] | length) == 5 and
-  (.supportedModels | index("openai-codex/gpt-6-sol") != null)
-' "$fast_defaults" >/dev/null || fail "repository fast defaults must cover all nine OpenAI models only"
+  ([.supportedModels[] | select(startswith("openai-codex/"))] | length) == 4
+' "$fast_defaults" >/dev/null || fail "repository fast defaults must cover the eight selected OpenAI models only"
 
 extension_target="$TMP_DIR/extensions/pi-fast-lane.json"
 mkdir -p "$(dirname "$extension_target")"
 printf '{"desiredActive":false,"customLocal":"keep","supportedModels":["stale/model"]}\n' >"$extension_target"
 "$ROOT_DIR/scripts/apply-pi-settings.sh" "$ROOT_DIR/pi/.pi/agent/settings.json" "$user_settings"
+jq -e '
+  .defaultModel == "gpt-6.2-sol" and .defaultThinkingLevel == "medium" and
+  .modelThinkingLevels["openai/gpt-6.2-sol"] == "medium" and
+  .customTool.enabled == true and .lastChangelogVersion == "local-runtime-state"
+' "$user_settings" >/dev/null || fail "settings sync must copy Sol 6.2 and preserve local keys"
 jq -e '
   .persistState == true and .desiredActive == true and .customLocal == "keep" and
   (.supportedModels == input.supportedModels)
