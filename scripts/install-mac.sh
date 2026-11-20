@@ -121,6 +121,9 @@ mise exec -- "$ROOT_DIR/scripts/apply-pi-settings.sh"
 mise exec -- "$ROOT_DIR/scripts/sync-pi-packages.sh"
 mise exec -- bat cache --build
 
+### Rex over SSH: link the rex binary into ~/.local/bin ###
+bash "$ROOT_DIR/scripts/setup-rex.sh"
+
 ### herdr-core (hc) for herdr-app ###
 # The herdr-app cask does not include hc. hc has no brew formula and no GitHub releases,
 # so mise cannot pin it. Upstream's installer checks the sha256 from the release
