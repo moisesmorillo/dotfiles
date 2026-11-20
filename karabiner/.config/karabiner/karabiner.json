@@ -7,7 +7,7 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Caps Lock behavior: Super Key on hold, Ctrl+\\ on tap",
+                        "description": "Caps Lock behavior: Hyper on hold, Ctrl+Space (Rex prefix) on tap",
                         "manipulators": [
                             {
                                 "from": {
@@ -28,7 +28,15 @@
                                         ]
                                     }
                                 ],
-                                "type": "basic"
+                                "type": "basic",
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    }
+                                ]
                             }
                         ]
                     }

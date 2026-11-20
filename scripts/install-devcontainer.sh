@@ -113,11 +113,6 @@ if [ -f "$MISE_CONFIG" ]; then
 	echo "dotfiles(devcontainer): linked mise config -> conf.d/dotfiles.toml"
 fi
 
-### Install tmux plugin manager (config references it) ###
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-	git clone --quiet https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm" || true
-fi
-
 ### Install everything the merged mise config now declares, then warm bat cache ###
 # mise installs in parallel (--jobs), so a tool with no build for this platform (e.g.
 # resvg/colima on linux/arm64) fails on its own WITHOUT blocking the rest — but it still

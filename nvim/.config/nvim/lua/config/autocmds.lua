@@ -5,7 +5,7 @@ vim.api.nvim_create_user_command("UpdateTM", function()
   vim.cmd("MasonInstall " .. table.concat(installed_packages, " "))
 end, { desc = "Install/Update treesitter and mason packages" })
 
--- start TMUX improvements
+-- start cursor shape: block in normal mode, bar in insert mode
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
   callback = function()
     vim.opt.guicursor = table.concat({
@@ -25,4 +25,4 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
     vim.opt.guicursor = "a:ver5-blinkon250-blinkoff400-blinkwait700"
   end,
 })
--- end TMUX improvements
+-- end cursor shape

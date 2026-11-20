@@ -34,13 +34,6 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - AI integration with Sidekick
 - Cursor like features
 
-### 📊 Tmux
-
-- Custom key bindings
-- Status bar customization
-- Session management
-- Integration with tmux plugins via TPM
-
 ### 🦖 Rex
 
 - Terminal and multiplexer with sessions, vertical tabs and panes
@@ -296,7 +289,6 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── rex/          # Rex terminal config and theme
 ├── scripts/      # Installation scripts
 ├── starship/     # Starship prompt config
-├── tmux/         # Tmux configuration
 ├── yamlfmt/      # YAML formatter config
 ├── yamllint/     # YAML linter config
 ├── yazi/         # Yazi file manager config

@@ -78,7 +78,6 @@ export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.antigravity/antigravity/bin"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.lmstudio/bin"
-export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/"
 
 if type starship &>/dev/null; then
 	eval "$(starship init zsh)"
