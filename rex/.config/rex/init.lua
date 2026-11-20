@@ -6,6 +6,10 @@
 
 local TERMINAL = "com.superlogical.terminal"
 
+-- A command block gets a login PATH without ~/.local/bin, because only an interactive zsh
+-- loads .zshrc. Call mise by its full path. `mise exec` then puts every mise tool on PATH.
+local MISE = os.getenv("HOME") .. "/.local/bin/mise"
+
 -- Prefix for the tmux-style bindings. It works on every client:
 --   Mac:    tap Caps Lock (Karabiner sends ctrl+space; hold stays Hyper for AeroSpace).
 --   iPhone: a ctrl+space key in the Key Bar (Settings > Keyboard > Shortcut Groups).
@@ -49,7 +53,7 @@ rex.action({
 			layout = rex.layout.block({
 				flavor = TERMINAL .. ".shell",
 				options = {
-					command = { "mise", "exec", "--", "lazygit" },
+					command = { MISE, "exec", "--", "lazygit" },
 					cwd = focused_cwd(),
 				},
 			}),
