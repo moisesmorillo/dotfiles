@@ -65,10 +65,6 @@ fi
 ### Update docker config file
 . ./scripts/update-docker-config.sh
 
-### Install Tpm ###
-rm -rf ~/.tmux/plugins/tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 ### Set defaults mac os
 chmod +x "${SCRIPT_DIR}/macos-settings.sh"
 #shellcheck disable=SC1091
@@ -77,11 +73,9 @@ source "${SCRIPT_DIR}/macos-settings.sh"
 ### Clone and set dotfiles ###
 for pattern in \
 	~/.config/nvim \
-	~/.config/tmux \
 	~/.local/share/nvim \
 	~/.config/lazygit \
 	~/.zshrc* \
-	~/.tmux \
 	~/.zprofile* \
 	~/.zsh_history* \
 	~/.zsh_sessions/ \

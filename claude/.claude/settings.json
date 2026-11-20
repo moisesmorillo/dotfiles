@@ -51,7 +51,7 @@
     "command": "bash ~/.claude/statusline.sh"
   },
   "syncClaudeAiSkills": false,
-  "teammateMode": "tmux",
+  "teammateMode": "in-process",
   "theme": "dark-ansi",
   "tui": "fullscreen"
 }
