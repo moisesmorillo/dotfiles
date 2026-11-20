@@ -4,7 +4,7 @@ agent: design-review-sol
 subtask: true
 ---
 
-Load and follow the `design-feasibility-review` skill using the skill tool before reviewing. Use this command's `design-review-sol` subagent (openai/gpt-6-sol, medium reasoning); do not delegate the review to another agent.
+Load and follow the `design-feasibility-review` skill using the skill tool before reviewing. Use this command's `design-review-sol` subagent (openai/gpt-6.2-sol, medium reasoning); do not delegate the review to another agent.
 
 Design document or review scope and any additional instructions: $ARGUMENTS
 

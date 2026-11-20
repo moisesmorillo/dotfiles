@@ -140,7 +140,7 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - **Claude CLI** - Claude AI integration
 - **Gemini CLI** - Google Gemini integration
 - **OpenCode** - AI coding assistant with Neovim integration (Toggle sidebar: `Ctrl+x` + `b`)
-- **Pi** - AI coding assistant; the session runs `openai/gpt-6.1-sol` with medium reasoning for brainstorming, specs, plans and orchestration, while subagents default to `openai/gpt-6-luna` with medium reasoning for implementation and high reasoning for the reviewer and oracle roles.
+- **Pi** - AI coding assistant; the session runs `openai/gpt-6.2-sol` with medium reasoning for brainstorming, specs, plans and orchestration, while subagents default to `openai/gpt-6-luna` with medium reasoning for implementation and high reasoning for the reviewer and oracle roles.
   Global instructions live in `pi/.pi/agent/AGENTS.md`: code changes always happen in a Git worktree under
   `~/.worktrees/<repo>/<branch>` via the superpowers `using-git-worktrees` skill, and finished branches are
   pushed and opened as pull requests by `finishing-a-development-branch`.
@@ -153,8 +153,8 @@ Reusable skills are owned by the separate `ai-engineering` repository. Pi and Op
 | Code | `/code-review [scope]` | `/prompt-workflow code-review [scope]` |
 | Design | `/design-feasibility-review <document>` | `/prompt-workflow design-feasibility-review <document>` |
 
-These commands launch dedicated subagents on GPT-6.1 Sol with medium reasoning (`openai/gpt-6.1-sol` in
-OpenCode, `openai/gpt-6.1-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
+These commands launch dedicated subagents on GPT-6.2 Sol with medium reasoning (`openai/gpt-6.2-sol` in
+OpenCode, `openai/gpt-6.2-sol` in Pi). Pi's `/skill:...` commands instead load a skill in the
 current agent without switching models.
 
 Pi package references in `pi/.pi/agent/settings.json` are intentionally unpinned so Pi can resolve current
@@ -179,7 +179,7 @@ interactive runs with `--fast` and leaves package, update, config, auth and mcp 
 
 Two more scripts start pi sessions from Backlog.md: `scripts/backlog-next-task-precheck.sh <repo> <gate>` exits 0 only when the next ready subtask of a gate task can start (no subtask in progress, no open feature pull request, no live pi session). `scripts/agent-next-task.sh <repo> <gate>` runs the precheck and starts pi with a one-line kickoff in Herdr.
 
-Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.1-sol`, medium) covers the
+Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.2-sol`, medium) covers the
 session, and `subagents.defaultModel` / `subagents.defaultThinking` (`openai/gpt-6-luna`, medium) cover every
 pi-subagents child that does not pin its own model; `subagents.agentOverrides` raises the `reviewer` and `oracle`
 roles to high. A one-run benchmark (implementation task with a hidden test suite) showed Luna medium and high
