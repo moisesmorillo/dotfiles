@@ -1,34 +1,18 @@
 #!/usr/bin/env bash
 # Start one pi session on the next ready Backlog.md subtask of a gate task.
-# Orca: creates a terminal in the repository worktree and sends the kickoff line.
 # herdr-core (hc): starts pi as terminal pi-<gate> in a herdr-app tab and sends the kickoff line
 # (not yet verified on a live core).
-# The Orca automation runs this script after its own precheck. Set SKIP_PRECHECK=1 there,
-# because the automation run sees itself as a live pi session.
+# Set SKIP_PRECHECK=1 when a caller already ran the precheck.
 set -euo pipefail
 
 REPO="${1:?usage: agent-next-task.sh <repo-path> <gate-task-id> [kickoff-text]}"
 GATE="${2:?usage: agent-next-task.sh <repo-path> <gate-task-id> [kickoff-text]}"
 KICKOFF="${3:-Pick the next ready $GATE subtask and do it. Read the Session start section of AGENTS.md first.}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ORCA_BIN="${ORCA_BIN:-orca}"
 PI_COMMAND="${PI_COMMAND:-pi --fast}"
 
 if [ "${SKIP_PRECHECK:-0}" != "1" ]; then
 	"$SCRIPT_DIR/backlog-next-task-precheck.sh" "$REPO" "$GATE"
-fi
-
-if [ -n "${ORCA_TERMINAL_HANDLE:-}" ] || "$ORCA_BIN" status >/dev/null 2>&1; then
-	handle="$("$ORCA_BIN" terminal create --worktree "path:$REPO" --title "pi $GATE" --command "$PI_COMMAND" --json \
-		| jq -r '.result.terminal.handle')"
-	[ -n "$handle" ] && [ "$handle" != "null" ] || { echo "agent-next-task: Orca did not return a terminal handle" >&2; exit 1; }
-	"$ORCA_BIN" terminal wait --terminal "$handle" --for tui-idle --timeout-ms 60000 >/dev/null
-	"$ORCA_BIN" terminal send --terminal "$handle" --text $'\r' >/dev/null
-	sleep 2
-	"$ORCA_BIN" terminal wait --terminal "$handle" --for tui-idle --timeout-ms 30000 >/dev/null || true
-	"$ORCA_BIN" terminal send --terminal "$handle" --text "$KICKOFF"$'\r' >/dev/null
-	echo "agent-next-task: started pi in Orca terminal $handle"
-	exit 0
 fi
 
 HC_BIN="${HC_BIN:-hc}"
@@ -52,5 +36,5 @@ if command -v "$HC_BIN" >/dev/null 2>&1 && "$HC_BIN" ls >/dev/null 2>&1; then
 	exit 0
 fi
 
-echo "agent-next-task: no harness found (Orca or herdr-core). Start pi in $REPO and send: $KICKOFF" >&2
+echo "agent-next-task: no harness found (herdr-core). Start pi in $REPO and send: $KICKOFF" >&2
 exit 1

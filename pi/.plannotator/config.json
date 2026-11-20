@@ -8,5 +8,11 @@
     "expandUnchanged": false,
     "hideWhitespace": false,
     "diffStyle": "unified"
+  },
+  "starAsk": {
+    "canStar": true,
+    "checkedAt": "2026-11-11T03:35:50.145Z",
+    "shownAt": "2026-11-11T03:35:56.796Z",
+    "surface": "annotate"
   }
 }
