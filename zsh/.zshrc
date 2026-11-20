@@ -49,7 +49,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 # rose-pine color theme for fzf
 # bg:-1 and gutter:-1 use the terminal's own background -> transparent, so fzf
-# blends with Ghostty instead of painting a solid rose-pine dark panel.
+# blends with the terminal instead of painting a solid rose-pine dark panel.
 # bg+ keeps a faint tint so the selected line stays visible.
 export FZF_DEFAULT_OPTS="
   --ignore-case
