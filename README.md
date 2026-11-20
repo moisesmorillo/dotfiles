@@ -121,6 +121,13 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Complex key mappings
 - Application-specific shortcuts
 
+### 🔀 Finicky
+
+- Sends every link to one Chrome profile (`cask "finicky"` in `brew/Brewfile.work`)
+- Stow links `~/.finicky.js` from the `finicky` package
+- `profile` is the local display name of the Chrome profile. Set that name to `Work` in
+  `chrome://settings/manageProfile`
+
 ### 🧭 Herdr
 
 - **herdr-app** is the desktop window for terminals and coding agents (`cask "herdr-app"` in
@@ -286,6 +293,7 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── claude/       # Claude CLI config
 ├── delta/        # Delta git diff viewer config
 ├── eza/          # Eza (ls replacement) config
+├── finicky/      # Finicky browser router config
 ├── gemini/       # Gemini CLI config
 ├── ghostty/      # Ghostty terminal config
 ├── karabiner/    # Karabiner keyboard config

@@ -88,6 +88,7 @@ for pattern in \
 	~/.zshrc \
 	~/.zshenv \
 	~/.hammerspoon \
+	~/.finicky.js \
 	~/.config/pi \
 	~/.config/herdr-app/settings.json \
 	~/.config/herdr-app/themes/rose-pine.json \
