@@ -41,11 +41,11 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - Session management
 - Integration with tmux plugins via TPM
 
-### 👻 Ghostty
+### 🦖 Rex
 
-- Modern terminal emulator configuration
-- Custom color schemes and fonts
-- Performance optimizations
+- Terminal and multiplexer with sessions, vertical tabs and panes
+- Key bindings in `rex/.config/rex/init.lua`
+- Rose Pine theme, font and layout applied by `scripts/macos-settings.sh` (quit Rex first)
 
 ### 🚀 Starship
 
@@ -285,7 +285,6 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── delta/        # Delta git diff viewer config
 ├── eza/          # Eza (ls replacement) config
 ├── gemini/       # Gemini CLI config
-├── ghostty/      # Ghostty terminal config
 ├── karabiner/    # Karabiner keyboard config
 ├── lazydocker/   # Lazydocker configuration
 ├── lazygit/      # Lazygit configuration
@@ -294,6 +293,7 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── network_utils/# Network utilities
 ├── nvim/         # Neovim configuration
 ├── opencode/     # OpenCode CLI config
+├── rex/          # Rex terminal config and theme
 ├── scripts/      # Installation scripts
 ├── starship/     # Starship prompt config
 ├── tmux/         # Tmux configuration
