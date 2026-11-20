@@ -8,12 +8,6 @@ return {
       copilot = {
         status = { enabled = false },
       },
-      cli = {
-        mux = {
-          backend = "tmux",
-          enabled = true,
-        },
-      },
     }
     return vim.tbl_extend("force", opts, options)
   end,

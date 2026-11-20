@@ -56,25 +56,6 @@
       ],
       "enabled": true
     },
-    "engram": {
-      "command": [
-        "/Users/moisesmorillo/.local/share/mise/shims/engram",
-        "mcp",
-        "--tools=agent"
-      ],
-      "enabled": true,
-      "type": "local"
-    },
-    "linear": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "mcp-remote",
-        "https://mcp.linear.app/mcp"
-      ],
-      "enabled": true
-    },
     "playwright": {
       "type": "local",
       "command": [

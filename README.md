@@ -34,18 +34,11 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 - AI integration with Sidekick
 - Cursor like features
 
-### 📊 Tmux
+### 🦖 Rex
 
-- Custom key bindings
-- Status bar customization
-- Session management
-- Integration with tmux plugins via TPM
-
-### 👻 Ghostty
-
-- Modern terminal emulator configuration
-- Custom color schemes and fonts
-- Performance optimizations
+- Terminal and multiplexer with sessions, vertical tabs and panes
+- Key bindings in `rex/.config/rex/init.lua`
+- Rose Pine theme, font and layout applied by `scripts/macos-settings.sh` (quit Rex first)
 
 ### 🚀 Starship
 
@@ -184,7 +177,7 @@ managed settings, so a child session runs fast when its parent does. The `pi` sh
 interactive runs with `--fast` and leaves package, update, config, auth and mcp subcommands unchanged. Set
 `PI_FAST_DEFAULT=0` for one run without the flag.
 
-Two more scripts start pi sessions from Backlog.md: `scripts/backlog-next-task-precheck.sh <repo> <gate>` exits 0 only when the next ready subtask of a gate task can start (no subtask in progress, no open feature pull request, no live pi session). `scripts/agent-next-task.sh <repo> <gate>` runs the precheck and starts pi with a one-line kickoff in Orca or Herdr. An Orca automation can use the precheck directly with `--precheck`.
+Two more scripts start pi sessions from Backlog.md: `scripts/backlog-next-task-precheck.sh <repo> <gate>` exits 0 only when the next ready subtask of a gate task can start (no subtask in progress, no open feature pull request, no live pi session). `scripts/agent-next-task.sh <repo> <gate>` runs the precheck and starts pi with a one-line kickoff in Herdr.
 
 Model routing by phase lives in `pi/.pi/agent/settings.json`: `defaultModel` (`gpt-6.1-sol`, medium) covers the
 session, and `subagents.defaultModel` / `subagents.defaultThinking` (`openai/gpt-6-luna`, medium) cover every
@@ -202,7 +195,6 @@ Installed Pi packages and what each one covers:
 | `pi-subagents`, `pi-background-tasks`, `pi-btw` | Delegation, durable background shell tasks (`/bg`, `bg_run`), side conversations |
 | `pi-web-access` | Web search, URL fetching, PDF and video extraction |
 | `git:github.com/obra/superpowers` | Process skills: brainstorming, TDD, systematic debugging, worktrees, finishing branches |
-| `gentle-engram` | Persistent memory shared across sessions |
 | `@narumitw/pi-worktree` | Interactive `/worktree` manager (list, create, switch, remove, prune); root `~/.worktrees` |
 | `pi-powerline-footer` | Powerline status bar (model, thinking, git, context %, cost); configured under `powerline` in settings |
 | `pi-token-speed` | Live tokens/s and time-to-first-token while streaming, shown inside the powerline `extension_statuses` segment; configured under `tokenSpeed` in settings (`/tps` menu) |
@@ -239,7 +231,6 @@ We keep the Pi setup lean and do not currently add these optional integrations:
 
 - `@juicesharp/rpiv-todo`: session todo overlay; Backlog.md plus superpowers plans already cover tracking.
 - `@narumitw/pi-plan-mode`: enforced read-only planning; superpowers brainstorming covers the workflow.
-- `gentle-pi`: a full harness (own subagents, UI and ODD workflow) that would duplicate superpowers and `pi-subagents`.
 - `pi-interactive-shell`: useful for interactive long-running commands, but not needed in the current workflow.
 - `@tmustier/pi-usage-extension`: adds usage analytics, which are not required here.
 - `pi-claude-cli`: not applicable because Pi uses the `openai` provider.
@@ -295,7 +286,6 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── eza/          # Eza (ls replacement) config
 ├── finicky/      # Finicky browser router config
 ├── gemini/       # Gemini CLI config
-├── ghostty/      # Ghostty terminal config
 ├── karabiner/    # Karabiner keyboard config
 ├── lazydocker/   # Lazydocker configuration
 ├── lazygit/      # Lazygit configuration
@@ -304,9 +294,9 @@ This repository includes GitHub Actions workflows to test the configuration:
 ├── network_utils/# Network utilities
 ├── nvim/         # Neovim configuration
 ├── opencode/     # OpenCode CLI config
+├── rex/          # Rex terminal config and theme
 ├── scripts/      # Installation scripts
 ├── starship/     # Starship prompt config
-├── tmux/         # Tmux configuration
 ├── yamlfmt/      # YAML formatter config
 ├── yamllint/     # YAML linter config
 ├── yazi/         # Yazi file manager config

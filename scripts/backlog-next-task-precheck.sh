@@ -1,18 +1,13 @@
 #!/usr/bin/env bash
 # Exit 0 when the next Backlog.md subtask under a gate task can start in a repository.
-# Used as the precheck of an Orca automation and by agent-next-task.sh.
+# Used by agent-next-task.sh.
 # Exit codes: 3 no ready subtask, 4 open pull request, 5 subtask in progress,
-# 6 live pi session in the repository, 7 main checkout not updatable,
-# 8 an Orca worktree of the repository holds an unmerged task branch, 2 bad arguments.
+# 6 live pi session in the repository, 7 main checkout not updatable, 2 bad arguments.
 set -euo pipefail
 
 REPO="${1:?usage: backlog-next-task-precheck.sh <repo-path> <gate-task-id> [branch-prefix]}"
 GATE="${2:?usage: backlog-next-task-precheck.sh <repo-path> <gate-task-id> [branch-prefix]}"
 PREFIX="${3:-feature/}"
-ORCA_BIN="${ORCA_BIN:-orca}"
-if ! command -v "$ORCA_BIN" >/dev/null 2>&1 && [ -x /Applications/Orca.app/Contents/Resources/bin/orca ]; then
-	ORCA_BIN=/Applications/Orca.app/Contents/Resources/bin/orca
-fi
 
 cd "$REPO"
 
@@ -40,44 +35,13 @@ if [ -z "$next" ]; then
 	exit 3
 fi
 
-# An automation run is not a terminal, and a worktree keeps its own Backlog
-# state. Look at every Orca worktree of the repository before the terminals.
-if command -v "$ORCA_BIN" >/dev/null 2>&1; then
-	while IFS= read -r worktree; do
-		[ -n "$worktree" ] && [ -d "$worktree" ] || continue
-		[ "$worktree" = "$REPO" ] && continue
-		wt_branch="$(git -C "$worktree" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
-		case "$wt_branch" in
-		"$PREFIX"*)
-			echo "precheck: Orca worktree $worktree holds branch $wt_branch"
-			exit 8
-			;;
-		esac
-		wt_in_progress="$(cd "$worktree" && backlog task list --plain -s "In Progress" -p "$GATE" 2>/dev/null | grep -cE '^  [A-Z]+-[0-9.]+ - ' || true)"
-		if [ "$wt_in_progress" -gt 0 ]; then
-			echo "precheck: $wt_in_progress subtask(s) of $GATE in progress in $worktree"
-			exit 5
-		fi
-	done < <("$ORCA_BIN" worktree list --repo "path:$REPO" --json 2>/dev/null | jq -r '.result.worktrees[]?.path // empty')
-fi
-
 open_prs="$(gh pr list --state open --json headRefName --jq '.[].headRefName' 2>/dev/null | grep -c "^$PREFIX" || true)"
 if [ "$open_prs" -gt 0 ]; then
 	echo "precheck: $open_prs open pull request(s) from $PREFIX*"
 	exit 4
 fi
 
-if [ -x "$ORCA_BIN" ] || command -v "$ORCA_BIN" >/dev/null 2>&1; then
-	live="$("$ORCA_BIN" terminal list --json 2>/dev/null \
-		| jq -r --arg repo "$REPO" --arg base "$(basename "$REPO")" --arg self "${ORCA_TERMINAL_HANDLE:-}" '
-			(.result.terminals // .terminals // [])
-			| map(select(.agentIdentity == "pi" and .handle != $self and ((.worktreePath // "") | (startswith($repo) or contains("/" + $base + "/")))))
-			| length' 2>/dev/null || echo 0)"
-	if [ "${live:-0}" -gt 0 ]; then
-		echo "precheck: $live live pi session(s) in $REPO"
-		exit 6
-	fi
-elif command -v "${HC_BIN:-hc}" >/dev/null 2>&1; then
+if command -v "${HC_BIN:-hc}" >/dev/null 2>&1; then
 	# Each entry of `hc ls --json` has the agent that reports in it and its folder.
 	live="$("${HC_BIN:-hc}" ls --json 2>/dev/null \
 		| jq -r --arg repo "$REPO" --arg self "${HC_TERMINAL_ID:-}" '

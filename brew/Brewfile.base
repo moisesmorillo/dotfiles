@@ -1,6 +1,5 @@
 tap "felixkratz/formulae", trusted: true
 tap "nikitabobko/tap", trusted: true
-tap "steipete/tap", trusted: true
 brew "btop"
 brew "cocoapods"
 brew "docker"
@@ -20,7 +19,6 @@ brew "mermaid-cli"
 brew "mole"
 brew "mosh"
 brew "nmap"
-brew "reattach-to-user-namespace"
 brew "stow"
 brew "terminal-notifier"
 brew "watch"
@@ -28,10 +26,8 @@ brew "wget"
 brew "felixkratz/formulae/borders", trusted: true
 cask "nikitabobko/tap/aerospace"
 cask "claude"
-cask "steipete/tap/codexbar"
 cask "dbeaver-community"
 cask "font-jetbrains-mono-nerd-font"
-cask "ghostty"
 cask "jordanbaird-ice"
 cask "karabiner-elements"
 cask "obsidian"
@@ -49,9 +45,8 @@ cask "stats"
 brew "iperf3"
 tap "ampcode/tap"
 brew "ampcode/tap/ampcode", trusted: true
-tap "abue-ammar/tinycast", trusted: true
-cask "abue-ammar/tinycast/tinycast", trusted: true
 tap "saffsanity/sill"
 cask "rustdesk"
 cask "herdr-app"
 cask "tinycast"
+cask "openusage"

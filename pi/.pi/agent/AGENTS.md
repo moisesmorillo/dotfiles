@@ -9,10 +9,7 @@ worktree, without asking for consent.**
 
 - Before editing files in a Git repository, follow the `using-git-worktrees` skill. Detect existing
   isolation first; if the current checkout is already a linked worktree, keep working there.
-- Use the harness command when one exists. Inside Orca (`ORCA_WORKTREE_ID` is set) run
-  `orca worktree create --name <branch> --repo path:<repo>`; Orca places the checkout under
-  `~/orca/workspaces/<repo>/`. Elsewhere (herdr-app included: herdr-core has no worktree
-  command) use plain Git worktrees at
+- Use plain Git worktrees (herdr-core has no worktree command) at
   `~/.worktrees/<repo>/<branch>`, where `<repo>` is the basename of the main worktree. This matches
   the default root of the `/worktree` command, so both views agree.
 - Update `main` before you create the worktree.

@@ -7,8 +7,7 @@ sudo add-apt-repository universe
 sudo apt-get update
 
 ### Install Basic Packages
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip build-essential libcurl4-openssl-dev libssl-dev curl bat tmux git zsh ripgrep fzf neovim python3-neovim rvenv batcat
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq unrar p7zip build-essential libcurl4-openssl-dev libssl-dev curl bat git zsh ripgrep fzf neovim python3-neovim rvenv batcat
 
 ### Configure Zsh ###
 sudo chsh -s $(which zsh) $USER
@@ -29,7 +28,6 @@ fc-cache -fv
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.p10k.zsh ~/.p10k.zsh
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.zshrc ~/.zshrc
 ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
-ln -sf ~/workspace/dotfiles/.config/tmux ~/.config/tmux
 
 ### Install Btop ###
 curl -LO https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz
