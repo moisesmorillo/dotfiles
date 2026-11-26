@@ -108,13 +108,17 @@ mkdir -p "$HOME/.config/herdr-app/themes" \
 	"$HOME/.config/herdr-app/layouts" \
 	"$HOME/.config/herdr-app/mods/auto-tabs"
 
+# Keep Claude's skill directory outside the checkout on a fresh install.
+mkdir -p "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+
 # Keep Pi's writable state out of the repository before stowing its config.
 "$ROOT_DIR/scripts/prepare-pi-home.sh"
 
 # Change to root directory before running stow
 cd "$ROOT_DIR" || exit
 # shellcheck disable=SC2035
-/opt/homebrew/bin/stow -R -t "$HOME" */
+/opt/homebrew/bin/stow -R -t "$HOME" */ || exit 1
+bash "$ROOT_DIR/scripts/link-terminal-browser-skill.sh" || exit 1
 
 # Post commands
 mise install
