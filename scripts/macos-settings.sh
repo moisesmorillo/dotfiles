@@ -113,6 +113,7 @@ defaults write com.superlogical.rex Workspace.tabIconTintMode -string "off"
 # Vertical tabs in a sidebar on the left.
 defaults write com.superlogical.rex Workspace.tabStyle -string "vertical"
 defaults write com.superlogical.rex Workspace.sidebarPosition -string "left"
+defaults write com.superlogical.rex Workspace.sidebarTextPointSize -float 15
 defaults write com.superlogical.rex rex.agents.names-sessions -bool true
 
 # Restart affected apps
