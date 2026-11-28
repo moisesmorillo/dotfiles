@@ -148,6 +148,22 @@ My personal dotfiles for macOS and GitHub Codespaces environments.
 Reusable skills are owned by the separate `ai-engineering` repository. Pi and OpenCode register
 `~/workspace/moisesmorillo/ai-engineering/skills` globally, so updating that repository updates both tools.
 
+The dotfiles manage the Terminal Browser skill because it ships with the macOS tool setup.
+Pi, Codex, Gemini CLI, Amp, and OpenCode can find it in `~/.agents/skills`.
+Claude Code uses its own skills directory. Both paths use the same `SKILL.md`.
+
+Before updating an existing checkout, check `agents/.config/agents/skills/terminal-browser`.
+If it is an untracked link into Homebrew `Caskroom`, remove only that link so Git can install the skill directory.
+Keep any custom directory or file. After updating the checkout, run these commands:
+
+```bash
+stow -R -t "$HOME" agents && bash scripts/link-terminal-browser-skill.sh
+```
+
+The link script replaces known Homebrew links and keeps custom skills.
+It also disables automatic vendor skill installation. If `terminal-browser setup` asks to install its skill, answer no.
+Restart the agent tools to load the new description. In Pi, `/reload` also works.
+
 | Review | OpenCode | Pi |
 | --- | --- | --- |
 | Code | `/code-review [scope]` | `/prompt-workflow code-review [scope]` |
