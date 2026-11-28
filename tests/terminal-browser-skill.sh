@@ -81,6 +81,22 @@ if HOME="$folded" bash "$ROOT_DIR/scripts/link-terminal-browser-skill.sh" >/dev/
 fi
 [[ ! -e "$TMP_DIR/vendor/skills" ]] || fail "Keep the folded target clean"
 
+upgrade_repo="$TMP_DIR/upgrade-repo"
+upgrade_home="$TMP_DIR/upgrade-home"
+mkdir -p "$upgrade_repo/scripts" "$upgrade_repo/claude/.claude" "$upgrade_home"
+cp -R "$ROOT_DIR/agents" "$upgrade_repo/agents"
+cp "$ROOT_DIR/scripts/link-terminal-browser-skill.sh" "$upgrade_repo/scripts/"
+printf 'settings\n' > "$upgrade_repo/claude/.claude/settings.json"
+stow -d "$upgrade_repo" -t "$upgrade_home" agents claude
+[[ -L "$upgrade_home/.claude" ]] || fail "The upgrade fixture must start folded"
+printf 'session state\n' > "$upgrade_home/.claude/history.jsonl"
+HOME="$upgrade_home" bash "$upgrade_repo/scripts/link-terminal-browser-skill.sh"
+[[ ! -L "$upgrade_home/.claude" ]] || fail "Unfold the Claude config directory"
+grep -Fxq 'session state' "$upgrade_home/.claude/history.jsonl" || fail "Keep Claude session state"
+[[ "$upgrade_home/.claude/skills/terminal-browser/SKILL.md" -ef "$upgrade_home/.config/agents/skills/terminal-browser/SKILL.md" ]] ||
+	fail "Install the Claude skill after unfolding"
+[[ ! -e "$upgrade_repo/claude/.claude/skills" ]] || fail "Do not add links to the Claude package"
+
 if command -v terminal-browser >/dev/null; then
 	HOME="$fresh" terminal-browser ls >/dev/null
 	marker="$fresh/.local/state/terminal-browser/setup-version"

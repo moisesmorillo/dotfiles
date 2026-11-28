@@ -10,8 +10,16 @@ if [[ ! "$source_dir/SKILL.md" -ef "$repo_skill" ]]; then
 	exit 1
 fi
 if [[ -L "$claude_home" && ! "$claude_home/skills/terminal-browser" -ef "$source_dir" ]]; then
-	printf 'Use a real Claude config directory before linking skills: %s\n' "$claude_home" >&2
-	exit 1
+	if [[ "$claude_home" != "$HOME/.claude" || ! "$claude_home" -ef "$root_dir/claude/.claude" ]]; then
+		printf 'Use a real Claude config directory before linking skills: %s\n' "$claude_home" >&2
+		exit 1
+	fi
+	# Keep Stow links to the existing contents, but make ~/.claude a real directory.
+	stow --no-folding -R -d "$root_dir" -t "$HOME" claude
+	if [[ -L "$claude_home" ]]; then
+		printf 'Stow did not unfold the Claude config directory: %s\n' "$claude_home" >&2
+		exit 1
+	fi
 fi
 
 is_vendor_link() {
